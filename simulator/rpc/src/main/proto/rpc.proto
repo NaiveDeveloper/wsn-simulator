@@ -1,0 +1,20 @@
+package org.jcjxb.wsn.rpc;
+
+option java_package = "org.jcjxb.wsn.rpc";
+option java_outer_classname = "LionRpcMessage";
+
+message Request {
+
+  required string service_name = 1;
+  
+  required string method_name = 2;
+  
+  required bytes request = 3;
+}
+
+message Response {
+
+  optional bytes response = 1;
+  
+  optional string errorText = 2;
+}
