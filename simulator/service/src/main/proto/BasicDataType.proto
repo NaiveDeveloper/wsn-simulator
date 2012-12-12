@@ -1,0 +1,13 @@
+package org.jcjxb.wsn.service;
+
+option java_package = "org.jcjxb.wsn.service.proto";
+option java_outer_classname = "BasicDataType";
+
+message Position {
+	optional double x = 1;
+	optional double y = 2;
+}
+
+message PositionList {
+	repeated Position postion = 1;
+}
