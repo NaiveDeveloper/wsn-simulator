@@ -11,3 +11,17 @@ message Position {
 message PositionList {
 	repeated Position postion = 1;
 }
+
+message Event {
+	enum Priority {
+		PRIORITY_HIGH = 0;
+		PRIORITY_NORMAL = 1;
+		PRIORITY_LOW = 2;
+	}
+	optional Priority priority = 1 [default = PRIORITY_NORMAL];
+	optional int64 startTime = 2;
+	optional int64 duration = 3;
+	repeated int32 sensorId = 4;
+	optional string type = 5;
+	optional bytes data = 6;
+}
