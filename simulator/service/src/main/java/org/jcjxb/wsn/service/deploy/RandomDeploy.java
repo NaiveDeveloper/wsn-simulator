@@ -1,6 +1,6 @@
 package org.jcjxb.wsn.service.deploy;
 
-import org.jcjxb.wsn.service.proto.DataType.PositionList;
+import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
 
 public class RandomDeploy implements Deploy {
 

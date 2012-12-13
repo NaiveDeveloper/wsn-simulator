@@ -1,0 +1,15 @@
+package org.jcjxb.wsn.service;
+
+option java_package = "org.jcjxb.wsn.service.proto";
+option java_outer_classname = "SimulatorConfig";
+
+message MasterConfig {
+	optional string host = 1;
+	optional int32 port = 2;
+}
+
+message SlaveConfig {
+	optional string host = 1;
+	optional int32 port = 2;
+}
+
