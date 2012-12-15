@@ -8,39 +8,39 @@ public final class MasterService {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface TimeSyncRequestOrBuilder
+  public interface LVTSyncRequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int64 localTime = 1;
     boolean hasLocalTime();
     long getLocalTime();
   }
-  public static final class TimeSyncRequest extends
+  public static final class LVTSyncRequest extends
       com.google.protobuf.GeneratedMessage
-      implements TimeSyncRequestOrBuilder {
-    // Use TimeSyncRequest.newBuilder() to construct.
-    private TimeSyncRequest(Builder builder) {
+      implements LVTSyncRequestOrBuilder {
+    // Use LVTSyncRequest.newBuilder() to construct.
+    private LVTSyncRequest(Builder builder) {
       super(builder);
     }
-    private TimeSyncRequest(boolean noInit) {}
+    private LVTSyncRequest(boolean noInit) {}
     
-    private static final TimeSyncRequest defaultInstance;
-    public static TimeSyncRequest getDefaultInstance() {
+    private static final LVTSyncRequest defaultInstance;
+    public static LVTSyncRequest getDefaultInstance() {
       return defaultInstance;
     }
     
-    public TimeSyncRequest getDefaultInstanceForType() {
+    public LVTSyncRequest getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeSyncRequest_descriptor;
+      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_LVTSyncRequest_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeSyncRequest_fieldAccessorTable;
+      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_LVTSyncRequest_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -97,41 +97,41 @@ public final class MasterService {
       return super.writeReplace();
     }
     
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(byte[] data)
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(java.io.InputStream input)
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseDelimitedFrom(java.io.InputStream input)
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -140,7 +140,7 @@ public final class MasterService {
         return null;
       }
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseDelimitedFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -151,12 +151,12 @@ public final class MasterService {
         return null;
       }
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest parseFrom(
+    public static org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -166,7 +166,7 @@ public final class MasterService {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest prototype) {
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -179,18 +179,18 @@ public final class MasterService {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequestOrBuilder {
+       implements org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeSyncRequest_descriptor;
+        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_LVTSyncRequest_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeSyncRequest_fieldAccessorTable;
+        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_LVTSyncRequest_fieldAccessorTable;
       }
       
-      // Construct using org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.newBuilder()
+      // Construct using org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -220,24 +220,24 @@ public final class MasterService {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.getDescriptor();
+        return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDescriptor();
       }
       
-      public org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest getDefaultInstanceForType() {
-        return org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.getDefaultInstance();
+      public org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
       }
       
-      public org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest build() {
-        org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest result = buildPartial();
+      public org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest build() {
+        org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest buildParsed()
+      private org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest result = buildPartial();
+        org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -245,8 +245,8 @@ public final class MasterService {
         return result;
       }
       
-      public org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest buildPartial() {
-        org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest result = new org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest(this);
+      public org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest buildPartial() {
+        org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest result = new org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -259,16 +259,16 @@ public final class MasterService {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest) {
-          return mergeFrom((org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest)other);
+        if (other instanceof org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest other) {
-        if (other == org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest other) {
+        if (other == org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance()) return this;
         if (other.hasLocalTime()) {
           setLocalTime(other.getLocalTime());
         }
@@ -335,375 +335,37 @@ public final class MasterService {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.TimeSyncRequest)
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.LVTSyncRequest)
     }
     
     static {
-      defaultInstance = new TimeSyncRequest(true);
+      defaultInstance = new LVTSyncRequest(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.TimeSyncRequest)
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.LVTSyncRequest)
   }
   
-  public interface TimeAckResponseOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int64 globalTime = 1;
-    boolean hasGlobalTime();
-    long getGlobalTime();
-  }
-  public static final class TimeAckResponse extends
-      com.google.protobuf.GeneratedMessage
-      implements TimeAckResponseOrBuilder {
-    // Use TimeAckResponse.newBuilder() to construct.
-    private TimeAckResponse(Builder builder) {
-      super(builder);
-    }
-    private TimeAckResponse(boolean noInit) {}
-    
-    private static final TimeAckResponse defaultInstance;
-    public static TimeAckResponse getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public TimeAckResponse getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeAckResponse_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeAckResponse_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // optional int64 globalTime = 1;
-    public static final int GLOBALTIME_FIELD_NUMBER = 1;
-    private long globalTime_;
-    public boolean hasGlobalTime() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public long getGlobalTime() {
-      return globalTime_;
-    }
-    
-    private void initFields() {
-      globalTime_ = 0L;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, globalTime_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, globalTime_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.jcjxb.wsn.service.proto.MasterService.TimeAckResponseOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeAckResponse_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_TimeAckResponse_fieldAccessorTable;
-      }
-      
-      // Construct using org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        globalTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDescriptor();
-      }
-      
-      public org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse getDefaultInstanceForType() {
-        return org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance();
-      }
-      
-      public org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse build() {
-        org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse buildPartial() {
-        org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse result = new org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.globalTime_ = globalTime_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse) {
-          return mergeFrom((org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse other) {
-        if (other == org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance()) return this;
-        if (other.hasGlobalTime()) {
-          setGlobalTime(other.getGlobalTime());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              globalTime_ = input.readInt64();
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // optional int64 globalTime = 1;
-      private long globalTime_ ;
-      public boolean hasGlobalTime() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public long getGlobalTime() {
-        return globalTime_;
-      }
-      public Builder setGlobalTime(long value) {
-        bitField0_ |= 0x00000001;
-        globalTime_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearGlobalTime() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        globalTime_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.TimeAckResponse)
-    }
-    
-    static {
-      defaultInstance = new TimeAckResponse(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.TimeAckResponse)
-  }
-  
-  public static abstract class TimeSyncService
+  public static abstract class MService
       implements com.google.protobuf.Service {
-    protected TimeSyncService() {}
+    protected MService() {}
     
     public interface Interface {
       public abstract void sync(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest request,
-          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse> done);
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
       
     }
     
     public static com.google.protobuf.Service newReflectiveService(
         final Interface impl) {
-      return new TimeSyncService() {
+      return new MService() {
         @java.lang.Override
         public  void sync(
             com.google.protobuf.RpcController controller,
-            org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest request,
-            com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse> done) {
+            org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+            com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
           impl.sync(controller, request, done);
         }
         
@@ -730,7 +392,7 @@ public final class MasterService {
           }
           switch(method.getIndex()) {
             case 0:
-              return impl.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest)request);
+              return impl.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -746,7 +408,7 @@ public final class MasterService {
           }
           switch(method.getIndex()) {
             case 0:
-              return org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.getDefaultInstance();
+              return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -762,7 +424,7 @@ public final class MasterService {
           }
           switch(method.getIndex()) {
             case 0:
-              return org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance();
+              return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -773,8 +435,8 @@ public final class MasterService {
     
     public abstract void sync(
         com.google.protobuf.RpcController controller,
-        org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest request,
-        com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse> done);
+        org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+        com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
     public static final
         com.google.protobuf.Descriptors.ServiceDescriptor
@@ -799,8 +461,8 @@ public final class MasterService {
       }
       switch(method.getIndex()) {
         case 0:
-          this.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest)request,
-            com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse>specializeCallback(
+          this.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request,
+            com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
               done));
           return;
         default:
@@ -818,7 +480,7 @@ public final class MasterService {
       }
       switch(method.getIndex()) {
         case 0:
-          return org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.getDefaultInstance();
+          return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -834,7 +496,7 @@ public final class MasterService {
       }
       switch(method.getIndex()) {
         case 0:
-          return org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance();
+          return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -845,7 +507,7 @@ public final class MasterService {
       return new Stub(channel);
     }
     
-    public static final class Stub extends org.jcjxb.wsn.service.proto.MasterService.TimeSyncService implements Interface {
+    public static final class Stub extends org.jcjxb.wsn.service.proto.MasterService.MService implements Interface {
       private Stub(com.google.protobuf.RpcChannel channel) {
         this.channel = channel;
       }
@@ -858,17 +520,17 @@ public final class MasterService {
       
       public  void sync(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest request,
-          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse> done) {
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(0),
           controller,
           request,
-          org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance(),
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance(),
           com.google.protobuf.RpcUtil.generalizeCallback(
             done,
-            org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.class,
-            org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance()));
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty.class,
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()));
       }
     }
     
@@ -878,9 +540,9 @@ public final class MasterService {
     }
     
     public interface BlockingInterface {
-      public org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse sync(
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest request)
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
           throws com.google.protobuf.ServiceException;
     }
     
@@ -891,30 +553,25 @@ public final class MasterService {
       
       private final com.google.protobuf.BlockingRpcChannel channel;
       
-      public org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse sync(
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest request)
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
           throws com.google.protobuf.ServiceException {
-        return (org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse) channel.callBlockingMethod(
+        return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
           getDescriptor().getMethods().get(0),
           controller,
           request,
-          org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.getDefaultInstance());
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance());
       }
       
     }
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_jcjxb_wsn_service_TimeSyncRequest_descriptor;
+    internal_static_org_jcjxb_wsn_service_LVTSyncRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_jcjxb_wsn_service_TimeSyncRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_jcjxb_wsn_service_TimeAckResponse_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_jcjxb_wsn_service_TimeAckResponse_fieldAccessorTable;
+      internal_static_org_jcjxb_wsn_service_LVTSyncRequest_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -925,40 +582,32 @@ public final class MasterService {
   static {
     java.lang.String[] descriptorData = {
       "\n\023MasterService.proto\022\025org.jcjxb.wsn.ser" +
-      "vice\"$\n\017TimeSyncRequest\022\021\n\tlocalTime\030\001 \001" +
-      "(\003\"%\n\017TimeAckResponse\022\022\n\nglobalTime\030\001 \001(" +
-      "\0032i\n\017TimeSyncService\022V\n\004sync\022&.org.jcjxb" +
-      ".wsn.service.TimeSyncRequest\032&.org.jcjxb" +
-      ".wsn.service.TimeAckResponseB/\n\033org.jcjx" +
-      "b.wsn.service.protoB\rMasterService\210\001\001"
+      "vice\032\023BasicDataType.proto\"#\n\016LVTSyncRequ" +
+      "est\022\021\n\tlocalTime\030\001 \001(\0032W\n\010MService\022K\n\004sy" +
+      "nc\022%.org.jcjxb.wsn.service.LVTSyncReques" +
+      "t\032\034.org.jcjxb.wsn.service.EmptyB/\n\033org.j" +
+      "cjxb.wsn.service.protoB\rMasterService\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_org_jcjxb_wsn_service_TimeSyncRequest_descriptor =
+          internal_static_org_jcjxb_wsn_service_LVTSyncRequest_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_org_jcjxb_wsn_service_TimeSyncRequest_fieldAccessorTable = new
+          internal_static_org_jcjxb_wsn_service_LVTSyncRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_org_jcjxb_wsn_service_TimeSyncRequest_descriptor,
+              internal_static_org_jcjxb_wsn_service_LVTSyncRequest_descriptor,
               new java.lang.String[] { "LocalTime", },
-              org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.class,
-              org.jcjxb.wsn.service.proto.MasterService.TimeSyncRequest.Builder.class);
-          internal_static_org_jcjxb_wsn_service_TimeAckResponse_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_org_jcjxb_wsn_service_TimeAckResponse_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_org_jcjxb_wsn_service_TimeAckResponse_descriptor,
-              new java.lang.String[] { "GlobalTime", },
-              org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.class,
-              org.jcjxb.wsn.service.proto.MasterService.TimeAckResponse.Builder.class);
+              org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.class,
+              org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.Builder.class);
           return null;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          org.jcjxb.wsn.service.proto.BasicDataType.getDescriptor(),
         }, assigner);
   }
   

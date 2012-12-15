@@ -6,8 +6,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.jcjxb.wsn.rpc.LionRpcServer;
 import org.jcjxb.wsn.rpc.LionRpcSocketServer;
-import org.jcjxb.wsn.service.TimeSyncServiceImpl;
-import org.jcjxb.wsn.service.proto.MasterService;
 
 public class Master {
 
@@ -23,8 +21,7 @@ public class Master {
 	public static void main(String[] args) throws UnknownHostException {
 		int port = 8080;
 		LionRpcServer rpcServer = new LionRpcSocketServer(port, "127.0.0.1");
-		rpcServer.registerBlockingService(MasterService.TimeSyncService
-				.newReflectiveBlockingService(new TimeSyncServiceImpl()));
+		
 		rpcServer.start();
 		logger.info(String.format("Master Server is running on port %d now...",
 				port));

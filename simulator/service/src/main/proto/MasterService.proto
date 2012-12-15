@@ -4,14 +4,12 @@ option java_package = "org.jcjxb.wsn.service.proto";
 option java_outer_classname = "MasterService";
 option java_generic_services = true;
 
-message TimeSyncRequest {
+import "BasicDataType.proto";
+
+message LVTSyncRequest {
 	optional int64 localTime = 1;
 }
 
-message TimeAckResponse {
-	optional int64 globalTime = 1;
-}
-
-service TimeSyncService {
-	rpc sync(TimeSyncRequest) returns(TimeAckResponse);
+service MService {
+	rpc sync(LVTSyncRequest) returns(Empty);
 }

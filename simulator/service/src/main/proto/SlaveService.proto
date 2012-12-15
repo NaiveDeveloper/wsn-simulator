@@ -1,0 +1,16 @@
+package org.jcjxb.wsn.service;
+
+option java_package = "org.jcjxb.wsn.service.proto";
+option java_outer_classname = "SlaveService";
+option java_generic_services = true;
+
+import "BasicDataType.proto";
+
+message InitSimCmd {
+	optional SensorsOnHost sendorsOnThisHost = 1;
+	repeated SensorsOnHost sendorsOnLeftHosts = 2;
+}
+
+service SService {
+
+}

@@ -25,3 +25,16 @@ message Event {
 	optional string type = 5;
 	optional bytes data = 6;
 }
+
+message Host {
+	optional string host = 1;
+	optional int32 port = 2;
+}
+
+message Empty {
+}
+
+message SensorsOnHost {
+	optional Host host = 1;
+	repeated int32 sensorId = 2;
+}

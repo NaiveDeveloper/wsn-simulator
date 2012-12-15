@@ -954,6 +954,2041 @@ public final class BasicDataType {
     // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.PositionList)
   }
   
+  public interface EventOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .org.jcjxb.wsn.service.Event.Priority priority = 1 [default = PRIORITY_NORMAL];
+    boolean hasPriority();
+    org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority getPriority();
+    
+    // optional int64 startTime = 2;
+    boolean hasStartTime();
+    long getStartTime();
+    
+    // optional int64 duration = 3;
+    boolean hasDuration();
+    long getDuration();
+    
+    // repeated int32 sensorId = 4;
+    java.util.List<java.lang.Integer> getSensorIdList();
+    int getSensorIdCount();
+    int getSensorId(int index);
+    
+    // optional string type = 5;
+    boolean hasType();
+    String getType();
+    
+    // optional bytes data = 6;
+    boolean hasData();
+    com.google.protobuf.ByteString getData();
+  }
+  public static final class Event extends
+      com.google.protobuf.GeneratedMessage
+      implements EventOrBuilder {
+    // Use Event.newBuilder() to construct.
+    private Event(Builder builder) {
+      super(builder);
+    }
+    private Event(boolean noInit) {}
+    
+    private static final Event defaultInstance;
+    public static Event getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Event getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Event_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable;
+    }
+    
+    public enum Priority
+        implements com.google.protobuf.ProtocolMessageEnum {
+      PRIORITY_HIGH(0, 0),
+      PRIORITY_NORMAL(1, 1),
+      PRIORITY_LOW(2, 2),
+      ;
+      
+      public static final int PRIORITY_HIGH_VALUE = 0;
+      public static final int PRIORITY_NORMAL_VALUE = 1;
+      public static final int PRIORITY_LOW_VALUE = 2;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static Priority valueOf(int value) {
+        switch (value) {
+          case 0: return PRIORITY_HIGH;
+          case 1: return PRIORITY_NORMAL;
+          case 2: return PRIORITY_LOW;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<Priority>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Priority>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Priority>() {
+              public Priority findValueByNumber(int number) {
+                return Priority.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Event.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final Priority[] VALUES = {
+        PRIORITY_HIGH, PRIORITY_NORMAL, PRIORITY_LOW, 
+      };
+      
+      public static Priority valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private Priority(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:org.jcjxb.wsn.service.Event.Priority)
+    }
+    
+    private int bitField0_;
+    // optional .org.jcjxb.wsn.service.Event.Priority priority = 1 [default = PRIORITY_NORMAL];
+    public static final int PRIORITY_FIELD_NUMBER = 1;
+    private org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority priority_;
+    public boolean hasPriority() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority getPriority() {
+      return priority_;
+    }
+    
+    // optional int64 startTime = 2;
+    public static final int STARTTIME_FIELD_NUMBER = 2;
+    private long startTime_;
+    public boolean hasStartTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getStartTime() {
+      return startTime_;
+    }
+    
+    // optional int64 duration = 3;
+    public static final int DURATION_FIELD_NUMBER = 3;
+    private long duration_;
+    public boolean hasDuration() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public long getDuration() {
+      return duration_;
+    }
+    
+    // repeated int32 sensorId = 4;
+    public static final int SENSORID_FIELD_NUMBER = 4;
+    private java.util.List<java.lang.Integer> sensorId_;
+    public java.util.List<java.lang.Integer>
+        getSensorIdList() {
+      return sensorId_;
+    }
+    public int getSensorIdCount() {
+      return sensorId_.size();
+    }
+    public int getSensorId(int index) {
+      return sensorId_.get(index);
+    }
+    
+    // optional string type = 5;
+    public static final int TYPE_FIELD_NUMBER = 5;
+    private java.lang.Object type_;
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getType() {
+      java.lang.Object ref = type_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          type_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getTypeBytes() {
+      java.lang.Object ref = type_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        type_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional bytes data = 6;
+    public static final int DATA_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString data_;
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public com.google.protobuf.ByteString getData() {
+      return data_;
+    }
+    
+    private void initFields() {
+      priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
+      startTime_ = 0L;
+      duration_ = 0L;
+      sensorId_ = java.util.Collections.emptyList();;
+      type_ = "";
+      data_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, priority_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, startTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, duration_);
+      }
+      for (int i = 0; i < sensorId_.size(); i++) {
+        output.writeInt32(4, sensorId_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(5, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(6, data_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, priority_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, startTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, duration_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < sensorId_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(sensorId_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSensorIdList().size();
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getTypeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, data_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Event parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.BasicDataType.Event prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Event_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.BasicDataType.Event.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        startTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        duration_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sensorId_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        type_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Event.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Event.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event build() {
+        org.jcjxb.wsn.service.proto.BasicDataType.Event result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.BasicDataType.Event buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.BasicDataType.Event result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event buildPartial() {
+        org.jcjxb.wsn.service.proto.BasicDataType.Event result = new org.jcjxb.wsn.service.proto.BasicDataType.Event(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.priority_ = priority_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.startTime_ = startTime_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.duration_ = duration_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.sensorId_ = sensorId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.data_ = data_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.BasicDataType.Event) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.BasicDataType.Event)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.Event other) {
+        if (other == org.jcjxb.wsn.service.proto.BasicDataType.Event.getDefaultInstance()) return this;
+        if (other.hasPriority()) {
+          setPriority(other.getPriority());
+        }
+        if (other.hasStartTime()) {
+          setStartTime(other.getStartTime());
+        }
+        if (other.hasDuration()) {
+          setDuration(other.getDuration());
+        }
+        if (!other.sensorId_.isEmpty()) {
+          if (sensorId_.isEmpty()) {
+            sensorId_ = other.sensorId_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureSensorIdIsMutable();
+            sensorId_.addAll(other.sensorId_);
+          }
+          onChanged();
+        }
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasData()) {
+          setData(other.getData());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority value = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                priority_ = value;
+              }
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              startTime_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              duration_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              ensureSensorIdIsMutable();
+              sensorId_.add(input.readInt32());
+              break;
+            }
+            case 34: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addSensorId(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              type_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              data_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .org.jcjxb.wsn.service.Event.Priority priority = 1 [default = PRIORITY_NORMAL];
+      private org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
+      public boolean hasPriority() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority getPriority() {
+        return priority_;
+      }
+      public Builder setPriority(org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPriority() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 startTime = 2;
+      private long startTime_ ;
+      public boolean hasStartTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getStartTime() {
+        return startTime_;
+      }
+      public Builder setStartTime(long value) {
+        bitField0_ |= 0x00000002;
+        startTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        startTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 duration = 3;
+      private long duration_ ;
+      public boolean hasDuration() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public long getDuration() {
+        return duration_;
+      }
+      public Builder setDuration(long value) {
+        bitField0_ |= 0x00000004;
+        duration_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDuration() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        duration_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int32 sensorId = 4;
+      private java.util.List<java.lang.Integer> sensorId_ = java.util.Collections.emptyList();;
+      private void ensureSensorIdIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          sensorId_ = new java.util.ArrayList<java.lang.Integer>(sensorId_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      public java.util.List<java.lang.Integer>
+          getSensorIdList() {
+        return java.util.Collections.unmodifiableList(sensorId_);
+      }
+      public int getSensorIdCount() {
+        return sensorId_.size();
+      }
+      public int getSensorId(int index) {
+        return sensorId_.get(index);
+      }
+      public Builder setSensorId(
+          int index, int value) {
+        ensureSensorIdIsMutable();
+        sensorId_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addSensorId(int value) {
+        ensureSensorIdIsMutable();
+        sensorId_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllSensorId(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSensorIdIsMutable();
+        super.addAll(values, sensorId_);
+        onChanged();
+        return this;
+      }
+      public Builder clearSensorId() {
+        sensorId_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      
+      // optional string type = 5;
+      private java.lang.Object type_ = "";
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getType() {
+        java.lang.Object ref = type_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          type_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setType(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        type_ = getDefaultInstance().getType();
+        onChanged();
+        return this;
+      }
+      void setType(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        type_ = value;
+        onChanged();
+      }
+      
+      // optional bytes data = 6;
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      public boolean hasData() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public com.google.protobuf.ByteString getData() {
+        return data_;
+      }
+      public Builder setData(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        data_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearData() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        data_ = getDefaultInstance().getData();
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.Event)
+    }
+    
+    static {
+      defaultInstance = new Event(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.Event)
+  }
+  
+  public interface HostOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional string host = 1;
+    boolean hasHost();
+    String getHost();
+    
+    // optional int32 port = 2;
+    boolean hasPort();
+    int getPort();
+  }
+  public static final class Host extends
+      com.google.protobuf.GeneratedMessage
+      implements HostOrBuilder {
+    // Use Host.newBuilder() to construct.
+    private Host(Builder builder) {
+      super(builder);
+    }
+    private Host(boolean noInit) {}
+    
+    private static final Host defaultInstance;
+    public static Host getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Host getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Host_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Host_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional string host = 1;
+    public static final int HOST_FIELD_NUMBER = 1;
+    private java.lang.Object host_;
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public String getHost() {
+      java.lang.Object ref = host_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          host_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getHostBytes() {
+      java.lang.Object ref = host_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        host_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int32 port = 2;
+    public static final int PORT_FIELD_NUMBER = 2;
+    private int port_;
+    public boolean hasPort() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getPort() {
+      return port_;
+    }
+    
+    private void initFields() {
+      host_ = "";
+      port_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, port_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, port_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Host parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.BasicDataType.Host prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Host_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Host_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.BasicDataType.Host.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        host_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        port_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Host.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Host getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Host build() {
+        org.jcjxb.wsn.service.proto.BasicDataType.Host result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.BasicDataType.Host buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.BasicDataType.Host result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Host buildPartial() {
+        org.jcjxb.wsn.service.proto.BasicDataType.Host result = new org.jcjxb.wsn.service.proto.BasicDataType.Host(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.host_ = host_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.port_ = port_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.BasicDataType.Host) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.BasicDataType.Host)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.Host other) {
+        if (other == org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance()) return this;
+        if (other.hasHost()) {
+          setHost(other.getHost());
+        }
+        if (other.hasPort()) {
+          setPort(other.getPort());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              host_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              port_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional string host = 1;
+      private java.lang.Object host_ = "";
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          host_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setHost(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      void setHost(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        host_ = value;
+        onChanged();
+      }
+      
+      // optional int32 port = 2;
+      private int port_ ;
+      public boolean hasPort() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getPort() {
+        return port_;
+      }
+      public Builder setPort(int value) {
+        bitField0_ |= 0x00000002;
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPort() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        port_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.Host)
+    }
+    
+    static {
+      defaultInstance = new Host(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.Host)
+  }
+  
+  public interface EmptyOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  public static final class Empty extends
+      com.google.protobuf.GeneratedMessage
+      implements EmptyOrBuilder {
+    // Use Empty.newBuilder() to construct.
+    private Empty(Builder builder) {
+      super(builder);
+    }
+    private Empty(boolean noInit) {}
+    
+    private static final Empty defaultInstance;
+    public static Empty getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Empty getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Empty_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Empty_fieldAccessorTable;
+    }
+    
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.Empty parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.BasicDataType.Empty prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.BasicDataType.EmptyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Empty_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_Empty_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.BasicDataType.Empty.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty build() {
+        org.jcjxb.wsn.service.proto.BasicDataType.Empty result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.BasicDataType.Empty buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.BasicDataType.Empty result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty buildPartial() {
+        org.jcjxb.wsn.service.proto.BasicDataType.Empty result = new org.jcjxb.wsn.service.proto.BasicDataType.Empty(this);
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.BasicDataType.Empty) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.BasicDataType.Empty)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.Empty other) {
+        if (other == org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.Empty)
+    }
+    
+    static {
+      defaultInstance = new Empty(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.Empty)
+  }
+  
+  public interface SensorsOnHostOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .org.jcjxb.wsn.service.Host host = 1;
+    boolean hasHost();
+    org.jcjxb.wsn.service.proto.BasicDataType.Host getHost();
+    org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder getHostOrBuilder();
+    
+    // repeated int32 sensorId = 2;
+    java.util.List<java.lang.Integer> getSensorIdList();
+    int getSensorIdCount();
+    int getSensorId(int index);
+  }
+  public static final class SensorsOnHost extends
+      com.google.protobuf.GeneratedMessage
+      implements SensorsOnHostOrBuilder {
+    // Use SensorsOnHost.newBuilder() to construct.
+    private SensorsOnHost(Builder builder) {
+      super(builder);
+    }
+    private SensorsOnHost(boolean noInit) {}
+    
+    private static final SensorsOnHost defaultInstance;
+    public static SensorsOnHost getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public SensorsOnHost getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_SensorsOnHost_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_SensorsOnHost_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .org.jcjxb.wsn.service.Host host = 1;
+    public static final int HOST_FIELD_NUMBER = 1;
+    private org.jcjxb.wsn.service.proto.BasicDataType.Host host_;
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.Host getHost() {
+      return host_;
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder getHostOrBuilder() {
+      return host_;
+    }
+    
+    // repeated int32 sensorId = 2;
+    public static final int SENSORID_FIELD_NUMBER = 2;
+    private java.util.List<java.lang.Integer> sensorId_;
+    public java.util.List<java.lang.Integer>
+        getSensorIdList() {
+      return sensorId_;
+    }
+    public int getSensorIdCount() {
+      return sensorId_.size();
+    }
+    public int getSensorId(int index) {
+      return sensorId_.get(index);
+    }
+    
+    private void initFields() {
+      host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+      sensorId_ = java.util.Collections.emptyList();;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, host_);
+      }
+      for (int i = 0; i < sensorId_.size(); i++) {
+        output.writeInt32(2, sensorId_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, host_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < sensorId_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(sensorId_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSensorIdList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_SensorsOnHost_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_SensorsOnHost_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getHostFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (hostBuilder_ == null) {
+          host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+        } else {
+          hostBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sensorId_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost build() {
+        org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost buildPartial() {
+        org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost result = new org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (hostBuilder_ == null) {
+          result.host_ = host_;
+        } else {
+          result.host_ = hostBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.sensorId_ = sensorId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost other) {
+        if (other == org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance()) return this;
+        if (other.hasHost()) {
+          mergeHost(other.getHost());
+        }
+        if (!other.sensorId_.isEmpty()) {
+          if (sensorId_.isEmpty()) {
+            sensorId_ = other.sensorId_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureSensorIdIsMutable();
+            sensorId_.addAll(other.sensorId_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.Host.newBuilder();
+              if (hasHost()) {
+                subBuilder.mergeFrom(getHost());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setHost(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              ensureSensorIdIsMutable();
+              sensorId_.add(input.readInt32());
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addSensorId(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .org.jcjxb.wsn.service.Host host = 1;
+      private org.jcjxb.wsn.service.proto.BasicDataType.Host host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.Host, org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder, org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder> hostBuilder_;
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Host getHost() {
+        if (hostBuilder_ == null) {
+          return host_;
+        } else {
+          return hostBuilder_.getMessage();
+        }
+      }
+      public Builder setHost(org.jcjxb.wsn.service.proto.BasicDataType.Host value) {
+        if (hostBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          host_ = value;
+          onChanged();
+        } else {
+          hostBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setHost(
+          org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder builderForValue) {
+        if (hostBuilder_ == null) {
+          host_ = builderForValue.build();
+          onChanged();
+        } else {
+          hostBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeHost(org.jcjxb.wsn.service.proto.BasicDataType.Host value) {
+        if (hostBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              host_ != org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance()) {
+            host_ =
+              org.jcjxb.wsn.service.proto.BasicDataType.Host.newBuilder(host_).mergeFrom(value).buildPartial();
+          } else {
+            host_ = value;
+          }
+          onChanged();
+        } else {
+          hostBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearHost() {
+        if (hostBuilder_ == null) {
+          host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+          onChanged();
+        } else {
+          hostBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder getHostBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getHostFieldBuilder().getBuilder();
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder getHostOrBuilder() {
+        if (hostBuilder_ != null) {
+          return hostBuilder_.getMessageOrBuilder();
+        } else {
+          return host_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.Host, org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder, org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder> 
+          getHostFieldBuilder() {
+        if (hostBuilder_ == null) {
+          hostBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.jcjxb.wsn.service.proto.BasicDataType.Host, org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder, org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder>(
+                  host_,
+                  getParentForChildren(),
+                  isClean());
+          host_ = null;
+        }
+        return hostBuilder_;
+      }
+      
+      // repeated int32 sensorId = 2;
+      private java.util.List<java.lang.Integer> sensorId_ = java.util.Collections.emptyList();;
+      private void ensureSensorIdIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          sensorId_ = new java.util.ArrayList<java.lang.Integer>(sensorId_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      public java.util.List<java.lang.Integer>
+          getSensorIdList() {
+        return java.util.Collections.unmodifiableList(sensorId_);
+      }
+      public int getSensorIdCount() {
+        return sensorId_.size();
+      }
+      public int getSensorId(int index) {
+        return sensorId_.get(index);
+      }
+      public Builder setSensorId(
+          int index, int value) {
+        ensureSensorIdIsMutable();
+        sensorId_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addSensorId(int value) {
+        ensureSensorIdIsMutable();
+        sensorId_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllSensorId(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSensorIdIsMutable();
+        super.addAll(values, sensorId_);
+        onChanged();
+        return this;
+      }
+      public Builder clearSensorId() {
+        sensorId_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.SensorsOnHost)
+    }
+    
+    static {
+      defaultInstance = new SensorsOnHost(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.SensorsOnHost)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_jcjxb_wsn_service_Position_descriptor;
   private static
@@ -964,6 +2999,26 @@ public final class BasicDataType {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_jcjxb_wsn_service_PositionList_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_Event_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_Host_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_Host_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_Empty_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_Empty_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_SensorsOnHost_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_SensorsOnHost_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -976,7 +3031,16 @@ public final class BasicDataType {
       "\n\023BasicDataType.proto\022\025org.jcjxb.wsn.ser" +
       "vice\" \n\010Position\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\"@" +
       "\n\014PositionList\0220\n\007postion\030\001 \003(\0132\037.org.jc" +
-      "jxb.wsn.service.PositionB,\n\033org.jcjxb.ws" +
+      "jxb.wsn.service.Position\"\352\001\n\005Event\022H\n\010pr" +
+      "iority\030\001 \001(\0162%.org.jcjxb.wsn.service.Eve" +
+      "nt.Priority:\017PRIORITY_NORMAL\022\021\n\tstartTim" +
+      "e\030\002 \001(\003\022\020\n\010duration\030\003 \001(\003\022\020\n\010sensorId\030\004 " +
+      "\003(\005\022\014\n\004type\030\005 \001(\t\022\014\n\004data\030\006 \001(\014\"D\n\010Prior" +
+      "ity\022\021\n\rPRIORITY_HIGH\020\000\022\023\n\017PRIORITY_NORMA" +
+      "L\020\001\022\020\n\014PRIORITY_LOW\020\002\"\"\n\004Host\022\014\n\004host\030\001 ",
+      "\001(\t\022\014\n\004port\030\002 \001(\005\"\007\n\005Empty\"L\n\rSensorsOnH" +
+      "ost\022)\n\004host\030\001 \001(\0132\033.org.jcjxb.wsn.servic" +
+      "e.Host\022\020\n\010sensorId\030\002 \003(\005B,\n\033org.jcjxb.ws" +
       "n.service.protoB\rBasicDataType"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -1000,6 +3064,38 @@ public final class BasicDataType {
               new java.lang.String[] { "Postion", },
               org.jcjxb.wsn.service.proto.BasicDataType.PositionList.class,
               org.jcjxb.wsn.service.proto.BasicDataType.PositionList.Builder.class);
+          internal_static_org_jcjxb_wsn_service_Event_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_Event_descriptor,
+              new java.lang.String[] { "Priority", "StartTime", "Duration", "SensorId", "Type", "Data", },
+              org.jcjxb.wsn.service.proto.BasicDataType.Event.class,
+              org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder.class);
+          internal_static_org_jcjxb_wsn_service_Host_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_org_jcjxb_wsn_service_Host_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_Host_descriptor,
+              new java.lang.String[] { "Host", "Port", },
+              org.jcjxb.wsn.service.proto.BasicDataType.Host.class,
+              org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder.class);
+          internal_static_org_jcjxb_wsn_service_Empty_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_org_jcjxb_wsn_service_Empty_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_Empty_descriptor,
+              new java.lang.String[] { },
+              org.jcjxb.wsn.service.proto.BasicDataType.Empty.class,
+              org.jcjxb.wsn.service.proto.BasicDataType.Empty.Builder.class);
+          internal_static_org_jcjxb_wsn_service_SensorsOnHost_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_org_jcjxb_wsn_service_SensorsOnHost_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_SensorsOnHost_descriptor,
+              new java.lang.String[] { "Host", "SensorId", },
+              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.class,
+              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder.class);
           return null;
         }
       };
