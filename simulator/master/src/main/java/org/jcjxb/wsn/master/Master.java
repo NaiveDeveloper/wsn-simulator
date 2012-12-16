@@ -21,7 +21,7 @@ public class Master {
 	public static void main(String[] args) throws UnknownHostException {
 		int port = 8080;
 		LionRpcServer rpcServer = new LionRpcSocketServer(port, "127.0.0.1");
-		
+		//注册服务
 		rpcServer.start();
 		logger.info(String.format("Master Server is running on port %d now...",
 				port));
