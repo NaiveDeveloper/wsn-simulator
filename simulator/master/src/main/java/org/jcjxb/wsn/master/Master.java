@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.jcjxb.wsn.common.Options;
 import org.jcjxb.wsn.rpc.LionRpcServer;
 import org.jcjxb.wsn.rpc.LionRpcSocketServer;
 
@@ -17,6 +18,8 @@ public class Master {
 	}
 
 	private static Logger logger = Logger.getLogger(Master.class);
+	
+	private static Options mainOptions = new Options();
 
 	public static void main(String[] args) throws UnknownHostException {
 		int port = 8080;
