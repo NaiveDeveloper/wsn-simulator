@@ -18,13 +18,25 @@ public class Master {
 	}
 
 	private static Logger logger = Logger.getLogger(Master.class);
-	
+
 	private static Options mainOptions = new Options();
 
+	private static Options.StringOption hostConfigOption = mainOptions
+			.newOption("hostConfig", "hostConfig.txt",
+					"This option defines master and slaves host config");
+
+	private static Options.IntOption hostIndexOption = mainOptions.newOption(
+			"hostIndex", 1,
+			"This option defines this slave's index in host config");
+
 	public static void main(String[] args) throws UnknownHostException {
+		mainOptions.parseCommandLine(args);
+		if(!"".equals(hostConfigOption.getValue())) {
+			
+		}
 		int port = 8080;
 		LionRpcServer rpcServer = new LionRpcSocketServer(port, "127.0.0.1");
-		//注册服务
+		// 注册服务
 		rpcServer.start();
 		logger.info(String.format("Master Server is running on port %d now...",
 				port));
