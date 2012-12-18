@@ -8,6 +8,7 @@ import java.util.Set;
 import org.jcjxb.wsn.service.algorithm.Algorithm;
 import org.jcjxb.wsn.service.proto.BasicDataType.Host;
 import org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost;
+import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 import org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd;
 
 public class SimConfig {
@@ -20,6 +21,8 @@ public class SimConfig {
 	
 	private Map<Integer, Host> sensorsToSlaveMap = null;
 	
+	private HostConfig hostConfig = null;
+	
 	private SimConfig() {
 	}
 	
@@ -30,7 +33,7 @@ public class SimConfig {
 		return simConfig;
 	}
 	
-	private SimConfig init(InitSimCmd initSimCmd) {
+	private SimConfig initSimCmd(InitSimCmd initSimCmd) {
 		this.clear();
 		sensorsOnThisSlave = new HashSet<Integer>(initSimCmd.getSendorsOnThisHost().getSensorIdList());
 		sensorsToSlaveMap = new HashMap<Integer, Host>();
@@ -59,5 +62,13 @@ public class SimConfig {
 	
 	public Algorithm getAlgorithm() {
 		return algorithm;
+	}
+
+	public HostConfig getHostConfig() {
+		return hostConfig;
+	}
+
+	public void setHostConfig(HostConfig hostConfig) {
+		this.hostConfig = hostConfig;
 	}
 }

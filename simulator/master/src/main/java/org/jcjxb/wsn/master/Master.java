@@ -1,12 +1,15 @@
 package org.jcjxb.wsn.master;
 
-import java.net.UnknownHostException;
+import java.io.FileInputStream;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.jcjxb.wsn.common.Options;
 import org.jcjxb.wsn.rpc.LionRpcServer;
 import org.jcjxb.wsn.rpc.LionRpcSocketServer;
+import org.jcjxb.wsn.service.impl.MasterServiceImpl;
+import org.jcjxb.wsn.service.proto.MasterService;
+import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 
 public class Master {
 
@@ -25,21 +28,32 @@ public class Master {
 			.newOption("hostConfig", "hostConfig.txt",
 					"This option defines master and slaves host config");
 
-	private static Options.IntOption hostIndexOption = mainOptions.newOption(
-			"hostIndex", 1,
-			"This option defines this slave's index in host config");
-
-	public static void main(String[] args) throws UnknownHostException {
+	public static void main(String[] args) throws Exception {
 		mainOptions.parseCommandLine(args);
-		if(!"".equals(hostConfigOption.getValue())) {
-			
+		HostConfig hostConfig = null;
+		if (!"".equals(hostConfigOption.getValue())) {
+			hostConfig = HostConfig.parseFrom(new FileInputStream(
+					hostConfigOption.getValue()));
+			if (hostConfig == null) {
+				logger.info("Parse Host Config File error");
+				return;
+			}
+		} else {
+			logger.info("Please specify host config file path");
+			return;
 		}
-		int port = 8080;
-		LionRpcServer rpcServer = new LionRpcSocketServer(port, "127.0.0.1");
+
+		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
+				.getMasterHost().getPort(), hostConfig.getMasterHost()
+				.getHost());
 		// 注册服务
+		rpcServer.registerBlockingService(MasterService.MService
+				.newReflectiveBlockingService(new MasterServiceImpl()));
+		
 		rpcServer.start();
+		
 		logger.info(String.format("Master Server is running on port %d now...",
-				port));
+				hostConfig.getMasterHost().getPort()));
 		try {
 			rpcServer.waitEnd();
 		} catch (InterruptedException e) {
