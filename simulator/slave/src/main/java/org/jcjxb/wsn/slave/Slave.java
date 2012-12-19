@@ -10,6 +10,7 @@ import org.jcjxb.wsn.rpc.LionRpcSocketServer;
 import org.jcjxb.wsn.service.impl.SlaveServiceImpl;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 import org.jcjxb.wsn.service.proto.SlaveService;
+import org.jcjxb.wsn.service.sim.SlaveSimConfig;
 
 public class Slave {
 
@@ -52,6 +53,11 @@ public class Slave {
 			logger.info("Please correctly specify host index argument");
 			return;
 		}
+
+		// 设置 host config in SimConfig
+		SlaveSimConfig.getInstance().setHostConfig(hostConfig);
+		SlaveSimConfig.getInstance().setHost(
+				hostConfig.getSlaveHost(hostIndexOption.getValue()));
 
 		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
 				.getSlaveHost(hostIndexOption.getValue()).getPort(), hostConfig

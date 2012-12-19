@@ -11,19 +11,14 @@ public final class SlaveService {
   public interface InitSimCmdOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .org.jcjxb.wsn.service.SensorsOnHost sendorsOnThisHost = 1;
-    boolean hasSendorsOnThisHost();
-    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnThisHost();
-    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnThisHostOrBuilder();
-    
-    // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnLeftHosts = 2;
+    // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnHosts = 1;
     java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> 
-        getSendorsOnLeftHostsList();
-    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnLeftHosts(int index);
-    int getSendorsOnLeftHostsCount();
+        getSendorsOnHostsList();
+    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnHosts(int index);
+    int getSendorsOnHostsCount();
     java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-        getSendorsOnLeftHostsOrBuilderList();
-    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnLeftHostsOrBuilder(
+        getSendorsOnHostsOrBuilderList();
+    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnHostsOrBuilder(
         int index);
   }
   public static final class InitSimCmd extends
@@ -54,44 +49,29 @@ public final class SlaveService {
       return org.jcjxb.wsn.service.proto.SlaveService.internal_static_org_jcjxb_wsn_service_InitSimCmd_fieldAccessorTable;
     }
     
-    private int bitField0_;
-    // optional .org.jcjxb.wsn.service.SensorsOnHost sendorsOnThisHost = 1;
-    public static final int SENDORSONTHISHOST_FIELD_NUMBER = 1;
-    private org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost sendorsOnThisHost_;
-    public boolean hasSendorsOnThisHost() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnThisHost() {
-      return sendorsOnThisHost_;
-    }
-    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnThisHostOrBuilder() {
-      return sendorsOnThisHost_;
-    }
-    
-    // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnLeftHosts = 2;
-    public static final int SENDORSONLEFTHOSTS_FIELD_NUMBER = 2;
-    private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sendorsOnLeftHosts_;
-    public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> getSendorsOnLeftHostsList() {
-      return sendorsOnLeftHosts_;
+    // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnHosts = 1;
+    public static final int SENDORSONHOSTS_FIELD_NUMBER = 1;
+    private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sendorsOnHosts_;
+    public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> getSendorsOnHostsList() {
+      return sendorsOnHosts_;
     }
     public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-        getSendorsOnLeftHostsOrBuilderList() {
-      return sendorsOnLeftHosts_;
+        getSendorsOnHostsOrBuilderList() {
+      return sendorsOnHosts_;
     }
-    public int getSendorsOnLeftHostsCount() {
-      return sendorsOnLeftHosts_.size();
+    public int getSendorsOnHostsCount() {
+      return sendorsOnHosts_.size();
     }
-    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnLeftHosts(int index) {
-      return sendorsOnLeftHosts_.get(index);
+    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnHosts(int index) {
+      return sendorsOnHosts_.get(index);
     }
-    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnLeftHostsOrBuilder(
+    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnHostsOrBuilder(
         int index) {
-      return sendorsOnLeftHosts_.get(index);
+      return sendorsOnHosts_.get(index);
     }
     
     private void initFields() {
-      sendorsOnThisHost_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance();
-      sendorsOnLeftHosts_ = java.util.Collections.emptyList();
+      sendorsOnHosts_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -105,11 +85,8 @@ public final class SlaveService {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, sendorsOnThisHost_);
-      }
-      for (int i = 0; i < sendorsOnLeftHosts_.size(); i++) {
-        output.writeMessage(2, sendorsOnLeftHosts_.get(i));
+      for (int i = 0; i < sendorsOnHosts_.size(); i++) {
+        output.writeMessage(1, sendorsOnHosts_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -120,13 +97,9 @@ public final class SlaveService {
       if (size != -1) return size;
     
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      for (int i = 0; i < sendorsOnHosts_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, sendorsOnThisHost_);
-      }
-      for (int i = 0; i < sendorsOnLeftHosts_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, sendorsOnLeftHosts_.get(i));
+          .computeMessageSize(1, sendorsOnHosts_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -244,8 +217,7 @@ public final class SlaveService {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSendorsOnThisHostFieldBuilder();
-          getSendorsOnLeftHostsFieldBuilder();
+          getSendorsOnHostsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -254,17 +226,11 @@ public final class SlaveService {
       
       public Builder clear() {
         super.clear();
-        if (sendorsOnThisHostBuilder_ == null) {
-          sendorsOnThisHost_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance();
+        if (sendorsOnHostsBuilder_ == null) {
+          sendorsOnHosts_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          sendorsOnThisHostBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          sendorsOnLeftHosts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          sendorsOnLeftHostsBuilder_.clear();
+          sendorsOnHostsBuilder_.clear();
         }
         return this;
       }
@@ -303,25 +269,15 @@ public final class SlaveService {
       public org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd buildPartial() {
         org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd result = new org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (sendorsOnThisHostBuilder_ == null) {
-          result.sendorsOnThisHost_ = sendorsOnThisHost_;
-        } else {
-          result.sendorsOnThisHost_ = sendorsOnThisHostBuilder_.build();
-        }
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            sendorsOnLeftHosts_ = java.util.Collections.unmodifiableList(sendorsOnLeftHosts_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+        if (sendorsOnHostsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            sendorsOnHosts_ = java.util.Collections.unmodifiableList(sendorsOnHosts_);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.sendorsOnLeftHosts_ = sendorsOnLeftHosts_;
+          result.sendorsOnHosts_ = sendorsOnHosts_;
         } else {
-          result.sendorsOnLeftHosts_ = sendorsOnLeftHostsBuilder_.build();
+          result.sendorsOnHosts_ = sendorsOnHostsBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -337,32 +293,29 @@ public final class SlaveService {
       
       public Builder mergeFrom(org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd other) {
         if (other == org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.getDefaultInstance()) return this;
-        if (other.hasSendorsOnThisHost()) {
-          mergeSendorsOnThisHost(other.getSendorsOnThisHost());
-        }
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          if (!other.sendorsOnLeftHosts_.isEmpty()) {
-            if (sendorsOnLeftHosts_.isEmpty()) {
-              sendorsOnLeftHosts_ = other.sendorsOnLeftHosts_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+        if (sendorsOnHostsBuilder_ == null) {
+          if (!other.sendorsOnHosts_.isEmpty()) {
+            if (sendorsOnHosts_.isEmpty()) {
+              sendorsOnHosts_ = other.sendorsOnHosts_;
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureSendorsOnLeftHostsIsMutable();
-              sendorsOnLeftHosts_.addAll(other.sendorsOnLeftHosts_);
+              ensureSendorsOnHostsIsMutable();
+              sendorsOnHosts_.addAll(other.sendorsOnHosts_);
             }
             onChanged();
           }
         } else {
-          if (!other.sendorsOnLeftHosts_.isEmpty()) {
-            if (sendorsOnLeftHostsBuilder_.isEmpty()) {
-              sendorsOnLeftHostsBuilder_.dispose();
-              sendorsOnLeftHostsBuilder_ = null;
-              sendorsOnLeftHosts_ = other.sendorsOnLeftHosts_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              sendorsOnLeftHostsBuilder_ = 
+          if (!other.sendorsOnHosts_.isEmpty()) {
+            if (sendorsOnHostsBuilder_.isEmpty()) {
+              sendorsOnHostsBuilder_.dispose();
+              sendorsOnHostsBuilder_ = null;
+              sendorsOnHosts_ = other.sendorsOnHosts_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              sendorsOnHostsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getSendorsOnLeftHostsFieldBuilder() : null;
+                   getSendorsOnHostsFieldBuilder() : null;
             } else {
-              sendorsOnLeftHostsBuilder_.addAllMessages(other.sendorsOnLeftHosts_);
+              sendorsOnHostsBuilder_.addAllMessages(other.sendorsOnHosts_);
             }
           }
         }
@@ -399,17 +352,8 @@ public final class SlaveService {
             }
             case 10: {
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.newBuilder();
-              if (hasSendorsOnThisHost()) {
-                subBuilder.mergeFrom(getSendorsOnThisHost());
-              }
               input.readMessage(subBuilder, extensionRegistry);
-              setSendorsOnThisHost(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addSendorsOnLeftHosts(subBuilder.buildPartial());
+              addSendorsOnHosts(subBuilder.buildPartial());
               break;
             }
           }
@@ -418,280 +362,190 @@ public final class SlaveService {
       
       private int bitField0_;
       
-      // optional .org.jcjxb.wsn.service.SensorsOnHost sendorsOnThisHost = 1;
-      private org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost sendorsOnThisHost_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> sendorsOnThisHostBuilder_;
-      public boolean hasSendorsOnThisHost() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnThisHost() {
-        if (sendorsOnThisHostBuilder_ == null) {
-          return sendorsOnThisHost_;
-        } else {
-          return sendorsOnThisHostBuilder_.getMessage();
-        }
-      }
-      public Builder setSendorsOnThisHost(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sendorsOnThisHostBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          sendorsOnThisHost_ = value;
-          onChanged();
-        } else {
-          sendorsOnThisHostBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder setSendorsOnThisHost(
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sendorsOnThisHostBuilder_ == null) {
-          sendorsOnThisHost_ = builderForValue.build();
-          onChanged();
-        } else {
-          sendorsOnThisHostBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder mergeSendorsOnThisHost(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sendorsOnThisHostBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sendorsOnThisHost_ != org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance()) {
-            sendorsOnThisHost_ =
-              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.newBuilder(sendorsOnThisHost_).mergeFrom(value).buildPartial();
-          } else {
-            sendorsOnThisHost_ = value;
-          }
-          onChanged();
-        } else {
-          sendorsOnThisHostBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder clearSendorsOnThisHost() {
-        if (sendorsOnThisHostBuilder_ == null) {
-          sendorsOnThisHost_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance();
-          onChanged();
-        } else {
-          sendorsOnThisHostBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder getSendorsOnThisHostBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getSendorsOnThisHostFieldBuilder().getBuilder();
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnThisHostOrBuilder() {
-        if (sendorsOnThisHostBuilder_ != null) {
-          return sendorsOnThisHostBuilder_.getMessageOrBuilder();
-        } else {
-          return sendorsOnThisHost_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-          getSendorsOnThisHostFieldBuilder() {
-        if (sendorsOnThisHostBuilder_ == null) {
-          sendorsOnThisHostBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder>(
-                  sendorsOnThisHost_,
-                  getParentForChildren(),
-                  isClean());
-          sendorsOnThisHost_ = null;
-        }
-        return sendorsOnThisHostBuilder_;
-      }
-      
-      // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnLeftHosts = 2;
-      private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sendorsOnLeftHosts_ =
+      // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnHosts = 1;
+      private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sendorsOnHosts_ =
         java.util.Collections.emptyList();
-      private void ensureSendorsOnLeftHostsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          sendorsOnLeftHosts_ = new java.util.ArrayList<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost>(sendorsOnLeftHosts_);
-          bitField0_ |= 0x00000002;
+      private void ensureSendorsOnHostsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          sendorsOnHosts_ = new java.util.ArrayList<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost>(sendorsOnHosts_);
+          bitField0_ |= 0x00000001;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> sendorsOnLeftHostsBuilder_;
+          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> sendorsOnHostsBuilder_;
       
-      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> getSendorsOnLeftHostsList() {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(sendorsOnLeftHosts_);
+      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> getSendorsOnHostsList() {
+        if (sendorsOnHostsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(sendorsOnHosts_);
         } else {
-          return sendorsOnLeftHostsBuilder_.getMessageList();
+          return sendorsOnHostsBuilder_.getMessageList();
         }
       }
-      public int getSendorsOnLeftHostsCount() {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          return sendorsOnLeftHosts_.size();
+      public int getSendorsOnHostsCount() {
+        if (sendorsOnHostsBuilder_ == null) {
+          return sendorsOnHosts_.size();
         } else {
-          return sendorsOnLeftHostsBuilder_.getCount();
+          return sendorsOnHostsBuilder_.getCount();
         }
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnLeftHosts(int index) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          return sendorsOnLeftHosts_.get(index);
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSendorsOnHosts(int index) {
+        if (sendorsOnHostsBuilder_ == null) {
+          return sendorsOnHosts_.get(index);
         } else {
-          return sendorsOnLeftHostsBuilder_.getMessage(index);
+          return sendorsOnHostsBuilder_.getMessage(index);
         }
       }
-      public Builder setSendorsOnLeftHosts(
+      public Builder setSendorsOnHosts(
           int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
+        if (sendorsOnHostsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.set(index, value);
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.set(index, value);
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.setMessage(index, value);
+          sendorsOnHostsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setSendorsOnLeftHosts(
+      public Builder setSendorsOnHosts(
           int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.set(index, builderForValue.build());
+        if (sendorsOnHostsBuilder_ == null) {
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.set(index, builderForValue.build());
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.setMessage(index, builderForValue.build());
+          sendorsOnHostsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addSendorsOnLeftHosts(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
+      public Builder addSendorsOnHosts(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
+        if (sendorsOnHostsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.add(value);
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.add(value);
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.addMessage(value);
+          sendorsOnHostsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addSendorsOnLeftHosts(
+      public Builder addSendorsOnHosts(
           int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
+        if (sendorsOnHostsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.add(index, value);
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.add(index, value);
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.addMessage(index, value);
+          sendorsOnHostsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addSendorsOnLeftHosts(
+      public Builder addSendorsOnHosts(
           org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.add(builderForValue.build());
+        if (sendorsOnHostsBuilder_ == null) {
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.add(builderForValue.build());
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.addMessage(builderForValue.build());
+          sendorsOnHostsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addSendorsOnLeftHosts(
+      public Builder addSendorsOnHosts(
           int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.add(index, builderForValue.build());
+        if (sendorsOnHostsBuilder_ == null) {
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.add(index, builderForValue.build());
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.addMessage(index, builderForValue.build());
+          sendorsOnHostsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllSendorsOnLeftHosts(
+      public Builder addAllSendorsOnHosts(
           java.lang.Iterable<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> values) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          ensureSendorsOnLeftHostsIsMutable();
-          super.addAll(values, sendorsOnLeftHosts_);
+        if (sendorsOnHostsBuilder_ == null) {
+          ensureSendorsOnHostsIsMutable();
+          super.addAll(values, sendorsOnHosts_);
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.addAllMessages(values);
+          sendorsOnHostsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearSendorsOnLeftHosts() {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          sendorsOnLeftHosts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearSendorsOnHosts() {
+        if (sendorsOnHostsBuilder_ == null) {
+          sendorsOnHosts_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.clear();
+          sendorsOnHostsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeSendorsOnLeftHosts(int index) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          ensureSendorsOnLeftHostsIsMutable();
-          sendorsOnLeftHosts_.remove(index);
+      public Builder removeSendorsOnHosts(int index) {
+        if (sendorsOnHostsBuilder_ == null) {
+          ensureSendorsOnHostsIsMutable();
+          sendorsOnHosts_.remove(index);
           onChanged();
         } else {
-          sendorsOnLeftHostsBuilder_.remove(index);
+          sendorsOnHostsBuilder_.remove(index);
         }
         return this;
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder getSendorsOnLeftHostsBuilder(
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder getSendorsOnHostsBuilder(
           int index) {
-        return getSendorsOnLeftHostsFieldBuilder().getBuilder(index);
+        return getSendorsOnHostsFieldBuilder().getBuilder(index);
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnLeftHostsOrBuilder(
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnHostsOrBuilder(
           int index) {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          return sendorsOnLeftHosts_.get(index);  } else {
-          return sendorsOnLeftHostsBuilder_.getMessageOrBuilder(index);
+        if (sendorsOnHostsBuilder_ == null) {
+          return sendorsOnHosts_.get(index);  } else {
+          return sendorsOnHostsBuilder_.getMessageOrBuilder(index);
         }
       }
       public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-           getSendorsOnLeftHostsOrBuilderList() {
-        if (sendorsOnLeftHostsBuilder_ != null) {
-          return sendorsOnLeftHostsBuilder_.getMessageOrBuilderList();
+           getSendorsOnHostsOrBuilderList() {
+        if (sendorsOnHostsBuilder_ != null) {
+          return sendorsOnHostsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(sendorsOnLeftHosts_);
+          return java.util.Collections.unmodifiableList(sendorsOnHosts_);
         }
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder addSendorsOnLeftHostsBuilder() {
-        return getSendorsOnLeftHostsFieldBuilder().addBuilder(
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder addSendorsOnHostsBuilder() {
+        return getSendorsOnHostsFieldBuilder().addBuilder(
             org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance());
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder addSendorsOnLeftHostsBuilder(
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder addSendorsOnHostsBuilder(
           int index) {
-        return getSendorsOnLeftHostsFieldBuilder().addBuilder(
+        return getSendorsOnHostsFieldBuilder().addBuilder(
             index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance());
       }
       public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder> 
-           getSendorsOnLeftHostsBuilderList() {
-        return getSendorsOnLeftHostsFieldBuilder().getBuilderList();
+           getSendorsOnHostsBuilderList() {
+        return getSendorsOnHostsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-          getSendorsOnLeftHostsFieldBuilder() {
-        if (sendorsOnLeftHostsBuilder_ == null) {
-          sendorsOnLeftHostsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getSendorsOnHostsFieldBuilder() {
+        if (sendorsOnHostsBuilder_ == null) {
+          sendorsOnHostsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder>(
-                  sendorsOnLeftHosts_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  sendorsOnHosts_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
-          sendorsOnLeftHosts_ = null;
+          sendorsOnHosts_ = null;
         }
-        return sendorsOnLeftHostsBuilder_;
+        return sendorsOnHostsBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.InitSimCmd)
@@ -876,12 +730,10 @@ public final class SlaveService {
   static {
     java.lang.String[] descriptorData = {
       "\n\022SlaveService.proto\022\025org.jcjxb.wsn.serv" +
-      "ice\032\023BasicDataType.proto\"\217\001\n\nInitSimCmd\022" +
-      "?\n\021sendorsOnThisHost\030\001 \001(\0132$.org.jcjxb.w" +
-      "sn.service.SensorsOnHost\022@\n\022sendorsOnLef" +
-      "tHosts\030\002 \003(\0132$.org.jcjxb.wsn.service.Sen" +
-      "sorsOnHost2\n\n\010SServiceB.\n\033org.jcjxb.wsn." +
-      "service.protoB\014SlaveService\210\001\001"
+      "ice\032\023BasicDataType.proto\"J\n\nInitSimCmd\022<" +
+      "\n\016sendorsOnHosts\030\001 \003(\0132$.org.jcjxb.wsn.s" +
+      "ervice.SensorsOnHost2\n\n\010SServiceB.\n\033org." +
+      "jcjxb.wsn.service.protoB\014SlaveService\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -893,7 +745,7 @@ public final class SlaveService {
           internal_static_org_jcjxb_wsn_service_InitSimCmd_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_InitSimCmd_descriptor,
-              new java.lang.String[] { "SendorsOnThisHost", "SendorsOnLeftHosts", },
+              new java.lang.String[] { "SendorsOnHosts", },
               org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.class,
               org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.Builder.class);
           return null;

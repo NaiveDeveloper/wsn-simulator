@@ -14,9 +14,8 @@ public class SlaveTimeLine {
 		while (!eventQueue.isEmpty()
 				&& eventQueue.peek().getStartTime() == globalVirtualTime) {
 			Event event = eventQueue.poll();
-			List<Event> eventList = SimConfig.sharedSimConfig().getAlgorithm()
+			List<Event> eventList = SlaveSimConfig.getInstance().getAlgorithm()
 					.generate(event);
-			
 		}
 	}
 	

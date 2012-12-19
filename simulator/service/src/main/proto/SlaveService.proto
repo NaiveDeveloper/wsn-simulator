@@ -7,8 +7,7 @@ option java_generic_services = true;
 import "BasicDataType.proto";
 
 message InitSimCmd {
-	optional SensorsOnHost sendorsOnThisHost = 1;
-	repeated SensorsOnHost sendorsOnLeftHosts = 2;
+	repeated SensorsOnHost sendorsOnHosts = 1;
 }
 
 service SService {

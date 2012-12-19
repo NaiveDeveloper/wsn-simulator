@@ -10,6 +10,7 @@ import org.jcjxb.wsn.rpc.LionRpcSocketServer;
 import org.jcjxb.wsn.service.impl.MasterServiceImpl;
 import org.jcjxb.wsn.service.proto.MasterService;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
+import org.jcjxb.wsn.service.sim.MasterSimConfig;
 
 public class Master {
 
@@ -35,13 +36,17 @@ public class Master {
 			hostConfig = HostConfig.parseFrom(new FileInputStream(
 					hostConfigOption.getValue()));
 			if (hostConfig == null) {
-				logger.info("Parse Host Config File error");
+				logger.info("Parsing Host Config File failed");
 				return;
 			}
 		} else {
 			logger.info("Please specify host config file path");
 			return;
 		}
+		
+		// 设置 host config in SimConfig
+		MasterSimConfig.getInstance().setHostConfig(hostConfig);
+		MasterSimConfig.getInstance().setHost(hostConfig.getMasterHost());
 
 		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
 				.getMasterHost().getPort(), hostConfig.getMasterHost()
