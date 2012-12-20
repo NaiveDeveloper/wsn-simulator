@@ -346,6 +346,344 @@ public final class MasterService {
     // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.LVTSyncRequest)
   }
   
+  public interface SlaveReadyRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 hostIndex = 1;
+    boolean hasHostIndex();
+    int getHostIndex();
+  }
+  public static final class SlaveReadyRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements SlaveReadyRequestOrBuilder {
+    // Use SlaveReadyRequest.newBuilder() to construct.
+    private SlaveReadyRequest(Builder builder) {
+      super(builder);
+    }
+    private SlaveReadyRequest(boolean noInit) {}
+    
+    private static final SlaveReadyRequest defaultInstance;
+    public static SlaveReadyRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public SlaveReadyRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 hostIndex = 1;
+    public static final int HOSTINDEX_FIELD_NUMBER = 1;
+    private int hostIndex_;
+    public boolean hasHostIndex() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getHostIndex() {
+      return hostIndex_;
+    }
+    
+    private void initFields() {
+      hostIndex_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, hostIndex_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, hostIndex_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.MasterService.internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        hostIndex_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest build() {
+        org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest buildPartial() {
+        org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest result = new org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.hostIndex_ = hostIndex_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest other) {
+        if (other == org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDefaultInstance()) return this;
+        if (other.hasHostIndex()) {
+          setHostIndex(other.getHostIndex());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              hostIndex_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 hostIndex = 1;
+      private int hostIndex_ ;
+      public boolean hasHostIndex() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getHostIndex() {
+        return hostIndex_;
+      }
+      public Builder setHostIndex(int value) {
+        bitField0_ |= 0x00000001;
+        hostIndex_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHostIndex() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        hostIndex_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.SlaveReadyRequest)
+    }
+    
+    static {
+      defaultInstance = new SlaveReadyRequest(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.SlaveReadyRequest)
+  }
+  
   public static abstract class MService
       implements com.google.protobuf.Service {
     protected MService() {}
@@ -353,7 +691,7 @@ public final class MasterService {
     public interface Interface {
       public abstract void slaveReady(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.BasicDataType.Host request,
+          org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
       
       public abstract void startSimulation(
@@ -366,6 +704,11 @@ public final class MasterService {
           org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
       
+      public abstract void stopSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
+      
     }
     
     public static com.google.protobuf.Service newReflectiveService(
@@ -374,7 +717,7 @@ public final class MasterService {
         @java.lang.Override
         public  void slaveReady(
             com.google.protobuf.RpcController controller,
-            org.jcjxb.wsn.service.proto.BasicDataType.Host request,
+            org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest request,
             com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
           impl.slaveReady(controller, request, done);
         }
@@ -393,6 +736,14 @@ public final class MasterService {
             org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
             com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
           impl.sync(controller, request, done);
+        }
+        
+        @java.lang.Override
+        public  void stopSimulation(
+            com.google.protobuf.RpcController controller,
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
+            com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
+          impl.stopSimulation(controller, request, done);
         }
         
       };
@@ -418,11 +769,13 @@ public final class MasterService {
           }
           switch(method.getIndex()) {
             case 0:
-              return impl.slaveReady(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Host)request);
+              return impl.slaveReady(controller, (org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest)request);
             case 1:
               return impl.startSimulation(controller, (org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig)request);
             case 2:
               return impl.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request);
+            case 3:
+              return impl.stopSimulation(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Empty)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -438,11 +791,13 @@ public final class MasterService {
           }
           switch(method.getIndex()) {
             case 0:
-              return org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+              return org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDefaultInstance();
             case 1:
               return org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
             case 2:
               return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
+            case 3:
+              return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -463,6 +818,8 @@ public final class MasterService {
               return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
             case 2:
               return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
+            case 3:
+              return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -473,7 +830,7 @@ public final class MasterService {
     
     public abstract void slaveReady(
         com.google.protobuf.RpcController controller,
-        org.jcjxb.wsn.service.proto.BasicDataType.Host request,
+        org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest request,
         com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
     public abstract void startSimulation(
@@ -484,6 +841,11 @@ public final class MasterService {
     public abstract void sync(
         com.google.protobuf.RpcController controller,
         org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+        com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
+    
+    public abstract void stopSimulation(
+        com.google.protobuf.RpcController controller,
+        org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
         com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
     public static final
@@ -509,7 +871,7 @@ public final class MasterService {
       }
       switch(method.getIndex()) {
         case 0:
-          this.slaveReady(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Host)request,
+          this.slaveReady(controller, (org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest)request,
             com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
               done));
           return;
@@ -520,6 +882,11 @@ public final class MasterService {
           return;
         case 2:
           this.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request,
+            com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
+              done));
+          return;
+        case 3:
+          this.stopSimulation(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Empty)request,
             com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
               done));
           return;
@@ -538,11 +905,13 @@ public final class MasterService {
       }
       switch(method.getIndex()) {
         case 0:
-          return org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+          return org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDefaultInstance();
         case 1:
           return org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
         case 2:
           return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
+        case 3:
+          return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -562,6 +931,8 @@ public final class MasterService {
         case 1:
           return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
         case 2:
+          return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
+        case 3:
           return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
@@ -586,7 +957,7 @@ public final class MasterService {
       
       public  void slaveReady(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.BasicDataType.Host request,
+          org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(0),
@@ -628,6 +999,21 @@ public final class MasterService {
             org.jcjxb.wsn.service.proto.BasicDataType.Empty.class,
             org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()));
       }
+      
+      public  void stopSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(3),
+          controller,
+          request,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty.class,
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()));
+      }
     }
     
     public static BlockingInterface newBlockingStub(
@@ -638,7 +1024,7 @@ public final class MasterService {
     public interface BlockingInterface {
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty slaveReady(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.BasicDataType.Host request)
+          org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest request)
           throws com.google.protobuf.ServiceException;
       
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty startSimulation(
@@ -649,6 +1035,11 @@ public final class MasterService {
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
           com.google.protobuf.RpcController controller,
           org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
+          throws com.google.protobuf.ServiceException;
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty stopSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty request)
           throws com.google.protobuf.ServiceException;
     }
     
@@ -661,7 +1052,7 @@ public final class MasterService {
       
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty slaveReady(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.BasicDataType.Host request)
+          org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
           getDescriptor().getMethods().get(0),
@@ -694,6 +1085,18 @@ public final class MasterService {
           org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance());
       }
       
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty stopSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty request)
+          throws com.google.protobuf.ServiceException {
+        return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(3),
+          controller,
+          request,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance());
+      }
+      
     }
   }
   
@@ -702,6 +1105,11 @@ public final class MasterService {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_jcjxb_wsn_service_LVTSyncRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -713,15 +1121,18 @@ public final class MasterService {
     java.lang.String[] descriptorData = {
       "\n\023MasterService.proto\022\025org.jcjxb.wsn.ser" +
       "vice\032\023BasicDataType.proto\032\017WSNConfig.pro" +
-      "to\"#\n\016LVTSyncRequest\022\021\n\tlocalTime\030\001 \001(\0032" +
-      "\366\001\n\010MService\022G\n\nslaveReady\022\033.org.jcjxb.w" +
-      "sn.service.Host\032\034.org.jcjxb.wsn.service." +
-      "Empty\022T\n\017startSimulation\022#.org.jcjxb.wsn" +
-      ".service.DeployConfig\032\034.org.jcjxb.wsn.se" +
-      "rvice.Empty\022K\n\004sync\022%.org.jcjxb.wsn.serv" +
-      "ice.LVTSyncRequest\032\034.org.jcjxb.wsn.servi" +
-      "ce.EmptyB/\n\033org.jcjxb.wsn.service.protoB",
-      "\rMasterService\210\001\001"
+      "to\"#\n\016LVTSyncRequest\022\021\n\tlocalTime\030\001 \001(\003\"" +
+      "&\n\021SlaveReadyRequest\022\021\n\thostIndex\030\001 \001(\0052" +
+      "\321\002\n\010MService\022T\n\nslaveReady\022(.org.jcjxb.w" +
+      "sn.service.SlaveReadyRequest\032\034.org.jcjxb" +
+      ".wsn.service.Empty\022T\n\017startSimulation\022#." +
+      "org.jcjxb.wsn.service.DeployConfig\032\034.org" +
+      ".jcjxb.wsn.service.Empty\022K\n\004sync\022%.org.j" +
+      "cjxb.wsn.service.LVTSyncRequest\032\034.org.jc",
+      "jxb.wsn.service.Empty\022L\n\016stopSimulation\022" +
+      "\034.org.jcjxb.wsn.service.Empty\032\034.org.jcjx" +
+      "b.wsn.service.EmptyB/\n\033org.jcjxb.wsn.ser" +
+      "vice.protoB\rMasterService\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -736,6 +1147,14 @@ public final class MasterService {
               new java.lang.String[] { "LocalTime", },
               org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.class,
               org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.Builder.class);
+          internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_SlaveReadyRequest_descriptor,
+              new java.lang.String[] { "HostIndex", },
+              org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.class,
+              org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.Builder.class);
           return null;
         }
       };

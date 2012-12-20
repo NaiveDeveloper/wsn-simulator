@@ -2460,10 +2460,9 @@ public final class BasicDataType {
   public interface SensorsOnHostOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .org.jcjxb.wsn.service.Host host = 1;
-    boolean hasHost();
-    org.jcjxb.wsn.service.proto.BasicDataType.Host getHost();
-    org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder getHostOrBuilder();
+    // optional int32 hostIndex = 1;
+    boolean hasHostIndex();
+    int getHostIndex();
     
     // repeated int32 sensorId = 2;
     java.util.List<java.lang.Integer> getSensorIdList();
@@ -2499,17 +2498,14 @@ public final class BasicDataType {
     }
     
     private int bitField0_;
-    // optional .org.jcjxb.wsn.service.Host host = 1;
-    public static final int HOST_FIELD_NUMBER = 1;
-    private org.jcjxb.wsn.service.proto.BasicDataType.Host host_;
-    public boolean hasHost() {
+    // optional int32 hostIndex = 1;
+    public static final int HOSTINDEX_FIELD_NUMBER = 1;
+    private int hostIndex_;
+    public boolean hasHostIndex() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public org.jcjxb.wsn.service.proto.BasicDataType.Host getHost() {
-      return host_;
-    }
-    public org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder getHostOrBuilder() {
-      return host_;
+    public int getHostIndex() {
+      return hostIndex_;
     }
     
     // repeated int32 sensorId = 2;
@@ -2527,7 +2523,7 @@ public final class BasicDataType {
     }
     
     private void initFields() {
-      host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
+      hostIndex_ = 0;
       sensorId_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
@@ -2543,7 +2539,7 @@ public final class BasicDataType {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, host_);
+        output.writeInt32(1, hostIndex_);
       }
       for (int i = 0; i < sensorId_.size(); i++) {
         output.writeInt32(2, sensorId_.get(i));
@@ -2559,7 +2555,7 @@ public final class BasicDataType {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, host_);
+          .computeInt32Size(1, hostIndex_);
       }
       {
         int dataSize = 0;
@@ -2686,7 +2682,6 @@ public final class BasicDataType {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getHostFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2695,11 +2690,7 @@ public final class BasicDataType {
       
       public Builder clear() {
         super.clear();
-        if (hostBuilder_ == null) {
-          host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
-        } else {
-          hostBuilder_.clear();
-        }
+        hostIndex_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         sensorId_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2744,11 +2735,7 @@ public final class BasicDataType {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (hostBuilder_ == null) {
-          result.host_ = host_;
-        } else {
-          result.host_ = hostBuilder_.build();
-        }
+        result.hostIndex_ = hostIndex_;
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -2770,8 +2757,8 @@ public final class BasicDataType {
       
       public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost other) {
         if (other == org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance()) return this;
-        if (other.hasHost()) {
-          mergeHost(other.getHost());
+        if (other.hasHostIndex()) {
+          setHostIndex(other.getHostIndex());
         }
         if (!other.sensorId_.isEmpty()) {
           if (sensorId_.isEmpty()) {
@@ -2814,13 +2801,9 @@ public final class BasicDataType {
               }
               break;
             }
-            case 10: {
-              org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.Host.newBuilder();
-              if (hasHost()) {
-                subBuilder.mergeFrom(getHost());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setHost(subBuilder.buildPartial());
+            case 8: {
+              bitField0_ |= 0x00000001;
+              hostIndex_ = input.readInt32();
               break;
             }
             case 16: {
@@ -2843,94 +2826,25 @@ public final class BasicDataType {
       
       private int bitField0_;
       
-      // optional .org.jcjxb.wsn.service.Host host = 1;
-      private org.jcjxb.wsn.service.proto.BasicDataType.Host host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.Host, org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder, org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder> hostBuilder_;
-      public boolean hasHost() {
+      // optional int32 hostIndex = 1;
+      private int hostIndex_ ;
+      public boolean hasHostIndex() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.Host getHost() {
-        if (hostBuilder_ == null) {
-          return host_;
-        } else {
-          return hostBuilder_.getMessage();
-        }
+      public int getHostIndex() {
+        return hostIndex_;
       }
-      public Builder setHost(org.jcjxb.wsn.service.proto.BasicDataType.Host value) {
-        if (hostBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          host_ = value;
-          onChanged();
-        } else {
-          hostBuilder_.setMessage(value);
-        }
+      public Builder setHostIndex(int value) {
         bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder setHost(
-          org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder builderForValue) {
-        if (hostBuilder_ == null) {
-          host_ = builderForValue.build();
-          onChanged();
-        } else {
-          hostBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder mergeHost(org.jcjxb.wsn.service.proto.BasicDataType.Host value) {
-        if (hostBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              host_ != org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance()) {
-            host_ =
-              org.jcjxb.wsn.service.proto.BasicDataType.Host.newBuilder(host_).mergeFrom(value).buildPartial();
-          } else {
-            host_ = value;
-          }
-          onChanged();
-        } else {
-          hostBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder clearHost() {
-        if (hostBuilder_ == null) {
-          host_ = org.jcjxb.wsn.service.proto.BasicDataType.Host.getDefaultInstance();
-          onChanged();
-        } else {
-          hostBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder getHostBuilder() {
-        bitField0_ |= 0x00000001;
+        hostIndex_ = value;
         onChanged();
-        return getHostFieldBuilder().getBuilder();
+        return this;
       }
-      public org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder getHostOrBuilder() {
-        if (hostBuilder_ != null) {
-          return hostBuilder_.getMessageOrBuilder();
-        } else {
-          return host_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.Host, org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder, org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder> 
-          getHostFieldBuilder() {
-        if (hostBuilder_ == null) {
-          hostBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              org.jcjxb.wsn.service.proto.BasicDataType.Host, org.jcjxb.wsn.service.proto.BasicDataType.Host.Builder, org.jcjxb.wsn.service.proto.BasicDataType.HostOrBuilder>(
-                  host_,
-                  getParentForChildren(),
-                  isClean());
-          host_ = null;
-        }
-        return hostBuilder_;
+      public Builder clearHostIndex() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        hostIndex_ = 0;
+        onChanged();
+        return this;
       }
       
       // repeated int32 sensorId = 2;
@@ -3038,10 +2952,10 @@ public final class BasicDataType {
       "\003(\005\022\014\n\004type\030\005 \001(\t\022\014\n\004data\030\006 \001(\014\"D\n\010Prior" +
       "ity\022\021\n\rPRIORITY_HIGH\020\000\022\023\n\017PRIORITY_NORMA" +
       "L\020\001\022\020\n\014PRIORITY_LOW\020\002\"\"\n\004Host\022\014\n\004host\030\001 ",
-      "\001(\t\022\014\n\004port\030\002 \001(\005\"\007\n\005Empty\"L\n\rSensorsOnH" +
-      "ost\022)\n\004host\030\001 \001(\0132\033.org.jcjxb.wsn.servic" +
-      "e.Host\022\020\n\010sensorId\030\002 \003(\005B,\n\033org.jcjxb.ws" +
-      "n.service.protoB\rBasicDataType"
+      "\001(\t\022\014\n\004port\030\002 \001(\005\"\007\n\005Empty\"4\n\rSensorsOnH" +
+      "ost\022\021\n\thostIndex\030\001 \001(\005\022\020\n\010sensorId\030\002 \003(\005" +
+      "B,\n\033org.jcjxb.wsn.service.protoB\rBasicDa" +
+      "taType"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3093,7 +3007,7 @@ public final class BasicDataType {
           internal_static_org_jcjxb_wsn_service_SensorsOnHost_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_SensorsOnHost_descriptor,
-              new java.lang.String[] { "Host", "SensorId", },
+              new java.lang.String[] { "HostIndex", "SensorId", },
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.class,
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder.class);
           return null;

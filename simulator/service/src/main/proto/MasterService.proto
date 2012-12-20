@@ -11,8 +11,13 @@ message LVTSyncRequest {
 	optional int64 localTime = 1;
 }
 
+message SlaveReadyRequest {
+	optional int32 hostIndex = 1;
+}
+
 service MService {
-	rpc slaveReady(Host) returns (Empty);
+	rpc slaveReady(SlaveReadyRequest) returns (Empty);
 	rpc startSimulation(DeployConfig) returns (Empty);
 	rpc sync(LVTSyncRequest) returns(Empty);
+	rpc stopSimulation(Empty) returns(Empty);
 }

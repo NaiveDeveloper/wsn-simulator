@@ -35,6 +35,6 @@ message Empty {
 }
 
 message SensorsOnHost {
-	optional Host host = 1;
+	optional int32 hostIndex = 1;
 	repeated int32 sensorId = 2;
 }

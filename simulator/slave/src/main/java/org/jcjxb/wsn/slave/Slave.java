@@ -56,8 +56,7 @@ public class Slave {
 
 		// 设置 host config in SimConfig
 		SlaveSimConfig.getInstance().setHostConfig(hostConfig);
-		SlaveSimConfig.getInstance().setHost(
-				hostConfig.getSlaveHost(hostIndexOption.getValue()));
+		SlaveSimConfig.getInstance().setHostIndex(hostIndexOption.getValue());
 
 		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
 				.getSlaveHost(hostIndexOption.getValue()).getPort(), hostConfig

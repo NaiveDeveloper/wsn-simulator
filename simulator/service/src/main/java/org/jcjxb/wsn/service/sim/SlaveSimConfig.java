@@ -13,6 +13,11 @@ public class SlaveSimConfig extends SimConfig {
 	private Algorithm algorithm = null;
 
 	private Set<Integer> sensorsOnThisSlave = null;
+	
+	private int hostIndex = 0;
+	
+	private SlaveSimConfig() {
+	}
 
 	public static SlaveSimConfig getInstance() {
 		return simConfig;
@@ -20,7 +25,7 @@ public class SlaveSimConfig extends SimConfig {
 
 	public void initSimCmd(InitSimCmd initSimCmd) {
 		super.initSimCmd(initSimCmd);
-		sensorsOnThisSlave = new HashSet<Integer>(slaveToSensorsMap.get(host));
+		sensorsOnThisSlave = new HashSet<Integer>(slaveToSensorsMap.get(hostIndex));
 	}
 
 	public Algorithm getAlgorithm() {
@@ -36,5 +41,13 @@ public class SlaveSimConfig extends SimConfig {
 
 	public boolean isSensorOnSlave(Integer sensorId) {
 		return sensorsOnThisSlave.contains(sensorId);
+	}
+
+	public int getHostIndex() {
+		return hostIndex;
+	}
+
+	public void setHostIndex(int hostIndex) {
+		this.hostIndex = hostIndex;
 	}
 }

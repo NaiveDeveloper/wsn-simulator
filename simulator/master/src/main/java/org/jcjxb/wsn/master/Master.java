@@ -46,7 +46,6 @@ public class Master {
 		
 		// 设置 host config in SimConfig
 		MasterSimConfig.getInstance().setHostConfig(hostConfig);
-		MasterSimConfig.getInstance().setHost(hostConfig.getMasterHost());
 
 		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
 				.getMasterHost().getPort(), hostConfig.getMasterHost()
