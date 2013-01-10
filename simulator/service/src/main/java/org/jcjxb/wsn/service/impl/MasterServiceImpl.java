@@ -23,7 +23,7 @@ public class MasterServiceImpl implements
 	@Override
 	public Empty startSimulation(RpcController controller, DeployConfig request)
 			throws ServiceException {
-		if (MasterSimConfig.getInstance().isAllSlaveReady()) {
+		if (!MasterSimConfig.getInstance().isAllSlaveReady()) {
 			controller.setFailed("All slaves are not ready");
 			return Empty.getDefaultInstance();
 		}

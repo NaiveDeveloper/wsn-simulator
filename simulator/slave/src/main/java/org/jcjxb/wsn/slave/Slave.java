@@ -5,12 +5,16 @@ import java.io.FileInputStream;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.jcjxb.wsn.common.Options;
+import org.jcjxb.wsn.rpc.LionRpcController;
 import org.jcjxb.wsn.rpc.LionRpcServer;
 import org.jcjxb.wsn.rpc.LionRpcSocketServer;
+import org.jcjxb.wsn.service.agent.MasterServiceAgent;
 import org.jcjxb.wsn.service.impl.SlaveServiceImpl;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 import org.jcjxb.wsn.service.proto.SlaveService;
 import org.jcjxb.wsn.service.sim.SlaveSimConfig;
+
+import com.google.protobuf.RpcController;
 
 public class Slave {
 
@@ -34,23 +38,25 @@ public class Slave {
 			"This option defines host index in host config for this slave");
 
 	public static void main(String[] args) throws Exception {
+		// 解析命令行参数
 		mainOptions.parseCommandLine(args);
+
 		HostConfig hostConfig = null;
 		if (!"".equals(hostConfigOption.getValue())) {
 			hostConfig = HostConfig.parseFrom(new FileInputStream(
 					hostConfigOption.getValue()));
 			if (hostConfig == null) {
-				logger.info("Parse Host Config File error");
+				logger.error("Parse Host Config File error");
 				return;
 			}
 		} else {
-			logger.info("Please specify host config file path");
+			logger.error("Please specify host config file path");
 			return;
 		}
 
 		if (hostIndexOption.getValue() < 0
 				|| hostIndexOption.getValue() >= hostConfig.getSlaveHostCount()) {
-			logger.info("Please correctly specify host index argument");
+			logger.error("Please correctly specify host index argument");
 			return;
 		}
 
@@ -69,6 +75,16 @@ public class Slave {
 
 		logger.info(String.format("Slave Server is running on port %d now...",
 				hostConfig.getSlaveHost(hostIndexOption.getValue()).getPort()));
+
+		// 发送准备消息给Master
+		RpcController controller = new LionRpcController();
+		MasterServiceAgent.getInstance().slaveReady(hostIndexOption.getValue(),
+				controller);
+		if (controller.failed()) {
+			logger.error(controller.errorText());
+			return;
+		}
+
 		try {
 			rpcServer.waitEnd();
 		} catch (InterruptedException e) {

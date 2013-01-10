@@ -30,17 +30,19 @@ public class Master {
 					"This option defines master and slaves host config");
 
 	public static void main(String[] args) throws Exception {
+		// 解析命令行参数
 		mainOptions.parseCommandLine(args);
+		
 		HostConfig hostConfig = null;
 		if (!"".equals(hostConfigOption.getValue())) {
 			hostConfig = HostConfig.parseFrom(new FileInputStream(
 					hostConfigOption.getValue()));
 			if (hostConfig == null) {
-				logger.info("Parsing Host Config File failed");
+				logger.error("Parsing Host Config File failed");
 				return;
 			}
 		} else {
-			logger.info("Please specify host config file path");
+			logger.error("Please specify host config file path");
 			return;
 		}
 		
