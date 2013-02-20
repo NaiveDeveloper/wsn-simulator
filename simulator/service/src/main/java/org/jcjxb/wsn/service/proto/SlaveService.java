@@ -20,6 +20,11 @@ public final class SlaveService {
         getSendorsOnHostsOrBuilderList();
     org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSendorsOnHostsOrBuilder(
         int index);
+    
+    // optional .org.jcjxb.wsn.service.DeployConfig deployConfig = 2;
+    boolean hasDeployConfig();
+    org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig getDeployConfig();
+    org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfigOrBuilder getDeployConfigOrBuilder();
   }
   public static final class InitSimCmd extends
       com.google.protobuf.GeneratedMessage
@@ -49,6 +54,7 @@ public final class SlaveService {
       return org.jcjxb.wsn.service.proto.SlaveService.internal_static_org_jcjxb_wsn_service_InitSimCmd_fieldAccessorTable;
     }
     
+    private int bitField0_;
     // repeated .org.jcjxb.wsn.service.SensorsOnHost sendorsOnHosts = 1;
     public static final int SENDORSONHOSTS_FIELD_NUMBER = 1;
     private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sendorsOnHosts_;
@@ -70,8 +76,22 @@ public final class SlaveService {
       return sendorsOnHosts_.get(index);
     }
     
+    // optional .org.jcjxb.wsn.service.DeployConfig deployConfig = 2;
+    public static final int DEPLOYCONFIG_FIELD_NUMBER = 2;
+    private org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig deployConfig_;
+    public boolean hasDeployConfig() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig getDeployConfig() {
+      return deployConfig_;
+    }
+    public org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfigOrBuilder getDeployConfigOrBuilder() {
+      return deployConfig_;
+    }
+    
     private void initFields() {
       sendorsOnHosts_ = java.util.Collections.emptyList();
+      deployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -88,6 +108,9 @@ public final class SlaveService {
       for (int i = 0; i < sendorsOnHosts_.size(); i++) {
         output.writeMessage(1, sendorsOnHosts_.get(i));
       }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(2, deployConfig_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -100,6 +123,10 @@ public final class SlaveService {
       for (int i = 0; i < sendorsOnHosts_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sendorsOnHosts_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, deployConfig_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -218,6 +245,7 @@ public final class SlaveService {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSendorsOnHostsFieldBuilder();
+          getDeployConfigFieldBuilder();
         }
       }
       private static Builder create() {
@@ -232,6 +260,12 @@ public final class SlaveService {
         } else {
           sendorsOnHostsBuilder_.clear();
         }
+        if (deployConfigBuilder_ == null) {
+          deployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
+        } else {
+          deployConfigBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       
@@ -269,6 +303,7 @@ public final class SlaveService {
       public org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd buildPartial() {
         org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd result = new org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         if (sendorsOnHostsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             sendorsOnHosts_ = java.util.Collections.unmodifiableList(sendorsOnHosts_);
@@ -278,6 +313,15 @@ public final class SlaveService {
         } else {
           result.sendorsOnHosts_ = sendorsOnHostsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (deployConfigBuilder_ == null) {
+          result.deployConfig_ = deployConfig_;
+        } else {
+          result.deployConfig_ = deployConfigBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -319,6 +363,9 @@ public final class SlaveService {
             }
           }
         }
+        if (other.hasDeployConfig()) {
+          mergeDeployConfig(other.getDeployConfig());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -354,6 +401,15 @@ public final class SlaveService {
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addSendorsOnHosts(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder subBuilder = org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.newBuilder();
+              if (hasDeployConfig()) {
+                subBuilder.mergeFrom(getDeployConfig());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setDeployConfig(subBuilder.buildPartial());
               break;
             }
           }
@@ -548,6 +604,96 @@ public final class SlaveService {
         return sendorsOnHostsBuilder_;
       }
       
+      // optional .org.jcjxb.wsn.service.DeployConfig deployConfig = 2;
+      private org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig deployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig, org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder, org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfigOrBuilder> deployConfigBuilder_;
+      public boolean hasDeployConfig() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig getDeployConfig() {
+        if (deployConfigBuilder_ == null) {
+          return deployConfig_;
+        } else {
+          return deployConfigBuilder_.getMessage();
+        }
+      }
+      public Builder setDeployConfig(org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig value) {
+        if (deployConfigBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          deployConfig_ = value;
+          onChanged();
+        } else {
+          deployConfigBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setDeployConfig(
+          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder builderForValue) {
+        if (deployConfigBuilder_ == null) {
+          deployConfig_ = builderForValue.build();
+          onChanged();
+        } else {
+          deployConfigBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeDeployConfig(org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig value) {
+        if (deployConfigBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              deployConfig_ != org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance()) {
+            deployConfig_ =
+              org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.newBuilder(deployConfig_).mergeFrom(value).buildPartial();
+          } else {
+            deployConfig_ = value;
+          }
+          onChanged();
+        } else {
+          deployConfigBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearDeployConfig() {
+        if (deployConfigBuilder_ == null) {
+          deployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
+          onChanged();
+        } else {
+          deployConfigBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder getDeployConfigBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getDeployConfigFieldBuilder().getBuilder();
+      }
+      public org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfigOrBuilder getDeployConfigOrBuilder() {
+        if (deployConfigBuilder_ != null) {
+          return deployConfigBuilder_.getMessageOrBuilder();
+        } else {
+          return deployConfig_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig, org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder, org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfigOrBuilder> 
+          getDeployConfigFieldBuilder() {
+        if (deployConfigBuilder_ == null) {
+          deployConfigBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig, org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder, org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfigOrBuilder>(
+                  deployConfig_,
+                  getParentForChildren(),
+                  isClean());
+          deployConfig_ = null;
+        }
+        return deployConfigBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.InitSimCmd)
     }
     
@@ -564,11 +710,24 @@ public final class SlaveService {
     protected SService() {}
     
     public interface Interface {
+      public abstract void startSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
+      
     }
     
     public static com.google.protobuf.Service newReflectiveService(
         final Interface impl) {
       return new SService() {
+        @java.lang.Override
+        public  void startSimulation(
+            com.google.protobuf.RpcController controller,
+            org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd request,
+            com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
+          impl.startSimulation(controller, request, done);
+        }
+        
       };
     }
     
@@ -591,6 +750,8 @@ public final class SlaveService {
               "wrong service type.");
           }
           switch(method.getIndex()) {
+            case 0:
+              return impl.startSimulation(controller, (org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -605,6 +766,8 @@ public final class SlaveService {
               "descriptor for wrong service type.");
           }
           switch(method.getIndex()) {
+            case 0:
+              return org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -619,6 +782,8 @@ public final class SlaveService {
               "descriptor for wrong service type.");
           }
           switch(method.getIndex()) {
+            case 0:
+              return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -626,6 +791,11 @@ public final class SlaveService {
         
       };
     }
+    
+    public abstract void startSimulation(
+        com.google.protobuf.RpcController controller,
+        org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd request,
+        com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
     public static final
         com.google.protobuf.Descriptors.ServiceDescriptor
@@ -649,6 +819,11 @@ public final class SlaveService {
           "service type.");
       }
       switch(method.getIndex()) {
+        case 0:
+          this.startSimulation(controller, (org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd)request,
+            com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
+              done));
+          return;
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -663,6 +838,8 @@ public final class SlaveService {
           "descriptor for wrong service type.");
       }
       switch(method.getIndex()) {
+        case 0:
+          return org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -677,6 +854,8 @@ public final class SlaveService {
           "descriptor for wrong service type.");
       }
       switch(method.getIndex()) {
+        case 0:
+          return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -697,6 +876,21 @@ public final class SlaveService {
       public com.google.protobuf.RpcChannel getChannel() {
         return channel;
       }
+      
+      public  void startSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(0),
+          controller,
+          request,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty.class,
+            org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()));
+      }
     }
     
     public static BlockingInterface newBlockingStub(
@@ -704,7 +898,12 @@ public final class SlaveService {
       return new BlockingStub(channel);
     }
     
-    public interface BlockingInterface {}
+    public interface BlockingInterface {
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty startSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd request)
+          throws com.google.protobuf.ServiceException;
+    }
     
     private static final class BlockingStub implements BlockingInterface {
       private BlockingStub(com.google.protobuf.BlockingRpcChannel channel) {
@@ -712,6 +911,18 @@ public final class SlaveService {
       }
       
       private final com.google.protobuf.BlockingRpcChannel channel;
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty startSimulation(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd request)
+          throws com.google.protobuf.ServiceException {
+        return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(0),
+          controller,
+          request,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance());
+      }
+      
     }
   }
   
@@ -730,10 +941,15 @@ public final class SlaveService {
   static {
     java.lang.String[] descriptorData = {
       "\n\022SlaveService.proto\022\025org.jcjxb.wsn.serv" +
-      "ice\032\023BasicDataType.proto\"J\n\nInitSimCmd\022<" +
-      "\n\016sendorsOnHosts\030\001 \003(\0132$.org.jcjxb.wsn.s" +
-      "ervice.SensorsOnHost2\n\n\010SServiceB.\n\033org." +
-      "jcjxb.wsn.service.protoB\014SlaveService\210\001\001"
+      "ice\032\023BasicDataType.proto\032\017WSNConfig.prot" +
+      "o\"\205\001\n\nInitSimCmd\022<\n\016sendorsOnHosts\030\001 \003(\013" +
+      "2$.org.jcjxb.wsn.service.SensorsOnHost\0229" +
+      "\n\014deployConfig\030\002 \001(\0132#.org.jcjxb.wsn.ser" +
+      "vice.DeployConfig2^\n\010SService\022R\n\017startSi" +
+      "mulation\022!.org.jcjxb.wsn.service.InitSim" +
+      "Cmd\032\034.org.jcjxb.wsn.service.EmptyB.\n\033org" +
+      ".jcjxb.wsn.service.protoB\014SlaveService\210\001" +
+      "\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -745,7 +961,7 @@ public final class SlaveService {
           internal_static_org_jcjxb_wsn_service_InitSimCmd_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_InitSimCmd_descriptor,
-              new java.lang.String[] { "SendorsOnHosts", },
+              new java.lang.String[] { "SendorsOnHosts", "DeployConfig", },
               org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.class,
               org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd.Builder.class);
           return null;
@@ -755,6 +971,7 @@ public final class SlaveService {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.jcjxb.wsn.service.proto.BasicDataType.getDescriptor(),
+          org.jcjxb.wsn.service.proto.SimulationConfig.getDescriptor(),
         }, assigner);
   }
   

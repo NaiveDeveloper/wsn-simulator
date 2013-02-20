@@ -1795,7 +1795,11 @@ public final class SimulationConfig {
     boolean hasEventNum();
     int getEventNum();
     
-    // optional .org.jcjxb.wsn.service.PositionList postionList = 4;
+    // optional uint32 eventInterval = 4;
+    boolean hasEventInterval();
+    int getEventInterval();
+    
+    // optional .org.jcjxb.wsn.service.PositionList postionList = 5;
     boolean hasPostionList();
     org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList();
     org.jcjxb.wsn.service.proto.BasicDataType.PositionListOrBuilder getPostionListOrBuilder();
@@ -1918,11 +1922,21 @@ public final class SimulationConfig {
       return eventNum_;
     }
     
-    // optional .org.jcjxb.wsn.service.PositionList postionList = 4;
-    public static final int POSTIONLIST_FIELD_NUMBER = 4;
+    // optional uint32 eventInterval = 4;
+    public static final int EVENTINTERVAL_FIELD_NUMBER = 4;
+    private int eventInterval_;
+    public boolean hasEventInterval() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getEventInterval() {
+      return eventInterval_;
+    }
+    
+    // optional .org.jcjxb.wsn.service.PositionList postionList = 5;
+    public static final int POSTIONLIST_FIELD_NUMBER = 5;
     private org.jcjxb.wsn.service.proto.BasicDataType.PositionList postionList_;
     public boolean hasPostionList() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList() {
       return postionList_;
@@ -1934,6 +1948,7 @@ public final class SimulationConfig {
     private void initFields() {
       radius_ = 0D;
       eventNum_ = 0;
+      eventInterval_ = 0;
       postionList_ = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -1955,7 +1970,10 @@ public final class SimulationConfig {
         output.writeUInt32(3, eventNum_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(4, postionList_);
+        output.writeUInt32(4, eventInterval_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeMessage(5, postionList_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1976,7 +1994,11 @@ public final class SimulationConfig {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, postionList_);
+          .computeUInt32Size(4, eventInterval_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, postionList_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2107,12 +2129,14 @@ public final class SimulationConfig {
         bitField0_ = (bitField0_ & ~0x00000001);
         eventNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        eventInterval_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         if (postionListBuilder_ == null) {
           postionList_ = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance();
         } else {
           postionListBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -2162,6 +2186,10 @@ public final class SimulationConfig {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.eventInterval_ = eventInterval_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         if (postionListBuilder_ == null) {
           result.postionList_ = postionList_;
         } else {
@@ -2188,6 +2216,9 @@ public final class SimulationConfig {
         }
         if (other.hasEventNum()) {
           setEventNum(other.getEventNum());
+        }
+        if (other.hasEventInterval()) {
+          setEventInterval(other.getEventInterval());
         }
         if (other.hasPostionList()) {
           mergePostionList(other.getPostionList());
@@ -2233,7 +2264,12 @@ public final class SimulationConfig {
               eventNum_ = input.readUInt32();
               break;
             }
-            case 34: {
+            case 32: {
+              bitField0_ |= 0x00000004;
+              eventInterval_ = input.readUInt32();
+              break;
+            }
+            case 42: {
               org.jcjxb.wsn.service.proto.BasicDataType.PositionList.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.newBuilder();
               if (hasPostionList()) {
                 subBuilder.mergeFrom(getPostionList());
@@ -2290,12 +2326,33 @@ public final class SimulationConfig {
         return this;
       }
       
-      // optional .org.jcjxb.wsn.service.PositionList postionList = 4;
+      // optional uint32 eventInterval = 4;
+      private int eventInterval_ ;
+      public boolean hasEventInterval() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getEventInterval() {
+        return eventInterval_;
+      }
+      public Builder setEventInterval(int value) {
+        bitField0_ |= 0x00000004;
+        eventInterval_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEventInterval() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        eventInterval_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .org.jcjxb.wsn.service.PositionList postionList = 5;
       private org.jcjxb.wsn.service.proto.BasicDataType.PositionList postionList_ = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           org.jcjxb.wsn.service.proto.BasicDataType.PositionList, org.jcjxb.wsn.service.proto.BasicDataType.PositionList.Builder, org.jcjxb.wsn.service.proto.BasicDataType.PositionListOrBuilder> postionListBuilder_;
       public boolean hasPostionList() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList() {
         if (postionListBuilder_ == null) {
@@ -2314,7 +2371,7 @@ public final class SimulationConfig {
         } else {
           postionListBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         return this;
       }
       public Builder setPostionList(
@@ -2325,12 +2382,12 @@ public final class SimulationConfig {
         } else {
           postionListBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         return this;
       }
       public Builder mergePostionList(org.jcjxb.wsn.service.proto.BasicDataType.PositionList value) {
         if (postionListBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
               postionList_ != org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance()) {
             postionList_ =
               org.jcjxb.wsn.service.proto.BasicDataType.PositionList.newBuilder(postionList_).mergeFrom(value).buildPartial();
@@ -2341,7 +2398,7 @@ public final class SimulationConfig {
         } else {
           postionListBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         return this;
       }
       public Builder clearPostionList() {
@@ -2351,11 +2408,11 @@ public final class SimulationConfig {
         } else {
           postionListBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       public org.jcjxb.wsn.service.proto.BasicDataType.PositionList.Builder getPostionListBuilder() {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
         return getPostionListFieldBuilder().getBuilder();
       }
@@ -2398,9 +2455,9 @@ public final class SimulationConfig {
     boolean hasWidth();
     double getWidth();
     
-    // optional double length = 2;
-    boolean hasLength();
-    double getLength();
+    // optional double height = 2;
+    boolean hasHeight();
+    double getHeight();
     
     // optional .org.jcjxb.wsn.service.SensorNodeDeployConfig sensorNodeDeployConfig = 3;
     boolean hasSensorNodeDeployConfig();
@@ -2456,14 +2513,14 @@ public final class SimulationConfig {
       return width_;
     }
     
-    // optional double length = 2;
-    public static final int LENGTH_FIELD_NUMBER = 2;
-    private double length_;
-    public boolean hasLength() {
+    // optional double height = 2;
+    public static final int HEIGHT_FIELD_NUMBER = 2;
+    private double height_;
+    public boolean hasHeight() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public double getLength() {
-      return length_;
+    public double getHeight() {
+      return height_;
     }
     
     // optional .org.jcjxb.wsn.service.SensorNodeDeployConfig sensorNodeDeployConfig = 3;
@@ -2507,7 +2564,7 @@ public final class SimulationConfig {
     
     private void initFields() {
       width_ = 0D;
-      length_ = 0D;
+      height_ = 0D;
       sensorNodeDeployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.SensorNodeDeployConfig.getDefaultInstance();
       sinkNodeDeployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.SinkNodeDeployConfig.getDefaultInstance();
       sourceEventDeployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.SourceEventDeployConfig.getDefaultInstance();
@@ -2528,7 +2585,7 @@ public final class SimulationConfig {
         output.writeDouble(1, width_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeDouble(2, length_);
+        output.writeDouble(2, height_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(3, sensorNodeDeployConfig_);
@@ -2554,7 +2611,7 @@ public final class SimulationConfig {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, length_);
+          .computeDoubleSize(2, height_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2697,7 +2754,7 @@ public final class SimulationConfig {
         super.clear();
         width_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000001);
-        length_ = 0D;
+        height_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (sensorNodeDeployConfigBuilder_ == null) {
           sensorNodeDeployConfig_ = org.jcjxb.wsn.service.proto.SimulationConfig.SensorNodeDeployConfig.getDefaultInstance();
@@ -2762,7 +2819,7 @@ public final class SimulationConfig {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.length_ = length_;
+        result.height_ = height_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -2806,8 +2863,8 @@ public final class SimulationConfig {
         if (other.hasWidth()) {
           setWidth(other.getWidth());
         }
-        if (other.hasLength()) {
-          setLength(other.getLength());
+        if (other.hasHeight()) {
+          setHeight(other.getHeight());
         }
         if (other.hasSensorNodeDeployConfig()) {
           mergeSensorNodeDeployConfig(other.getSensorNodeDeployConfig());
@@ -2856,7 +2913,7 @@ public final class SimulationConfig {
             }
             case 17: {
               bitField0_ |= 0x00000002;
-              length_ = input.readDouble();
+              height_ = input.readDouble();
               break;
             }
             case 26: {
@@ -2913,23 +2970,23 @@ public final class SimulationConfig {
         return this;
       }
       
-      // optional double length = 2;
-      private double length_ ;
-      public boolean hasLength() {
+      // optional double height = 2;
+      private double height_ ;
+      public boolean hasHeight() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public double getLength() {
-        return length_;
+      public double getHeight() {
+        return height_;
       }
-      public Builder setLength(double value) {
+      public Builder setHeight(double value) {
         bitField0_ |= 0x00000002;
-        length_ = value;
+        height_ = value;
         onChanged();
         return this;
       }
-      public Builder clearLength() {
+      public Builder clearHeight() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        length_ = 0D;
+        height_ = 0D;
         onChanged();
         return this;
       }
@@ -3264,20 +3321,20 @@ public final class SimulationConfig {
       "n.service.SinkNodeDeployConfig.DeployTyp" +
       "e\022\017\n\007nodeNum\030\002 \001(\r\0228\n\013postionList\030\004 \001(\0132" +
       "#.org.jcjxb.wsn.service.PositionList\"$\n\n" +
-      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\233\001\n\027S" +
+      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\262\001\n\027S" +
       "ourceEventDeployConfig\022\016\n\006radius\030\002 \001(\001\022\020" +
-      "\n\010eventNum\030\003 \001(\r\0228\n\013postionList\030\004 \001(\0132#." +
-      "org.jcjxb.wsn.service.PositionList\"$\n\nDe" +
-      "ployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\230\002\n\014Dep",
-      "loyConfig\022\r\n\005width\030\001 \001(\001\022\016\n\006length\030\002 \001(\001" +
-      "\022M\n\026sensorNodeDeployConfig\030\003 \001(\0132-.org.j" +
-      "cjxb.wsn.service.SensorNodeDeployConfig\022" +
-      "I\n\024sinkNodeDeployConfig\030\004 \001(\0132+.org.jcjx" +
-      "b.wsn.service.SinkNodeDeployConfig\022O\n\027so" +
-      "urceEventDeployConfig\030\005 \001(\0132..org.jcjxb." +
-      "wsn.service.SourceEventDeployConfigB/\n\033o" +
-      "rg.jcjxb.wsn.service.protoB\020SimulationCo" +
-      "nfig"
+      "\n\010eventNum\030\003 \001(\r\022\025\n\reventInterval\030\004 \001(\r\022" +
+      "8\n\013postionList\030\005 \001(\0132#.org.jcjxb.wsn.ser" +
+      "vice.PositionList\"$\n\nDeployType\022\n\n\006RANDO",
+      "M\020\000\022\n\n\006STATIC\020\001\"\230\002\n\014DeployConfig\022\r\n\005widt" +
+      "h\030\001 \001(\001\022\016\n\006height\030\002 \001(\001\022M\n\026sensorNodeDep" +
+      "loyConfig\030\003 \001(\0132-.org.jcjxb.wsn.service." +
+      "SensorNodeDeployConfig\022I\n\024sinkNodeDeploy" +
+      "Config\030\004 \001(\0132+.org.jcjxb.wsn.service.Sin" +
+      "kNodeDeployConfig\022O\n\027sourceEventDeployCo" +
+      "nfig\030\005 \001(\0132..org.jcjxb.wsn.service.Sourc" +
+      "eEventDeployConfigB/\n\033org.jcjxb.wsn.serv" +
+      "ice.protoB\020SimulationConfig"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3313,7 +3370,7 @@ public final class SimulationConfig {
           internal_static_org_jcjxb_wsn_service_SourceEventDeployConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_SourceEventDeployConfig_descriptor,
-              new java.lang.String[] { "Radius", "EventNum", "PostionList", },
+              new java.lang.String[] { "Radius", "EventNum", "EventInterval", "PostionList", },
               org.jcjxb.wsn.service.proto.SimulationConfig.SourceEventDeployConfig.class,
               org.jcjxb.wsn.service.proto.SimulationConfig.SourceEventDeployConfig.Builder.class);
           internal_static_org_jcjxb_wsn_service_DeployConfig_descriptor =
@@ -3321,7 +3378,7 @@ public final class SimulationConfig {
           internal_static_org_jcjxb_wsn_service_DeployConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_DeployConfig_descriptor,
-              new java.lang.String[] { "Width", "Length", "SensorNodeDeployConfig", "SinkNodeDeployConfig", "SourceEventDeployConfig", },
+              new java.lang.String[] { "Width", "Height", "SensorNodeDeployConfig", "SinkNodeDeployConfig", "SourceEventDeployConfig", },
               org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.class,
               org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.Builder.class);
           return null;

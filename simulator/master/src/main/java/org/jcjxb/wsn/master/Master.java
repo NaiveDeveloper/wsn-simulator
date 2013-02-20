@@ -25,46 +25,44 @@ public class Master {
 
 	private static Options mainOptions = new Options();
 
-	private static Options.StringOption hostConfigOption = mainOptions
-			.newOption("hostConfig", "hostConfig.txt",
-					"This option defines master and slaves host config");
+	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.txt",
+			"This option defines master and slaves host config");
 
 	public static void main(String[] args) throws Exception {
-		// 解析命令行参数
+		// Parse command line arguments
 		mainOptions.parseCommandLine(args);
-		
+
+		// Check host config argument
 		HostConfig hostConfig = null;
 		if (!"".equals(hostConfigOption.getValue())) {
-			hostConfig = HostConfig.parseFrom(new FileInputStream(
-					hostConfigOption.getValue()));
+			hostConfig = HostConfig.parseFrom(new FileInputStream(hostConfigOption.getValue()));
 			if (hostConfig == null) {
-				logger.error("Parsing Host Config File failed");
+				logger.error("Parsing host config file failed, hostConfig = " + hostConfigOption.getValue());
 				return;
 			}
 		} else {
 			logger.error("Please specify host config file path");
 			return;
 		}
-		
-		// 设置 host config in SimConfig
+
+		// Set host config in SimConfig
 		MasterSimConfig.getInstance().setHostConfig(hostConfig);
 
-		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
-				.getMasterHost().getPort(), hostConfig.getMasterHost()
-				.getHost());
-		// 注册服务
-		rpcServer.registerBlockingService(MasterService.MService
-				.newReflectiveBlockingService(new MasterServiceImpl()));
-		
+		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig.getMasterHost().getPort(), hostConfig.getMasterHost().getHost());
+
+		// Register master services
+		rpcServer.registerBlockingService(MasterService.MService.newReflectiveBlockingService(new MasterServiceImpl()));
+
 		rpcServer.start();
+
+		logger.info(String.format("Master Server is running on port %d, ip %s now", hostConfig.getMasterHost().getPort(), hostConfig
+				.getMasterHost().getHost()));
 		
-		logger.info(String.format("Master Server is running on port %d now...",
-				hostConfig.getMasterHost().getPort()));
 		try {
 			rpcServer.waitEnd();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		logger.info("Master Server is exiting now...");
+		logger.info("Master Server is exiting now");
 	}
 }

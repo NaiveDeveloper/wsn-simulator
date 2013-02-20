@@ -29,24 +29,22 @@ public class Slave {
 
 	private static Options mainOptions = new Options();
 
-	private static Options.StringOption hostConfigOption = mainOptions
-			.newOption("hostConfig", "hostConfig.txt",
-					"This option defines master and slaves host config");
+	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.txt",
+			"This option defines master and slaves host config");
 
-	private static Options.IntOption hostIndexOption = mainOptions.newOption(
-			"hostIndex", -1,
+	private static Options.IntOption hostIndexOption = mainOptions.newOption("hostIndex", -1,
 			"This option defines host index in host config for this slave");
 
 	public static void main(String[] args) throws Exception {
-		// 解析命令行参数
+		// Parse command line arguments
 		mainOptions.parseCommandLine(args);
 
+		// Check host config argument
 		HostConfig hostConfig = null;
 		if (!"".equals(hostConfigOption.getValue())) {
-			hostConfig = HostConfig.parseFrom(new FileInputStream(
-					hostConfigOption.getValue()));
+			hostConfig = HostConfig.parseFrom(new FileInputStream(hostConfigOption.getValue()));
 			if (hostConfig == null) {
-				logger.error("Parse Host Config File error");
+				logger.error("Parse Host Config File error, hostConfig = " + hostConfigOption.getValue());
 				return;
 			}
 		} else {
@@ -54,34 +52,32 @@ public class Slave {
 			return;
 		}
 
-		if (hostIndexOption.getValue() < 0
-				|| hostIndexOption.getValue() >= hostConfig.getSlaveHostCount()) {
-			logger.error("Please correctly specify host index argument");
+		// Check host index option
+		if (hostIndexOption.getValue() < 0 || hostIndexOption.getValue() >= hostConfig.getSlaveHostCount()) {
+			logger.error("Please correctly specify host index argument, hostIndex = " + hostIndexOption.getValue());
 			return;
 		}
 
-		// 设置 host config in SimConfig
+		// Set host config and host index in SimConfig
 		SlaveSimConfig.getInstance().setHostConfig(hostConfig);
 		SlaveSimConfig.getInstance().setHostIndex(hostIndexOption.getValue());
 
-		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig
-				.getSlaveHost(hostIndexOption.getValue()).getPort(), hostConfig
+		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig.getSlaveHost(hostIndexOption.getValue()).getPort(), hostConfig
 				.getSlaveHost(hostIndexOption.getValue()).getHost());
-		// 注册服务
-		rpcServer.registerBlockingService(SlaveService.SService
-				.newReflectiveBlockingService(new SlaveServiceImpl()));
+
+		// Register slave services
+		rpcServer.registerBlockingService(SlaveService.SService.newReflectiveBlockingService(new SlaveServiceImpl()));
 
 		rpcServer.start();
 
-		logger.info(String.format("Slave Server is running on port %d now...",
-				hostConfig.getSlaveHost(hostIndexOption.getValue()).getPort()));
+		logger.info(String.format("Slave Server is running on port %d, ip %s now", hostConfig.getSlaveHost(hostIndexOption.getValue())
+				.getPort(), hostConfig.getSlaveHost(hostIndexOption.getValue()).getHost()));
 
-		// 发送准备消息给Master
+		// Send slave ready message to master
 		RpcController controller = new LionRpcController();
-		MasterServiceAgent.getInstance().slaveReady(hostIndexOption.getValue(),
-				controller);
+		MasterServiceAgent.getInstance().slaveReady(hostIndexOption.getValue(), controller);
 		if (controller.failed()) {
-			logger.error(controller.errorText());
+			logger.error("Send slave ready message failed, error text is " + controller.errorText());
 			return;
 		}
 
@@ -91,7 +87,7 @@ public class Slave {
 			e.printStackTrace();
 		}
 
-		logger.info("Slave Server is exiting now...");
+		logger.info("Slave server is exiting now");
 	}
 
 }

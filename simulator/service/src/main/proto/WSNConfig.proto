@@ -6,8 +6,8 @@ option java_outer_classname = "SimulationConfig";
 import "BasicDataType.proto";
 
 message SensorConfig {
-	optional double energy = 1; // 电池容量
-	optional double transmissionRadius = 2; // 传输半径
+	optional double energy = 1; // Battery capacity
+	optional double transmissionRadius = 2;
 }
 
 message SensorNodeDeployConfig {
@@ -40,12 +40,13 @@ message SourceEventDeployConfig {
 	}
 	optional double radius = 2;
 	optional uint32 eventNum = 3;
-	optional PositionList postionList = 4;
+	optional uint32 eventInterval = 4;
+	optional PositionList postionList = 5;
 }
 
 message DeployConfig {
 	optional double width = 1;
-	optional double length = 2;
+	optional double height = 2;
 	optional SensorNodeDeployConfig sensorNodeDeployConfig = 3;
 	optional SinkNodeDeployConfig sinkNodeDeployConfig = 4;
 	optional SourceEventDeployConfig sourceEventDeployConfig = 5;
