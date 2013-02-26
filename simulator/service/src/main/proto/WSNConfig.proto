@@ -1,7 +1,7 @@
 package org.jcjxb.wsn.service;
 
 option java_package = "org.jcjxb.wsn.service.proto";
-option java_outer_classname = "SimulationConfig";
+option java_outer_classname = "WSNConfig";
 
 import "BasicDataType.proto";
 
@@ -50,6 +50,27 @@ message DeployConfig {
 	optional SensorNodeDeployConfig sensorNodeDeployConfig = 3;
 	optional SinkNodeDeployConfig sinkNodeDeployConfig = 4;
 	optional SourceEventDeployConfig sourceEventDeployConfig = 5;
+}
+
+message AlgorithmConfig {
+	optional string name = 1;
+}
+
+message PartitionConfig {
+	enum PartitionType {
+		RANDOM = 0;
+		STATIC = 1;
+		CIRCLE = 2;
+		GRID = 3;
+	}
+	optional PartitionType partitionType = 1;
+	repeated SensorsOnHost sensorsOnHosts = 2;
+}
+
+message SimulationConfig {
+	optional DeployConfig deployConfig = 1;
+	optional AlgorithmConfig algorithmConfig = 2;
+	optional PartitionConfig partitionConfig = 3;
 }
 
 

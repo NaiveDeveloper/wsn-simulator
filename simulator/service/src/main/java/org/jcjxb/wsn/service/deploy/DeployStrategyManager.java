@@ -1,9 +1,8 @@
 package org.jcjxb.wsn.service.deploy;
 
-import org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig;
-import org.jcjxb.wsn.service.proto.SimulationConfig.SensorNodeDeployConfig;
-import org.jcjxb.wsn.service.proto.SimulationConfig.SinkNodeDeployConfig;
-import org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd;
+import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SinkNodeDeployConfig;
 
 public class DeployStrategyManager {
 
@@ -13,7 +12,7 @@ public class DeployStrategyManager {
 		return deployStrategyManager;
 	}
 
-	public void deploy(InitSimCmd.Builder builder, DeployConfig deplyConfig) {
+	public void deploy(DeployConfig.Builder builder, DeployConfig deplyConfig) {
 		DeployConfig.Builder deplyBuilder = DeployConfig.newBuilder();
 		deplyBuilder.setWidth(deplyConfig.getWidth());
 		deplyBuilder.setHeight(deplyConfig.getHeight());

@@ -696,7 +696,7 @@ public final class MasterService {
       
       public abstract void startSimulation(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig request,
+          org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
       
       public abstract void sync(
@@ -725,7 +725,7 @@ public final class MasterService {
         @java.lang.Override
         public  void startSimulation(
             com.google.protobuf.RpcController controller,
-            org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig request,
+            org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request,
             com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
           impl.startSimulation(controller, request, done);
         }
@@ -771,7 +771,7 @@ public final class MasterService {
             case 0:
               return impl.slaveReady(controller, (org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest)request);
             case 1:
-              return impl.startSimulation(controller, (org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig)request);
+              return impl.startSimulation(controller, (org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig)request);
             case 2:
               return impl.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request);
             case 3:
@@ -793,7 +793,7 @@ public final class MasterService {
             case 0:
               return org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDefaultInstance();
             case 1:
-              return org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
+              return org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig.getDefaultInstance();
             case 2:
               return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
             case 3:
@@ -835,7 +835,7 @@ public final class MasterService {
     
     public abstract void startSimulation(
         com.google.protobuf.RpcController controller,
-        org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig request,
+        org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request,
         com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
     public abstract void sync(
@@ -876,7 +876,7 @@ public final class MasterService {
               done));
           return;
         case 1:
-          this.startSimulation(controller, (org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig)request,
+          this.startSimulation(controller, (org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig)request,
             com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
               done));
           return;
@@ -907,7 +907,7 @@ public final class MasterService {
         case 0:
           return org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest.getDefaultInstance();
         case 1:
-          return org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig.getDefaultInstance();
+          return org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig.getDefaultInstance();
         case 2:
           return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
         case 3:
@@ -972,7 +972,7 @@ public final class MasterService {
       
       public  void startSimulation(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig request,
+          org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(1),
@@ -1029,7 +1029,7 @@ public final class MasterService {
       
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty startSimulation(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig request)
+          org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request)
           throws com.google.protobuf.ServiceException;
       
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
@@ -1064,7 +1064,7 @@ public final class MasterService {
       
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty startSimulation(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig request)
+          org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request)
           throws com.google.protobuf.ServiceException {
         return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
           getDescriptor().getMethods().get(1),
@@ -1123,16 +1123,16 @@ public final class MasterService {
       "vice\032\023BasicDataType.proto\032\017WSNConfig.pro" +
       "to\"#\n\016LVTSyncRequest\022\021\n\tlocalTime\030\001 \001(\003\"" +
       "&\n\021SlaveReadyRequest\022\021\n\thostIndex\030\001 \001(\0052" +
-      "\321\002\n\010MService\022T\n\nslaveReady\022(.org.jcjxb.w" +
+      "\325\002\n\010MService\022T\n\nslaveReady\022(.org.jcjxb.w" +
       "sn.service.SlaveReadyRequest\032\034.org.jcjxb" +
-      ".wsn.service.Empty\022T\n\017startSimulation\022#." +
-      "org.jcjxb.wsn.service.DeployConfig\032\034.org" +
-      ".jcjxb.wsn.service.Empty\022K\n\004sync\022%.org.j" +
-      "cjxb.wsn.service.LVTSyncRequest\032\034.org.jc",
-      "jxb.wsn.service.Empty\022L\n\016stopSimulation\022" +
-      "\034.org.jcjxb.wsn.service.Empty\032\034.org.jcjx" +
-      "b.wsn.service.EmptyB/\n\033org.jcjxb.wsn.ser" +
-      "vice.protoB\rMasterService\210\001\001"
+      ".wsn.service.Empty\022X\n\017startSimulation\022\'." +
+      "org.jcjxb.wsn.service.SimulationConfig\032\034" +
+      ".org.jcjxb.wsn.service.Empty\022K\n\004sync\022%.o" +
+      "rg.jcjxb.wsn.service.LVTSyncRequest\032\034.or",
+      "g.jcjxb.wsn.service.Empty\022L\n\016stopSimulat" +
+      "ion\022\034.org.jcjxb.wsn.service.Empty\032\034.org." +
+      "jcjxb.wsn.service.EmptyB/\n\033org.jcjxb.wsn" +
+      ".service.protoB\rMasterService\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1162,7 +1162,7 @@ public final class MasterService {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.jcjxb.wsn.service.proto.BasicDataType.getDescriptor(),
-          org.jcjxb.wsn.service.proto.SimulationConfig.getDescriptor(),
+          org.jcjxb.wsn.service.proto.WSNConfig.getDescriptor(),
         }, assigner);
   }
   

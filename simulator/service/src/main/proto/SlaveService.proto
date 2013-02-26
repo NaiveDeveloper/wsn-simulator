@@ -7,11 +7,6 @@ option java_generic_services = true;
 import "BasicDataType.proto";
 import "WSNConfig.proto";
 
-message InitSimCmd {
-	repeated SensorsOnHost sendorsOnHosts = 1;
-	optional DeployConfig deployConfig = 2;
-}
-
 service SService {
-	rpc startSimulation(InitSimCmd) returns (Empty);
+	rpc startSimulation(SimulationConfig) returns (Empty);
 }

@@ -19,6 +19,8 @@ public abstract class Algorithm {
 	}
 
 	public abstract void initHandlers();
+	
+	public abstract List<Event> start();
 
 	public interface EventHandler {
 		public List<Event> handle(Event event);

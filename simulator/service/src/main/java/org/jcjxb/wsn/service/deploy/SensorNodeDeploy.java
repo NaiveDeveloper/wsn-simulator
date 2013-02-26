@@ -2,9 +2,11 @@ package org.jcjxb.wsn.service.deploy;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
-import org.jcjxb.wsn.service.proto.SimulationConfig.SensorNodeDeployConfig.DeployType;
+import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig.DeployType;
 
 public class SensorNodeDeploy {
 
@@ -20,7 +22,7 @@ public class SensorNodeDeploy {
 	public static SensorNodeDeploy getInstance() {
 		return sensorNodeDeploy;
 	}
-	
+
 	public PositionList deploy(int num, int width, int height, DeployType deployType, PositionList positionList) {
 		return deployStrategys.get(deployType).generate(num, width, height, positionList);
 	}
@@ -34,8 +36,12 @@ public class SensorNodeDeploy {
 
 		@Override
 		public PositionList generate(int num, int width, int height, PositionList positionList) {
-
-			return null;
+			PositionList.Builder builder = PositionList.newBuilder();
+			Random random = new Random();
+			for (int i = 0; i < num; ++i) {
+				builder.addPostion(Position.newBuilder().setX(random.nextInt(width)).setY(random.nextInt(height)).build());
+			}
+			return builder.build();
 		}
 	}
 

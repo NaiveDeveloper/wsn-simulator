@@ -6,8 +6,8 @@ import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.MasterService;
 import org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest;
 import org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest;
-import org.jcjxb.wsn.service.proto.SimulationConfig.DeployConfig;
-import org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd;
+import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 import org.jcjxb.wsn.service.sim.MasterSimConfig;
 
 import com.google.protobuf.RpcController;
@@ -25,7 +25,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 	}
 
 	@Override
-	public Empty startSimulation(RpcController controller, DeployConfig request) throws ServiceException {
+	public Empty startSimulation(RpcController controller, SimulationConfig request) throws ServiceException {
 		if (!MasterSimConfig.getInstance().isAllSlaveReady()) {
 			controller.setFailed("All slaves are not ready");
 			logger.error("A start simulation rquest is recieved when all slaves are not ready");
@@ -38,9 +38,15 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			return Empty.getDefaultInstance();
 		}
 
-		// Prepare InitSimCmd
-		InitSimCmd.Builder builder = InitSimCmd.newBuilder();
-		DeployStrategyManager.getInstance().deploy(builder, request);
+		// Complete SimulationConfig unfilled data
+		SimulationConfig.Builder simulationConfigBuilder = SimulationConfig.newBuilder();
+		
+		// Generate deploy data
+		DeployConfig.Builder deployConfigBuilder = DeployConfig.newBuilder(request.getDeployConfig());
+		DeployStrategyManager.getInstance().deploy(deployConfigBuilder, request.getDeployConfig());
+		
+		// Divide sensors to slaves
+		
 		
 		return Empty.getDefaultInstance();
 	}
