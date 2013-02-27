@@ -2,11 +2,13 @@ package org.jcjxb.wsn.service.impl;
 
 import org.apache.log4j.Logger;
 import org.jcjxb.wsn.service.deploy.DeployStrategyManager;
+import org.jcjxb.wsn.service.partition.PartitionStrategyManager;
 import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.MasterService;
 import org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest;
 import org.jcjxb.wsn.service.proto.MasterService.SlaveReadyRequest;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 import org.jcjxb.wsn.service.sim.MasterSimConfig;
 
@@ -40,13 +42,17 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 
 		// Complete SimulationConfig unfilled data
 		SimulationConfig.Builder simulationConfigBuilder = SimulationConfig.newBuilder();
-		
+
 		// Generate deploy data
 		DeployConfig.Builder deployConfigBuilder = DeployConfig.newBuilder(request.getDeployConfig());
 		DeployStrategyManager.getInstance().deploy(deployConfigBuilder, request.getDeployConfig());
-		
+
 		// Divide sensors to slaves
+		PartitionConfig.Builder partitionConfigBuilder = PartitionConfig.newBuilder(request.getPartitionConfig());
+		PartitionStrategyManager.getInstance().partition(partitionConfigBuilder, request.getPartitionConfig(), 0,
+				deployConfigBuilder.getSensorNodeDeployConfig().getPostionList());
 		
+		simulationConfigBuilder.build();
 		
 		return Empty.getDefaultInstance();
 	}

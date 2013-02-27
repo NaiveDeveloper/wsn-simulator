@@ -1787,6 +1787,10 @@ public final class WSNConfig {
   public interface SourceEventDeployConfigOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
+    // optional .org.jcjxb.wsn.service.SourceEventDeployConfig.DeployType deployType = 1;
+    boolean hasDeployType();
+    org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType getDeployType();
+    
     // optional double radius = 2;
     boolean hasRadius();
     double getRadius();
@@ -1803,6 +1807,14 @@ public final class WSNConfig {
     boolean hasPostionList();
     org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList();
     org.jcjxb.wsn.service.proto.BasicDataType.PositionListOrBuilder getPostionListOrBuilder();
+    
+    // optional bool regenerate = 6;
+    boolean hasRegenerate();
+    boolean getRegenerate();
+    
+    // optional uint32 times = 7;
+    boolean hasTimes();
+    int getTimes();
   }
   public static final class SourceEventDeployConfig extends
       com.google.protobuf.GeneratedMessage
@@ -1902,11 +1914,21 @@ public final class WSNConfig {
     }
     
     private int bitField0_;
+    // optional .org.jcjxb.wsn.service.SourceEventDeployConfig.DeployType deployType = 1;
+    public static final int DEPLOYTYPE_FIELD_NUMBER = 1;
+    private org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType deployType_;
+    public boolean hasDeployType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType getDeployType() {
+      return deployType_;
+    }
+    
     // optional double radius = 2;
     public static final int RADIUS_FIELD_NUMBER = 2;
     private double radius_;
     public boolean hasRadius() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     public double getRadius() {
       return radius_;
@@ -1916,7 +1938,7 @@ public final class WSNConfig {
     public static final int EVENTNUM_FIELD_NUMBER = 3;
     private int eventNum_;
     public boolean hasEventNum() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public int getEventNum() {
       return eventNum_;
@@ -1926,7 +1948,7 @@ public final class WSNConfig {
     public static final int EVENTINTERVAL_FIELD_NUMBER = 4;
     private int eventInterval_;
     public boolean hasEventInterval() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getEventInterval() {
       return eventInterval_;
@@ -1936,7 +1958,7 @@ public final class WSNConfig {
     public static final int POSTIONLIST_FIELD_NUMBER = 5;
     private org.jcjxb.wsn.service.proto.BasicDataType.PositionList postionList_;
     public boolean hasPostionList() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList() {
       return postionList_;
@@ -1945,11 +1967,34 @@ public final class WSNConfig {
       return postionList_;
     }
     
+    // optional bool regenerate = 6;
+    public static final int REGENERATE_FIELD_NUMBER = 6;
+    private boolean regenerate_;
+    public boolean hasRegenerate() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getRegenerate() {
+      return regenerate_;
+    }
+    
+    // optional uint32 times = 7;
+    public static final int TIMES_FIELD_NUMBER = 7;
+    private int times_;
+    public boolean hasTimes() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getTimes() {
+      return times_;
+    }
+    
     private void initFields() {
+      deployType_ = org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType.RANDOM;
       radius_ = 0D;
       eventNum_ = 0;
       eventInterval_ = 0;
       postionList_ = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance();
+      regenerate_ = false;
+      times_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1964,16 +2009,25 @@ public final class WSNConfig {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeDouble(2, radius_);
+        output.writeEnum(1, deployType_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(3, eventNum_);
+        output.writeDouble(2, radius_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt32(4, eventInterval_);
+        output.writeUInt32(3, eventNum_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, eventInterval_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeMessage(5, postionList_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, regenerate_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeUInt32(7, times_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1986,19 +2040,31 @@ public final class WSNConfig {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, radius_);
+          .computeEnumSize(1, deployType_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, eventNum_);
+          .computeDoubleSize(2, radius_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, eventInterval_);
+          .computeUInt32Size(3, eventNum_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, eventInterval_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, postionList_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, regenerate_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, times_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2125,18 +2191,24 @@ public final class WSNConfig {
       
       public Builder clear() {
         super.clear();
-        radius_ = 0D;
+        deployType_ = org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType.RANDOM;
         bitField0_ = (bitField0_ & ~0x00000001);
-        eventNum_ = 0;
+        radius_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000002);
-        eventInterval_ = 0;
+        eventNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        eventInterval_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (postionListBuilder_ == null) {
           postionList_ = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance();
         } else {
           postionListBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
+        regenerate_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        times_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -2178,23 +2250,35 @@ public final class WSNConfig {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.radius_ = radius_;
+        result.deployType_ = deployType_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.eventNum_ = eventNum_;
+        result.radius_ = radius_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.eventInterval_ = eventInterval_;
+        result.eventNum_ = eventNum_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        result.eventInterval_ = eventInterval_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         if (postionListBuilder_ == null) {
           result.postionList_ = postionList_;
         } else {
           result.postionList_ = postionListBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.regenerate_ = regenerate_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.times_ = times_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2211,6 +2295,9 @@ public final class WSNConfig {
       
       public Builder mergeFrom(org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig other) {
         if (other == org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.getDefaultInstance()) return this;
+        if (other.hasDeployType()) {
+          setDeployType(other.getDeployType());
+        }
         if (other.hasRadius()) {
           setRadius(other.getRadius());
         }
@@ -2222,6 +2309,12 @@ public final class WSNConfig {
         }
         if (other.hasPostionList()) {
           mergePostionList(other.getPostionList());
+        }
+        if (other.hasRegenerate()) {
+          setRegenerate(other.getRegenerate());
+        }
+        if (other.hasTimes()) {
+          setTimes(other.getTimes());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2254,18 +2347,29 @@ public final class WSNConfig {
               }
               break;
             }
+            case 8: {
+              int rawValue = input.readEnum();
+              org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType value = org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                deployType_ = value;
+              }
+              break;
+            }
             case 17: {
-              bitField0_ |= 0x00000001;
+              bitField0_ |= 0x00000002;
               radius_ = input.readDouble();
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               eventNum_ = input.readUInt32();
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               eventInterval_ = input.readUInt32();
               break;
             }
@@ -2278,28 +2382,62 @@ public final class WSNConfig {
               setPostionList(subBuilder.buildPartial());
               break;
             }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              regenerate_ = input.readBool();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              times_ = input.readUInt32();
+              break;
+            }
           }
         }
       }
       
       private int bitField0_;
       
+      // optional .org.jcjxb.wsn.service.SourceEventDeployConfig.DeployType deployType = 1;
+      private org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType deployType_ = org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType.RANDOM;
+      public boolean hasDeployType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType getDeployType() {
+        return deployType_;
+      }
+      public Builder setDeployType(org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        deployType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDeployType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        deployType_ = org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType.RANDOM;
+        onChanged();
+        return this;
+      }
+      
       // optional double radius = 2;
       private double radius_ ;
       public boolean hasRadius() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       public double getRadius() {
         return radius_;
       }
       public Builder setRadius(double value) {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         radius_ = value;
         onChanged();
         return this;
       }
       public Builder clearRadius() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         radius_ = 0D;
         onChanged();
         return this;
@@ -2308,19 +2446,19 @@ public final class WSNConfig {
       // optional uint32 eventNum = 3;
       private int eventNum_ ;
       public boolean hasEventNum() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public int getEventNum() {
         return eventNum_;
       }
       public Builder setEventNum(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         eventNum_ = value;
         onChanged();
         return this;
       }
       public Builder clearEventNum() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         eventNum_ = 0;
         onChanged();
         return this;
@@ -2329,19 +2467,19 @@ public final class WSNConfig {
       // optional uint32 eventInterval = 4;
       private int eventInterval_ ;
       public boolean hasEventInterval() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getEventInterval() {
         return eventInterval_;
       }
       public Builder setEventInterval(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         eventInterval_ = value;
         onChanged();
         return this;
       }
       public Builder clearEventInterval() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         eventInterval_ = 0;
         onChanged();
         return this;
@@ -2352,7 +2490,7 @@ public final class WSNConfig {
       private com.google.protobuf.SingleFieldBuilder<
           org.jcjxb.wsn.service.proto.BasicDataType.PositionList, org.jcjxb.wsn.service.proto.BasicDataType.PositionList.Builder, org.jcjxb.wsn.service.proto.BasicDataType.PositionListOrBuilder> postionListBuilder_;
       public boolean hasPostionList() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList() {
         if (postionListBuilder_ == null) {
@@ -2371,7 +2509,7 @@ public final class WSNConfig {
         } else {
           postionListBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder setPostionList(
@@ -2382,12 +2520,12 @@ public final class WSNConfig {
         } else {
           postionListBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder mergePostionList(org.jcjxb.wsn.service.proto.BasicDataType.PositionList value) {
         if (postionListBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
               postionList_ != org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance()) {
             postionList_ =
               org.jcjxb.wsn.service.proto.BasicDataType.PositionList.newBuilder(postionList_).mergeFrom(value).buildPartial();
@@ -2398,7 +2536,7 @@ public final class WSNConfig {
         } else {
           postionListBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder clearPostionList() {
@@ -2408,11 +2546,11 @@ public final class WSNConfig {
         } else {
           postionListBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       public org.jcjxb.wsn.service.proto.BasicDataType.PositionList.Builder getPostionListBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getPostionListFieldBuilder().getBuilder();
       }
@@ -2435,6 +2573,48 @@ public final class WSNConfig {
           postionList_ = null;
         }
         return postionListBuilder_;
+      }
+      
+      // optional bool regenerate = 6;
+      private boolean regenerate_ ;
+      public boolean hasRegenerate() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public boolean getRegenerate() {
+        return regenerate_;
+      }
+      public Builder setRegenerate(boolean value) {
+        bitField0_ |= 0x00000020;
+        regenerate_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRegenerate() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        regenerate_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional uint32 times = 7;
+      private int times_ ;
+      public boolean hasTimes() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getTimes() {
+        return times_;
+      }
+      public Builder setTimes(int value) {
+        bitField0_ |= 0x00000040;
+        times_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTimes() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        times_ = 0;
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.SourceEventDeployConfig)
@@ -3654,15 +3834,10 @@ public final class WSNConfig {
     boolean hasPartitionType();
     org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.PartitionType getPartitionType();
     
-    // repeated .org.jcjxb.wsn.service.SensorsOnHost sensorsOnHosts = 2;
-    java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> 
-        getSensorsOnHostsList();
-    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSensorsOnHosts(int index);
-    int getSensorsOnHostsCount();
-    java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-        getSensorsOnHostsOrBuilderList();
-    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSensorsOnHostsOrBuilder(
-        int index);
+    // optional .org.jcjxb.wsn.service.SensorsOnHostList sensorsOnHostList = 2;
+    boolean hasSensorsOnHostList();
+    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList getSensorsOnHostList();
+    org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostListOrBuilder getSensorsOnHostListOrBuilder();
   }
   public static final class PartitionConfig extends
       com.google.protobuf.GeneratedMessage
@@ -3778,30 +3953,22 @@ public final class WSNConfig {
       return partitionType_;
     }
     
-    // repeated .org.jcjxb.wsn.service.SensorsOnHost sensorsOnHosts = 2;
-    public static final int SENSORSONHOSTS_FIELD_NUMBER = 2;
-    private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sensorsOnHosts_;
-    public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> getSensorsOnHostsList() {
-      return sensorsOnHosts_;
+    // optional .org.jcjxb.wsn.service.SensorsOnHostList sensorsOnHostList = 2;
+    public static final int SENSORSONHOSTLIST_FIELD_NUMBER = 2;
+    private org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList sensorsOnHostList_;
+    public boolean hasSensorsOnHostList() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-        getSensorsOnHostsOrBuilderList() {
-      return sensorsOnHosts_;
+    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList getSensorsOnHostList() {
+      return sensorsOnHostList_;
     }
-    public int getSensorsOnHostsCount() {
-      return sensorsOnHosts_.size();
-    }
-    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSensorsOnHosts(int index) {
-      return sensorsOnHosts_.get(index);
-    }
-    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSensorsOnHostsOrBuilder(
-        int index) {
-      return sensorsOnHosts_.get(index);
+    public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostListOrBuilder getSensorsOnHostListOrBuilder() {
+      return sensorsOnHostList_;
     }
     
     private void initFields() {
       partitionType_ = org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.PartitionType.RANDOM;
-      sensorsOnHosts_ = java.util.Collections.emptyList();
+      sensorsOnHostList_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3818,8 +3985,8 @@ public final class WSNConfig {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, partitionType_.getNumber());
       }
-      for (int i = 0; i < sensorsOnHosts_.size(); i++) {
-        output.writeMessage(2, sensorsOnHosts_.get(i));
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, sensorsOnHostList_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3834,9 +4001,9 @@ public final class WSNConfig {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, partitionType_.getNumber());
       }
-      for (int i = 0; i < sensorsOnHosts_.size(); i++) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, sensorsOnHosts_.get(i));
+          .computeMessageSize(2, sensorsOnHostList_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3954,7 +4121,7 @@ public final class WSNConfig {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSensorsOnHostsFieldBuilder();
+          getSensorsOnHostListFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3965,12 +4132,12 @@ public final class WSNConfig {
         super.clear();
         partitionType_ = org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.PartitionType.RANDOM;
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (sensorsOnHostsBuilder_ == null) {
-          sensorsOnHosts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (sensorsOnHostListBuilder_ == null) {
+          sensorsOnHostList_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.getDefaultInstance();
         } else {
-          sensorsOnHostsBuilder_.clear();
+          sensorsOnHostListBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       
@@ -4013,14 +4180,13 @@ public final class WSNConfig {
           to_bitField0_ |= 0x00000001;
         }
         result.partitionType_ = partitionType_;
-        if (sensorsOnHostsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            sensorsOnHosts_ = java.util.Collections.unmodifiableList(sensorsOnHosts_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.sensorsOnHosts_ = sensorsOnHosts_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (sensorsOnHostListBuilder_ == null) {
+          result.sensorsOnHostList_ = sensorsOnHostList_;
         } else {
-          result.sensorsOnHosts_ = sensorsOnHostsBuilder_.build();
+          result.sensorsOnHostList_ = sensorsOnHostListBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4041,31 +4207,8 @@ public final class WSNConfig {
         if (other.hasPartitionType()) {
           setPartitionType(other.getPartitionType());
         }
-        if (sensorsOnHostsBuilder_ == null) {
-          if (!other.sensorsOnHosts_.isEmpty()) {
-            if (sensorsOnHosts_.isEmpty()) {
-              sensorsOnHosts_ = other.sensorsOnHosts_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureSensorsOnHostsIsMutable();
-              sensorsOnHosts_.addAll(other.sensorsOnHosts_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.sensorsOnHosts_.isEmpty()) {
-            if (sensorsOnHostsBuilder_.isEmpty()) {
-              sensorsOnHostsBuilder_.dispose();
-              sensorsOnHostsBuilder_ = null;
-              sensorsOnHosts_ = other.sensorsOnHosts_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              sensorsOnHostsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getSensorsOnHostsFieldBuilder() : null;
-            } else {
-              sensorsOnHostsBuilder_.addAllMessages(other.sensorsOnHosts_);
-            }
-          }
+        if (other.hasSensorsOnHostList()) {
+          mergeSensorsOnHostList(other.getSensorsOnHostList());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4110,9 +4253,12 @@ public final class WSNConfig {
               break;
             }
             case 18: {
-              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.newBuilder();
+              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.newBuilder();
+              if (hasSensorsOnHostList()) {
+                subBuilder.mergeFrom(getSensorsOnHostList());
+              }
               input.readMessage(subBuilder, extensionRegistry);
-              addSensorsOnHosts(subBuilder.buildPartial());
+              setSensorsOnHostList(subBuilder.buildPartial());
               break;
             }
           }
@@ -4145,190 +4291,94 @@ public final class WSNConfig {
         return this;
       }
       
-      // repeated .org.jcjxb.wsn.service.SensorsOnHost sensorsOnHosts = 2;
-      private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> sensorsOnHosts_ =
-        java.util.Collections.emptyList();
-      private void ensureSensorsOnHostsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          sensorsOnHosts_ = new java.util.ArrayList<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost>(sensorsOnHosts_);
-          bitField0_ |= 0x00000002;
-         }
+      // optional .org.jcjxb.wsn.service.SensorsOnHostList sensorsOnHostList = 2;
+      private org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList sensorsOnHostList_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostListOrBuilder> sensorsOnHostListBuilder_;
+      public boolean hasSensorsOnHostList() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> sensorsOnHostsBuilder_;
-      
-      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> getSensorsOnHostsList() {
-        if (sensorsOnHostsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(sensorsOnHosts_);
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList getSensorsOnHostList() {
+        if (sensorsOnHostListBuilder_ == null) {
+          return sensorsOnHostList_;
         } else {
-          return sensorsOnHostsBuilder_.getMessageList();
+          return sensorsOnHostListBuilder_.getMessage();
         }
       }
-      public int getSensorsOnHostsCount() {
-        if (sensorsOnHostsBuilder_ == null) {
-          return sensorsOnHosts_.size();
-        } else {
-          return sensorsOnHostsBuilder_.getCount();
-        }
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost getSensorsOnHosts(int index) {
-        if (sensorsOnHostsBuilder_ == null) {
-          return sensorsOnHosts_.get(index);
-        } else {
-          return sensorsOnHostsBuilder_.getMessage(index);
-        }
-      }
-      public Builder setSensorsOnHosts(
-          int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sensorsOnHostsBuilder_ == null) {
+      public Builder setSensorsOnHostList(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList value) {
+        if (sensorsOnHostListBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.set(index, value);
+          sensorsOnHostList_ = value;
           onChanged();
         } else {
-          sensorsOnHostsBuilder_.setMessage(index, value);
+          sensorsOnHostListBuilder_.setMessage(value);
         }
+        bitField0_ |= 0x00000002;
         return this;
       }
-      public Builder setSensorsOnHosts(
-          int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sensorsOnHostsBuilder_ == null) {
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.set(index, builderForValue.build());
+      public Builder setSensorsOnHostList(
+          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder builderForValue) {
+        if (sensorsOnHostListBuilder_ == null) {
+          sensorsOnHostList_ = builderForValue.build();
           onChanged();
         } else {
-          sensorsOnHostsBuilder_.setMessage(index, builderForValue.build());
+          sensorsOnHostListBuilder_.setMessage(builderForValue.build());
         }
+        bitField0_ |= 0x00000002;
         return this;
       }
-      public Builder addSensorsOnHosts(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sensorsOnHostsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+      public Builder mergeSensorsOnHostList(org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList value) {
+        if (sensorsOnHostListBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              sensorsOnHostList_ != org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.getDefaultInstance()) {
+            sensorsOnHostList_ =
+              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.newBuilder(sensorsOnHostList_).mergeFrom(value).buildPartial();
+          } else {
+            sensorsOnHostList_ = value;
           }
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.add(value);
           onChanged();
         } else {
-          sensorsOnHostsBuilder_.addMessage(value);
+          sensorsOnHostListBuilder_.mergeFrom(value);
         }
+        bitField0_ |= 0x00000002;
         return this;
       }
-      public Builder addSensorsOnHosts(
-          int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost value) {
-        if (sensorsOnHostsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.add(index, value);
+      public Builder clearSensorsOnHostList() {
+        if (sensorsOnHostListBuilder_ == null) {
+          sensorsOnHostList_ = org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.getDefaultInstance();
           onChanged();
         } else {
-          sensorsOnHostsBuilder_.addMessage(index, value);
+          sensorsOnHostListBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      public Builder addSensorsOnHosts(
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sensorsOnHostsBuilder_ == null) {
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.add(builderForValue.build());
-          onChanged();
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder getSensorsOnHostListBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getSensorsOnHostListFieldBuilder().getBuilder();
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostListOrBuilder getSensorsOnHostListOrBuilder() {
+        if (sensorsOnHostListBuilder_ != null) {
+          return sensorsOnHostListBuilder_.getMessageOrBuilder();
         } else {
-          sensorsOnHostsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addSensorsOnHosts(
-          int index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder builderForValue) {
-        if (sensorsOnHostsBuilder_ == null) {
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          sensorsOnHostsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllSensorsOnHosts(
-          java.lang.Iterable<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost> values) {
-        if (sensorsOnHostsBuilder_ == null) {
-          ensureSensorsOnHostsIsMutable();
-          super.addAll(values, sensorsOnHosts_);
-          onChanged();
-        } else {
-          sensorsOnHostsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearSensorsOnHosts() {
-        if (sensorsOnHostsBuilder_ == null) {
-          sensorsOnHosts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          sensorsOnHostsBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeSensorsOnHosts(int index) {
-        if (sensorsOnHostsBuilder_ == null) {
-          ensureSensorsOnHostsIsMutable();
-          sensorsOnHosts_.remove(index);
-          onChanged();
-        } else {
-          sensorsOnHostsBuilder_.remove(index);
-        }
-        return this;
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder getSensorsOnHostsBuilder(
-          int index) {
-        return getSensorsOnHostsFieldBuilder().getBuilder(index);
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder getSensorsOnHostsOrBuilder(
-          int index) {
-        if (sensorsOnHostsBuilder_ == null) {
-          return sensorsOnHosts_.get(index);  } else {
-          return sensorsOnHostsBuilder_.getMessageOrBuilder(index);
+          return sensorsOnHostList_;
         }
       }
-      public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-           getSensorsOnHostsOrBuilderList() {
-        if (sensorsOnHostsBuilder_ != null) {
-          return sensorsOnHostsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(sensorsOnHosts_);
-        }
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder addSensorsOnHostsBuilder() {
-        return getSensorsOnHostsFieldBuilder().addBuilder(
-            org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance());
-      }
-      public org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder addSensorsOnHostsBuilder(
-          int index) {
-        return getSensorsOnHostsFieldBuilder().addBuilder(
-            index, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.getDefaultInstance());
-      }
-      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder> 
-           getSensorsOnHostsBuilderList() {
-        return getSensorsOnHostsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder> 
-          getSensorsOnHostsFieldBuilder() {
-        if (sensorsOnHostsBuilder_ == null) {
-          sensorsOnHostsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostOrBuilder>(
-                  sensorsOnHosts_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostListOrBuilder> 
+          getSensorsOnHostListFieldBuilder() {
+        if (sensorsOnHostListBuilder_ == null) {
+          sensorsOnHostListBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder, org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostListOrBuilder>(
+                  sensorsOnHostList_,
                   getParentForChildren(),
                   isClean());
-          sensorsOnHosts_ = null;
+          sensorsOnHostList_ = null;
         }
-        return sensorsOnHostsBuilder_;
+        return sensorsOnHostListBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.PartitionConfig)
@@ -5116,32 +5166,35 @@ public final class WSNConfig {
       "n.service.SinkNodeDeployConfig.DeployTyp" +
       "e\022\017\n\007nodeNum\030\002 \001(\r\0228\n\013postionList\030\004 \001(\0132" +
       "#.org.jcjxb.wsn.service.PositionList\"$\n\n" +
-      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\262\001\n\027S" +
-      "ourceEventDeployConfig\022\016\n\006radius\030\002 \001(\001\022\020" +
-      "\n\010eventNum\030\003 \001(\r\022\025\n\reventInterval\030\004 \001(\r\022" +
-      "8\n\013postionList\030\005 \001(\0132#.org.jcjxb.wsn.ser" +
-      "vice.PositionList\"$\n\nDeployType\022\n\n\006RANDO",
-      "M\020\000\022\n\n\006STATIC\020\001\"\230\002\n\014DeployConfig\022\r\n\005widt" +
-      "h\030\001 \001(\001\022\016\n\006height\030\002 \001(\001\022M\n\026sensorNodeDep" +
-      "loyConfig\030\003 \001(\0132-.org.jcjxb.wsn.service." +
-      "SensorNodeDeployConfig\022I\n\024sinkNodeDeploy" +
-      "Config\030\004 \001(\0132+.org.jcjxb.wsn.service.Sin" +
-      "kNodeDeployConfig\022O\n\027sourceEventDeployCo" +
-      "nfig\030\005 \001(\0132..org.jcjxb.wsn.service.Sourc" +
-      "eEventDeployConfig\"\037\n\017AlgorithmConfig\022\014\n" +
-      "\004name\030\001 \001(\t\"\333\001\n\017PartitionConfig\022K\n\rparti" +
-      "tionType\030\001 \001(\01624.org.jcjxb.wsn.service.P",
-      "artitionConfig.PartitionType\022<\n\016sensorsO" +
-      "nHosts\030\002 \003(\0132$.org.jcjxb.wsn.service.Sen" +
-      "sorsOnHost\"=\n\rPartitionType\022\n\n\006RANDOM\020\000\022" +
-      "\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"\317\001\n\020Si" +
-      "mulationConfig\0229\n\014deployConfig\030\001 \001(\0132#.o" +
-      "rg.jcjxb.wsn.service.DeployConfig\022?\n\017alg" +
-      "orithmConfig\030\002 \001(\0132&.org.jcjxb.wsn.servi" +
-      "ce.AlgorithmConfig\022?\n\017partitionConfig\030\003 " +
-      "\001(\0132&.org.jcjxb.wsn.service.PartitionCon" +
-      "figB(\n\033org.jcjxb.wsn.service.protoB\tWSNC",
-      "onfig"
+      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\244\002\n\027S" +
+      "ourceEventDeployConfig\022M\n\ndeployType\030\001 \001" +
+      "(\01629.org.jcjxb.wsn.service.SourceEventDe" +
+      "ployConfig.DeployType\022\016\n\006radius\030\002 \001(\001\022\020\n" +
+      "\010eventNum\030\003 \001(\r\022\025\n\reventInterval\030\004 \001(\r\0228",
+      "\n\013postionList\030\005 \001(\0132#.org.jcjxb.wsn.serv" +
+      "ice.PositionList\022\022\n\nregenerate\030\006 \001(\010\022\r\n\005" +
+      "times\030\007 \001(\r\"$\n\nDeployType\022\n\n\006RANDOM\020\000\022\n\n" +
+      "\006STATIC\020\001\"\230\002\n\014DeployConfig\022\r\n\005width\030\001 \001(" +
+      "\001\022\016\n\006height\030\002 \001(\001\022M\n\026sensorNodeDeployCon" +
+      "fig\030\003 \001(\0132-.org.jcjxb.wsn.service.Sensor" +
+      "NodeDeployConfig\022I\n\024sinkNodeDeployConfig" +
+      "\030\004 \001(\0132+.org.jcjxb.wsn.service.SinkNodeD" +
+      "eployConfig\022O\n\027sourceEventDeployConfig\030\005" +
+      " \001(\0132..org.jcjxb.wsn.service.SourceEvent",
+      "DeployConfig\"\037\n\017AlgorithmConfig\022\014\n\004name\030" +
+      "\001 \001(\t\"\342\001\n\017PartitionConfig\022K\n\rpartitionTy" +
+      "pe\030\001 \001(\01624.org.jcjxb.wsn.service.Partiti" +
+      "onConfig.PartitionType\022C\n\021sensorsOnHostL" +
+      "ist\030\002 \001(\0132(.org.jcjxb.wsn.service.Sensor" +
+      "sOnHostList\"=\n\rPartitionType\022\n\n\006RANDOM\020\000" +
+      "\022\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"\317\001\n\020S" +
+      "imulationConfig\0229\n\014deployConfig\030\001 \001(\0132#." +
+      "org.jcjxb.wsn.service.DeployConfig\022?\n\017al" +
+      "gorithmConfig\030\002 \001(\0132&.org.jcjxb.wsn.serv",
+      "ice.AlgorithmConfig\022?\n\017partitionConfig\030\003" +
+      " \001(\0132&.org.jcjxb.wsn.service.PartitionCo" +
+      "nfigB(\n\033org.jcjxb.wsn.service.protoB\tWSN" +
+      "Config"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5177,7 +5230,7 @@ public final class WSNConfig {
           internal_static_org_jcjxb_wsn_service_SourceEventDeployConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_SourceEventDeployConfig_descriptor,
-              new java.lang.String[] { "Radius", "EventNum", "EventInterval", "PostionList", },
+              new java.lang.String[] { "DeployType", "Radius", "EventNum", "EventInterval", "PostionList", "Regenerate", "Times", },
               org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.Builder.class);
           internal_static_org_jcjxb_wsn_service_DeployConfig_descriptor =
@@ -5201,7 +5254,7 @@ public final class WSNConfig {
           internal_static_org_jcjxb_wsn_service_PartitionConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_PartitionConfig_descriptor,
-              new java.lang.String[] { "PartitionType", "SensorsOnHosts", },
+              new java.lang.String[] { "PartitionType", "SensorsOnHostList", },
               org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.Builder.class);
           internal_static_org_jcjxb_wsn_service_SimulationConfig_descriptor =

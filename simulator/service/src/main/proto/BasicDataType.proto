@@ -38,3 +38,7 @@ message SensorsOnHost {
 	optional int32 hostIndex = 1;
 	repeated int32 sensorId = 2;
 }
+
+message SensorsOnHostList {
+	repeated SensorsOnHost sensorsOnHost = 1;
+}

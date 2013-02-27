@@ -38,10 +38,13 @@ message SourceEventDeployConfig {
 		RANDOM = 0;
 		STATIC = 1;
 	}
+	optional DeployType deployType = 1;
 	optional double radius = 2;
 	optional uint32 eventNum = 3;
 	optional uint32 eventInterval = 4;
 	optional PositionList postionList = 5;
+	optional bool regenerate = 6;
+	optional uint32 times = 7; // not set and < 0 means indefinite
 }
 
 message DeployConfig {
@@ -64,7 +67,7 @@ message PartitionConfig {
 		GRID = 3;
 	}
 	optional PartitionType partitionType = 1;
-	repeated SensorsOnHost sensorsOnHosts = 2;
+	optional SensorsOnHostList sensorsOnHostList = 2;
 }
 
 message SimulationConfig {
