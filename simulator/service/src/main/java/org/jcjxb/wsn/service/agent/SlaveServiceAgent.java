@@ -6,9 +6,11 @@ import org.jcjxb.wsn.rpc.LionRpcChannelFactory;
 import org.jcjxb.wsn.service.proto.BasicDataType.Host;
 import org.jcjxb.wsn.service.proto.SlaveService.SService;
 import org.jcjxb.wsn.service.proto.SlaveService.SService.BlockingInterface;
+import org.jcjxb.wsn.service.proto.SlaveService.SService.Interface;
 import org.jcjxb.wsn.service.sim.MasterSimConfig;
 
 import com.google.protobuf.BlockingRpcChannel;
+import com.google.protobuf.RpcChannel;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 
@@ -16,31 +18,35 @@ public class SlaveServiceAgent {
 	
 	private int slaveId;
 	
-	private BlockingRpcChannel channel = null;
+	private BlockingRpcChannel blockChannel = null;
 
-	private BlockingInterface serviceStub = null;
+	private BlockingInterface blockServiceStub = null;
+	
+	private RpcChannel channel = null;
+	
+	private Interface serviceStub = null;
 
 	public SlaveServiceAgent(int slaveId) {
 	}
 	
-	private synchronized BlockingRpcChannel getChannel()
+	private synchronized BlockingRpcChannel getBlockChannel()
 			throws UnknownHostException {
-		if (channel != null) {
-			return channel;
+		if (blockChannel != null) {
+			return blockChannel;
 		}
 		Host host = MasterSimConfig.getInstance().getHostConfig().getSlaveHost(slaveId);
-		channel = LionRpcChannelFactory.newBlockingRpcChannel(host.getHost(),
+		blockChannel = LionRpcChannelFactory.newBlockingRpcChannel(host.getHost(),
 				host.getPort());
-		return channel;
+		return blockChannel;
 	}
 
-	private synchronized BlockingInterface getServiceStub()
+	private synchronized BlockingInterface getBlockServiceStub()
 			throws UnknownHostException {
-		if (serviceStub != null) {
-			return serviceStub;
+		if (blockServiceStub != null) {
+			return blockServiceStub;
 		}
-		serviceStub = SService.newBlockingStub(getChannel());
-		return serviceStub;
+		blockServiceStub = SService.newBlockingStub(getBlockChannel());
+		return blockServiceStub;
 	}
 	
 	private void handleRpcException(Exception exception,
