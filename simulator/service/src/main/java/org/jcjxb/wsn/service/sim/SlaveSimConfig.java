@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.jcjxb.wsn.service.algorithm.Algorithm;
-import org.jcjxb.wsn.service.proto.SlaveService.InitSimCmd;
+import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 
 public class SlaveSimConfig extends SimConfig {
 
@@ -23,8 +23,8 @@ public class SlaveSimConfig extends SimConfig {
 		return simConfig;
 	}
 
-	public void initSimCmd(InitSimCmd initSimCmd) {
-		super.initSimCmd(initSimCmd);
+	public void initSimulation(SimulationConfig simulationConfig) {
+		super.initSimulation(simulationConfig);
 		sensorsOnThisSlave = new HashSet<Integer>(slaveToSensorsMap.get(hostIndex));
 	}
 
