@@ -11,6 +11,6 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 
 	@Override
 	public Empty startSimulation(RpcController controller, SimulationConfig request) throws ServiceException {
-		return null;
+		return Empty.getDefaultInstance();
 	}
 }

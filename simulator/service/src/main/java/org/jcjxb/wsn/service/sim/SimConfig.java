@@ -23,7 +23,7 @@ public class SimConfig {
 	protected SimConfig() {
 	}
 
-	protected void initSimulation(SimulationConfig simulationConfig) {
+	public void initSimulation(SimulationConfig simulationConfig) {
 		this.clear();
 		this.simulationConfig = simulationConfig;
 		sensorsToSlaveMap = new HashMap<Integer, Integer>();
