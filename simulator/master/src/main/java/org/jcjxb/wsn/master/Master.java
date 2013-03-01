@@ -25,7 +25,7 @@ public class Master {
 
 	private static Options mainOptions = new Options();
 
-	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.txt",
+	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.bin",
 			"This option defines master and slaves host config");
 
 	public static void main(String[] args) throws Exception {

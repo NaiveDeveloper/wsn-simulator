@@ -45,6 +45,10 @@ public class SimConfig {
 		this.isSimRunning = false;
 		this.simulationConfig = null;
 	}
+	
+	public int getSlaveCount() {
+		return hostConfig.getSlaveHostCount();
+	}
 
 	public HostConfig getHostConfig() {
 		return hostConfig;

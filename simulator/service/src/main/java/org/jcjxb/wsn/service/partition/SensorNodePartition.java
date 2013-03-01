@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
+import org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost;
 import org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList;
 import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.PartitionType;
 
@@ -35,7 +36,17 @@ public class SensorNodePartition {
 
 		@Override
 		public SensorsOnHostList generate(int slaveNum, PositionList positionList, SensorsOnHostList sensorsOnHostList) {
-			return null;
+			SensorsOnHostList.Builder listBuilder = SensorsOnHostList.newBuilder();
+			int sensorCount = positionList.getPostionCount();
+			int num = sensorCount / slaveNum;
+			for (int i = 0; i < slaveNum; ++i) {
+				SensorsOnHost.Builder builder = SensorsOnHost.newBuilder();
+				for (int j = i * num; j < (i + 1) * num && j < sensorCount; ++j) {
+					builder.addSensorId(j);
+				}
+				listBuilder.addSensorsOnHost(builder.build());
+			}
+			return listBuilder.build();
 		}
 	}
 
@@ -43,7 +54,7 @@ public class SensorNodePartition {
 
 		@Override
 		public SensorsOnHostList generate(int slaveNum, PositionList positionList, SensorsOnHostList sensorsOnHostList) {
-			return null;
+			return sensorsOnHostList;
 		}
 	}
 }

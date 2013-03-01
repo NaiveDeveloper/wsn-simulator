@@ -34,6 +34,8 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 
 	@Override
 	public Empty startSimulation(RpcController controller, SimulationConfig request) throws ServiceException {
+		logger.info("A new simulation request is recieved");
+		logger.info("Message:\n" + request.toString());
 		if (!MasterSimConfig.getInstance().isAllSlaveReady()) {
 			controller.setFailed("All slaves are not ready");
 			logger.error("A start simulation rquest is recieved when all slaves are not ready");
@@ -57,10 +59,14 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 
 			// Divide sensors to slaves
 			PartitionConfig.Builder partitionConfigBuilder = PartitionConfig.newBuilder(request.getPartitionConfig());
-			PartitionStrategyManager.getInstance().partition(partitionConfigBuilder, request.getPartitionConfig(), 0,
-					deployConfigBuilder.getSensorNodeDeployConfig().getPostionList());
-
+			PartitionStrategyManager.getInstance().partition(partitionConfigBuilder, request.getPartitionConfig(),
+					MasterSimConfig.getInstance().getSlaveCount(), deployConfigBuilder.getSensorNodeDeployConfig().getPostionList());
+			
+			simulationConfigBuilder.setAlgorithmConfig(request.getAlgorithmConfig());
+			simulationConfigBuilder.setDeployConfig(deployConfigBuilder.build());
+			simulationConfigBuilder.setPartitionConfig(partitionConfigBuilder.build());
 			SimulationConfig simulationConfig = simulationConfigBuilder.build();
+			
 			int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 			final CountDownLatch latch = new CountDownLatch(slaveCount);
 			final Status status = new Status(true);
@@ -86,10 +92,13 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 				latch.await();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				status.setFlag(false);
 			}
 			if (status.isFlag()) {
 				MasterSimConfig.getInstance().setSimRunning(true);
 				MasterSimConfig.getInstance().initSimulation(simulationConfig);
+				logger.info("Start simulation on slaves successfully");
+				logger.info("Simulation message:\n" + simulationConfig.toString());
 			} else {
 				controller.setFailed("All slaves are not ready");
 				logger.error("Not all slaves start simulation successfully");

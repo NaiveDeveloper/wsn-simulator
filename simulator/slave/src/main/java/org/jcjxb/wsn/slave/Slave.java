@@ -8,7 +8,7 @@ import org.jcjxb.wsn.common.Options;
 import org.jcjxb.wsn.rpc.LionRpcController;
 import org.jcjxb.wsn.rpc.LionRpcServer;
 import org.jcjxb.wsn.rpc.LionRpcSocketServer;
-import org.jcjxb.wsn.service.agent.MasterServiceAgent;
+import org.jcjxb.wsn.service.agent.MasterServicAgentManager;
 import org.jcjxb.wsn.service.impl.SlaveServiceImpl;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 import org.jcjxb.wsn.service.proto.SlaveService;
@@ -29,7 +29,7 @@ public class Slave {
 
 	private static Options mainOptions = new Options();
 
-	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.txt",
+	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.bin",
 			"This option defines master and slaves host config");
 
 	private static Options.IntOption hostIndexOption = mainOptions.newOption("hostIndex", -1,
@@ -75,7 +75,7 @@ public class Slave {
 
 		// Send slave ready message to master
 		RpcController controller = new LionRpcController();
-		MasterServiceAgent.getInstance().slaveReady(hostIndexOption.getValue(), controller);
+		MasterServicAgentManager.getInstance().getServiceAgent().slaveReady(hostIndexOption.getValue(), controller);
 		if (controller.failed()) {
 			logger.error("Send slave ready message failed, error text is " + controller.errorText());
 			return;

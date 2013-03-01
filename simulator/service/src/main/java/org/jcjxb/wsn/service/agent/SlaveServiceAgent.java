@@ -30,22 +30,19 @@ public class SlaveServiceAgent {
 	private Interface serviceStub = null;
 
 	public SlaveServiceAgent(int slaveId) {
+		this.slaveId = slaveId;
 	}
 
-	private synchronized BlockingRpcChannel getBlockChannel()
-			throws UnknownHostException {
+	private synchronized BlockingRpcChannel getBlockChannel() throws UnknownHostException {
 		if (blockChannel != null) {
 			return blockChannel;
 		}
-		Host host = MasterSimConfig.getInstance().getHostConfig()
-				.getSlaveHost(slaveId);
-		blockChannel = LionRpcChannelFactory.newBlockingRpcChannel(
-				host.getHost(), host.getPort());
+		Host host = MasterSimConfig.getInstance().getHostConfig().getSlaveHost(slaveId);
+		blockChannel = LionRpcChannelFactory.newBlockingRpcChannel(host.getHost(), host.getPort());
 		return blockChannel;
 	}
 
-	private synchronized BlockingInterface getBlockServiceStub()
-			throws UnknownHostException {
+	private synchronized BlockingInterface getBlockServiceStub() throws UnknownHostException {
 		if (blockServiceStub != null) {
 			return blockServiceStub;
 		}
@@ -57,10 +54,8 @@ public class SlaveServiceAgent {
 		if (channel != null) {
 			return channel;
 		}
-		Host host = MasterSimConfig.getInstance().getHostConfig()
-				.getSlaveHost(slaveId);
-		channel = LionRpcChannelFactory.newRpcChannel(host.getHost(),
-				host.getPort());
+		Host host = MasterSimConfig.getInstance().getHostConfig().getSlaveHost(slaveId);
+		channel = LionRpcChannelFactory.newRpcChannel(host.getHost(), host.getPort());
 		return channel;
 	}
 
@@ -72,18 +67,23 @@ public class SlaveServiceAgent {
 		return serviceStub;
 	}
 
-	public void startSimulation(SimulationConfig simulationConfig,
-			RpcController controller, RpcCallback<Empty> done) {
+	public void startSimulation(SimulationConfig simulationConfig, RpcController controller) {
 		try {
-			getServiceStub()
-					.startSimulation(controller, simulationConfig, done);
+			getBlockServiceStub().startSimulation(controller, simulationConfig);
 		} catch (Exception e) {
 			handleRpcException(e, controller);
 		}
 	}
 
-	private void handleRpcException(Exception exception,
-			RpcController controller) {
+	public void startSimulation(SimulationConfig simulationConfig, RpcController controller, RpcCallback<Empty> done) {
+		try {
+			getServiceStub().startSimulation(controller, simulationConfig, done);
+		} catch (Exception e) {
+			handleRpcException(e, controller);
+		}
+	}
+
+	private void handleRpcException(Exception exception, RpcController controller) {
 		if (exception instanceof UnknownHostException) {
 			controller.setFailed("Master server IO Connection error");
 		} else if (exception instanceof ServiceException) {

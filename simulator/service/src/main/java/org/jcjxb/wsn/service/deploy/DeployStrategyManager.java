@@ -14,7 +14,7 @@ public class DeployStrategyManager {
 	}
 
 	public void deploy(DeployConfig.Builder builder, DeployConfig deplyConfig) {
-		DeployConfig.Builder deplyBuilder = DeployConfig.newBuilder();
+		DeployConfig.Builder deplyBuilder = builder;
 		deplyBuilder.setWidth(deplyConfig.getWidth());
 		deplyBuilder.setHeight(deplyConfig.getHeight());
 
@@ -37,5 +37,6 @@ public class DeployStrategyManager {
 		SourceEventDeployConfig.Builder sourceBuilder = SourceEventDeployConfig.newBuilder(sourceConfig);
 		sourceBuilder.setPostionList(SourceEventDeploy.getInstance().deploy(sourceConfig.getEventNum(), (int) deplyConfig.getWidth(),
 				(int) deplyConfig.getHeight(), sourceConfig.getDeployType(), sourceConfig.getPostionList()));
+		deplyBuilder.setSourceEventDeployConfig(sourceBuilder.build());
 	}
 }
