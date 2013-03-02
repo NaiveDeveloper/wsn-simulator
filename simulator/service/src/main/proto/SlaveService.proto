@@ -7,6 +7,11 @@ option java_generic_services = true;
 import "BasicDataType.proto";
 import "WSNConfig.proto";
 
+message ExecRequest {
+	optional int64 globalVirtualTime = 1;
+}
+
 service SService {
 	rpc startSimulation(SimulationConfig) returns (Empty);
+	rpc exec(ExecRequest) returns (Empty);
 }

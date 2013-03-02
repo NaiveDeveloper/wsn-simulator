@@ -35,7 +35,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 	@Override
 	public Empty startSimulation(RpcController controller, SimulationConfig request) throws ServiceException {
 		logger.info("A new simulation request is recieved");
-		logger.info("Message:\n" + request.toString());
+		logger.debug("Message:\n" + request.toString());
 		if (!MasterSimConfig.getInstance().isAllSlaveReady()) {
 			controller.setFailed("All slaves are not ready");
 			logger.error("A start simulation rquest is recieved when all slaves are not ready");
@@ -98,7 +98,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 				MasterSimConfig.getInstance().setSimRunning(true);
 				MasterSimConfig.getInstance().initSimulation(simulationConfig);
 				logger.info("Start simulation on slaves successfully");
-				logger.info("Simulation message:\n" + simulationConfig.toString());
+				logger.debug("Simulation message:\n" + simulationConfig.toString());
 			} else {
 				controller.setFailed("All slaves are not ready");
 				logger.error("Not all slaves start simulation successfully");

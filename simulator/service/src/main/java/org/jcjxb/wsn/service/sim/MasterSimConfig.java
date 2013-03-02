@@ -3,6 +3,8 @@ package org.jcjxb.wsn.service.sim;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
+
 public class MasterSimConfig extends SimConfig {
 
 	private static MasterSimConfig simConfig = new MasterSimConfig();
@@ -14,6 +16,12 @@ public class MasterSimConfig extends SimConfig {
 
 	public static MasterSimConfig getInstance() {
 		return simConfig;
+	}
+
+	@Override
+	public void initSimulation(SimulationConfig simulationConfig) {
+		super.initSimulation(simulationConfig);
+		MasterTimeLine.getInstance().init();
 	}
 
 	public synchronized void slaveReady(Integer hostIndex) {
