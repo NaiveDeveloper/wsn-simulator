@@ -7,8 +7,21 @@ import java.util.concurrent.PriorityBlockingQueue;
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 
 public class SlaveTimeLine {
+	
+	private static SlaveTimeLine timeline = new SlaveTimeLine();
 
-	private PriorityBlockingQueue<Event> eventQueue = new PriorityBlockingQueue<Event>(10, new EventComparator());
+	private PriorityBlockingQueue<Event> eventQueue = null;
+	
+	private SlaveTimeLine() {
+	}
+	
+	public static SlaveTimeLine getInstance() {
+		return timeline;
+	}
+	
+	public void init() {
+		eventQueue = new PriorityBlockingQueue<Event>(10, new EventComparator());
+	}
 
 	public void run(long globalVirtualTime) {
 		while (!eventQueue.isEmpty()

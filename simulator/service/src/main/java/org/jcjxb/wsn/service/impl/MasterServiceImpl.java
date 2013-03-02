@@ -67,6 +67,9 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			simulationConfigBuilder.setPartitionConfig(partitionConfigBuilder.build());
 			SimulationConfig simulationConfig = simulationConfigBuilder.build();
 			
+			// Initialize simulation
+			MasterSimConfig.getInstance().initSimulation(simulationConfig);
+			
 			int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 			final CountDownLatch latch = new CountDownLatch(slaveCount);
 			final Status status = new Status(true);
@@ -96,7 +99,6 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			}
 			if (status.isFlag()) {
 				MasterSimConfig.getInstance().setSimRunning(true);
-				MasterSimConfig.getInstance().initSimulation(simulationConfig);
 				logger.info("Start simulation on slaves successfully");
 				logger.debug("Simulation message:\n" + simulationConfig.toString());
 			} else {
