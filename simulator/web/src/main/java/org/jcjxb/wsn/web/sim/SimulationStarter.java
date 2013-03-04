@@ -25,7 +25,7 @@ public class SimulationStarter {
 		SimulationConfig.Builder simulationBuilder = SimulationConfig.newBuilder();
 		
 		AlgorithmConfig.Builder algorithmBuilder = AlgorithmConfig.newBuilder();
-		algorithmBuilder.setName("DD");
+		algorithmBuilder.setName("EMPTY");
 		simulationBuilder.setAlgorithmConfig(algorithmBuilder.build());
 		
 		PartitionConfig.Builder partitionBuilder = PartitionConfig.newBuilder();

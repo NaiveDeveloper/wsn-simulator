@@ -9,6 +9,10 @@ import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 public abstract class Algorithm {
 
 	private Map<String, EventHandler> handlerList = new HashMap<String, EventHandler>();
+	
+	public Algorithm() {
+		this.initHandlers();
+	}
 
 	public List<Event> generate(Event event) {
 		EventHandler handler = handlerList.get(event.getType());

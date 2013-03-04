@@ -16,6 +16,7 @@ import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 import org.jcjxb.wsn.service.sim.MasterSimConfig;
+import org.jcjxb.wsn.service.sim.MasterTimeLine;
 
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
@@ -99,6 +100,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			}
 			if (status.isFlag()) {
 				MasterSimConfig.getInstance().setSimRunning(true);
+				MasterTimeLine.getInstance().start();
 				logger.info("Start simulation on slaves successfully");
 				logger.debug("Simulation message:\n" + simulationConfig.toString());
 			} else {

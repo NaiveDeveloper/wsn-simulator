@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jcjxb.wsn.service.algorithm.Algorithm;
+import org.jcjxb.wsn.service.algorithm.AlgorithmManager;
 import org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
@@ -45,7 +47,7 @@ public class SimConfig {
 		this.isSimRunning = false;
 		this.simulationConfig = null;
 	}
-	
+
 	public int getSlaveCount() {
 		return hostConfig.getSlaveHostCount();
 	}
@@ -64,5 +66,9 @@ public class SimConfig {
 
 	public void setSimRunning(boolean isSimRunning) {
 		this.isSimRunning = isSimRunning;
+	}
+
+	public Algorithm getAlgorithm() {
+		return AlgorithmManager.getInstance().getAlgorithm(simulationConfig.getAlgorithmConfig().getName());
 	}
 }

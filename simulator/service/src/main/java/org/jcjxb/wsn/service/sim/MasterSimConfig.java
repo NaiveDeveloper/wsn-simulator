@@ -21,7 +21,6 @@ public class MasterSimConfig extends SimConfig {
 	@Override
 	public void initSimulation(SimulationConfig simulationConfig) {
 		super.initSimulation(simulationConfig);
-		MasterTimeLine.getInstance().init();
 	}
 
 	public synchronized void slaveReady(Integer hostIndex) {

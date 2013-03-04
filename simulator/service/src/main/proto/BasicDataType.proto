@@ -20,10 +20,11 @@ message Event {
 	}
 	optional Priority priority = 1 [default = PRIORITY_NORMAL];
 	optional int64 startTime = 2;
-	optional int64 duration = 3;
-	repeated int32 sensorId = 4;
-	optional string type = 5;
-	optional bytes data = 6;
+	repeated int32 sensorId = 3;
+	optional string type = 4;
+	optional bytes data = 5;
+	optional int32 senderId = 6;
+	optional bool sink = 7;
 }
 
 message Host {
