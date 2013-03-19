@@ -965,30 +965,30 @@ public final class BasicDataType {
     boolean hasStartTime();
     long getStartTime();
     
-    // optional int64 duration = 3;
-    boolean hasDuration();
-    long getDuration();
-    
-    // repeated int32 sensorId = 4;
+    // repeated int32 sensorId = 3;
     java.util.List<java.lang.Integer> getSensorIdList();
     int getSensorIdCount();
     int getSensorId(int index);
     
-    // optional string type = 5;
+    // optional string type = 4;
     boolean hasType();
     String getType();
     
-    // optional bytes data = 6;
+    // optional bytes data = 5;
     boolean hasData();
     com.google.protobuf.ByteString getData();
     
-    // optional int32 sender = 7;
-    boolean hasSender();
-    int getSender();
+    // optional int32 senderId = 6;
+    boolean hasSenderId();
+    int getSenderId();
     
-    // optional bool sinkNode = 8;
-    boolean hasSinkNode();
-    boolean getSinkNode();
+    // optional bool sink = 7;
+    boolean hasSink();
+    boolean getSink();
+    
+    // optional double energyCost = 8;
+    boolean hasEnergyCost();
+    double getEnergyCost();
   }
   public static final class Event extends
       com.google.protobuf.GeneratedMessage
@@ -1111,18 +1111,8 @@ public final class BasicDataType {
       return startTime_;
     }
     
-    // optional int64 duration = 3;
-    public static final int DURATION_FIELD_NUMBER = 3;
-    private long duration_;
-    public boolean hasDuration() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public long getDuration() {
-      return duration_;
-    }
-    
-    // repeated int32 sensorId = 4;
-    public static final int SENSORID_FIELD_NUMBER = 4;
+    // repeated int32 sensorId = 3;
+    public static final int SENSORID_FIELD_NUMBER = 3;
     private java.util.List<java.lang.Integer> sensorId_;
     public java.util.List<java.lang.Integer>
         getSensorIdList() {
@@ -1135,11 +1125,11 @@ public final class BasicDataType {
       return sensorId_.get(index);
     }
     
-    // optional string type = 5;
-    public static final int TYPE_FIELD_NUMBER = 5;
+    // optional string type = 4;
+    public static final int TYPE_FIELD_NUMBER = 4;
     private java.lang.Object type_;
     public boolean hasType() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public String getType() {
       java.lang.Object ref = type_;
@@ -1167,45 +1157,55 @@ public final class BasicDataType {
       }
     }
     
-    // optional bytes data = 6;
-    public static final int DATA_FIELD_NUMBER = 6;
+    // optional bytes data = 5;
+    public static final int DATA_FIELD_NUMBER = 5;
     private com.google.protobuf.ByteString data_;
     public boolean hasData() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public com.google.protobuf.ByteString getData() {
       return data_;
     }
     
-    // optional int32 sender = 7;
-    public static final int SENDER_FIELD_NUMBER = 7;
-    private int sender_;
-    public boolean hasSender() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+    // optional int32 senderId = 6;
+    public static final int SENDERID_FIELD_NUMBER = 6;
+    private int senderId_;
+    public boolean hasSenderId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public int getSender() {
-      return sender_;
+    public int getSenderId() {
+      return senderId_;
     }
     
-    // optional bool sinkNode = 8;
-    public static final int SINKNODE_FIELD_NUMBER = 8;
-    private boolean sinkNode_;
-    public boolean hasSinkNode() {
+    // optional bool sink = 7;
+    public static final int SINK_FIELD_NUMBER = 7;
+    private boolean sink_;
+    public boolean hasSink() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getSink() {
+      return sink_;
+    }
+    
+    // optional double energyCost = 8;
+    public static final int ENERGYCOST_FIELD_NUMBER = 8;
+    private double energyCost_;
+    public boolean hasEnergyCost() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public boolean getSinkNode() {
-      return sinkNode_;
+    public double getEnergyCost() {
+      return energyCost_;
     }
     
     private void initFields() {
       priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
       startTime_ = 0L;
-      duration_ = 0L;
       sensorId_ = java.util.Collections.emptyList();;
       type_ = "";
       data_ = com.google.protobuf.ByteString.EMPTY;
-      sender_ = 0;
-      sinkNode_ = false;
+      senderId_ = 0;
+      sink_ = false;
+      energyCost_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1225,23 +1225,23 @@ public final class BasicDataType {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, startTime_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, duration_);
-      }
       for (int i = 0; i < sensorId_.size(); i++) {
-        output.writeInt32(4, sensorId_.get(i));
+        output.writeInt32(3, sensorId_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(4, getTypeBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(5, getTypeBytes());
+        output.writeBytes(5, data_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(6, data_);
+        output.writeInt32(6, senderId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(7, sender_);
+        output.writeBool(7, sink_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBool(8, sinkNode_);
+        output.writeDouble(8, energyCost_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1260,10 +1260,6 @@ public final class BasicDataType {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, startTime_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, duration_);
-      }
       {
         int dataSize = 0;
         for (int i = 0; i < sensorId_.size(); i++) {
@@ -1273,21 +1269,25 @@ public final class BasicDataType {
         size += dataSize;
         size += 1 * getSensorIdList().size();
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getTypeBytes());
+      }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getTypeBytes());
+          .computeBytesSize(5, data_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(6, data_);
+          .computeInt32Size(6, senderId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, sender_);
+          .computeBoolSize(7, sink_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(8, sinkNode_);
+          .computeDoubleSize(8, energyCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1417,17 +1417,17 @@ public final class BasicDataType {
         bitField0_ = (bitField0_ & ~0x00000001);
         startTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        duration_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000004);
         sensorId_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         type_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        senderId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        sender_ = 0;
+        sink_ = false;
         bitField0_ = (bitField0_ & ~0x00000040);
-        sinkNode_ = false;
+        energyCost_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -1475,31 +1475,31 @@ public final class BasicDataType {
           to_bitField0_ |= 0x00000002;
         }
         result.startTime_ = startTime_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.duration_ = duration_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
           sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.sensorId_ = sensorId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.type_ = type_;
+        result.data_ = data_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.data_ = data_;
+        result.senderId_ = senderId_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.sender_ = sender_;
+        result.sink_ = sink_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.sinkNode_ = sinkNode_;
+        result.energyCost_ = energyCost_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1522,13 +1522,10 @@ public final class BasicDataType {
         if (other.hasStartTime()) {
           setStartTime(other.getStartTime());
         }
-        if (other.hasDuration()) {
-          setDuration(other.getDuration());
-        }
         if (!other.sensorId_.isEmpty()) {
           if (sensorId_.isEmpty()) {
             sensorId_ = other.sensorId_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           } else {
             ensureSensorIdIsMutable();
             sensorId_.addAll(other.sensorId_);
@@ -1541,11 +1538,14 @@ public final class BasicDataType {
         if (other.hasData()) {
           setData(other.getData());
         }
-        if (other.hasSender()) {
-          setSender(other.getSender());
+        if (other.hasSenderId()) {
+          setSenderId(other.getSenderId());
         }
-        if (other.hasSinkNode()) {
-          setSinkNode(other.getSinkNode());
+        if (other.hasSink()) {
+          setSink(other.getSink());
+        }
+        if (other.hasEnergyCost()) {
+          setEnergyCost(other.getEnergyCost());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1595,16 +1595,11 @@ public final class BasicDataType {
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
-              duration_ = input.readInt64();
-              break;
-            }
-            case 32: {
               ensureSensorIdIsMutable();
               sensorId_.add(input.readInt32());
               break;
             }
-            case 34: {
+            case 26: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -1613,24 +1608,29 @@ public final class BasicDataType {
               input.popLimit(limit);
               break;
             }
-            case 42: {
-              bitField0_ |= 0x00000010;
+            case 34: {
+              bitField0_ |= 0x00000008;
               type_ = input.readBytes();
               break;
             }
-            case 50: {
-              bitField0_ |= 0x00000020;
+            case 42: {
+              bitField0_ |= 0x00000010;
               data_ = input.readBytes();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              senderId_ = input.readInt32();
               break;
             }
             case 56: {
               bitField0_ |= 0x00000040;
-              sender_ = input.readInt32();
+              sink_ = input.readBool();
               break;
             }
-            case 64: {
+            case 65: {
               bitField0_ |= 0x00000080;
-              sinkNode_ = input.readBool();
+              energyCost_ = input.readDouble();
               break;
             }
           }
@@ -1684,33 +1684,12 @@ public final class BasicDataType {
         return this;
       }
       
-      // optional int64 duration = 3;
-      private long duration_ ;
-      public boolean hasDuration() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public long getDuration() {
-        return duration_;
-      }
-      public Builder setDuration(long value) {
-        bitField0_ |= 0x00000004;
-        duration_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearDuration() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        duration_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 sensorId = 4;
+      // repeated int32 sensorId = 3;
       private java.util.List<java.lang.Integer> sensorId_ = java.util.Collections.emptyList();;
       private void ensureSensorIdIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           sensorId_ = new java.util.ArrayList<java.lang.Integer>(sensorId_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
       public java.util.List<java.lang.Integer>
@@ -1745,15 +1724,15 @@ public final class BasicDataType {
       }
       public Builder clearSensorId() {
         sensorId_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
       
-      // optional string type = 5;
+      // optional string type = 4;
       private java.lang.Object type_ = "";
       public boolean hasType() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public String getType() {
         java.lang.Object ref = type_;
@@ -1769,27 +1748,27 @@ public final class BasicDataType {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         type_ = value;
         onChanged();
         return this;
       }
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         type_ = getDefaultInstance().getType();
         onChanged();
         return this;
       }
       void setType(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         type_ = value;
         onChanged();
       }
       
-      // optional bytes data = 6;
+      // optional bytes data = 5;
       private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
       public boolean hasData() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public com.google.protobuf.ByteString getData() {
         return data_;
@@ -1798,56 +1777,77 @@ public final class BasicDataType {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000010;
         data_ = value;
         onChanged();
         return this;
       }
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       
-      // optional int32 sender = 7;
-      private int sender_ ;
-      public boolean hasSender() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+      // optional int32 senderId = 6;
+      private int senderId_ ;
+      public boolean hasSenderId() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-      public int getSender() {
-        return sender_;
+      public int getSenderId() {
+        return senderId_;
       }
-      public Builder setSender(int value) {
-        bitField0_ |= 0x00000040;
-        sender_ = value;
+      public Builder setSenderId(int value) {
+        bitField0_ |= 0x00000020;
+        senderId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearSender() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        sender_ = 0;
+      public Builder clearSenderId() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        senderId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional bool sinkNode = 8;
-      private boolean sinkNode_ ;
-      public boolean hasSinkNode() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+      // optional bool sink = 7;
+      private boolean sink_ ;
+      public boolean hasSink() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public boolean getSinkNode() {
-        return sinkNode_;
+      public boolean getSink() {
+        return sink_;
       }
-      public Builder setSinkNode(boolean value) {
-        bitField0_ |= 0x00000080;
-        sinkNode_ = value;
+      public Builder setSink(boolean value) {
+        bitField0_ |= 0x00000040;
+        sink_ = value;
         onChanged();
         return this;
       }
-      public Builder clearSinkNode() {
+      public Builder clearSink() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        sink_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional double energyCost = 8;
+      private double energyCost_ ;
+      public boolean hasEnergyCost() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public double getEnergyCost() {
+        return energyCost_;
+      }
+      public Builder setEnergyCost(double value) {
+        bitField0_ |= 0x00000080;
+        energyCost_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEnergyCost() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        sinkNode_ = false;
+        energyCost_ = 0D;
         onChanged();
         return this;
       }
@@ -3618,9 +3618,9 @@ public final class BasicDataType {
       "jxb.wsn.service.Position\"\214\002\n\005Event\022H\n\010pr" +
       "iority\030\001 \001(\0162%.org.jcjxb.wsn.service.Eve" +
       "nt.Priority:\017PRIORITY_NORMAL\022\021\n\tstartTim" +
-      "e\030\002 \001(\003\022\020\n\010duration\030\003 \001(\003\022\020\n\010sensorId\030\004 " +
-      "\003(\005\022\014\n\004type\030\005 \001(\t\022\014\n\004data\030\006 \001(\014\022\016\n\006sende" +
-      "r\030\007 \001(\005\022\020\n\010sinkNode\030\010 \001(\010\"D\n\010Priority\022\021\n" +
+      "e\030\002 \001(\003\022\020\n\010sensorId\030\003 \003(\005\022\014\n\004type\030\004 \001(\t\022" +
+      "\014\n\004data\030\005 \001(\014\022\020\n\010senderId\030\006 \001(\005\022\014\n\004sink\030" +
+      "\007 \001(\010\022\022\n\nenergyCost\030\010 \001(\001\"D\n\010Priority\022\021\n" +
       "\rPRIORITY_HIGH\020\000\022\023\n\017PRIORITY_NORMAL\020\001\022\020\n",
       "\014PRIORITY_LOW\020\002\"\"\n\004Host\022\014\n\004host\030\001 \001(\t\022\014\n" +
       "\004port\030\002 \001(\005\"\007\n\005Empty\"4\n\rSensorsOnHost\022\021\n" +
@@ -3656,7 +3656,7 @@ public final class BasicDataType {
           internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_Event_descriptor,
-              new java.lang.String[] { "Priority", "StartTime", "Duration", "SensorId", "Type", "Data", "Sender", "SinkNode", },
+              new java.lang.String[] { "Priority", "StartTime", "SensorId", "Type", "Data", "SenderId", "Sink", "EnergyCost", },
               org.jcjxb.wsn.service.proto.BasicDataType.Event.class,
               org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder.class);
           internal_static_org_jcjxb_wsn_service_Host_descriptor =

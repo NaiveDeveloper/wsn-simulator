@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import org.jcjxb.wsn.rpc.LionRpcChannelFactory;
 import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.BasicDataType.Host;
+import org.jcjxb.wsn.service.proto.SlaveService.EventsRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.ExecRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
 import org.jcjxb.wsn.service.proto.SlaveService.SService;
@@ -88,6 +89,22 @@ public class SlaveServiceAgent {
 	public void exec(ExecRequest execRequest, RpcController controller, RpcCallback<LVTSync> done) {
 		try {
 			getServiceStub().exec(controller, execRequest, done);
+		} catch (Exception e) {
+			handleRpcException(e, controller);
+		}
+	}
+
+	public void sendEvents(EventsRequest eventsRequest, RpcController controller, RpcCallback<Empty> done) {
+		try {
+			getServiceStub().sendEvents(controller, eventsRequest, done);
+		} catch (Exception e) {
+			handleRpcException(e, controller);
+		}
+	}
+
+	public void endSimulation(Empty empty, RpcController controller, RpcCallback<Empty> done) {
+		try {
+			getServiceStub().endSimulation(controller, empty, done);
 		} catch (Exception e) {
 			handleRpcException(e, controller);
 		}

@@ -44,6 +44,7 @@ public class SensorNodePartition {
 				for (int j = i * num; j < (i + 1) * num && j < sensorCount; ++j) {
 					builder.addSensorId(j);
 				}
+				builder.setHostIndex(i);
 				listBuilder.addSensorsOnHost(builder.build());
 			}
 			return listBuilder.build();

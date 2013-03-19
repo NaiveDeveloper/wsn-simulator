@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.jcjxb.wsn.service.algorithm.Algorithm;
+import org.jcjxb.wsn.service.algorithm.AlgorithmManager;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 
 public class SlaveSimConfig extends SimConfig {
@@ -13,9 +14,9 @@ public class SlaveSimConfig extends SimConfig {
 	private Algorithm algorithm = null;
 
 	private Set<Integer> sensorsOnThisSlave = null;
-	
+
 	private int hostIndex = 0;
-	
+
 	private SlaveSimConfig() {
 	}
 
@@ -26,6 +27,7 @@ public class SlaveSimConfig extends SimConfig {
 	public void initSimulation(SimulationConfig simulationConfig) {
 		super.initSimulation(simulationConfig);
 		sensorsOnThisSlave = new HashSet<Integer>(slaveToSensorsMap.get(hostIndex));
+		algorithm = AlgorithmManager.getInstance().getAlgorithm(simulationConfig.getAlgorithmConfig().getName());
 	}
 
 	public Algorithm getAlgorithm() {
@@ -49,5 +51,9 @@ public class SlaveSimConfig extends SimConfig {
 
 	public void setHostIndex(int hostIndex) {
 		this.hostIndex = hostIndex;
+	}
+
+	public int getSlaveId() {
+		return hostIndex;
 	}
 }

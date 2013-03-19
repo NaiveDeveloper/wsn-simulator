@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.jcjxb.wsn.common.Status;
 import org.jcjxb.wsn.rpc.LionRpcController;
 import org.jcjxb.wsn.service.agent.SlaveServiceAgentManager;
+import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.SlaveService.ExecRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
 
@@ -18,7 +19,7 @@ import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
 
 public class MasterTimeLine {
-	
+
 	private static Logger logger = Logger.getLogger(MasterTimeLine.class);
 
 	private static MasterTimeLine timeline = new MasterTimeLine();
@@ -26,9 +27,9 @@ public class MasterTimeLine {
 	private Map<Integer, Long> localVirtualTime = null;
 
 	private Map<Integer, Boolean> execFlag = null;
-	
+
 	private ControlThread controlThread = null;
-	
+
 	private boolean stop;
 
 	private MasterTimeLine() {
@@ -49,7 +50,14 @@ public class MasterTimeLine {
 		}
 		stop = false;
 	}
-	
+
+	public void clear() {
+		localVirtualTime = null;
+		execFlag = null;
+		stop = true;
+		controlThread = null;
+	}
+
 	public void start() {
 		this.init();
 		controlThread = new ControlThread();
@@ -77,6 +85,10 @@ public class MasterTimeLine {
 
 	private List<Integer> slavesToExec(long globalVirtualTime) {
 		List<Integer> slaves = new ArrayList<Integer>();
+		execFlag.clear();
+		if (globalVirtualTime == Long.MAX_VALUE) {
+			return slaves;
+		}
 		for (Entry<Integer, Long> entry : localVirtualTime.entrySet()) {
 			if (entry.getValue() == globalVirtualTime) {
 				slaves.add(entry.getKey());
@@ -85,32 +97,70 @@ public class MasterTimeLine {
 		}
 		return slaves;
 	}
-	
+
 	private void setSlaveVirtualTime(int slaveId, long virtualTime) {
-		synchronized (localVirtualTime) {
-			if(localVirtualTime.get(slaveId) > virtualTime) {
-				localVirtualTime.put(slaveId, virtualTime);
-			}
+		if (localVirtualTime.get(slaveId) > virtualTime) {
+			localVirtualTime.put(slaveId, virtualTime);
 		}
 	}
-	
+
 	private void resetVirtualTime(List<Integer> slaveIds) {
 		for (int slaveId : slaveIds) {
 			localVirtualTime.put(slaveId, Long.MAX_VALUE);
 		}
 	}
-	
+
+	private void endSimulation() {
+		int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
+		final CountDownLatch latch = new CountDownLatch(slaveCount);
+		final Status status = new Status(true);
+		for (int i = 0; i < slaveCount; ++i) {
+			final RpcController localController = new LionRpcController();
+			final int salveId = i;
+			SlaveServiceAgentManager.getInstance().getServiceAgent(i)
+					.endSimulation(Empty.getDefaultInstance(), localController, new RpcCallback<Empty>() {
+						@Override
+						public void run(Empty parameter) {
+							if (localController.failed()) {
+								logger.error(String.format("End simulation on slave [%d] failed, error message [%s]", salveId,
+										localController.errorText()));
+								status.setFlag(false);
+							}
+							latch.countDown();
+						}
+					});
+		}
+
+		// Wait all slaves to finish
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			status.setFlag(false);
+		}
+		MasterSimConfig.getInstance().clear();
+		MasterTimeLine.getInstance().clear();
+		if (status.isFlag()) {
+			logger.info("Stop simulation on slaves successfully");
+		} else {
+			logger.error("Not all slaves end simulation successfully");
+		}
+	}
+
 	private class ControlThread extends Thread {
 
 		@Override
 		public void run() {
 			super.run();
-			while(!stop) {
+			while (!stop) {
 				long globalVirtualTime = calculateGlobalVirtualTime();
 				List<Integer> slaveIds = slavesToExec(globalVirtualTime);
-				if(slaveIds.isEmpty()) {
-					// Simulation end, notify all slaves to stop, and set simulation status
-					// TODO
+				if (slaveIds.isEmpty()) {
+					// Simulation end, notify all slaves to stop, and set
+					// simulation status
+					endSimulation();
+					stop = true;
+					break;
 				} else {
 					resetVirtualTime(slaveIds);
 					// Notify slaves to run
@@ -131,9 +181,11 @@ public class MasterTimeLine {
 													localController.errorText()));
 											status.setFlag(false);
 										} else {
-											setSlaveVirtualTime(lvtSync.getSlaveId(), lvtSync.getLocalTime());
-											for(LVTSync.Update update : lvtSync.getUpdateList()) {
-												setSlaveVirtualTime(update.getSlaveId(), update.getLocalTime());
+											synchronized (localVirtualTime) {
+												setSlaveVirtualTime(lvtSync.getSlaveId(), lvtSync.getLocalTime());
+												for (LVTSync.Update update : lvtSync.getUpdateList()) {
+													setSlaveVirtualTime(update.getSlaveId(), update.getLocalTime());
+												}
 											}
 										}
 										latch.countDown();
@@ -151,8 +203,11 @@ public class MasterTimeLine {
 						logger.info(String.format("Cycle %d run on slaves %s successfully", globalVirtualTime, slaveIds.toString()));
 					} else {
 						logger.error(String.format("Cycle %d run on slaves %s falied", globalVirtualTime, slaveIds.toString()));
-						// Error happened, simulation end, notify all slaves to stop, and set simulation status
-						// TODO
+						// Error happened, simulation end, notify all slaves to
+						// stop, and set simulation status
+						endSimulation();
+						stop = true;
+						break;
 					}
 				}
 			}

@@ -16,12 +16,18 @@ message LVTSync {
 	optional int64 localTime = 2;
 	message Update {
 		optional int32 slaveId = 1;
-		optional int32 localTime = 2;
+		optional int64 localTime = 2;
 	}
 	repeated Update update = 3;
+}
+
+message EventsRequest {
+	repeated Event event = 1;
 }
 
 service SService {
 	rpc startSimulation(SimulationConfig) returns (Empty);
 	rpc exec(ExecRequest) returns (LVTSync);
+	rpc sendEvents(EventsRequest) returns (Empty);
+	rpc endSimulation(Empty) returns (Empty);
 }

@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jcjxb.wsn.service.algorithm.Algorithm;
-import org.jcjxb.wsn.service.algorithm.AlgorithmManager;
 import org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
@@ -68,7 +66,7 @@ public class SimConfig {
 		this.isSimRunning = isSimRunning;
 	}
 
-	public Algorithm getAlgorithm() {
-		return AlgorithmManager.getInstance().getAlgorithm(simulationConfig.getAlgorithmConfig().getName());
+	public Integer getSlaveIdWithSensorId(Integer sensorId) {
+		return sensorsToSlaveMap.get(sensorId);
 	}
 }

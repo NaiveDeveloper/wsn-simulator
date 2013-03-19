@@ -62,15 +62,15 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			PartitionConfig.Builder partitionConfigBuilder = PartitionConfig.newBuilder(request.getPartitionConfig());
 			PartitionStrategyManager.getInstance().partition(partitionConfigBuilder, request.getPartitionConfig(),
 					MasterSimConfig.getInstance().getSlaveCount(), deployConfigBuilder.getSensorNodeDeployConfig().getPostionList());
-			
+
 			simulationConfigBuilder.setAlgorithmConfig(request.getAlgorithmConfig());
 			simulationConfigBuilder.setDeployConfig(deployConfigBuilder.build());
 			simulationConfigBuilder.setPartitionConfig(partitionConfigBuilder.build());
 			SimulationConfig simulationConfig = simulationConfigBuilder.build();
-			
+
 			// Initialize simulation
 			MasterSimConfig.getInstance().initSimulation(simulationConfig);
-			
+
 			int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 			final CountDownLatch latch = new CountDownLatch(slaveCount);
 			final Status status = new Status(true);
@@ -99,10 +99,10 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 				status.setFlag(false);
 			}
 			if (status.isFlag()) {
-				MasterSimConfig.getInstance().setSimRunning(true);
-				MasterTimeLine.getInstance().start();
 				logger.info("Start simulation on slaves successfully");
 				logger.debug("Simulation message:\n" + simulationConfig.toString());
+				MasterSimConfig.getInstance().setSimRunning(true);
+				MasterTimeLine.getInstance().start();
 			} else {
 				controller.setFailed("All slaves are not ready");
 				logger.error("Not all slaves start simulation successfully");
@@ -118,8 +118,8 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 
 	@Override
 	public Empty stopSimulation(RpcController controller, Empty request) throws ServiceException {
-		// to do 通知所有Slave停止模拟
-
+		// Notify all slaves to stop simulation
+		// TODO
 		MasterSimConfig.getInstance().clear();
 		return Empty.getDefaultInstance();
 	}

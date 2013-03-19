@@ -25,6 +25,7 @@ message Event {
 	optional bytes data = 5;
 	optional int32 senderId = 6;
 	optional bool sink = 7;
+	optional double energyCost = 8;
 }
 
 message Host {
