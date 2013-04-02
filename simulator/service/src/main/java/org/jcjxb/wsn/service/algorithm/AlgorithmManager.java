@@ -11,8 +11,10 @@ public class AlgorithmManager {
 
 	private AlgorithmManager() {
 		algorithms.put("EMPTY", new EmptyAlgorithm());
+		algorithms.put("TESTER", new TesterAlgorithm());
 		algorithms.put("GPRS", new GPSRAlgorithm());
 		algorithms.put("SDVB", new SDVBAlgorithm());
+		algorithms.put("LEACH", new LEACHAlgorithm());
 	}
 
 	public static AlgorithmManager getInstance() {

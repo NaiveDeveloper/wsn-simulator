@@ -12,7 +12,6 @@ import org.jcjxb.wsn.service.proto.SlaveService.SService;
 import org.jcjxb.wsn.service.proto.SlaveService.SService.BlockingInterface;
 import org.jcjxb.wsn.service.proto.SlaveService.SService.Interface;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
-import org.jcjxb.wsn.service.sim.MasterSimConfig;
 
 import com.google.protobuf.BlockingRpcChannel;
 import com.google.protobuf.RpcCallback;
@@ -22,7 +21,7 @@ import com.google.protobuf.ServiceException;
 
 public class SlaveServiceAgent {
 
-	private int slaveId;
+	private Host host;
 
 	private BlockingRpcChannel blockChannel = null;
 
@@ -32,15 +31,14 @@ public class SlaveServiceAgent {
 
 	private Interface serviceStub = null;
 
-	public SlaveServiceAgent(int slaveId) {
-		this.slaveId = slaveId;
+	public SlaveServiceAgent(Host host) {
+		this.host = host;
 	}
 
 	private synchronized BlockingRpcChannel getBlockChannel() throws UnknownHostException {
 		if (blockChannel != null) {
 			return blockChannel;
 		}
-		Host host = MasterSimConfig.getInstance().getHostConfig().getSlaveHost(slaveId);
 		blockChannel = LionRpcChannelFactory.newBlockingRpcChannel(host.getHost(), host.getPort());
 		return blockChannel;
 	}
@@ -57,7 +55,6 @@ public class SlaveServiceAgent {
 		if (channel != null) {
 			return channel;
 		}
-		Host host = MasterSimConfig.getInstance().getHostConfig().getSlaveHost(slaveId);
 		channel = LionRpcChannelFactory.newRpcChannel(host.getHost(), host.getPort());
 		return channel;
 	}

@@ -77,7 +77,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			for (int i = 0; i < slaveCount; ++i) {
 				final RpcController localController = new LionRpcController();
 				final int salveId = i;
-				SlaveServiceAgentManager.getInstance().getServiceAgent(i)
+				SlaveServiceAgentManager.getInstance().getServiceAgent(i, true)
 						.startSimulation(simulationConfig, localController, new RpcCallback<Empty>() {
 							@Override
 							public void run(Empty parameter) {

@@ -69,4 +69,12 @@ public class SimConfig {
 	public Integer getSlaveIdWithSensorId(Integer sensorId) {
 		return sensorsToSlaveMap.get(sensorId);
 	}
+	
+	public int getSensorCount() {
+		return simulationConfig.getDeployConfig().getSensorNodeDeployConfig().getNodeNum();
+	}
+
+	public SimulationConfig getSimulationConfig() {
+		return simulationConfig;
+	}
 }

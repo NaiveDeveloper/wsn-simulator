@@ -982,13 +982,13 @@ public final class BasicDataType {
     boolean hasSenderId();
     int getSenderId();
     
-    // optional bool sink = 7;
-    boolean hasSink();
-    boolean getSink();
+    // optional int64 eventId = 7;
+    boolean hasEventId();
+    long getEventId();
     
-    // optional double energyCost = 8;
-    boolean hasEnergyCost();
-    double getEnergyCost();
+    // optional int64 fromEventId = 8;
+    boolean hasFromEventId();
+    long getFromEventId();
   }
   public static final class Event extends
       com.google.protobuf.GeneratedMessage
@@ -1177,24 +1177,24 @@ public final class BasicDataType {
       return senderId_;
     }
     
-    // optional bool sink = 7;
-    public static final int SINK_FIELD_NUMBER = 7;
-    private boolean sink_;
-    public boolean hasSink() {
+    // optional int64 eventId = 7;
+    public static final int EVENTID_FIELD_NUMBER = 7;
+    private long eventId_;
+    public boolean hasEventId() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
-    public boolean getSink() {
-      return sink_;
+    public long getEventId() {
+      return eventId_;
     }
     
-    // optional double energyCost = 8;
-    public static final int ENERGYCOST_FIELD_NUMBER = 8;
-    private double energyCost_;
-    public boolean hasEnergyCost() {
+    // optional int64 fromEventId = 8;
+    public static final int FROMEVENTID_FIELD_NUMBER = 8;
+    private long fromEventId_;
+    public boolean hasFromEventId() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public double getEnergyCost() {
-      return energyCost_;
+    public long getFromEventId() {
+      return fromEventId_;
     }
     
     private void initFields() {
@@ -1204,8 +1204,8 @@ public final class BasicDataType {
       type_ = "";
       data_ = com.google.protobuf.ByteString.EMPTY;
       senderId_ = 0;
-      sink_ = false;
-      energyCost_ = 0D;
+      eventId_ = 0L;
+      fromEventId_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1238,10 +1238,10 @@ public final class BasicDataType {
         output.writeInt32(6, senderId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBool(7, sink_);
+        output.writeInt64(7, eventId_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeDouble(8, energyCost_);
+        output.writeInt64(8, fromEventId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1283,11 +1283,11 @@ public final class BasicDataType {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, sink_);
+          .computeInt64Size(7, eventId_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(8, energyCost_);
+          .computeInt64Size(8, fromEventId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1425,9 +1425,9 @@ public final class BasicDataType {
         bitField0_ = (bitField0_ & ~0x00000010);
         senderId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        sink_ = false;
+        eventId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
-        energyCost_ = 0D;
+        fromEventId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -1495,11 +1495,11 @@ public final class BasicDataType {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.sink_ = sink_;
+        result.eventId_ = eventId_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.energyCost_ = energyCost_;
+        result.fromEventId_ = fromEventId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1541,11 +1541,11 @@ public final class BasicDataType {
         if (other.hasSenderId()) {
           setSenderId(other.getSenderId());
         }
-        if (other.hasSink()) {
-          setSink(other.getSink());
+        if (other.hasEventId()) {
+          setEventId(other.getEventId());
         }
-        if (other.hasEnergyCost()) {
-          setEnergyCost(other.getEnergyCost());
+        if (other.hasFromEventId()) {
+          setFromEventId(other.getFromEventId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1625,12 +1625,12 @@ public final class BasicDataType {
             }
             case 56: {
               bitField0_ |= 0x00000040;
-              sink_ = input.readBool();
+              eventId_ = input.readInt64();
               break;
             }
-            case 65: {
+            case 64: {
               bitField0_ |= 0x00000080;
-              energyCost_ = input.readDouble();
+              fromEventId_ = input.readInt64();
               break;
             }
           }
@@ -1810,44 +1810,44 @@ public final class BasicDataType {
         return this;
       }
       
-      // optional bool sink = 7;
-      private boolean sink_ ;
-      public boolean hasSink() {
+      // optional int64 eventId = 7;
+      private long eventId_ ;
+      public boolean hasEventId() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public boolean getSink() {
-        return sink_;
+      public long getEventId() {
+        return eventId_;
       }
-      public Builder setSink(boolean value) {
+      public Builder setEventId(long value) {
         bitField0_ |= 0x00000040;
-        sink_ = value;
+        eventId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearSink() {
+      public Builder clearEventId() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        sink_ = false;
+        eventId_ = 0L;
         onChanged();
         return this;
       }
       
-      // optional double energyCost = 8;
-      private double energyCost_ ;
-      public boolean hasEnergyCost() {
+      // optional int64 fromEventId = 8;
+      private long fromEventId_ ;
+      public boolean hasFromEventId() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
-      public double getEnergyCost() {
-        return energyCost_;
+      public long getFromEventId() {
+        return fromEventId_;
       }
-      public Builder setEnergyCost(double value) {
+      public Builder setFromEventId(long value) {
         bitField0_ |= 0x00000080;
-        energyCost_ = value;
+        fromEventId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearEnergyCost() {
+      public Builder clearFromEventId() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        energyCost_ = 0D;
+        fromEventId_ = 0L;
         onChanged();
         return this;
       }
@@ -3615,20 +3615,20 @@ public final class BasicDataType {
       "\n\023BasicDataType.proto\022\025org.jcjxb.wsn.ser" +
       "vice\" \n\010Position\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\"@" +
       "\n\014PositionList\0220\n\007postion\030\001 \003(\0132\037.org.jc" +
-      "jxb.wsn.service.Position\"\214\002\n\005Event\022H\n\010pr" +
+      "jxb.wsn.service.Position\"\220\002\n\005Event\022H\n\010pr" +
       "iority\030\001 \001(\0162%.org.jcjxb.wsn.service.Eve" +
       "nt.Priority:\017PRIORITY_NORMAL\022\021\n\tstartTim" +
       "e\030\002 \001(\003\022\020\n\010sensorId\030\003 \003(\005\022\014\n\004type\030\004 \001(\t\022" +
-      "\014\n\004data\030\005 \001(\014\022\020\n\010senderId\030\006 \001(\005\022\014\n\004sink\030" +
-      "\007 \001(\010\022\022\n\nenergyCost\030\010 \001(\001\"D\n\010Priority\022\021\n" +
-      "\rPRIORITY_HIGH\020\000\022\023\n\017PRIORITY_NORMAL\020\001\022\020\n",
-      "\014PRIORITY_LOW\020\002\"\"\n\004Host\022\014\n\004host\030\001 \001(\t\022\014\n" +
-      "\004port\030\002 \001(\005\"\007\n\005Empty\"4\n\rSensorsOnHost\022\021\n" +
-      "\thostIndex\030\001 \001(\005\022\020\n\010sensorId\030\002 \003(\005\"P\n\021Se" +
-      "nsorsOnHostList\022;\n\rsensorsOnHost\030\001 \003(\0132$" +
-      ".org.jcjxb.wsn.service.SensorsOnHostB,\n\033" +
-      "org.jcjxb.wsn.service.protoB\rBasicDataTy" +
-      "pe"
+      "\014\n\004data\030\005 \001(\014\022\020\n\010senderId\030\006 \001(\005\022\017\n\007event" +
+      "Id\030\007 \001(\003\022\023\n\013fromEventId\030\010 \001(\003\"D\n\010Priorit" +
+      "y\022\021\n\rPRIORITY_HIGH\020\000\022\023\n\017PRIORITY_NORMAL\020",
+      "\001\022\020\n\014PRIORITY_LOW\020\002\"\"\n\004Host\022\014\n\004host\030\001 \001(" +
+      "\t\022\014\n\004port\030\002 \001(\005\"\007\n\005Empty\"4\n\rSensorsOnHos" +
+      "t\022\021\n\thostIndex\030\001 \001(\005\022\020\n\010sensorId\030\002 \003(\005\"P" +
+      "\n\021SensorsOnHostList\022;\n\rsensorsOnHost\030\001 \003" +
+      "(\0132$.org.jcjxb.wsn.service.SensorsOnHost" +
+      "B,\n\033org.jcjxb.wsn.service.protoB\rBasicDa" +
+      "taType"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3656,7 +3656,7 @@ public final class BasicDataType {
           internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_Event_descriptor,
-              new java.lang.String[] { "Priority", "StartTime", "SensorId", "Type", "Data", "SenderId", "Sink", "EnergyCost", },
+              new java.lang.String[] { "Priority", "StartTime", "SensorId", "Type", "Data", "SenderId", "EventId", "FromEventId", },
               org.jcjxb.wsn.service.proto.BasicDataType.Event.class,
               org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder.class);
           internal_static_org_jcjxb_wsn_service_Host_descriptor =

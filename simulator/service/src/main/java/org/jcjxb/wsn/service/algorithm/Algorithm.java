@@ -8,7 +8,7 @@ import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 
 public abstract class Algorithm {
 
-	private Map<String, EventHandler> handlerList = new HashMap<String, EventHandler>();
+	protected Map<String, EventHandler> handlerList = new HashMap<String, EventHandler>();
 	
 	public Algorithm() {
 		this.initHandlers();
@@ -22,9 +22,11 @@ public abstract class Algorithm {
 		return null;
 	}
 
-	public abstract void initHandlers();
+	protected abstract void initHandlers();
 	
 	public abstract List<Event> start();
+	
+	public abstract void end();
 
 	public interface EventHandler {
 		public List<Event> handle(Event event);

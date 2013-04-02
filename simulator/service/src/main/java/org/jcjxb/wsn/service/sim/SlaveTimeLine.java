@@ -40,7 +40,7 @@ public class SlaveTimeLine {
 	public void init() {
 		eventQueue = new PriorityBlockingQueue<Event>(10, new EventComparator());
 	}
-	
+
 	public void clear() {
 		eventQueue = null;
 	}
@@ -52,6 +52,8 @@ public class SlaveTimeLine {
 	public boolean run(long globalVirtualTime, LVTSync.Builder syncBuilder) {
 		if (globalVirtualTime == 0L) {
 			List<Event> eventList = SlaveSimConfig.getInstance().getAlgorithm().start();
+			logger.debug("Global virtual time is 0L, call algorithm start method, return events num "
+					+ (eventList == null ? 0 : eventList.size()));
 			return processNewEvents(eventList, syncBuilder);
 		} else {
 			List<Event> allEventList = new ArrayList<Event>();
@@ -72,7 +74,7 @@ public class SlaveTimeLine {
 		Map<Integer, List<Event>> eventsForSlaves = new HashMap<Integer, List<Event>>();
 
 		// Divide one event to slaves
-		if(eventList != null) {
+		if (eventList != null) {
 			for (Event event : eventList) {
 				Map<Integer, Event.Builder> eventForSlaves = dispatchEvent(event);
 				for (Entry<Integer, Event.Builder> entry : eventForSlaves.entrySet()) {
@@ -135,6 +137,7 @@ public class SlaveTimeLine {
 				builder = Event.newBuilder(event);
 				builder.clearSensorId();
 				builder.addSensorId(sensorId);
+				eventForSlaves.put(slaveId, builder);
 			} else {
 				builder.addSensorId(sensorId);
 			}
@@ -153,7 +156,7 @@ public class SlaveTimeLine {
 			final int salveId = entry.getKey();
 			final EventsRequest.Builder builder = EventsRequest.newBuilder();
 			builder.addAllEvent(entry.getValue());
-			SlaveServiceAgentManager.getInstance().getServiceAgent(salveId)
+			SlaveServiceAgentManager.getInstance().getServiceAgent(salveId, false)
 					.sendEvents(builder.build(), localController, new RpcCallback<Empty>() {
 						@Override
 						public void run(Empty parameter) {

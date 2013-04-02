@@ -117,7 +117,7 @@ public class MasterTimeLine {
 		for (int i = 0; i < slaveCount; ++i) {
 			final RpcController localController = new LionRpcController();
 			final int salveId = i;
-			SlaveServiceAgentManager.getInstance().getServiceAgent(i)
+			SlaveServiceAgentManager.getInstance().getServiceAgent(i, true)
 					.endSimulation(Empty.getDefaultInstance(), localController, new RpcCallback<Empty>() {
 						@Override
 						public void run(Empty parameter) {
@@ -172,7 +172,7 @@ public class MasterTimeLine {
 					final ExecRequest execRequest = requestbuilder.build();
 					for (final int slaveId : slaveIds) {
 						final RpcController localController = new LionRpcController();
-						SlaveServiceAgentManager.getInstance().getServiceAgent(slaveId)
+						SlaveServiceAgentManager.getInstance().getServiceAgent(slaveId, true)
 								.exec(execRequest, localController, new RpcCallback<LVTSync>() {
 									@Override
 									public void run(LVTSync lvtSync) {

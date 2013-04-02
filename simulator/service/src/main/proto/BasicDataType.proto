@@ -24,8 +24,8 @@ message Event {
 	optional string type = 4;
 	optional bytes data = 5;
 	optional int32 senderId = 6;
-	optional bool sink = 7;
-	optional double energyCost = 8;
+	optional int64 eventId = 7;
+	optional int64 fromEventId = 8;
 }
 
 message Host {

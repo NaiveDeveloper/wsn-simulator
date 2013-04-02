@@ -7,11 +7,15 @@ import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 public class EmptyAlgorithm extends Algorithm {
 
 	@Override
-	public void initHandlers() {
+	protected void initHandlers() {
 	}
 
 	@Override
 	public List<Event> start() {
 		return null;
+	}
+
+	@Override
+	public void end() {
 	}
 }

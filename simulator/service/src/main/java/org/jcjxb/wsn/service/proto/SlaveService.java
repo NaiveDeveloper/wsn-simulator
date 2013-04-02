@@ -366,6 +366,16 @@ public final class SlaveService {
         getUpdateOrBuilderList();
     org.jcjxb.wsn.service.proto.SlaveService.LVTSync.UpdateOrBuilder getUpdateOrBuilder(
         int index);
+    
+    // repeated .org.jcjxb.wsn.service.Event processedEvent = 4;
+    java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.Event> 
+        getProcessedEventList();
+    org.jcjxb.wsn.service.proto.BasicDataType.Event getProcessedEvent(int index);
+    int getProcessedEventCount();
+    java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder> 
+        getProcessedEventOrBuilderList();
+    org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder getProcessedEventOrBuilder(
+        int index);
   }
   public static final class LVTSync extends
       com.google.protobuf.GeneratedMessage
@@ -832,10 +842,32 @@ public final class SlaveService {
       return update_.get(index);
     }
     
+    // repeated .org.jcjxb.wsn.service.Event processedEvent = 4;
+    public static final int PROCESSEDEVENT_FIELD_NUMBER = 4;
+    private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.Event> processedEvent_;
+    public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.Event> getProcessedEventList() {
+      return processedEvent_;
+    }
+    public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder> 
+        getProcessedEventOrBuilderList() {
+      return processedEvent_;
+    }
+    public int getProcessedEventCount() {
+      return processedEvent_.size();
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.Event getProcessedEvent(int index) {
+      return processedEvent_.get(index);
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder getProcessedEventOrBuilder(
+        int index) {
+      return processedEvent_.get(index);
+    }
+    
     private void initFields() {
       slaveId_ = 0;
       localTime_ = 0L;
       update_ = java.util.Collections.emptyList();
+      processedEvent_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -858,6 +890,9 @@ public final class SlaveService {
       for (int i = 0; i < update_.size(); i++) {
         output.writeMessage(3, update_.get(i));
       }
+      for (int i = 0; i < processedEvent_.size(); i++) {
+        output.writeMessage(4, processedEvent_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -878,6 +913,10 @@ public final class SlaveService {
       for (int i = 0; i < update_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, update_.get(i));
+      }
+      for (int i = 0; i < processedEvent_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, processedEvent_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -996,6 +1035,7 @@ public final class SlaveService {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getUpdateFieldBuilder();
+          getProcessedEventFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1013,6 +1053,12 @@ public final class SlaveService {
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           updateBuilder_.clear();
+        }
+        if (processedEventBuilder_ == null) {
+          processedEvent_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          processedEventBuilder_.clear();
         }
         return this;
       }
@@ -1069,6 +1115,15 @@ public final class SlaveService {
         } else {
           result.update_ = updateBuilder_.build();
         }
+        if (processedEventBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            processedEvent_ = java.util.Collections.unmodifiableList(processedEvent_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.processedEvent_ = processedEvent_;
+        } else {
+          result.processedEvent_ = processedEventBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1117,6 +1172,32 @@ public final class SlaveService {
             }
           }
         }
+        if (processedEventBuilder_ == null) {
+          if (!other.processedEvent_.isEmpty()) {
+            if (processedEvent_.isEmpty()) {
+              processedEvent_ = other.processedEvent_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureProcessedEventIsMutable();
+              processedEvent_.addAll(other.processedEvent_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.processedEvent_.isEmpty()) {
+            if (processedEventBuilder_.isEmpty()) {
+              processedEventBuilder_.dispose();
+              processedEventBuilder_ = null;
+              processedEvent_ = other.processedEvent_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              processedEventBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getProcessedEventFieldBuilder() : null;
+            } else {
+              processedEventBuilder_.addAllMessages(other.processedEvent_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1162,6 +1243,12 @@ public final class SlaveService {
               org.jcjxb.wsn.service.proto.SlaveService.LVTSync.Update.Builder subBuilder = org.jcjxb.wsn.service.proto.SlaveService.LVTSync.Update.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUpdate(subBuilder.buildPartial());
+              break;
+            }
+            case 34: {
+              org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.Event.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addProcessedEvent(subBuilder.buildPartial());
               break;
             }
           }
@@ -1396,6 +1483,192 @@ public final class SlaveService {
           update_ = null;
         }
         return updateBuilder_;
+      }
+      
+      // repeated .org.jcjxb.wsn.service.Event processedEvent = 4;
+      private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.Event> processedEvent_ =
+        java.util.Collections.emptyList();
+      private void ensureProcessedEventIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          processedEvent_ = new java.util.ArrayList<org.jcjxb.wsn.service.proto.BasicDataType.Event>(processedEvent_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.Event, org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder, org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder> processedEventBuilder_;
+      
+      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.Event> getProcessedEventList() {
+        if (processedEventBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(processedEvent_);
+        } else {
+          return processedEventBuilder_.getMessageList();
+        }
+      }
+      public int getProcessedEventCount() {
+        if (processedEventBuilder_ == null) {
+          return processedEvent_.size();
+        } else {
+          return processedEventBuilder_.getCount();
+        }
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event getProcessedEvent(int index) {
+        if (processedEventBuilder_ == null) {
+          return processedEvent_.get(index);
+        } else {
+          return processedEventBuilder_.getMessage(index);
+        }
+      }
+      public Builder setProcessedEvent(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.Event value) {
+        if (processedEventBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureProcessedEventIsMutable();
+          processedEvent_.set(index, value);
+          onChanged();
+        } else {
+          processedEventBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setProcessedEvent(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder builderForValue) {
+        if (processedEventBuilder_ == null) {
+          ensureProcessedEventIsMutable();
+          processedEvent_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          processedEventBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addProcessedEvent(org.jcjxb.wsn.service.proto.BasicDataType.Event value) {
+        if (processedEventBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureProcessedEventIsMutable();
+          processedEvent_.add(value);
+          onChanged();
+        } else {
+          processedEventBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addProcessedEvent(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.Event value) {
+        if (processedEventBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureProcessedEventIsMutable();
+          processedEvent_.add(index, value);
+          onChanged();
+        } else {
+          processedEventBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addProcessedEvent(
+          org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder builderForValue) {
+        if (processedEventBuilder_ == null) {
+          ensureProcessedEventIsMutable();
+          processedEvent_.add(builderForValue.build());
+          onChanged();
+        } else {
+          processedEventBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addProcessedEvent(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder builderForValue) {
+        if (processedEventBuilder_ == null) {
+          ensureProcessedEventIsMutable();
+          processedEvent_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          processedEventBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllProcessedEvent(
+          java.lang.Iterable<? extends org.jcjxb.wsn.service.proto.BasicDataType.Event> values) {
+        if (processedEventBuilder_ == null) {
+          ensureProcessedEventIsMutable();
+          super.addAll(values, processedEvent_);
+          onChanged();
+        } else {
+          processedEventBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearProcessedEvent() {
+        if (processedEventBuilder_ == null) {
+          processedEvent_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          processedEventBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeProcessedEvent(int index) {
+        if (processedEventBuilder_ == null) {
+          ensureProcessedEventIsMutable();
+          processedEvent_.remove(index);
+          onChanged();
+        } else {
+          processedEventBuilder_.remove(index);
+        }
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder getProcessedEventBuilder(
+          int index) {
+        return getProcessedEventFieldBuilder().getBuilder(index);
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder getProcessedEventOrBuilder(
+          int index) {
+        if (processedEventBuilder_ == null) {
+          return processedEvent_.get(index);  } else {
+          return processedEventBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder> 
+           getProcessedEventOrBuilderList() {
+        if (processedEventBuilder_ != null) {
+          return processedEventBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(processedEvent_);
+        }
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder addProcessedEventBuilder() {
+        return getProcessedEventFieldBuilder().addBuilder(
+            org.jcjxb.wsn.service.proto.BasicDataType.Event.getDefaultInstance());
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder addProcessedEventBuilder(
+          int index) {
+        return getProcessedEventFieldBuilder().addBuilder(
+            index, org.jcjxb.wsn.service.proto.BasicDataType.Event.getDefaultInstance());
+      }
+      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder> 
+           getProcessedEventBuilderList() {
+        return getProcessedEventFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.Event, org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder, org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder> 
+          getProcessedEventFieldBuilder() {
+        if (processedEventBuilder_ == null) {
+          processedEventBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.jcjxb.wsn.service.proto.BasicDataType.Event, org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder, org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder>(
+                  processedEvent_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          processedEvent_ = null;
+        }
+        return processedEventBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.LVTSync)
@@ -2408,21 +2681,23 @@ public final class SlaveService {
       "\n\022SlaveService.proto\022\025org.jcjxb.wsn.serv" +
       "ice\032\023BasicDataType.proto\032\017WSNConfig.prot" +
       "o\"(\n\013ExecRequest\022\031\n\021globalVirtualTime\030\001 " +
-      "\001(\003\"\222\001\n\007LVTSync\022\017\n\007slaveId\030\001 \001(\005\022\021\n\tloca" +
+      "\001(\003\"\310\001\n\007LVTSync\022\017\n\007slaveId\030\001 \001(\005\022\021\n\tloca" +
       "lTime\030\002 \001(\003\0225\n\006update\030\003 \003(\0132%.org.jcjxb." +
-      "wsn.service.LVTSync.Update\032,\n\006Update\022\017\n\007" +
-      "slaveId\030\001 \001(\005\022\021\n\tlocalTime\030\002 \001(\003\"<\n\rEven" +
-      "tsRequest\022+\n\005event\030\001 \003(\0132\034.org.jcjxb.wsn" +
-      ".service.Event2\317\002\n\010SService\022X\n\017startSimu" +
-      "lation\022\'.org.jcjxb.wsn.service.Simulatio",
-      "nConfig\032\034.org.jcjxb.wsn.service.Empty\022J\n" +
-      "\004exec\022\".org.jcjxb.wsn.service.ExecReques" +
-      "t\032\036.org.jcjxb.wsn.service.LVTSync\022P\n\nsen" +
-      "dEvents\022$.org.jcjxb.wsn.service.EventsRe" +
-      "quest\032\034.org.jcjxb.wsn.service.Empty\022K\n\re" +
-      "ndSimulation\022\034.org.jcjxb.wsn.service.Emp" +
-      "ty\032\034.org.jcjxb.wsn.service.EmptyB.\n\033org." +
-      "jcjxb.wsn.service.protoB\014SlaveService\210\001\001"
+      "wsn.service.LVTSync.Update\0224\n\016processedE" +
+      "vent\030\004 \003(\0132\034.org.jcjxb.wsn.service.Event" +
+      "\032,\n\006Update\022\017\n\007slaveId\030\001 \001(\005\022\021\n\tlocalTime" +
+      "\030\002 \001(\003\"<\n\rEventsRequest\022+\n\005event\030\001 \003(\0132\034" +
+      ".org.jcjxb.wsn.service.Event2\317\002\n\010SServic",
+      "e\022X\n\017startSimulation\022\'.org.jcjxb.wsn.ser" +
+      "vice.SimulationConfig\032\034.org.jcjxb.wsn.se" +
+      "rvice.Empty\022J\n\004exec\022\".org.jcjxb.wsn.serv" +
+      "ice.ExecRequest\032\036.org.jcjxb.wsn.service." +
+      "LVTSync\022P\n\nsendEvents\022$.org.jcjxb.wsn.se" +
+      "rvice.EventsRequest\032\034.org.jcjxb.wsn.serv" +
+      "ice.Empty\022K\n\rendSimulation\022\034.org.jcjxb.w" +
+      "sn.service.Empty\032\034.org.jcjxb.wsn.service" +
+      ".EmptyB.\n\033org.jcjxb.wsn.service.protoB\014S" +
+      "laveService\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2442,7 +2717,7 @@ public final class SlaveService {
           internal_static_org_jcjxb_wsn_service_LVTSync_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_LVTSync_descriptor,
-              new java.lang.String[] { "SlaveId", "LocalTime", "Update", },
+              new java.lang.String[] { "SlaveId", "LocalTime", "Update", "ProcessedEvent", },
               org.jcjxb.wsn.service.proto.SlaveService.LVTSync.class,
               org.jcjxb.wsn.service.proto.SlaveService.LVTSync.Builder.class);
           internal_static_org_jcjxb_wsn_service_LVTSync_Update_descriptor =

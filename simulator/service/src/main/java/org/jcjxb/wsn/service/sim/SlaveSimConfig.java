@@ -56,4 +56,8 @@ public class SlaveSimConfig extends SimConfig {
 	public int getSlaveId() {
 		return hostIndex;
 	}
+
+	public Set<Integer> getSensorsOnThisSlave() {
+		return sensorsOnThisSlave;
+	}
 }

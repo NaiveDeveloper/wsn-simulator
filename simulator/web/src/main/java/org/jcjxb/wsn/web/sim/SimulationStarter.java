@@ -25,7 +25,7 @@ public class SimulationStarter {
 		SimulationConfig.Builder simulationBuilder = SimulationConfig.newBuilder();
 		
 		AlgorithmConfig.Builder algorithmBuilder = AlgorithmConfig.newBuilder();
-		algorithmBuilder.setName("EMPTY");
+		algorithmBuilder.setName("TESTER");
 		simulationBuilder.setAlgorithmConfig(algorithmBuilder.build());
 		
 		PartitionConfig.Builder partitionBuilder = PartitionConfig.newBuilder();
@@ -38,7 +38,7 @@ public class SimulationStarter {
 		
 		SensorNodeDeployConfig.Builder sensorDeployBuilder = SensorNodeDeployConfig.newBuilder();
 		sensorDeployBuilder.setDeployType(SensorNodeDeployConfig.DeployType.RANDOM);
-		sensorDeployBuilder.setNodeNum(100);
+		sensorDeployBuilder.setNodeNum(50);
 		SensorConfig.Builder sensorBuilder= SensorConfig.newBuilder();
 		sensorBuilder.setEnergy(1000);
 		sensorBuilder.setTransmissionRadius(20);
