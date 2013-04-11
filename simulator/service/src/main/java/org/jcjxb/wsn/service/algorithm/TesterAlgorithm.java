@@ -29,7 +29,7 @@ public class TesterAlgorithm extends Algorithm {
 			if (event.getStartTime() > 1000L) {
 				return null;
 			}
-			return generateRandomEvent(event.getStartTime() + (long) random.nextInt(20) + 1L, randomNum / 5);
+			return generateRandomEvent(event.getStartTime() + (long) random.nextInt(20) + 1L, randomNum % 4);
 		}
 	}
 
@@ -53,5 +53,9 @@ public class TesterAlgorithm extends Algorithm {
 		}
 		events.add(builder.build());
 		return events;
+	}
+
+	@Override
+	public void end() {
 	}
 }

@@ -14,6 +14,7 @@ import org.jcjxb.wsn.service.agent.SlaveServiceAgentManager;
 import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.SlaveService.ExecRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 
 import com.google.protobuf.RpcCallback;
 import com.google.protobuf.RpcController;
@@ -118,9 +119,9 @@ public class MasterTimeLine {
 			final RpcController localController = new LionRpcController();
 			final int salveId = i;
 			SlaveServiceAgentManager.getInstance().getServiceAgent(i, true)
-					.endSimulation(Empty.getDefaultInstance(), localController, new RpcCallback<Empty>() {
+					.endSimulation(Empty.getDefaultInstance(), localController, new RpcCallback<SimulationResult>() {
 						@Override
-						public void run(Empty parameter) {
+						public void run(SimulationResult parameter) {
 							if (localController.failed()) {
 								logger.error(String.format("End simulation on slave [%d] failed, error message [%s]", salveId,
 										localController.errorText()));

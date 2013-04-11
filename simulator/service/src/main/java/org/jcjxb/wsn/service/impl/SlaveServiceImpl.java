@@ -6,6 +6,7 @@ import org.jcjxb.wsn.service.proto.SlaveService;
 import org.jcjxb.wsn.service.proto.SlaveService.EventsRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.ExecRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 import org.jcjxb.wsn.service.sim.SlaveSimConfig;
 import org.jcjxb.wsn.service.sim.SlaveTimeLine;
@@ -44,10 +45,12 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 	}
 
 	@Override
-	public Empty endSimulation(RpcController controller, Empty request) throws ServiceException {
+	public SimulationResult endSimulation(RpcController controller, Empty request) throws ServiceException {
 		logger.info("The simulation end request is recieved");
 		SlaveSimConfig.getInstance().clear();
 		SlaveTimeLine.getInstance().clear();
-		return Empty.getDefaultInstance();
+		// TODO
+		// Collect simulation result data
+		return SimulationResult.getDefaultInstance();
 	}
 }

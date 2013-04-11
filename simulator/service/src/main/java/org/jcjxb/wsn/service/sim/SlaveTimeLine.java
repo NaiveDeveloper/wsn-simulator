@@ -50,6 +50,7 @@ public class SlaveTimeLine {
 	}
 
 	public boolean run(long globalVirtualTime, LVTSync.Builder syncBuilder) {
+		logger.debug(String.format("Event num in queue is %d", eventQueue.size()));
 		if (globalVirtualTime == 0L) {
 			List<Event> eventList = SlaveSimConfig.getInstance().getAlgorithm().start();
 			logger.debug("Global virtual time is 0L, call algorithm start method, return events num "

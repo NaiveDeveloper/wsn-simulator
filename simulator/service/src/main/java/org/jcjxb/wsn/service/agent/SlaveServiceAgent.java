@@ -11,6 +11,7 @@ import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
 import org.jcjxb.wsn.service.proto.SlaveService.SService;
 import org.jcjxb.wsn.service.proto.SlaveService.SService.BlockingInterface;
 import org.jcjxb.wsn.service.proto.SlaveService.SService.Interface;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 
 import com.google.protobuf.BlockingRpcChannel;
@@ -99,7 +100,7 @@ public class SlaveServiceAgent {
 		}
 	}
 
-	public void endSimulation(Empty empty, RpcController controller, RpcCallback<Empty> done) {
+	public void endSimulation(Empty empty, RpcController controller, RpcCallback<SimulationResult> done) {
 		try {
 			getServiceStub().endSimulation(controller, empty, done);
 		} catch (Exception e) {

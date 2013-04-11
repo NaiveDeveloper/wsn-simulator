@@ -37,6 +37,9 @@ public class SlaveSimConfig extends SimConfig {
 	@Override
 	public void clear() {
 		super.clear();
+		if(this.algorithm != null) {
+			this.algorithm.end();
+		}
 		this.algorithm = null;
 		this.sensorsOnThisSlave = null;
 	}

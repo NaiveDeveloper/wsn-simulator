@@ -15,9 +15,9 @@ public class HostConfigGenerator {
 
 	public static void main(String[] args) throws IOException {
 		HostConfig.Builder builder = HostConfig.newBuilder();
-		builder.setMasterHost(Host.newBuilder().setHost("127.0.0.1").setPort(10000));
+		builder.setMasterHost(Host.newBuilder().setHost("166.111.70.158").setPort(10000));
 		for (int i = 0; i < 2; ++i) {
-			builder.addSlaveHost(Host.newBuilder().setHost("127.0.0.1").setPort(10001 + i));
+			builder.addSlaveHost(Host.newBuilder().setHost("166.111.70.158").setPort(10001 + i));
 		}
 		String userHome = System.getProperty("user.home");
 		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(userHome + File.separator + "HostConfig.txt"));

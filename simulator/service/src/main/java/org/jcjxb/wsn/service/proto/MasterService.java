@@ -699,14 +699,14 @@ public final class MasterService {
           org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
       
-      public abstract void sync(
-          com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
-          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
-      
       public abstract void stopSimulation(
           com.google.protobuf.RpcController controller,
           org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
+          com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
+      
+      public abstract void sync(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
       
     }
@@ -731,19 +731,19 @@ public final class MasterService {
         }
         
         @java.lang.Override
-        public  void sync(
-            com.google.protobuf.RpcController controller,
-            org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
-            com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
-          impl.sync(controller, request, done);
-        }
-        
-        @java.lang.Override
         public  void stopSimulation(
             com.google.protobuf.RpcController controller,
             org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
             com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
           impl.stopSimulation(controller, request, done);
+        }
+        
+        @java.lang.Override
+        public  void sync(
+            com.google.protobuf.RpcController controller,
+            org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+            com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
+          impl.sync(controller, request, done);
         }
         
       };
@@ -773,9 +773,9 @@ public final class MasterService {
             case 1:
               return impl.startSimulation(controller, (org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig)request);
             case 2:
-              return impl.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request);
-            case 3:
               return impl.stopSimulation(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Empty)request);
+            case 3:
+              return impl.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -795,9 +795,9 @@ public final class MasterService {
             case 1:
               return org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig.getDefaultInstance();
             case 2:
-              return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
-            case 3:
               return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
+            case 3:
+              return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -838,14 +838,14 @@ public final class MasterService {
         org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request,
         com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
-    public abstract void sync(
-        com.google.protobuf.RpcController controller,
-        org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
-        com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
-    
     public abstract void stopSimulation(
         com.google.protobuf.RpcController controller,
         org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
+        com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
+    
+    public abstract void sync(
+        com.google.protobuf.RpcController controller,
+        org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
         com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done);
     
     public static final
@@ -881,12 +881,12 @@ public final class MasterService {
               done));
           return;
         case 2:
-          this.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request,
+          this.stopSimulation(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Empty)request,
             com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
               done));
           return;
         case 3:
-          this.stopSimulation(controller, (org.jcjxb.wsn.service.proto.BasicDataType.Empty)request,
+          this.sync(controller, (org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest)request,
             com.google.protobuf.RpcUtil.<org.jcjxb.wsn.service.proto.BasicDataType.Empty>specializeCallback(
               done));
           return;
@@ -909,9 +909,9 @@ public final class MasterService {
         case 1:
           return org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig.getDefaultInstance();
         case 2:
-          return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
-        case 3:
           return org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance();
+        case 3:
+          return org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -985,9 +985,9 @@ public final class MasterService {
             org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()));
       }
       
-      public  void sync(
+      public  void stopSimulation(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(2),
@@ -1000,9 +1000,9 @@ public final class MasterService {
             org.jcjxb.wsn.service.proto.BasicDataType.Empty.getDefaultInstance()));
       }
       
-      public  void stopSimulation(
+      public  void sync(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.BasicDataType.Empty request,
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request,
           com.google.protobuf.RpcCallback<org.jcjxb.wsn.service.proto.BasicDataType.Empty> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(3),
@@ -1032,14 +1032,14 @@ public final class MasterService {
           org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig request)
           throws com.google.protobuf.ServiceException;
       
-      public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
-          com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
-          throws com.google.protobuf.ServiceException;
-      
       public org.jcjxb.wsn.service.proto.BasicDataType.Empty stopSimulation(
           com.google.protobuf.RpcController controller,
           org.jcjxb.wsn.service.proto.BasicDataType.Empty request)
+          throws com.google.protobuf.ServiceException;
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
+          com.google.protobuf.RpcController controller,
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
           throws com.google.protobuf.ServiceException;
     }
     
@@ -1074,9 +1074,9 @@ public final class MasterService {
       }
       
       
-      public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty stopSimulation(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
+          org.jcjxb.wsn.service.proto.BasicDataType.Empty request)
           throws com.google.protobuf.ServiceException {
         return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
           getDescriptor().getMethods().get(2),
@@ -1086,9 +1086,9 @@ public final class MasterService {
       }
       
       
-      public org.jcjxb.wsn.service.proto.BasicDataType.Empty stopSimulation(
+      public org.jcjxb.wsn.service.proto.BasicDataType.Empty sync(
           com.google.protobuf.RpcController controller,
-          org.jcjxb.wsn.service.proto.BasicDataType.Empty request)
+          org.jcjxb.wsn.service.proto.MasterService.LVTSyncRequest request)
           throws com.google.protobuf.ServiceException {
         return (org.jcjxb.wsn.service.proto.BasicDataType.Empty) channel.callBlockingMethod(
           getDescriptor().getMethods().get(3),
@@ -1127,10 +1127,10 @@ public final class MasterService {
       "sn.service.SlaveReadyRequest\032\034.org.jcjxb" +
       ".wsn.service.Empty\022X\n\017startSimulation\022\'." +
       "org.jcjxb.wsn.service.SimulationConfig\032\034" +
-      ".org.jcjxb.wsn.service.Empty\022K\n\004sync\022%.o" +
-      "rg.jcjxb.wsn.service.LVTSyncRequest\032\034.or",
-      "g.jcjxb.wsn.service.Empty\022L\n\016stopSimulat" +
-      "ion\022\034.org.jcjxb.wsn.service.Empty\032\034.org." +
+      ".org.jcjxb.wsn.service.Empty\022L\n\016stopSimu" +
+      "lation\022\034.org.jcjxb.wsn.service.Empty\032\034.o",
+      "rg.jcjxb.wsn.service.Empty\022K\n\004sync\022%.org" +
+      ".jcjxb.wsn.service.LVTSyncRequest\032\034.org." +
       "jcjxb.wsn.service.EmptyB/\n\033org.jcjxb.wsn" +
       ".service.protoB\rMasterService\210\001\001"
     };

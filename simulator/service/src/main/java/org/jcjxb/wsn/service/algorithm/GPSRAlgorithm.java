@@ -15,4 +15,8 @@ public class GPSRAlgorithm extends Algorithm {
 	public List<Event> start() {
 		return null;
 	}
+
+	@Override
+	public void end() {
+	}
 }

@@ -38,7 +38,7 @@ public class SimulationStarter {
 		
 		SensorNodeDeployConfig.Builder sensorDeployBuilder = SensorNodeDeployConfig.newBuilder();
 		sensorDeployBuilder.setDeployType(SensorNodeDeployConfig.DeployType.RANDOM);
-		sensorDeployBuilder.setNodeNum(50);
+		sensorDeployBuilder.setNodeNum(10000);
 		SensorConfig.Builder sensorBuilder= SensorConfig.newBuilder();
 		sensorBuilder.setEnergy(1000);
 		sensorBuilder.setTransmissionRadius(20);
@@ -62,7 +62,7 @@ public class SimulationStarter {
 		simulationBuilder.setDeployConfig(deployBuilder.build());
 		
 		RpcController controller = new LionRpcController();
-		MasterServicAgentManager.getInstance().getServiceAgent("127.0.0.1", 10000).startSimulation(simulationBuilder.build(), controller);
+		MasterServicAgentManager.getInstance().getServiceAgent("166.111.70.158", 10000).startSimulation(simulationBuilder.build(), controller);
 		
 		if (controller.failed()) {
 			logger.error("Start simulation failed, " + controller.errorText());

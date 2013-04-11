@@ -15,6 +15,7 @@ public class AlgorithmManager {
 		algorithms.put("GPRS", new GPSRAlgorithm());
 		algorithms.put("SDVB", new SDVBAlgorithm());
 		algorithms.put("LEACH", new LEACHAlgorithm());
+		algorithms.put("DIRECT", new DirectAlgorithm());
 	}
 
 	public static AlgorithmManager getInstance() {

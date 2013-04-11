@@ -6,22 +6,24 @@ import java.net.Socket;
 
 import javax.net.SocketFactory;
 
-public class LionPersistentRpcSocketConnectionFactory extends
-		LionRpcSocketConnectionFactory {
+public class LionPersistentRpcSocketConnectionFactory extends LionRpcSocketConnectionFactory {
 
-	public LionPersistentRpcSocketConnectionFactory(InetAddress serverAddr,
-			int port, boolean delimited) {
+	private Connection connection = null;
+
+	public LionPersistentRpcSocketConnectionFactory(InetAddress serverAddr, int port, boolean delimited) {
 		super(serverAddr, port, delimited);
 	}
 
-	public LionPersistentRpcSocketConnectionFactory(InetAddress serverAddr,
-			int port, SocketFactory socketFactory, boolean delimited) {
+	public LionPersistentRpcSocketConnectionFactory(InetAddress serverAddr, int port, SocketFactory socketFactory, boolean delimited) {
 		super(serverAddr, port, socketFactory, delimited);
 	}
 
 	@Override
 	public Connection createConnection() throws IOException {
-		Socket socket = this.socketFactory.createSocket(serverAddr, port);
-		return new LionPersistentRpcSocketConnection(socket, delimited);
+		if (connection == null) {
+			Socket socket = this.socketFactory.createSocket(serverAddr, port);
+			connection = new LionPersistentRpcSocketConnection(socket, delimited);
+		}
+		return connection;
 	}
 }

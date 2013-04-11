@@ -18,6 +18,7 @@ message SlaveReadyRequest {
 service MService {
 	rpc slaveReady(SlaveReadyRequest) returns (Empty);
 	rpc startSimulation(SimulationConfig) returns (Empty);
-	rpc sync(LVTSyncRequest) returns(Empty);
 	rpc stopSimulation(Empty) returns(Empty);
+	/* Services below is not used */
+	rpc sync(LVTSyncRequest) returns(Empty);
 }

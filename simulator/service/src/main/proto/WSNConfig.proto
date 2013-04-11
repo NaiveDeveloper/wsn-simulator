@@ -70,10 +70,19 @@ message PartitionConfig {
 	optional SensorsOnHostList sensorsOnHostList = 2;
 }
 
+message CommandConfig {
+	enum Output {
+		DETAIL = 0;
+		SIMPLE = 1;
+	}
+	optional Output output = 1 [default = SIMPLE];
+}
+
 message SimulationConfig {
 	optional DeployConfig deployConfig = 1;
 	optional AlgorithmConfig algorithmConfig = 2;
 	optional PartitionConfig partitionConfig = 3;
+	optional CommandConfig commandConfig = 4;
 }
 
 

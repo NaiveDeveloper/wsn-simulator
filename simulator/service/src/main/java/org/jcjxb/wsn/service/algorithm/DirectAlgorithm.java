@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 
-public class SDVBAlgorithm extends Algorithm {
+public class DirectAlgorithm extends Algorithm {
 
 	@Override
-	public void initHandlers() {
+	protected void initHandlers() {
 	}
 
 	@Override

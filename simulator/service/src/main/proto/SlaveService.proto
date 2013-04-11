@@ -26,9 +26,17 @@ message EventsRequest {
 	repeated Event event = 1;
 }
 
+message SimulationResult {
+	message EnergyData {
+		optional int32 nodeId = 1;
+		optional double eneryLeft = 2;
+	}
+	optional EnergyData energyData = 1;
+}
+
 service SService {
 	rpc startSimulation(SimulationConfig) returns (Empty);
 	rpc exec(ExecRequest) returns (LVTSync);
 	rpc sendEvents(EventsRequest) returns (Empty);
-	rpc endSimulation(Empty) returns (Empty);
+	rpc endSimulation(Empty) returns (SimulationResult);
 }
