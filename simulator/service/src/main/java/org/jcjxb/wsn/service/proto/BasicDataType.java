@@ -961,6 +961,10 @@ public final class BasicDataType {
     boolean hasPriority();
     org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority getPriority();
     
+    // optional int64 eventId = 8;
+    boolean hasEventId();
+    long getEventId();
+    
     // optional int64 startTime = 2;
     boolean hasStartTime();
     long getStartTime();
@@ -978,17 +982,26 @@ public final class BasicDataType {
     boolean hasData();
     com.google.protobuf.ByteString getData();
     
-    // optional int32 senderId = 6;
-    boolean hasSenderId();
-    int getSenderId();
+    // optional int32 dataSize = 6;
+    boolean hasDataSize();
+    int getDataSize();
     
-    // optional int64 eventId = 7;
-    boolean hasEventId();
-    long getEventId();
+    // optional int32 senderNodeId = 7;
+    boolean hasSenderNodeId();
+    int getSenderNodeId();
     
-    // optional int64 fromEventId = 8;
+    // optional int64 fromEventId = 9;
     boolean hasFromEventId();
     long getFromEventId();
+    
+    // optional bool sensorEvent = 10 [default = true];
+    boolean hasSensorEvent();
+    boolean getSensorEvent();
+    
+    // optional .org.jcjxb.wsn.service.Position postion = 11;
+    boolean hasPostion();
+    org.jcjxb.wsn.service.proto.BasicDataType.Position getPostion();
+    org.jcjxb.wsn.service.proto.BasicDataType.PositionOrBuilder getPostionOrBuilder();
   }
   public static final class Event extends
       com.google.protobuf.GeneratedMessage
@@ -1101,11 +1114,21 @@ public final class BasicDataType {
       return priority_;
     }
     
+    // optional int64 eventId = 8;
+    public static final int EVENTID_FIELD_NUMBER = 8;
+    private long eventId_;
+    public boolean hasEventId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getEventId() {
+      return eventId_;
+    }
+    
     // optional int64 startTime = 2;
     public static final int STARTTIME_FIELD_NUMBER = 2;
     private long startTime_;
     public boolean hasStartTime() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public long getStartTime() {
       return startTime_;
@@ -1129,7 +1152,7 @@ public final class BasicDataType {
     public static final int TYPE_FIELD_NUMBER = 4;
     private java.lang.Object type_;
     public boolean hasType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public String getType() {
       java.lang.Object ref = type_;
@@ -1161,51 +1184,77 @@ public final class BasicDataType {
     public static final int DATA_FIELD_NUMBER = 5;
     private com.google.protobuf.ByteString data_;
     public boolean hasData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public com.google.protobuf.ByteString getData() {
       return data_;
     }
     
-    // optional int32 senderId = 6;
-    public static final int SENDERID_FIELD_NUMBER = 6;
-    private int senderId_;
-    public boolean hasSenderId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    public int getSenderId() {
-      return senderId_;
-    }
-    
-    // optional int64 eventId = 7;
-    public static final int EVENTID_FIELD_NUMBER = 7;
-    private long eventId_;
-    public boolean hasEventId() {
+    // optional int32 dataSize = 6;
+    public static final int DATASIZE_FIELD_NUMBER = 6;
+    private int dataSize_;
+    public boolean hasDataSize() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
-    public long getEventId() {
-      return eventId_;
+    public int getDataSize() {
+      return dataSize_;
     }
     
-    // optional int64 fromEventId = 8;
-    public static final int FROMEVENTID_FIELD_NUMBER = 8;
+    // optional int32 senderNodeId = 7;
+    public static final int SENDERNODEID_FIELD_NUMBER = 7;
+    private int senderNodeId_;
+    public boolean hasSenderNodeId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getSenderNodeId() {
+      return senderNodeId_;
+    }
+    
+    // optional int64 fromEventId = 9;
+    public static final int FROMEVENTID_FIELD_NUMBER = 9;
     private long fromEventId_;
     public boolean hasFromEventId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public long getFromEventId() {
       return fromEventId_;
     }
     
+    // optional bool sensorEvent = 10 [default = true];
+    public static final int SENSOREVENT_FIELD_NUMBER = 10;
+    private boolean sensorEvent_;
+    public boolean hasSensorEvent() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public boolean getSensorEvent() {
+      return sensorEvent_;
+    }
+    
+    // optional .org.jcjxb.wsn.service.Position postion = 11;
+    public static final int POSTION_FIELD_NUMBER = 11;
+    private org.jcjxb.wsn.service.proto.BasicDataType.Position postion_;
+    public boolean hasPostion() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.Position getPostion() {
+      return postion_;
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.PositionOrBuilder getPostionOrBuilder() {
+      return postion_;
+    }
+    
     private void initFields() {
       priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
+      eventId_ = 0L;
       startTime_ = 0L;
       sensorId_ = java.util.Collections.emptyList();;
       type_ = "";
       data_ = com.google.protobuf.ByteString.EMPTY;
-      senderId_ = 0;
-      eventId_ = 0L;
+      dataSize_ = 0;
+      senderNodeId_ = 0;
       fromEventId_ = 0L;
+      sensorEvent_ = true;
+      postion_ = org.jcjxb.wsn.service.proto.BasicDataType.Position.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1222,26 +1271,35 @@ public final class BasicDataType {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeEnum(1, priority_.getNumber());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(2, startTime_);
       }
       for (int i = 0; i < sensorId_.size(); i++) {
         output.writeInt32(3, sensorId_.get(i));
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getTypeBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(5, data_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(6, senderId_);
-      }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt64(7, eventId_);
+        output.writeInt32(6, dataSize_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt64(8, fromEventId_);
+        output.writeInt32(7, senderNodeId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(8, eventId_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt64(9, fromEventId_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBool(10, sensorEvent_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(11, postion_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1256,7 +1314,7 @@ public final class BasicDataType {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, priority_.getNumber());
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, startTime_);
       }
@@ -1269,25 +1327,37 @@ public final class BasicDataType {
         size += dataSize;
         size += 1 * getSensorIdList().size();
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(4, getTypeBytes());
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, data_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, senderId_);
-      }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, eventId_);
+          .computeInt32Size(6, dataSize_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(8, fromEventId_);
+          .computeInt32Size(7, senderNodeId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, eventId_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(9, fromEventId_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, sensorEvent_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, postion_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1405,6 +1475,7 @@ public final class BasicDataType {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPostionFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1415,20 +1486,30 @@ public final class BasicDataType {
         super.clear();
         priority_ = org.jcjxb.wsn.service.proto.BasicDataType.Event.Priority.PRIORITY_NORMAL;
         bitField0_ = (bitField0_ & ~0x00000001);
-        startTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        sensorId_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        type_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
-        data_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        senderId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
         eventId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        startTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        sensorId_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        type_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        dataSize_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        fromEventId_ = 0L;
+        senderNodeId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
+        fromEventId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        sensorEvent_ = true;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        if (postionBuilder_ == null) {
+          postion_ = org.jcjxb.wsn.service.proto.BasicDataType.Position.getDefaultInstance();
+        } else {
+          postionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
       
@@ -1474,32 +1555,48 @@ public final class BasicDataType {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.startTime_ = startTime_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
-          bitField0_ = (bitField0_ & ~0x00000004);
-        }
-        result.sensorId_ = sensorId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+        result.eventId_ = eventId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.type_ = type_;
+        result.startTime_ = startTime_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.sensorId_ = sensorId_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.data_ = data_;
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.senderId_ = senderId_;
+        result.data_ = data_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.eventId_ = eventId_;
+        result.dataSize_ = dataSize_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000040;
         }
+        result.senderNodeId_ = senderNodeId_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
         result.fromEventId_ = fromEventId_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.sensorEvent_ = sensorEvent_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (postionBuilder_ == null) {
+          result.postion_ = postion_;
+        } else {
+          result.postion_ = postionBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1519,13 +1616,16 @@ public final class BasicDataType {
         if (other.hasPriority()) {
           setPriority(other.getPriority());
         }
+        if (other.hasEventId()) {
+          setEventId(other.getEventId());
+        }
         if (other.hasStartTime()) {
           setStartTime(other.getStartTime());
         }
         if (!other.sensorId_.isEmpty()) {
           if (sensorId_.isEmpty()) {
             sensorId_ = other.sensorId_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000008);
           } else {
             ensureSensorIdIsMutable();
             sensorId_.addAll(other.sensorId_);
@@ -1538,14 +1638,20 @@ public final class BasicDataType {
         if (other.hasData()) {
           setData(other.getData());
         }
-        if (other.hasSenderId()) {
-          setSenderId(other.getSenderId());
+        if (other.hasDataSize()) {
+          setDataSize(other.getDataSize());
         }
-        if (other.hasEventId()) {
-          setEventId(other.getEventId());
+        if (other.hasSenderNodeId()) {
+          setSenderNodeId(other.getSenderNodeId());
         }
         if (other.hasFromEventId()) {
           setFromEventId(other.getFromEventId());
+        }
+        if (other.hasSensorEvent()) {
+          setSensorEvent(other.getSensorEvent());
+        }
+        if (other.hasPostion()) {
+          mergePostion(other.getPostion());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1590,7 +1696,7 @@ public final class BasicDataType {
               break;
             }
             case 16: {
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               startTime_ = input.readInt64();
               break;
             }
@@ -1609,28 +1715,47 @@ public final class BasicDataType {
               break;
             }
             case 34: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               type_ = input.readBytes();
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               data_ = input.readBytes();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
-              senderId_ = input.readInt32();
+              bitField0_ |= 0x00000040;
+              dataSize_ = input.readInt32();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000040;
-              eventId_ = input.readInt64();
+              bitField0_ |= 0x00000080;
+              senderNodeId_ = input.readInt32();
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000002;
+              eventId_ = input.readInt64();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
               fromEventId_ = input.readInt64();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              sensorEvent_ = input.readBool();
+              break;
+            }
+            case 90: {
+              org.jcjxb.wsn.service.proto.BasicDataType.Position.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.Position.newBuilder();
+              if (hasPostion()) {
+                subBuilder.mergeFrom(getPostion());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPostion(subBuilder.buildPartial());
               break;
             }
           }
@@ -1663,22 +1788,43 @@ public final class BasicDataType {
         return this;
       }
       
+      // optional int64 eventId = 8;
+      private long eventId_ ;
+      public boolean hasEventId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getEventId() {
+        return eventId_;
+      }
+      public Builder setEventId(long value) {
+        bitField0_ |= 0x00000002;
+        eventId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEventId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        eventId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
       // optional int64 startTime = 2;
       private long startTime_ ;
       public boolean hasStartTime() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public long getStartTime() {
         return startTime_;
       }
       public Builder setStartTime(long value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         startTime_ = value;
         onChanged();
         return this;
       }
       public Builder clearStartTime() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         startTime_ = 0L;
         onChanged();
         return this;
@@ -1687,9 +1833,9 @@ public final class BasicDataType {
       // repeated int32 sensorId = 3;
       private java.util.List<java.lang.Integer> sensorId_ = java.util.Collections.emptyList();;
       private void ensureSensorIdIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           sensorId_ = new java.util.ArrayList<java.lang.Integer>(sensorId_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
          }
       }
       public java.util.List<java.lang.Integer>
@@ -1724,7 +1870,7 @@ public final class BasicDataType {
       }
       public Builder clearSensorId() {
         sensorId_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -1732,7 +1878,7 @@ public final class BasicDataType {
       // optional string type = 4;
       private java.lang.Object type_ = "";
       public boolean hasType() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public String getType() {
         java.lang.Object ref = type_;
@@ -1748,19 +1894,19 @@ public final class BasicDataType {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000010;
         type_ = value;
         onChanged();
         return this;
       }
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         type_ = getDefaultInstance().getType();
         onChanged();
         return this;
       }
       void setType(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         type_ = value;
         onChanged();
       }
@@ -1768,7 +1914,7 @@ public final class BasicDataType {
       // optional bytes data = 5;
       private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
       public boolean hasData() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public com.google.protobuf.ByteString getData() {
         return data_;
@@ -1777,79 +1923,190 @@ public final class BasicDataType {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         data_ = value;
         onChanged();
         return this;
       }
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
       }
       
-      // optional int32 senderId = 6;
-      private int senderId_ ;
-      public boolean hasSenderId() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public int getSenderId() {
-        return senderId_;
-      }
-      public Builder setSenderId(int value) {
-        bitField0_ |= 0x00000020;
-        senderId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSenderId() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        senderId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int64 eventId = 7;
-      private long eventId_ ;
-      public boolean hasEventId() {
+      // optional int32 dataSize = 6;
+      private int dataSize_ ;
+      public boolean hasDataSize() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public long getEventId() {
-        return eventId_;
+      public int getDataSize() {
+        return dataSize_;
       }
-      public Builder setEventId(long value) {
+      public Builder setDataSize(int value) {
         bitField0_ |= 0x00000040;
-        eventId_ = value;
+        dataSize_ = value;
         onChanged();
         return this;
       }
-      public Builder clearEventId() {
+      public Builder clearDataSize() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        eventId_ = 0L;
+        dataSize_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int64 fromEventId = 8;
+      // optional int32 senderNodeId = 7;
+      private int senderNodeId_ ;
+      public boolean hasSenderNodeId() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getSenderNodeId() {
+        return senderNodeId_;
+      }
+      public Builder setSenderNodeId(int value) {
+        bitField0_ |= 0x00000080;
+        senderNodeId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSenderNodeId() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        senderNodeId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 fromEventId = 9;
       private long fromEventId_ ;
       public boolean hasFromEventId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public long getFromEventId() {
         return fromEventId_;
       }
       public Builder setFromEventId(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         fromEventId_ = value;
         onChanged();
         return this;
       }
       public Builder clearFromEventId() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         fromEventId_ = 0L;
         onChanged();
         return this;
+      }
+      
+      // optional bool sensorEvent = 10 [default = true];
+      private boolean sensorEvent_ = true;
+      public boolean hasSensorEvent() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public boolean getSensorEvent() {
+        return sensorEvent_;
+      }
+      public Builder setSensorEvent(boolean value) {
+        bitField0_ |= 0x00000200;
+        sensorEvent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSensorEvent() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        sensorEvent_ = true;
+        onChanged();
+        return this;
+      }
+      
+      // optional .org.jcjxb.wsn.service.Position postion = 11;
+      private org.jcjxb.wsn.service.proto.BasicDataType.Position postion_ = org.jcjxb.wsn.service.proto.BasicDataType.Position.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.Position, org.jcjxb.wsn.service.proto.BasicDataType.Position.Builder, org.jcjxb.wsn.service.proto.BasicDataType.PositionOrBuilder> postionBuilder_;
+      public boolean hasPostion() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Position getPostion() {
+        if (postionBuilder_ == null) {
+          return postion_;
+        } else {
+          return postionBuilder_.getMessage();
+        }
+      }
+      public Builder setPostion(org.jcjxb.wsn.service.proto.BasicDataType.Position value) {
+        if (postionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          postion_ = value;
+          onChanged();
+        } else {
+          postionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      public Builder setPostion(
+          org.jcjxb.wsn.service.proto.BasicDataType.Position.Builder builderForValue) {
+        if (postionBuilder_ == null) {
+          postion_ = builderForValue.build();
+          onChanged();
+        } else {
+          postionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      public Builder mergePostion(org.jcjxb.wsn.service.proto.BasicDataType.Position value) {
+        if (postionBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              postion_ != org.jcjxb.wsn.service.proto.BasicDataType.Position.getDefaultInstance()) {
+            postion_ =
+              org.jcjxb.wsn.service.proto.BasicDataType.Position.newBuilder(postion_).mergeFrom(value).buildPartial();
+          } else {
+            postion_ = value;
+          }
+          onChanged();
+        } else {
+          postionBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      public Builder clearPostion() {
+        if (postionBuilder_ == null) {
+          postion_ = org.jcjxb.wsn.service.proto.BasicDataType.Position.getDefaultInstance();
+          onChanged();
+        } else {
+          postionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.Position.Builder getPostionBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getPostionFieldBuilder().getBuilder();
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.PositionOrBuilder getPostionOrBuilder() {
+        if (postionBuilder_ != null) {
+          return postionBuilder_.getMessageOrBuilder();
+        } else {
+          return postion_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.Position, org.jcjxb.wsn.service.proto.BasicDataType.Position.Builder, org.jcjxb.wsn.service.proto.BasicDataType.PositionOrBuilder> 
+          getPostionFieldBuilder() {
+        if (postionBuilder_ == null) {
+          postionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.jcjxb.wsn.service.proto.BasicDataType.Position, org.jcjxb.wsn.service.proto.BasicDataType.Position.Builder, org.jcjxb.wsn.service.proto.BasicDataType.PositionOrBuilder>(
+                  postion_,
+                  getParentForChildren(),
+                  isClean());
+          postion_ = null;
+        }
+        return postionBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.Event)
@@ -3615,20 +3872,22 @@ public final class BasicDataType {
       "\n\023BasicDataType.proto\022\025org.jcjxb.wsn.ser" +
       "vice\" \n\010Position\022\t\n\001x\030\001 \001(\001\022\t\n\001y\030\002 \001(\001\"@" +
       "\n\014PositionList\0220\n\007postion\030\001 \003(\0132\037.org.jc" +
-      "jxb.wsn.service.Position\"\220\002\n\005Event\022H\n\010pr" +
+      "jxb.wsn.service.Position\"\363\002\n\005Event\022H\n\010pr" +
       "iority\030\001 \001(\0162%.org.jcjxb.wsn.service.Eve" +
-      "nt.Priority:\017PRIORITY_NORMAL\022\021\n\tstartTim" +
-      "e\030\002 \001(\003\022\020\n\010sensorId\030\003 \003(\005\022\014\n\004type\030\004 \001(\t\022" +
-      "\014\n\004data\030\005 \001(\014\022\020\n\010senderId\030\006 \001(\005\022\017\n\007event" +
-      "Id\030\007 \001(\003\022\023\n\013fromEventId\030\010 \001(\003\"D\n\010Priorit" +
-      "y\022\021\n\rPRIORITY_HIGH\020\000\022\023\n\017PRIORITY_NORMAL\020",
-      "\001\022\020\n\014PRIORITY_LOW\020\002\"\"\n\004Host\022\014\n\004host\030\001 \001(" +
-      "\t\022\014\n\004port\030\002 \001(\005\"\007\n\005Empty\"4\n\rSensorsOnHos" +
-      "t\022\021\n\thostIndex\030\001 \001(\005\022\020\n\010sensorId\030\002 \003(\005\"P" +
-      "\n\021SensorsOnHostList\022;\n\rsensorsOnHost\030\001 \003" +
-      "(\0132$.org.jcjxb.wsn.service.SensorsOnHost" +
-      "B,\n\033org.jcjxb.wsn.service.protoB\rBasicDa" +
-      "taType"
+      "nt.Priority:\017PRIORITY_NORMAL\022\017\n\007eventId\030" +
+      "\010 \001(\003\022\021\n\tstartTime\030\002 \001(\003\022\020\n\010sensorId\030\003 \003" +
+      "(\005\022\014\n\004type\030\004 \001(\t\022\014\n\004data\030\005 \001(\014\022\020\n\010dataSi" +
+      "ze\030\006 \001(\005\022\024\n\014senderNodeId\030\007 \001(\005\022\023\n\013fromEv" +
+      "entId\030\t \001(\003\022\031\n\013sensorEvent\030\n \001(\010:\004true\0220",
+      "\n\007postion\030\013 \001(\0132\037.org.jcjxb.wsn.service." +
+      "Position\"D\n\010Priority\022\021\n\rPRIORITY_HIGH\020\000\022" +
+      "\023\n\017PRIORITY_NORMAL\020\001\022\020\n\014PRIORITY_LOW\020\002\"\"" +
+      "\n\004Host\022\014\n\004host\030\001 \001(\t\022\014\n\004port\030\002 \001(\005\"\007\n\005Em" +
+      "pty\"4\n\rSensorsOnHost\022\021\n\thostIndex\030\001 \001(\005\022" +
+      "\020\n\010sensorId\030\002 \003(\005\"P\n\021SensorsOnHostList\022;" +
+      "\n\rsensorsOnHost\030\001 \003(\0132$.org.jcjxb.wsn.se" +
+      "rvice.SensorsOnHostB,\n\033org.jcjxb.wsn.ser" +
+      "vice.protoB\rBasicDataType"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3656,7 +3915,7 @@ public final class BasicDataType {
           internal_static_org_jcjxb_wsn_service_Event_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_Event_descriptor,
-              new java.lang.String[] { "Priority", "StartTime", "SensorId", "Type", "Data", "SenderId", "EventId", "FromEventId", },
+              new java.lang.String[] { "Priority", "EventId", "StartTime", "SensorId", "Type", "Data", "DataSize", "SenderNodeId", "FromEventId", "SensorEvent", "Postion", },
               org.jcjxb.wsn.service.proto.BasicDataType.Event.class,
               org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder.class);
           internal_static_org_jcjxb_wsn_service_Host_descriptor =

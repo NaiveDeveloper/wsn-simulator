@@ -1,4 +1,4 @@
-package org.jcjxb.wsn.service.bean;
+package org.jcjxb.wsn.service.node;
 
 public class SensorNode extends Node {
 
@@ -8,7 +8,7 @@ public class SensorNode extends Node {
 	
 	private double energy;
 	
-	private int state;
+	private int state; // 0 running 1 sleep 2 die
 
 	public double getX() {
 		return x;

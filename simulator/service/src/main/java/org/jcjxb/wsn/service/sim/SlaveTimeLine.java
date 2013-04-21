@@ -129,8 +129,13 @@ public class SlaveTimeLine {
 	}
 
 	private Map<Integer, Event.Builder> dispatchEvent(Event event) {
-		List<Integer> sensors = event.getSensorIdList();
 		Map<Integer, Event.Builder> eventForSlaves = new HashMap<Integer, Event.Builder>();
+		if (!event.getSensorEvent()) {
+			Event.Builder builder = Event.newBuilder(event);
+			eventForSlaves.put(SlaveSimConfig.getInstance().getSlaveId(), builder);
+			return eventForSlaves;
+		}
+		List<Integer> sensors = event.getSensorIdList();
 		for (Integer sensorId : sensors) {
 			Integer slaveId = SlaveSimConfig.getInstance().getSlaveIdWithSensorId(sensorId);
 			Event.Builder builder = eventForSlaves.get(slaveId);

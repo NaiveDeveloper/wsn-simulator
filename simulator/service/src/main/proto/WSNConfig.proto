@@ -2,9 +2,7 @@ package org.jcjxb.wsn.service;
 
 option java_package = "org.jcjxb.wsn.service.proto";
 option java_outer_classname = "WSNConfig";
-
 import "BasicDataType.proto";
-
 message SensorConfig {
 	optional double energy = 1; // Battery capacity
 	optional double transmissionRadius = 2;
@@ -17,6 +15,7 @@ message SensorNodeDeployConfig {
 		GRID = 2;
 		CIRCLE = 3;
 	}
+
 	optional DeployType deployType = 1;
 	optional uint32 nodeNum = 2;
 	optional SensorConfig sensorConfig = 3;
@@ -28,6 +27,7 @@ message SinkNodeDeployConfig {
 		RANDOM = 0;
 		STATIC = 1;
 	}
+
 	optional DeployType deployType = 1;
 	optional uint32 nodeNum = 2;
 	optional PositionList postionList = 4;
@@ -38,13 +38,14 @@ message SourceEventDeployConfig {
 		RANDOM = 0;
 		STATIC = 1;
 	}
+
 	optional DeployType deployType = 1;
 	optional double radius = 2;
 	optional uint32 eventNum = 3;
 	optional uint32 eventInterval = 4;
 	optional PositionList postionList = 5;
-	optional bool regenerate = 6;
-	optional uint32 times = 7; // not set and < 0 means indefinite
+	optional uint32 times = 6; // not set and < 0 means indefinite
+	optional uint32 eventBit = 7 [default = 100];
 }
 
 message DeployConfig {
@@ -66,8 +67,23 @@ message PartitionConfig {
 		CIRCLE = 2;
 		GRID = 3;
 	}
+
 	optional PartitionType partitionType = 1;
 	optional SensorsOnHostList sensorsOnHostList = 2;
+}
+
+message EnergyConsumeConfig {
+	enum ConsumeType {
+		STATIC = 0;
+		SIMPLE = 1;
+	}
+
+	optional ConsumeType consumeType = 1;
+	optional double transmitter = 2;
+	optional double amplifier = 3;
+	optional double receiver = 4;
+	optional double exponent = 5;
+	optional double sensor = 6;
 }
 
 message CommandConfig {
@@ -75,6 +91,7 @@ message CommandConfig {
 		DETAIL = 0;
 		SIMPLE = 1;
 	}
+
 	optional Output output = 1 [default = SIMPLE];
 }
 
@@ -82,9 +99,6 @@ message SimulationConfig {
 	optional DeployConfig deployConfig = 1;
 	optional AlgorithmConfig algorithmConfig = 2;
 	optional PartitionConfig partitionConfig = 3;
-	optional CommandConfig commandConfig = 4;
+	optional EnergyConsumeConfig energyConsumeConfig = 4;
+	optional CommandConfig commandConfig = 5;
 }
-
-
-
-

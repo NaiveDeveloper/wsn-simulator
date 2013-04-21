@@ -10,11 +10,7 @@ public class AlgorithmManager {
 	private Map<String, Algorithm> algorithms = new HashMap<String, Algorithm>();
 
 	private AlgorithmManager() {
-		algorithms.put("EMPTY", new EmptyAlgorithm());
 		algorithms.put("TESTER", new TesterAlgorithm());
-		algorithms.put("GPRS", new GPSRAlgorithm());
-		algorithms.put("SDVB", new SDVBAlgorithm());
-		algorithms.put("LEACH", new LEACHAlgorithm());
 		algorithms.put("DIRECT", new DirectAlgorithm());
 	}
 

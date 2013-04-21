@@ -1808,13 +1808,13 @@ public final class WSNConfig {
     org.jcjxb.wsn.service.proto.BasicDataType.PositionList getPostionList();
     org.jcjxb.wsn.service.proto.BasicDataType.PositionListOrBuilder getPostionListOrBuilder();
     
-    // optional bool regenerate = 6;
-    boolean hasRegenerate();
-    boolean getRegenerate();
-    
-    // optional uint32 times = 7;
+    // optional uint32 times = 6;
     boolean hasTimes();
     int getTimes();
+    
+    // optional uint32 eventBit = 7 [default = 100];
+    boolean hasEventBit();
+    int getEventBit();
   }
   public static final class SourceEventDeployConfig extends
       com.google.protobuf.GeneratedMessage
@@ -1967,24 +1967,24 @@ public final class WSNConfig {
       return postionList_;
     }
     
-    // optional bool regenerate = 6;
-    public static final int REGENERATE_FIELD_NUMBER = 6;
-    private boolean regenerate_;
-    public boolean hasRegenerate() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public boolean getRegenerate() {
-      return regenerate_;
-    }
-    
-    // optional uint32 times = 7;
-    public static final int TIMES_FIELD_NUMBER = 7;
+    // optional uint32 times = 6;
+    public static final int TIMES_FIELD_NUMBER = 6;
     private int times_;
     public boolean hasTimes() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getTimes() {
       return times_;
+    }
+    
+    // optional uint32 eventBit = 7 [default = 100];
+    public static final int EVENTBIT_FIELD_NUMBER = 7;
+    private int eventBit_;
+    public boolean hasEventBit() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getEventBit() {
+      return eventBit_;
     }
     
     private void initFields() {
@@ -1993,8 +1993,8 @@ public final class WSNConfig {
       eventNum_ = 0;
       eventInterval_ = 0;
       postionList_ = org.jcjxb.wsn.service.proto.BasicDataType.PositionList.getDefaultInstance();
-      regenerate_ = false;
       times_ = 0;
+      eventBit_ = 100;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2024,10 +2024,10 @@ public final class WSNConfig {
         output.writeMessage(5, postionList_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBool(6, regenerate_);
+        output.writeUInt32(6, times_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeUInt32(7, times_);
+        output.writeUInt32(7, eventBit_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2060,11 +2060,11 @@ public final class WSNConfig {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(6, regenerate_);
+          .computeUInt32Size(6, times_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(7, times_);
+          .computeUInt32Size(7, eventBit_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2205,9 +2205,9 @@ public final class WSNConfig {
           postionListBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
-        regenerate_ = false;
-        bitField0_ = (bitField0_ & ~0x00000020);
         times_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        eventBit_ = 100;
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -2274,11 +2274,11 @@ public final class WSNConfig {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.regenerate_ = regenerate_;
+        result.times_ = times_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.times_ = times_;
+        result.eventBit_ = eventBit_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2310,11 +2310,11 @@ public final class WSNConfig {
         if (other.hasPostionList()) {
           mergePostionList(other.getPostionList());
         }
-        if (other.hasRegenerate()) {
-          setRegenerate(other.getRegenerate());
-        }
         if (other.hasTimes()) {
           setTimes(other.getTimes());
+        }
+        if (other.hasEventBit()) {
+          setEventBit(other.getEventBit());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2384,12 +2384,12 @@ public final class WSNConfig {
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              regenerate_ = input.readBool();
+              times_ = input.readUInt32();
               break;
             }
             case 56: {
               bitField0_ |= 0x00000040;
-              times_ = input.readUInt32();
+              eventBit_ = input.readUInt32();
               break;
             }
           }
@@ -2575,44 +2575,44 @@ public final class WSNConfig {
         return postionListBuilder_;
       }
       
-      // optional bool regenerate = 6;
-      private boolean regenerate_ ;
-      public boolean hasRegenerate() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public boolean getRegenerate() {
-        return regenerate_;
-      }
-      public Builder setRegenerate(boolean value) {
-        bitField0_ |= 0x00000020;
-        regenerate_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearRegenerate() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        regenerate_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // optional uint32 times = 7;
+      // optional uint32 times = 6;
       private int times_ ;
       public boolean hasTimes() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getTimes() {
         return times_;
       }
       public Builder setTimes(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         times_ = value;
         onChanged();
         return this;
       }
       public Builder clearTimes() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         times_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional uint32 eventBit = 7 [default = 100];
+      private int eventBit_ = 100;
+      public boolean hasEventBit() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getEventBit() {
+        return eventBit_;
+      }
+      public Builder setEventBit(int value) {
+        bitField0_ |= 0x00000040;
+        eventBit_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEventBit() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        eventBit_ = 100;
         onChanged();
         return this;
       }
@@ -4392,6 +4392,707 @@ public final class WSNConfig {
     // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.PartitionConfig)
   }
   
+  public interface EnergyConsumeConfigOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .org.jcjxb.wsn.service.EnergyConsumeConfig.ConsumeType consumeType = 1;
+    boolean hasConsumeType();
+    org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType getConsumeType();
+    
+    // optional double transmitter = 2;
+    boolean hasTransmitter();
+    double getTransmitter();
+    
+    // optional double amplifier = 3;
+    boolean hasAmplifier();
+    double getAmplifier();
+    
+    // optional double receiver = 4;
+    boolean hasReceiver();
+    double getReceiver();
+    
+    // optional double exponent = 5;
+    boolean hasExponent();
+    double getExponent();
+    
+    // optional double sensor = 6;
+    boolean hasSensor();
+    double getSensor();
+  }
+  public static final class EnergyConsumeConfig extends
+      com.google.protobuf.GeneratedMessage
+      implements EnergyConsumeConfigOrBuilder {
+    // Use EnergyConsumeConfig.newBuilder() to construct.
+    private EnergyConsumeConfig(Builder builder) {
+      super(builder);
+    }
+    private EnergyConsumeConfig(boolean noInit) {}
+    
+    private static final EnergyConsumeConfig defaultInstance;
+    public static EnergyConsumeConfig getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public EnergyConsumeConfig getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.WSNConfig.internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.WSNConfig.internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_fieldAccessorTable;
+    }
+    
+    public enum ConsumeType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      STATIC(0, 0),
+      SIMPLE(1, 1),
+      ;
+      
+      public static final int STATIC_VALUE = 0;
+      public static final int SIMPLE_VALUE = 1;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static ConsumeType valueOf(int value) {
+        switch (value) {
+          case 0: return STATIC;
+          case 1: return SIMPLE;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<ConsumeType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ConsumeType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ConsumeType>() {
+              public ConsumeType findValueByNumber(int number) {
+                return ConsumeType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final ConsumeType[] VALUES = {
+        STATIC, SIMPLE, 
+      };
+      
+      public static ConsumeType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private ConsumeType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:org.jcjxb.wsn.service.EnergyConsumeConfig.ConsumeType)
+    }
+    
+    private int bitField0_;
+    // optional .org.jcjxb.wsn.service.EnergyConsumeConfig.ConsumeType consumeType = 1;
+    public static final int CONSUMETYPE_FIELD_NUMBER = 1;
+    private org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType consumeType_;
+    public boolean hasConsumeType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType getConsumeType() {
+      return consumeType_;
+    }
+    
+    // optional double transmitter = 2;
+    public static final int TRANSMITTER_FIELD_NUMBER = 2;
+    private double transmitter_;
+    public boolean hasTransmitter() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public double getTransmitter() {
+      return transmitter_;
+    }
+    
+    // optional double amplifier = 3;
+    public static final int AMPLIFIER_FIELD_NUMBER = 3;
+    private double amplifier_;
+    public boolean hasAmplifier() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public double getAmplifier() {
+      return amplifier_;
+    }
+    
+    // optional double receiver = 4;
+    public static final int RECEIVER_FIELD_NUMBER = 4;
+    private double receiver_;
+    public boolean hasReceiver() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public double getReceiver() {
+      return receiver_;
+    }
+    
+    // optional double exponent = 5;
+    public static final int EXPONENT_FIELD_NUMBER = 5;
+    private double exponent_;
+    public boolean hasExponent() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public double getExponent() {
+      return exponent_;
+    }
+    
+    // optional double sensor = 6;
+    public static final int SENSOR_FIELD_NUMBER = 6;
+    private double sensor_;
+    public boolean hasSensor() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public double getSensor() {
+      return sensor_;
+    }
+    
+    private void initFields() {
+      consumeType_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType.STATIC;
+      transmitter_ = 0D;
+      amplifier_ = 0D;
+      receiver_ = 0D;
+      exponent_ = 0D;
+      sensor_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, consumeType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeDouble(2, transmitter_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeDouble(3, amplifier_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, receiver_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeDouble(5, exponent_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeDouble(6, sensor_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, consumeType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, transmitter_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, amplifier_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, receiver_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(5, exponent_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(6, sensor_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.WSNConfig.internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.WSNConfig.internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        consumeType_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType.STATIC;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        transmitter_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        amplifier_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        receiver_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        exponent_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        sensor_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig build() {
+        org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig buildPartial() {
+        org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig result = new org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.consumeType_ = consumeType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.transmitter_ = transmitter_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.amplifier_ = amplifier_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.receiver_ = receiver_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.exponent_ = exponent_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.sensor_ = sensor_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig other) {
+        if (other == org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance()) return this;
+        if (other.hasConsumeType()) {
+          setConsumeType(other.getConsumeType());
+        }
+        if (other.hasTransmitter()) {
+          setTransmitter(other.getTransmitter());
+        }
+        if (other.hasAmplifier()) {
+          setAmplifier(other.getAmplifier());
+        }
+        if (other.hasReceiver()) {
+          setReceiver(other.getReceiver());
+        }
+        if (other.hasExponent()) {
+          setExponent(other.getExponent());
+        }
+        if (other.hasSensor()) {
+          setSensor(other.getSensor());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType value = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                consumeType_ = value;
+              }
+              break;
+            }
+            case 17: {
+              bitField0_ |= 0x00000002;
+              transmitter_ = input.readDouble();
+              break;
+            }
+            case 25: {
+              bitField0_ |= 0x00000004;
+              amplifier_ = input.readDouble();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              receiver_ = input.readDouble();
+              break;
+            }
+            case 41: {
+              bitField0_ |= 0x00000010;
+              exponent_ = input.readDouble();
+              break;
+            }
+            case 49: {
+              bitField0_ |= 0x00000020;
+              sensor_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .org.jcjxb.wsn.service.EnergyConsumeConfig.ConsumeType consumeType = 1;
+      private org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType consumeType_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType.STATIC;
+      public boolean hasConsumeType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType getConsumeType() {
+        return consumeType_;
+      }
+      public Builder setConsumeType(org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        consumeType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearConsumeType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        consumeType_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType.STATIC;
+        onChanged();
+        return this;
+      }
+      
+      // optional double transmitter = 2;
+      private double transmitter_ ;
+      public boolean hasTransmitter() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public double getTransmitter() {
+        return transmitter_;
+      }
+      public Builder setTransmitter(double value) {
+        bitField0_ |= 0x00000002;
+        transmitter_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTransmitter() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        transmitter_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // optional double amplifier = 3;
+      private double amplifier_ ;
+      public boolean hasAmplifier() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public double getAmplifier() {
+        return amplifier_;
+      }
+      public Builder setAmplifier(double value) {
+        bitField0_ |= 0x00000004;
+        amplifier_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAmplifier() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        amplifier_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // optional double receiver = 4;
+      private double receiver_ ;
+      public boolean hasReceiver() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public double getReceiver() {
+        return receiver_;
+      }
+      public Builder setReceiver(double value) {
+        bitField0_ |= 0x00000008;
+        receiver_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearReceiver() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        receiver_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // optional double exponent = 5;
+      private double exponent_ ;
+      public boolean hasExponent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public double getExponent() {
+        return exponent_;
+      }
+      public Builder setExponent(double value) {
+        bitField0_ |= 0x00000010;
+        exponent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearExponent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        exponent_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // optional double sensor = 6;
+      private double sensor_ ;
+      public boolean hasSensor() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public double getSensor() {
+        return sensor_;
+      }
+      public Builder setSensor(double value) {
+        bitField0_ |= 0x00000020;
+        sensor_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSensor() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        sensor_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.EnergyConsumeConfig)
+    }
+    
+    static {
+      defaultInstance = new EnergyConsumeConfig(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.EnergyConsumeConfig)
+  }
+  
   public interface CommandConfigOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -4826,7 +5527,12 @@ public final class WSNConfig {
     org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig getPartitionConfig();
     org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfigOrBuilder getPartitionConfigOrBuilder();
     
-    // optional .org.jcjxb.wsn.service.CommandConfig commandConfig = 4;
+    // optional .org.jcjxb.wsn.service.EnergyConsumeConfig energyConsumeConfig = 4;
+    boolean hasEnergyConsumeConfig();
+    org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig getEnergyConsumeConfig();
+    org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder getEnergyConsumeConfigOrBuilder();
+    
+    // optional .org.jcjxb.wsn.service.CommandConfig commandConfig = 5;
     boolean hasCommandConfig();
     org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig getCommandConfig();
     org.jcjxb.wsn.service.proto.WSNConfig.CommandConfigOrBuilder getCommandConfigOrBuilder();
@@ -4899,11 +5605,24 @@ public final class WSNConfig {
       return partitionConfig_;
     }
     
-    // optional .org.jcjxb.wsn.service.CommandConfig commandConfig = 4;
-    public static final int COMMANDCONFIG_FIELD_NUMBER = 4;
+    // optional .org.jcjxb.wsn.service.EnergyConsumeConfig energyConsumeConfig = 4;
+    public static final int ENERGYCONSUMECONFIG_FIELD_NUMBER = 4;
+    private org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig energyConsumeConfig_;
+    public boolean hasEnergyConsumeConfig() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig getEnergyConsumeConfig() {
+      return energyConsumeConfig_;
+    }
+    public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder getEnergyConsumeConfigOrBuilder() {
+      return energyConsumeConfig_;
+    }
+    
+    // optional .org.jcjxb.wsn.service.CommandConfig commandConfig = 5;
+    public static final int COMMANDCONFIG_FIELD_NUMBER = 5;
     private org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig commandConfig_;
     public boolean hasCommandConfig() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig getCommandConfig() {
       return commandConfig_;
@@ -4916,6 +5635,7 @@ public final class WSNConfig {
       deployConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig.getDefaultInstance();
       algorithmConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.AlgorithmConfig.getDefaultInstance();
       partitionConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.getDefaultInstance();
+      energyConsumeConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance();
       commandConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -4940,7 +5660,10 @@ public final class WSNConfig {
         output.writeMessage(3, partitionConfig_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, commandConfig_);
+        output.writeMessage(4, energyConsumeConfig_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, commandConfig_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4965,7 +5688,11 @@ public final class WSNConfig {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, commandConfig_);
+          .computeMessageSize(4, energyConsumeConfig_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, commandConfig_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5086,6 +5813,7 @@ public final class WSNConfig {
           getDeployConfigFieldBuilder();
           getAlgorithmConfigFieldBuilder();
           getPartitionConfigFieldBuilder();
+          getEnergyConsumeConfigFieldBuilder();
           getCommandConfigFieldBuilder();
         }
       }
@@ -5113,12 +5841,18 @@ public final class WSNConfig {
           partitionConfigBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (energyConsumeConfigBuilder_ == null) {
+          energyConsumeConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance();
+        } else {
+          energyConsumeConfigBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (commandConfigBuilder_ == null) {
           commandConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.getDefaultInstance();
         } else {
           commandConfigBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -5184,6 +5918,14 @@ public final class WSNConfig {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        if (energyConsumeConfigBuilder_ == null) {
+          result.energyConsumeConfig_ = energyConsumeConfig_;
+        } else {
+          result.energyConsumeConfig_ = energyConsumeConfigBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
         if (commandConfigBuilder_ == null) {
           result.commandConfig_ = commandConfig_;
         } else {
@@ -5213,6 +5955,9 @@ public final class WSNConfig {
         }
         if (other.hasPartitionConfig()) {
           mergePartitionConfig(other.getPartitionConfig());
+        }
+        if (other.hasEnergyConsumeConfig()) {
+          mergeEnergyConsumeConfig(other.getEnergyConsumeConfig());
         }
         if (other.hasCommandConfig()) {
           mergeCommandConfig(other.getCommandConfig());
@@ -5276,6 +6021,15 @@ public final class WSNConfig {
               break;
             }
             case 34: {
+              org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder subBuilder = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.newBuilder();
+              if (hasEnergyConsumeConfig()) {
+                subBuilder.mergeFrom(getEnergyConsumeConfig());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setEnergyConsumeConfig(subBuilder.buildPartial());
+              break;
+            }
+            case 42: {
               org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.Builder subBuilder = org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.newBuilder();
               if (hasCommandConfig()) {
                 subBuilder.mergeFrom(getCommandConfig());
@@ -5560,12 +6314,102 @@ public final class WSNConfig {
         return partitionConfigBuilder_;
       }
       
-      // optional .org.jcjxb.wsn.service.CommandConfig commandConfig = 4;
+      // optional .org.jcjxb.wsn.service.EnergyConsumeConfig energyConsumeConfig = 4;
+      private org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig energyConsumeConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig, org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder, org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder> energyConsumeConfigBuilder_;
+      public boolean hasEnergyConsumeConfig() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig getEnergyConsumeConfig() {
+        if (energyConsumeConfigBuilder_ == null) {
+          return energyConsumeConfig_;
+        } else {
+          return energyConsumeConfigBuilder_.getMessage();
+        }
+      }
+      public Builder setEnergyConsumeConfig(org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig value) {
+        if (energyConsumeConfigBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          energyConsumeConfig_ = value;
+          onChanged();
+        } else {
+          energyConsumeConfigBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder setEnergyConsumeConfig(
+          org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder builderForValue) {
+        if (energyConsumeConfigBuilder_ == null) {
+          energyConsumeConfig_ = builderForValue.build();
+          onChanged();
+        } else {
+          energyConsumeConfigBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder mergeEnergyConsumeConfig(org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig value) {
+        if (energyConsumeConfigBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              energyConsumeConfig_ != org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance()) {
+            energyConsumeConfig_ =
+              org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.newBuilder(energyConsumeConfig_).mergeFrom(value).buildPartial();
+          } else {
+            energyConsumeConfig_ = value;
+          }
+          onChanged();
+        } else {
+          energyConsumeConfigBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder clearEnergyConsumeConfig() {
+        if (energyConsumeConfigBuilder_ == null) {
+          energyConsumeConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.getDefaultInstance();
+          onChanged();
+        } else {
+          energyConsumeConfigBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder getEnergyConsumeConfigBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getEnergyConsumeConfigFieldBuilder().getBuilder();
+      }
+      public org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder getEnergyConsumeConfigOrBuilder() {
+        if (energyConsumeConfigBuilder_ != null) {
+          return energyConsumeConfigBuilder_.getMessageOrBuilder();
+        } else {
+          return energyConsumeConfig_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig, org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder, org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder> 
+          getEnergyConsumeConfigFieldBuilder() {
+        if (energyConsumeConfigBuilder_ == null) {
+          energyConsumeConfigBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig, org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder, org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfigOrBuilder>(
+                  energyConsumeConfig_,
+                  getParentForChildren(),
+                  isClean());
+          energyConsumeConfig_ = null;
+        }
+        return energyConsumeConfigBuilder_;
+      }
+      
+      // optional .org.jcjxb.wsn.service.CommandConfig commandConfig = 5;
       private org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig commandConfig_ = org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig, org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.Builder, org.jcjxb.wsn.service.proto.WSNConfig.CommandConfigOrBuilder> commandConfigBuilder_;
       public boolean hasCommandConfig() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig getCommandConfig() {
         if (commandConfigBuilder_ == null) {
@@ -5584,7 +6428,7 @@ public final class WSNConfig {
         } else {
           commandConfigBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder setCommandConfig(
@@ -5595,12 +6439,12 @@ public final class WSNConfig {
         } else {
           commandConfigBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder mergeCommandConfig(org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig value) {
         if (commandConfigBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
               commandConfig_ != org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.getDefaultInstance()) {
             commandConfig_ =
               org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.newBuilder(commandConfig_).mergeFrom(value).buildPartial();
@@ -5611,7 +6455,7 @@ public final class WSNConfig {
         } else {
           commandConfigBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       public Builder clearCommandConfig() {
@@ -5621,11 +6465,11 @@ public final class WSNConfig {
         } else {
           commandConfigBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       public org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.Builder getCommandConfigBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getCommandConfigFieldBuilder().getBuilder();
       }
@@ -5697,6 +6541,11 @@ public final class WSNConfig {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_jcjxb_wsn_service_PartitionConfig_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_jcjxb_wsn_service_CommandConfig_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -5730,39 +6579,47 @@ public final class WSNConfig {
       "n.service.SinkNodeDeployConfig.DeployTyp" +
       "e\022\017\n\007nodeNum\030\002 \001(\r\0228\n\013postionList\030\004 \001(\0132" +
       "#.org.jcjxb.wsn.service.PositionList\"$\n\n" +
-      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\244\002\n\027S" +
+      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\247\002\n\027S" +
       "ourceEventDeployConfig\022M\n\ndeployType\030\001 \001" +
       "(\01629.org.jcjxb.wsn.service.SourceEventDe" +
       "ployConfig.DeployType\022\016\n\006radius\030\002 \001(\001\022\020\n" +
       "\010eventNum\030\003 \001(\r\022\025\n\reventInterval\030\004 \001(\r\0228",
       "\n\013postionList\030\005 \001(\0132#.org.jcjxb.wsn.serv" +
-      "ice.PositionList\022\022\n\nregenerate\030\006 \001(\010\022\r\n\005" +
-      "times\030\007 \001(\r\"$\n\nDeployType\022\n\n\006RANDOM\020\000\022\n\n" +
-      "\006STATIC\020\001\"\230\002\n\014DeployConfig\022\r\n\005width\030\001 \001(" +
-      "\001\022\016\n\006height\030\002 \001(\001\022M\n\026sensorNodeDeployCon" +
-      "fig\030\003 \001(\0132-.org.jcjxb.wsn.service.Sensor" +
-      "NodeDeployConfig\022I\n\024sinkNodeDeployConfig" +
-      "\030\004 \001(\0132+.org.jcjxb.wsn.service.SinkNodeD" +
-      "eployConfig\022O\n\027sourceEventDeployConfig\030\005" +
-      " \001(\0132..org.jcjxb.wsn.service.SourceEvent",
-      "DeployConfig\"\037\n\017AlgorithmConfig\022\014\n\004name\030" +
-      "\001 \001(\t\"\342\001\n\017PartitionConfig\022K\n\rpartitionTy" +
-      "pe\030\001 \001(\01624.org.jcjxb.wsn.service.Partiti" +
-      "onConfig.PartitionType\022C\n\021sensorsOnHostL" +
-      "ist\030\002 \001(\0132(.org.jcjxb.wsn.service.Sensor" +
-      "sOnHostList\"=\n\rPartitionType\022\n\n\006RANDOM\020\000" +
-      "\022\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"v\n\rCo" +
-      "mmandConfig\022C\n\006output\030\001 \001(\0162+.org.jcjxb." +
-      "wsn.service.CommandConfig.Output:\006SIMPLE" +
-      "\" \n\006Output\022\n\n\006DETAIL\020\000\022\n\n\006SIMPLE\020\001\"\214\002\n\020S",
-      "imulationConfig\0229\n\014deployConfig\030\001 \001(\0132#." +
-      "org.jcjxb.wsn.service.DeployConfig\022?\n\017al" +
-      "gorithmConfig\030\002 \001(\0132&.org.jcjxb.wsn.serv" +
-      "ice.AlgorithmConfig\022?\n\017partitionConfig\030\003" +
-      " \001(\0132&.org.jcjxb.wsn.service.PartitionCo" +
-      "nfig\022;\n\rcommandConfig\030\004 \001(\0132$.org.jcjxb." +
-      "wsn.service.CommandConfigB(\n\033org.jcjxb.w" +
-      "sn.service.protoB\tWSNConfig"
+      "ice.PositionList\022\r\n\005times\030\006 \001(\r\022\025\n\010event" +
+      "Bit\030\007 \001(\r:\003100\"$\n\nDeployType\022\n\n\006RANDOM\020\000" +
+      "\022\n\n\006STATIC\020\001\"\230\002\n\014DeployConfig\022\r\n\005width\030\001" +
+      " \001(\001\022\016\n\006height\030\002 \001(\001\022M\n\026sensorNodeDeploy" +
+      "Config\030\003 \001(\0132-.org.jcjxb.wsn.service.Sen" +
+      "sorNodeDeployConfig\022I\n\024sinkNodeDeployCon" +
+      "fig\030\004 \001(\0132+.org.jcjxb.wsn.service.SinkNo" +
+      "deDeployConfig\022O\n\027sourceEventDeployConfi" +
+      "g\030\005 \001(\0132..org.jcjxb.wsn.service.SourceEv",
+      "entDeployConfig\"\037\n\017AlgorithmConfig\022\014\n\004na" +
+      "me\030\001 \001(\t\"\342\001\n\017PartitionConfig\022K\n\rpartitio" +
+      "nType\030\001 \001(\01624.org.jcjxb.wsn.service.Part" +
+      "itionConfig.PartitionType\022C\n\021sensorsOnHo" +
+      "stList\030\002 \001(\0132(.org.jcjxb.wsn.service.Sen" +
+      "sorsOnHostList\"=\n\rPartitionType\022\n\n\006RANDO" +
+      "M\020\000\022\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"\345\001" +
+      "\n\023EnergyConsumeConfig\022K\n\013consumeType\030\001 \001" +
+      "(\01626.org.jcjxb.wsn.service.EnergyConsume" +
+      "Config.ConsumeType\022\023\n\013transmitter\030\002 \001(\001\022",
+      "\021\n\tamplifier\030\003 \001(\001\022\020\n\010receiver\030\004 \001(\001\022\020\n\010" +
+      "exponent\030\005 \001(\001\022\016\n\006sensor\030\006 \001(\001\"%\n\013Consum" +
+      "eType\022\n\n\006STATIC\020\000\022\n\n\006SIMPLE\020\001\"v\n\rCommand" +
+      "Config\022C\n\006output\030\001 \001(\0162+.org.jcjxb.wsn.s" +
+      "ervice.CommandConfig.Output:\006SIMPLE\" \n\006O" +
+      "utput\022\n\n\006DETAIL\020\000\022\n\n\006SIMPLE\020\001\"\325\002\n\020Simula" +
+      "tionConfig\0229\n\014deployConfig\030\001 \001(\0132#.org.j" +
+      "cjxb.wsn.service.DeployConfig\022?\n\017algorit" +
+      "hmConfig\030\002 \001(\0132&.org.jcjxb.wsn.service.A" +
+      "lgorithmConfig\022?\n\017partitionConfig\030\003 \001(\0132",
+      "&.org.jcjxb.wsn.service.PartitionConfig\022" +
+      "G\n\023energyConsumeConfig\030\004 \001(\0132*.org.jcjxb" +
+      ".wsn.service.EnergyConsumeConfig\022;\n\rcomm" +
+      "andConfig\030\005 \001(\0132$.org.jcjxb.wsn.service." +
+      "CommandConfigB(\n\033org.jcjxb.wsn.service.p" +
+      "rotoB\tWSNConfig"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5798,7 +6655,7 @@ public final class WSNConfig {
           internal_static_org_jcjxb_wsn_service_SourceEventDeployConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_SourceEventDeployConfig_descriptor,
-              new java.lang.String[] { "DeployType", "Radius", "EventNum", "EventInterval", "PostionList", "Regenerate", "Times", },
+              new java.lang.String[] { "DeployType", "Radius", "EventNum", "EventInterval", "PostionList", "Times", "EventBit", },
               org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.Builder.class);
           internal_static_org_jcjxb_wsn_service_DeployConfig_descriptor =
@@ -5825,8 +6682,16 @@ public final class WSNConfig {
               new java.lang.String[] { "PartitionType", "SensorsOnHostList", },
               org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.Builder.class);
-          internal_static_org_jcjxb_wsn_service_CommandConfig_descriptor =
+          internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_descriptor =
             getDescriptor().getMessageTypes().get(7);
+          internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_EnergyConsumeConfig_descriptor,
+              new java.lang.String[] { "ConsumeType", "Transmitter", "Amplifier", "Receiver", "Exponent", "Sensor", },
+              org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.class,
+              org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.Builder.class);
+          internal_static_org_jcjxb_wsn_service_CommandConfig_descriptor =
+            getDescriptor().getMessageTypes().get(8);
           internal_static_org_jcjxb_wsn_service_CommandConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_CommandConfig_descriptor,
@@ -5834,11 +6699,11 @@ public final class WSNConfig {
               org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig.Builder.class);
           internal_static_org_jcjxb_wsn_service_SimulationConfig_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_org_jcjxb_wsn_service_SimulationConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_SimulationConfig_descriptor,
-              new java.lang.String[] { "DeployConfig", "AlgorithmConfig", "PartitionConfig", "CommandConfig", },
+              new java.lang.String[] { "DeployConfig", "AlgorithmConfig", "PartitionConfig", "EnergyConsumeConfig", "CommandConfig", },
               org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig.Builder.class);
           return null;

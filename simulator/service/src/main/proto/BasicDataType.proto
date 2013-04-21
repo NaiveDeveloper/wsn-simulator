@@ -19,13 +19,16 @@ message Event {
 		PRIORITY_LOW = 2;
 	}
 	optional Priority priority = 1 [default = PRIORITY_NORMAL];
+	optional int64 eventId = 8;
 	optional int64 startTime = 2;
 	repeated int32 sensorId = 3;
 	optional string type = 4;
 	optional bytes data = 5;
-	optional int32 senderId = 6;
-	optional int64 eventId = 7;
-	optional int64 fromEventId = 8;
+	optional int32 dataSize = 6;
+	optional int32 senderNodeId = 7;
+	optional int64 fromEventId = 9;
+	optional bool sensorEvent = 10 [default = true];
+	optional Position postion = 11;
 }
 
 message Host {
