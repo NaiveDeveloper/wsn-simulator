@@ -8,10 +8,13 @@ import java.util.Map.Entry;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.log4j.Logger;
+import org.jcjxb.wsn.common.FileTool;
 import org.jcjxb.wsn.common.Status;
+import org.jcjxb.wsn.db.Log;
 import org.jcjxb.wsn.rpc.LionRpcController;
 import org.jcjxb.wsn.service.agent.SlaveServiceAgentManager;
 import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
+import org.jcjxb.wsn.service.proto.SlaveService.EventsDetail;
 import org.jcjxb.wsn.service.proto.SlaveService.ExecRequest;
 import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
 import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
@@ -115,6 +118,7 @@ public class MasterTimeLine {
 		int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 		final CountDownLatch latch = new CountDownLatch(slaveCount);
 		final Status status = new Status(true);
+		final List<SimulationResult> resultList = new ArrayList<SimulationResult>();
 		for (int i = 0; i < slaveCount; ++i) {
 			final RpcController localController = new LionRpcController();
 			final int salveId = i;
@@ -126,6 +130,10 @@ public class MasterTimeLine {
 								logger.error(String.format("End simulation on slave [%d] failed, error message [%s]", salveId,
 										localController.errorText()));
 								status.setFlag(false);
+							} else {
+								synchronized (resultList) {
+									resultList.add(parameter);
+								}
 							}
 							latch.countDown();
 						}
@@ -142,10 +150,59 @@ public class MasterTimeLine {
 		MasterSimConfig.getInstance().clear();
 		MasterTimeLine.getInstance().clear();
 		if (status.isFlag()) {
+			SimulationResult result = mergeSimulationResult(resultList);
+			Log log = MasterSimConfig.getInstance().getLog();
+			// Update log status to finished
+			log.setState(1);
+			log.setResult(result.toByteArray());
+			MasterSimConfig.getInstance().getDbOperation().saveLog(log);
 			logger.info("Stop simulation on slaves successfully");
 		} else {
 			logger.error("Not all slaves end simulation successfully");
+			Log log = MasterSimConfig.getInstance().getLog();
+			// Update log status to failed
+			log.setState(2);
+			MasterSimConfig.getInstance().getDbOperation().saveLog(log);
 		}
+	}
+
+	private boolean cancelSimulation() {
+		int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
+		final CountDownLatch latch = new CountDownLatch(slaveCount);
+		final Status status = new Status(true);
+		for (int i = 0; i < slaveCount; ++i) {
+			final RpcController localController = new LionRpcController();
+			final int salveId = i;
+			SlaveServiceAgentManager.getInstance().getServiceAgent(i, true)
+					.cancelSimulation(Empty.getDefaultInstance(), localController, new RpcCallback<Empty>() {
+						@Override
+						public void run(Empty parameter) {
+							if (localController.failed()) {
+								logger.error(String.format("Cancel simulation on slave [%d] failed, error message [%s]", salveId,
+										localController.errorText()));
+								status.setFlag(false);
+							}
+							latch.countDown();
+						}
+					});
+		}
+
+		// Wait all slaves to finish
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			status.setFlag(false);
+		}
+		return status.isFlag();
+	}
+
+	private SimulationResult mergeSimulationResult(List<SimulationResult> resultList) {
+		SimulationResult.Builder builder = SimulationResult.newBuilder();
+		for (SimulationResult result : resultList) {
+			builder.addAllEnergyData(result.getEnergyDataList());
+		}
+		return builder.build();
 	}
 
 	private class ControlThread extends Thread {
@@ -183,9 +240,16 @@ public class MasterTimeLine {
 											status.setFlag(false);
 										} else {
 											synchronized (localVirtualTime) {
+												// Adjust slave local virtual
+												// time
 												setSlaveVirtualTime(lvtSync.getSlaveId(), lvtSync.getLocalTime());
 												for (LVTSync.Update update : lvtSync.getUpdateList()) {
 													setSlaveVirtualTime(update.getSlaveId(), update.getLocalTime());
+												}
+
+												// If needed, save event details
+												if (MasterSimConfig.getInstance().outputDetail()) {
+													MasterSimConfig.getInstance().addSync(lvtSync);
 												}
 											}
 										}
@@ -202,11 +266,25 @@ public class MasterTimeLine {
 					}
 					if (status.isFlag()) {
 						logger.info(String.format("Cycle %d run on slaves %s successfully", globalVirtualTime, slaveIds.toString()));
+
+						// If log is needed to flush to file, store it.
+						if (MasterSimConfig.getInstance().getEventsDetailSize() >= MasterSimConfig.getInstance().getLogFlushCycle()) {
+							EventsDetail eventsDetail = MasterSimConfig.getInstance().buildEventsDetail();
+							long fromCycle = eventsDetail.getSync(0).getProcessedEvent(0).getStartTime();
+							long endCycle = eventsDetail.getSync(eventsDetail.getSyncCount() - 1).getProcessedEvent(0).getStartTime();
+							Log log = MasterSimConfig.getInstance().getLog();
+							String fileName = String.format("%d-%d.bin", fromCycle, endCycle);
+							FileTool.storeFile(log.getEventDetailDir(), fileName, eventsDetail.toByteArray());
+						}
 					} else {
 						logger.error(String.format("Cycle %d run on slaves %s falied", globalVirtualTime, slaveIds.toString()));
 						// Error happened, simulation end, notify all slaves to
 						// stop, and set simulation status
-						endSimulation();
+						Log log = MasterSimConfig.getInstance().getLog();
+						// Update log status to failed
+						log.setState(2);
+						MasterSimConfig.getInstance().getDbOperation().saveLog(log);
+						cancelSimulation();
 						stop = true;
 						break;
 					}

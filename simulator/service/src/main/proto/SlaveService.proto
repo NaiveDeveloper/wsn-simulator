@@ -30,8 +30,13 @@ message SimulationResult {
 	message EnergyData {
 		optional int32 nodeId = 1;
 		optional double eneryLeft = 2;
+		optional bool die = 3;
 	}
-	optional EnergyData energyData = 1;
+	repeated EnergyData energyData = 1;
+}
+
+message EventsDetail {
+	repeated LVTSync sync = 1;
 }
 
 service SService {
@@ -39,4 +44,5 @@ service SService {
 	rpc exec(ExecRequest) returns (LVTSync);
 	rpc sendEvents(EventsRequest) returns (Empty);
 	rpc endSimulation(Empty) returns (SimulationResult);
+	rpc cancelSimulation(Empty) returns (Empty);
 }

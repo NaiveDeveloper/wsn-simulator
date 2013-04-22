@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.jcjxb.wsn.service.algorithm.Algorithm;
 import org.jcjxb.wsn.service.algorithm.AlgorithmManager;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 
 public class SlaveSimConfig extends SimConfig {
@@ -62,5 +63,9 @@ public class SlaveSimConfig extends SimConfig {
 
 	public Set<Integer> getSensorsOnThisSlave() {
 		return sensorsOnThisSlave;
+	}
+	
+	public void collectSimResult(SimulationResult.Builder builder) {
+		algorithm.collectSimResult(builder);
 	}
 }

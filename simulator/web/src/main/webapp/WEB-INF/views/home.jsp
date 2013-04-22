@@ -2,13 +2,12 @@
 
 <html>
 <head>
-	<title>Home</title>
+	<title>JCJXB TSSIM</title>
 </head>
 <body>
 <h1>
-	Hello world!  
+	A large scale simulator for wireless sensor network.
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

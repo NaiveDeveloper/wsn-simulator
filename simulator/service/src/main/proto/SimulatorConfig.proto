@@ -9,4 +9,3 @@ message HostConfig {
 	optional Host masterHost = 1;
 	repeated Host slaveHost = 2;
 }
-

@@ -4,6 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 import org.apache.log4j.Logger;
 import org.jcjxb.wsn.common.Status;
+import org.jcjxb.wsn.db.Log;
 import org.jcjxb.wsn.rpc.LionRpcController;
 import org.jcjxb.wsn.service.agent.SlaveServiceAgentManager;
 import org.jcjxb.wsn.service.deploy.DeployStrategyManager;
@@ -71,6 +72,16 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			// Initialize simulation
 			MasterSimConfig.getInstance().initSimulation(simulationConfig);
 
+			// Insert log to db
+			Log log = MasterSimConfig.getInstance().getLog();
+			log.setState(0);
+			if (!MasterSimConfig.getInstance().getDbOperation().saveLog(log)) {
+				controller.setFailed("Insert start up log into db failed");
+				logger.error("Insert initialization log to db failed");
+				return Empty.getDefaultInstance();
+			}
+			log.setEventDetailDir(MasterSimConfig.getInstance().getLogPath() + log.getId() + "/");
+
 			int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 			final CountDownLatch latch = new CountDownLatch(slaveCount);
 			final Status status = new Status(true);
@@ -106,6 +117,13 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			} else {
 				controller.setFailed("All slaves are not ready");
 				logger.error("Not all slaves start simulation successfully");
+
+				// Update log status to failed
+				log.setState(2);
+				MasterSimConfig.getInstance().getDbOperation().saveLog(log);
+
+				// cancel simulation
+				cancelSimulation();
 			}
 		}
 		return Empty.getDefaultInstance();
@@ -122,5 +140,36 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 		// TODO
 		MasterSimConfig.getInstance().clear();
 		return Empty.getDefaultInstance();
+	}
+
+	private boolean cancelSimulation() {
+		int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
+		final CountDownLatch latch = new CountDownLatch(slaveCount);
+		final Status status = new Status(true);
+		for (int i = 0; i < slaveCount; ++i) {
+			final RpcController localController = new LionRpcController();
+			final int salveId = i;
+			SlaveServiceAgentManager.getInstance().getServiceAgent(i, true)
+					.cancelSimulation(Empty.getDefaultInstance(), localController, new RpcCallback<Empty>() {
+						@Override
+						public void run(Empty parameter) {
+							if (localController.failed()) {
+								logger.error(String.format("Cancel simulation on slave [%d] failed, error message [%s]", salveId,
+										localController.errorText()));
+								status.setFlag(false);
+							}
+							latch.countDown();
+						}
+					});
+		}
+
+		// Wait all slaves to finish
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			status.setFlag(false);
+		}
+		return status.isFlag();
 	}
 }

@@ -9,6 +9,7 @@ import java.util.Random;
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig;
@@ -105,6 +106,9 @@ public abstract class Algorithm {
 	public void end() {
 		sourceEventTime = 0;
 		eventTime = 0L;
+	}
+	
+	public void collectSimResult(SimulationResult.Builder builder) {	
 	}
 
 	protected Event generateEGEvent(long startTime) {

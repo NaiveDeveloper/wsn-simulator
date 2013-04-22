@@ -55,7 +55,6 @@ public class SimulationStarter {
 		sourceDeployBuilder.setEventInterval(10);
 		sourceDeployBuilder.setEventNum(10);
 		sourceDeployBuilder.setTimes(-1);
-		sourceDeployBuilder.setRegenerate(false);
 		sourceDeployBuilder.setRadius(30);
 		deployBuilder.setSourceEventDeployConfig(sourceDeployBuilder.build());
 		

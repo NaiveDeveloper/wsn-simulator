@@ -28,6 +28,15 @@ public class Master {
 	private static Options.StringOption hostConfigOption = mainOptions.newOption("hostConfig", "hostConfig.bin",
 			"This option defines master and slaves host config");
 
+	private static Options.IntOption logFlushCycleOption = mainOptions.newOption("logFlushCycle", 100,
+			"Split logs into different files, this value control how to split");
+
+	private static Options.StringOption dbHostOption = mainOptions.newOption("dbHost", "166.111.70.158",
+			"The database to store log information");
+
+	private static Options.StringOption logPathOption = mainOptions.newOption("logPath", "/var/tssim/",
+			"Directory to store event detail log");
+
 	public static void main(String[] args) throws Exception {
 		// Parse command line arguments
 		mainOptions.parseCommandLine(args);
@@ -45,8 +54,29 @@ public class Master {
 			return;
 		}
 
-		// Set host config in SimConfig
+		// Check log flush cycle option
+		if (logFlushCycleOption.getValue() <= 0) {
+			logger.error("Please correctly specify log flush cycle, logFlushCycle = " + logFlushCycleOption.getValue());
+			return;
+		}
+
+		// Check db host option
+		if ("".equals(dbHostOption.getValue())) {
+			logger.error("Please correctly specify db host, dbHost = " + dbHostOption.getValue());
+			return;
+		}
+
+		// Check log path option
+		if ("".equals(logPathOption.getValue())) {
+			logger.error("Please correctly specify log path, logPath = " + logPathOption.getValue());
+			return;
+		}
+
+		// Set options in SimConfig
 		MasterSimConfig.getInstance().setHostConfig(hostConfig);
+		MasterSimConfig.getInstance().setLogFlushCycle(logFlushCycleOption.getValue());
+		MasterSimConfig.getInstance().setDbHost(dbHostOption.getValue());
+		MasterSimConfig.getInstance().setLogPath(logPathOption.getValue());
 
 		LionRpcServer rpcServer = new LionRpcSocketServer(hostConfig.getMasterHost().getPort(), hostConfig.getMasterHost().getHost());
 
@@ -57,7 +87,7 @@ public class Master {
 
 		logger.info(String.format("Master Server is running on port %d, ip %s now", hostConfig.getMasterHost().getPort(), hostConfig
 				.getMasterHost().getHost()));
-		
+
 		try {
 			rpcServer.waitEnd();
 		} catch (InterruptedException e) {

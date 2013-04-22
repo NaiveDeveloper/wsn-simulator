@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHost;
 import org.jcjxb.wsn.service.proto.SimulatorConfig.HostConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 
 public class SimConfig {
@@ -69,12 +70,16 @@ public class SimConfig {
 	public Integer getSlaveIdWithSensorId(Integer sensorId) {
 		return sensorsToSlaveMap.get(sensorId);
 	}
-	
+
 	public int getSensorCount() {
 		return simulationConfig.getDeployConfig().getSensorNodeDeployConfig().getNodeNum();
 	}
 
 	public SimulationConfig getSimulationConfig() {
 		return simulationConfig;
+	}
+
+	public boolean outputDetail() {
+		return simulationConfig.getCommandConfig().getOutput() == CommandConfig.Output.DETAIL;
 	}
 }

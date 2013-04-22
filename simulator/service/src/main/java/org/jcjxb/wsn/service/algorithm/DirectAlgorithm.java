@@ -12,6 +12,8 @@ import org.jcjxb.wsn.service.energy.EnergyConsumeManager;
 import org.jcjxb.wsn.service.node.SensorNode;
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult.EnergyData;
 import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SinkNodeDeployConfig;
@@ -40,6 +42,19 @@ public class DirectAlgorithm extends Algorithm {
 	@Override
 	public void end() {
 		super.end();
+		sensorNodes.clear();
+	}
+
+	@Override
+	public void collectSimResult(SimulationResult.Builder builder) {
+		super.collectSimResult(builder);
+		EnergyData.Builder energyDataBuilder = EnergyData.newBuilder();
+		for(SensorNode node : sensorNodes.values()) {
+			energyDataBuilder.setDie(node.getState() == 2);
+			energyDataBuilder.setEneryLeft(node.getEnergy());
+			energyDataBuilder.setNodeId(node.getId());
+			builder.addEnergyData(energyDataBuilder.build());
+		}
 	}
 
 	private void initSensors() {

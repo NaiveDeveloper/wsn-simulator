@@ -108,6 +108,14 @@ public class SlaveServiceAgent {
 		}
 	}
 
+	public void cancelSimulation(Empty empty, RpcController controller, RpcCallback<Empty> done) {
+		try {
+			getServiceStub().cancelSimulation(controller, empty, done);
+		} catch (Exception e) {
+			handleRpcException(e, controller);
+		}
+	}
+
 	private void handleRpcException(Exception exception, RpcController controller) {
 		if (exception instanceof UnknownHostException) {
 			controller.setFailed("Master server IO Connection error");

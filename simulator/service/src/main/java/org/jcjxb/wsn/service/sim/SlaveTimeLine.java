@@ -64,6 +64,10 @@ public class SlaveTimeLine {
 				if (eventList != null) {
 					allEventList.addAll(eventList);
 				}
+				// Add processed event to LVTSync
+				if(SlaveSimConfig.getInstance().outputDetail()) {
+					syncBuilder.addProcessedEvent(event);
+				}
 			}
 			return processNewEvents(allEventList, syncBuilder);
 		}

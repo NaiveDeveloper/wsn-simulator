@@ -101,4 +101,5 @@ message SimulationConfig {
 	optional PartitionConfig partitionConfig = 3;
 	optional EnergyConsumeConfig energyConsumeConfig = 4;
 	optional CommandConfig commandConfig = 5;
+	optional string name = 6;
 }
