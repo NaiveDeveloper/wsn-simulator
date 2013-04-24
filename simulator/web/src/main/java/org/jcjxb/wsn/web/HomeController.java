@@ -17,4 +17,9 @@ public class HomeController {
 	public String jsp(@PathVariable("path") String path) {
 		return path;
 	}
+	
+	@RequestMapping(value = "/config", method = RequestMethod.GET)
+	public String config() {
+		return "config";
+	}
 }

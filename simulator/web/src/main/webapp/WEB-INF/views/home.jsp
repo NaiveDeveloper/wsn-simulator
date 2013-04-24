@@ -26,6 +26,10 @@
 			font-size: x-large;
 		}
 		
+		.pagination li a {
+			color: rgb(51, 51, 51);
+		}
+		
 	</style>
 </head>
 <body>
@@ -34,7 +38,7 @@
 			<div class="container">
 				<a class="brand" href="resources/page/about.html">大规模无线传感网络并行模拟器</a>
 				<form class="navbar-form pull-right margin10">
-					<a href="#addSimModal" class="btn" data-toggle="modal">新增模拟</a>
+					<a href="#" class="btn" onclick="addConfig();">新增模拟</a>
 					<a href="resources/page/about.html" class="btn">关于我们</a>
 				</form>
 				<form class="navbar-search pull-right margin10">
@@ -85,6 +89,34 @@
 					<td>成功运行</td>
 					<td><button class="btn" type="button">删除</button></td>
 				</tr>
+				<tr>
+					<td>5</td>
+					<td>直接发送算法5</td>
+					<td>2013-04-23</td>
+					<td>成功运行</td>
+					<td><button class="btn" type="button">删除</button></td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>直接发送算法6</td>
+					<td>2013-04-23</td>
+					<td>成功运行</td>
+					<td><button class="btn" type="button">删除</button></td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>直接发送算法6</td>
+					<td>2013-04-23</td>
+					<td>成功运行</td>
+					<td><button class="btn" type="button">删除</button></td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>直接发送算法6</td>
+					<td>2013-04-23</td>
+					<td>成功运行</td>
+					<td><button class="btn" type="button">删除</button></td>
+				</tr>
 			</tbody>
 		</table>
 		<div class="pagination pagination-centered">
@@ -99,20 +131,18 @@
 			</ul>
 		</div>
 	</div>
-	<div id="addSimModal" class="modal hide fade" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="addSimModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">×</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h3 id="myModalLabel">模拟器实验配置</h3>
 		</div>
 		<div class="modal-body">
-			<p>One fine body…</p>
 		</div>
 		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-			<button class="btn btn-primary">Save changes</button>
+			<button class="btn" onclick="preStep();" disabled>上一步</button>
+			<button class="btn" onclick="nextStep();">下一步</button>
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="resources/js/config.js"></script>
 </html>
