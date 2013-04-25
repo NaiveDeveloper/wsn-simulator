@@ -7,24 +7,35 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.jcjxb.wsn.rpc.LionRpcController;
+import org.jcjxb.wsn.service.agent.MasterServicAgentManager;
 import org.jcjxb.wsn.service.proto.WSNConfig.AlgorithmConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType;
 import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.PartitionType;
+import org.jcjxb.wsn.service.proto.WSNConfig.SensorConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
-import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType;
+import org.jcjxb.wsn.service.proto.WSNConfig.SinkNodeDeployConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.protobuf.RpcController;
+
 @Controller
 public class HomeController {
+	
+	private static Logger logger = Logger.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
@@ -80,6 +91,18 @@ public class HomeController {
 			result.put("errorText", "生成命令请求发生错误");
 			return result;
 		}
+		
+		SimulationConfig simulationConfig = simulationConfigbuilder.build();
+		logger.debug(simulationConfig.toString());
+		
+		RpcController controller = new LionRpcController();
+		MasterServicAgentManager.getInstance().getServiceAgent("127.0.0.1", 10000).startSimulation(simulationConfig, controller);
+		
+		if(controller.failed()) {
+			result.put("status", "1");
+			result.put("errorText", "Master服务器返回信息：" + controller.errorText());
+			return result;
+		}
 		result.put("status", "0");
 		return result;
 	}
@@ -87,16 +110,16 @@ public class HomeController {
 	@SuppressWarnings({ "rawtypes" })
 	private boolean initSimulationConfig(Map<String, Object> reuqetsMap, SimulationConfig.Builder simulationConfigbuilder) {
 		simulationConfigbuilder.setName(reuqetsMap.get("name").toString());
-		
+
 		// 设置算法选择
 		Map algorithmMap = (Map) reuqetsMap.get("algorithmConfig");
 		simulationConfigbuilder.setAlgorithmConfig(AlgorithmConfig.newBuilder().setName(algorithmMap.get("name").toString()));
-		
+
 		// 设置命令参数
 		Map commandConfig = (Map) reuqetsMap.get("commandConfig");
 		simulationConfigbuilder.setCommandConfig(CommandConfig.newBuilder().setOutput(
 				CommandConfig.Output.valueOf(Integer.parseInt(commandConfig.get("output").toString()))));
-		
+
 		// 设置能量消耗模型配置
 		Map energyConsumeConfig = (Map) reuqetsMap.get("energyConsumeConfig");
 		EnergyConsumeConfig.Builder energyBuider = EnergyConsumeConfig.newBuilder();
@@ -107,14 +130,46 @@ public class HomeController {
 		energyBuider.setExponent(Double.parseDouble(energyConsumeConfig.get("exponent").toString()));
 		energyBuider.setSensor(Double.parseDouble(energyConsumeConfig.get("sensor").toString()));
 		simulationConfigbuilder.setEnergyConsumeConfig(energyBuider);
-		
+
 		// 设置模拟分割模型
 		simulationConfigbuilder.setPartitionConfig(PartitionConfig.newBuilder().setPartitionType(PartitionType.RANDOM));
-		
+
 		// 设置部署模型
 		DeployConfig.Builder deployBuilder = DeployConfig.newBuilder();
-		Map deployMap = (Map)reuqetsMap.get("deployConfig");
+		Map deployMap = (Map) reuqetsMap.get("deployConfig");
+		deployBuilder.setWidth(Double.parseDouble(deployMap.get("width").toString()));
+		deployBuilder.setHeight(Double.parseDouble(deployMap.get("height").toString()));
+
+		Map sensorNodeMap = (Map) deployMap.get("sensorNodeDeployConfig");
+		SensorNodeDeployConfig.Builder sensorDeployBuilder = SensorNodeDeployConfig.newBuilder();
+		sensorDeployBuilder.setDeployType(SensorNodeDeployConfig.DeployType.valueOf(Integer.parseInt(sensorNodeMap.get("deployType")
+				.toString())));
+		sensorDeployBuilder.setNodeNum(Integer.parseInt(sensorNodeMap.get("nodeNum").toString()));
+		SensorConfig.Builder sensorBuilder = SensorConfig.newBuilder();
+		sensorBuilder.setEnergy(Double.parseDouble(sensorNodeMap.get("energy").toString()));
+		sensorBuilder.setTransmissionRadius(Double.parseDouble(sensorNodeMap.get("transmissionRadius").toString()));
+		sensorDeployBuilder.setSensorConfig(sensorBuilder);
+		deployBuilder.setSensorNodeDeployConfig(sensorDeployBuilder);
 		
+		Map sinkNodeMap = (Map) deployMap.get("sinkNodeDeployConfig");
+		SinkNodeDeployConfig.Builder sinkDeployBuilder = SinkNodeDeployConfig.newBuilder();
+		sinkDeployBuilder.setDeployType(SinkNodeDeployConfig.DeployType.valueOf(Integer.parseInt(sinkNodeMap.get("deployType")
+				.toString())));
+		sinkDeployBuilder.setNodeNum(Integer.parseInt(sinkNodeMap.get("nodeNum").toString()));
+		deployBuilder.setSinkNodeDeployConfig(sinkDeployBuilder);
+		
+		Map sourceNodeMap = (Map) deployMap.get("sourceEventDeployConfig");
+		SourceEventDeployConfig.Builder sourceDeployBuilder = SourceEventDeployConfig.newBuilder();
+		sourceDeployBuilder.setDeployType(SourceEventDeployConfig.DeployType.valueOf(Integer.parseInt(sourceNodeMap.get("deployType")
+				.toString())));
+		sourceDeployBuilder.setRadius(Double.parseDouble(sourceNodeMap.get("radius").toString()));
+		sourceDeployBuilder.setEventNum(Integer.parseInt(sourceNodeMap.get("eventNum").toString()));
+		sourceDeployBuilder.setEventInterval(Integer.parseInt(sourceNodeMap.get("eventInterval").toString()));
+		sourceDeployBuilder.setTimes(Integer.parseInt(sourceNodeMap.get("times").toString()));
+		sourceDeployBuilder.setEventBit(Integer.parseInt(sourceNodeMap.get("eventBit").toString()));
+		deployBuilder.setSourceEventDeployConfig(sourceDeployBuilder);
+		
+		simulationConfigbuilder.setDeployConfig(deployBuilder);
 		return true;
 	}
 }

@@ -31,7 +31,7 @@ public class Master {
 	private static Options.IntOption logFlushCycleOption = mainOptions.newOption("logFlushCycle", 100,
 			"Split logs into different files, this value control how to split");
 
-	private static Options.StringOption dbHostOption = mainOptions.newOption("dbHost", "166.111.70.158",
+	private static Options.StringOption dbHostOption = mainOptions.newOption("dbHost", "127.0.0.1",
 			"The database to store log information");
 
 	private static Options.StringOption logPathOption = mainOptions.newOption("logPath", "/var/tssim/",

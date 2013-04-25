@@ -38,7 +38,7 @@
 			<div class="container">
 				<a class="brand" href="resources/page/about.html">大规模无线传感网络并行模拟器</a>
 				<form class="navbar-form pull-right margin10">
-					<a href="#" class="btn" onclick="addConfig();">新增模拟</a>
+					<a class="btn" onclick="addConfig();">新增模拟</a>
 					<a href="resources/page/about.html" class="btn">关于我们</a>
 				</form>
 				<form class="navbar-search pull-right margin10">

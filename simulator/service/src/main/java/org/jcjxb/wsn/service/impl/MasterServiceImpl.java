@@ -53,20 +53,17 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			}
 
 			// Complete SimulationConfig unfilled data
-			SimulationConfig.Builder simulationConfigBuilder = SimulationConfig.newBuilder();
+			SimulationConfig.Builder simulationConfigBuilder = SimulationConfig.newBuilder(request);
 
 			// Generate deploy data
-			DeployConfig.Builder deployConfigBuilder = DeployConfig.newBuilder(request.getDeployConfig());
+			DeployConfig.Builder deployConfigBuilder = simulationConfigBuilder.getDeployConfigBuilder();
 			DeployStrategyManager.getInstance().deploy(deployConfigBuilder, request.getDeployConfig());
 
 			// Divide sensors to slaves
-			PartitionConfig.Builder partitionConfigBuilder = PartitionConfig.newBuilder(request.getPartitionConfig());
+			PartitionConfig.Builder partitionConfigBuilder = simulationConfigBuilder.getPartitionConfigBuilder();
 			PartitionStrategyManager.getInstance().partition(partitionConfigBuilder, request.getPartitionConfig(),
 					MasterSimConfig.getInstance().getSlaveCount(), deployConfigBuilder.getSensorNodeDeployConfig().getPostionList());
 
-			simulationConfigBuilder.setAlgorithmConfig(request.getAlgorithmConfig());
-			simulationConfigBuilder.setDeployConfig(deployConfigBuilder.build());
-			simulationConfigBuilder.setPartitionConfig(partitionConfigBuilder.build());
 			SimulationConfig simulationConfig = simulationConfigBuilder.build();
 
 			// Initialize simulation
