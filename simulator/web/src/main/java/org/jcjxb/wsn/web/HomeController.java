@@ -1,5 +1,7 @@
 package org.jcjxb.wsn.web;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,5 +23,9 @@ public class HomeController {
 	@RequestMapping(value = "/config", method = RequestMethod.GET)
 	public String config() {
 		return "config";
+	}
+	
+	public Map<String, String> addSimulation() {
+		return null;
 	}
 }

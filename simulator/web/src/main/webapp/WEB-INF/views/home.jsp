@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.css" media="screen"></link>
 	<script type="text/javascript" src="resources/jquery/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="resources/js/json2.js"></script>
 	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
 	
 	<style type="text/css">
@@ -29,7 +30,6 @@
 		.pagination li a {
 			color: rgb(51, 51, 51);
 		}
-		
 	</style>
 </head>
 <body>
@@ -139,8 +139,8 @@
 		<div class="modal-body">
 		</div>
 		<div class="modal-footer">
-			<button class="btn" onclick="preStep();" disabled>上一步</button>
-			<button class="btn" onclick="nextStep();">下一步</button>
+			<!--<button class="btn" onclick="preStep();" disabled id="pre">上一步</button>-->
+			<button class="btn" onclick="nextStep();" id="next">下一步</button>
 		</div>
 	</div>
 </body>
