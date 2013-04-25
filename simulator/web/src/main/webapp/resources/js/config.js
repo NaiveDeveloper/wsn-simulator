@@ -62,9 +62,28 @@ var algorithms = {
 };
 
 function submitConfig() {
-	//alert(JSON.stringify(simulationConfig));
 	$("#addSimModal #next").attr("disabled", "disabled");
 	$("#addSimModal .modal-body").html("<div class='alert alert-info'>正在提交实验配置信息，请耐心等待...</div>");
+	$.ajax(
+		{
+			url: 'addSimulation',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(simulationConfig),
+			dataType: 'json',
+			success: function(data) {
+				if(data.status == 0) {
+					$("#addSimModal .modal-body").html("<div class='alert alert-success'>实验请求成功，请手动关闭窗口，谢谢！</div>");
+				} else {
+					$("#addSimModal .modal-body").html("<div class='alert alert-error'>" + data.errorText + "</div>");
+					$("#addSimModal #next").removeAttr("disabled");
+				}
+			},
+			error: function(xhr, errorInfo) {
+				$("#addSimModal .modal-body").html("<div class='alert alert-error'>" + errorInfo + ": " + xhr.statusText + "</div>");
+			}
+		}
+	);
 }
 
 // 选择算法
@@ -185,7 +204,7 @@ function step7() {
 		if(!item.value) {
 			return false;
 		}
-		simulationConfig.commandConfig[item.name] = item.value;
+		simulationConfig[item.name] = item.value;
 	}
 	return true;
 }
