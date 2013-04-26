@@ -8,6 +8,8 @@ $("#addSimModal").on("show", function() {
 $("#addSimModal").on("hide", function() {
 	simulationConfig = null;
 	step = 0;
+	$("#addSimModal #next").removeAttr("disabled");
+	$("#addSimModal #next").text("下一步");
 });
 
 function addConfig() {

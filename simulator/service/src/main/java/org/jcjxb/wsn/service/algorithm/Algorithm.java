@@ -135,7 +135,7 @@ public abstract class Algorithm {
 			// Generate next EG event
 			SourceEventDeployConfig sourceConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
 					.getSourceEventDeployConfig();
-			if (!sourceConfig.hasTimes() || sourceConfig.getTimes() < 0 || sourceEventTime >= sourceConfig.getTimes()) {
+			if (!sourceConfig.hasTimes() || sourceConfig.getTimes() < 0 || sourceEventTime <= sourceConfig.getTimes()) {
 				events.add(generateEGEvent(event.getStartTime() + sourceConfig.getEventInterval()));
 			}
 			return events;

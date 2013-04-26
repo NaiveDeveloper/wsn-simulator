@@ -147,8 +147,7 @@ public class MasterTimeLine {
 			e.printStackTrace();
 			status.setFlag(false);
 		}
-		MasterSimConfig.getInstance().clear();
-		MasterTimeLine.getInstance().clear();
+		
 		if (status.isFlag()) {
 			SimulationResult result = mergeSimulationResult(resultList);
 			Log log = MasterSimConfig.getInstance().getLog();
@@ -164,6 +163,9 @@ public class MasterTimeLine {
 			log.setState(2);
 			MasterSimConfig.getInstance().getDbOperation().saveLog(log);
 		}
+		
+		MasterSimConfig.getInstance().clear();
+		MasterTimeLine.getInstance().clear();
 	}
 
 	private boolean cancelSimulation() {
@@ -204,6 +206,29 @@ public class MasterTimeLine {
 		}
 		return builder.build();
 	}
+	
+	private void storePartialEvents() {
+		EventsDetail eventsDetail = MasterSimConfig.getInstance().buildEventsDetail();
+		if(eventsDetail.getSyncCount() <= 0) {
+			return;
+		}
+		long fromCycle = 0L;
+		LVTSync startSync = eventsDetail.getSync(0);
+		if(startSync.getProcessedEventCount() > 0) {
+			fromCycle = startSync.getProcessedEvent(0).getStartTime();
+		}
+		
+		long endCycle = 0L;
+		LVTSync endSync = eventsDetail.getSync(eventsDetail.getSyncCount() - 1);
+		if(endSync.getProcessedEventCount() > 0) {
+			endCycle = endSync.getProcessedEvent(0).getStartTime();
+		}
+		
+		Log log = MasterSimConfig.getInstance().getLog();
+		String fileName = String.format("%d-%d.bin", fromCycle, endCycle);
+		log.addFile(fileName);
+		FileTool.storeFile(log.getEventDetailDir(), fileName, eventsDetail.toByteArray());
+	}
 
 	private class ControlThread extends Thread {
 
@@ -216,6 +241,9 @@ public class MasterTimeLine {
 				if (slaveIds.isEmpty()) {
 					// Simulation end, notify all slaves to stop, and set
 					// simulation status
+					if(MasterSimConfig.getInstance().outputDetail()) {
+						storePartialEvents();
+					}
 					endSimulation();
 					stop = true;
 					break;
@@ -268,13 +296,10 @@ public class MasterTimeLine {
 						logger.info(String.format("Cycle %d run on slaves %s successfully", globalVirtualTime, slaveIds.toString()));
 
 						// If log is needed to flush to file, store it.
-						if (MasterSimConfig.getInstance().getEventsDetailSize() >= MasterSimConfig.getInstance().getLogFlushCycle()) {
-							EventsDetail eventsDetail = MasterSimConfig.getInstance().buildEventsDetail();
-							long fromCycle = eventsDetail.getSync(0).getProcessedEvent(0).getStartTime();
-							long endCycle = eventsDetail.getSync(eventsDetail.getSyncCount() - 1).getProcessedEvent(0).getStartTime();
-							Log log = MasterSimConfig.getInstance().getLog();
-							String fileName = String.format("%d-%d.bin", fromCycle, endCycle);
-							FileTool.storeFile(log.getEventDetailDir(), fileName, eventsDetail.toByteArray());
+						if(MasterSimConfig.getInstance().outputDetail()) {
+							if (MasterSimConfig.getInstance().getEventsDetailSize() >= MasterSimConfig.getInstance().getLogFlushCycle()) {
+								storePartialEvents();
+							}
 						}
 					} else {
 						logger.error(String.format("Cycle %d run on slaves %s falied", globalVirtualTime, slaveIds.toString()));

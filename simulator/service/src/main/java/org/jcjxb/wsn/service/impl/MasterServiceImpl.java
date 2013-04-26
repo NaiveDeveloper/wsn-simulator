@@ -77,7 +77,10 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 				logger.error("Insert initialization log to db failed");
 				return Empty.getDefaultInstance();
 			}
-			log.setEventDetailDir(MasterSimConfig.getInstance().getLogPath() + log.getId() + "/");
+			
+			if(MasterSimConfig.getInstance().outputDetail()) {
+				log.setEventDetailDir(MasterSimConfig.getInstance().getLogPath() + log.getId() + "/");
+			}
 
 			int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 			final CountDownLatch latch = new CountDownLatch(slaveCount);

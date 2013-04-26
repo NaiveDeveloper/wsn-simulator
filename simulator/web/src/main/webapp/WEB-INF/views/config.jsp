@@ -169,11 +169,11 @@
 		<h4 class="text-center">命令参数</h4>
 		<form>
 			<label class="radio">
-  				<input type="radio" name="output" value="0" checked>
+  				<input type="radio" name="output" value="1" checked>
   				简单结果输出
 			</label>
 			<label class="radio">
-  				<input type="radio" name="output" value="1">
+  				<input type="radio" name="output" value="0">
   				详细结果输出
 			</label>
 		</form>

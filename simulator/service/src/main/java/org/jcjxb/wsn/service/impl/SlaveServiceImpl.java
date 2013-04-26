@@ -47,12 +47,15 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 	@Override
 	public SimulationResult endSimulation(RpcController controller, Empty request) throws ServiceException {
 		logger.info("The simulation end request is recieved");
-		SlaveSimConfig.getInstance().clear();
-		SlaveTimeLine.getInstance().clear();
 
 		// Collect simulation result data
 		SimulationResult.Builder builder = SimulationResult.newBuilder();
 		SlaveSimConfig.getInstance().collectSimResult(builder);
+		
+		// Clear running data
+		SlaveSimConfig.getInstance().clear();
+		SlaveTimeLine.getInstance().clear();
+		
 		return builder.build();
 	}
 
