@@ -1,6 +1,7 @@
 package org.jcjxb.wsn.service.sim;
 
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +42,7 @@ public class MasterSimConfig extends SimConfig {
 		log = new Log();
 		log.setName(simulationConfig.getName());
 		log.setConfig(simulationConfig.toByteArray());
+		log.setDate(new Date());
 	}
 
 	@Override

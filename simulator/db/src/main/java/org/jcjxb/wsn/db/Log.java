@@ -1,7 +1,10 @@
 package org.jcjxb.wsn.db;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Log {
 
@@ -18,6 +21,16 @@ public class Log {
 	private byte[] result;
 	
 	private int state; // 0 running 1 finished 2 error
+	
+	private Date date;
+	
+	private static Map<Integer, String> statusMap = new HashMap<Integer, String>();
+	
+	{
+		statusMap.put(0, "正在运行");
+		statusMap.put(1, "成功运行");
+		statusMap.put(2, "运行失败");
+	}
 
 	public String getId() {
 		return id;
@@ -77,5 +90,17 @@ public class Log {
 	
 	public void addFile(String file) {
 		eventDetailFiles.add(file);
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public static Map<Integer, String> getStatusMap() {
+		return statusMap;
 	}
 }

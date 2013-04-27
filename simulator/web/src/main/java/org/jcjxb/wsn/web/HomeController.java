@@ -5,11 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import org.jcjxb.wsn.db.DBOperation;
+import org.jcjxb.wsn.db.Log;
 import org.jcjxb.wsn.rpc.LionRpcController;
 import org.jcjxb.wsn.service.agent.MasterServicAgentManager;
 import org.jcjxb.wsn.service.proto.WSNConfig.AlgorithmConfig;
@@ -24,22 +27,58 @@ import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SinkNodeDeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.protobuf.RpcController;
 
 @Controller
 public class HomeController {
-	
+
 	private static Logger logger = Logger.getLogger(HomeController.class);
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	private static int pageSize = 8;
+
+	@Autowired
+	private DBOperation dbOperation;
+
+	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
+	public String home(@RequestParam(required = false, defaultValue = "") String query,
+			@RequestParam(required = false, defaultValue = "0") int page, ModelMap modelMap) {
+		logger.debug(String.format("Query keyword is %s visiting page %d", query, page));
+		long count = dbOperation.count(query);
+		long pageNum = (count + (pageSize - 1)) / pageSize;
+		List<Log> logs = dbOperation.query(query, page, pageSize);
+		modelMap.put("logs", logs);
+		modelMap.put("pageNum", pageNum);
+		modelMap.put("page", page);
+		modelMap.put("pageSize", pageSize);
+		modelMap.put("query", query);
+		modelMap.put("statusMap", Log.getStatusMap());
 		return "home";
+	}
+	
+	@RequestMapping(value = { "/delete" }, method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam(required = false, defaultValue = "") String query,
+			@RequestParam(required = false, defaultValue = "0") int page, String id) {
+		logger.debug(String.format("Delete log with id %s", id));
+		dbOperation.deleteById(id);
+		ModelMap mmap = new ModelMap();
+		mmap.put("query", query);
+		mmap.put("page", page);
+		return new ModelAndView("redirect:/home", mmap);
+	}
+	
+	@RequestMapping(value = { "/view" }, method = RequestMethod.GET)
+	public String view(String id, ModelMap modelMap) {
+		return "view";
 	}
 
 	@RequestMapping(value = "/{path:.*}.jspt", method = RequestMethod.GET)
@@ -91,14 +130,14 @@ public class HomeController {
 			result.put("errorText", "生成命令请求发生错误");
 			return result;
 		}
-		
+
 		SimulationConfig simulationConfig = simulationConfigbuilder.build();
 		logger.debug(simulationConfig.toString());
-		
+
 		RpcController controller = new LionRpcController();
 		MasterServicAgentManager.getInstance().getServiceAgent("127.0.0.1", 10000).startSimulation(simulationConfig, controller);
-		
-		if(controller.failed()) {
+
+		if (controller.failed()) {
 			result.put("status", "1");
 			result.put("errorText", "Master服务器返回信息：" + controller.errorText());
 			return result;
@@ -150,14 +189,14 @@ public class HomeController {
 		sensorBuilder.setTransmissionRadius(Double.parseDouble(sensorNodeMap.get("transmissionRadius").toString()));
 		sensorDeployBuilder.setSensorConfig(sensorBuilder);
 		deployBuilder.setSensorNodeDeployConfig(sensorDeployBuilder);
-		
+
 		Map sinkNodeMap = (Map) deployMap.get("sinkNodeDeployConfig");
 		SinkNodeDeployConfig.Builder sinkDeployBuilder = SinkNodeDeployConfig.newBuilder();
-		sinkDeployBuilder.setDeployType(SinkNodeDeployConfig.DeployType.valueOf(Integer.parseInt(sinkNodeMap.get("deployType")
-				.toString())));
+		sinkDeployBuilder
+				.setDeployType(SinkNodeDeployConfig.DeployType.valueOf(Integer.parseInt(sinkNodeMap.get("deployType").toString())));
 		sinkDeployBuilder.setNodeNum(Integer.parseInt(sinkNodeMap.get("nodeNum").toString()));
 		deployBuilder.setSinkNodeDeployConfig(sinkDeployBuilder);
-		
+
 		Map sourceNodeMap = (Map) deployMap.get("sourceEventDeployConfig");
 		SourceEventDeployConfig.Builder sourceDeployBuilder = SourceEventDeployConfig.newBuilder();
 		sourceDeployBuilder.setDeployType(SourceEventDeployConfig.DeployType.valueOf(Integer.parseInt(sourceNodeMap.get("deployType")
@@ -168,7 +207,7 @@ public class HomeController {
 		sourceDeployBuilder.setTimes(Integer.parseInt(sourceNodeMap.get("times").toString()));
 		sourceDeployBuilder.setEventBit(Integer.parseInt(sourceNodeMap.get("eventBit").toString()));
 		deployBuilder.setSourceEventDeployConfig(sourceDeployBuilder);
-		
+
 		simulationConfigbuilder.setDeployConfig(deployBuilder);
 		return true;
 	}

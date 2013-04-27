@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -30,6 +32,7 @@
 		.pagination li a {
 			color: rgb(51, 51, 51);
 		}
+		
 	</style>
 </head>
 <body>
@@ -60,74 +63,48 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>直接发送算法1</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>直接发送算法2</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td>
-						<button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>直接发送算法3</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td>直接发送算法4</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>直接发送算法5</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td>直接发送算法6</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>7</td>
-					<td>直接发送算法6</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
-				<tr>
-					<td>8</td>
-					<td>直接发送算法6</td>
-					<td>2013-04-23</td>
-					<td>成功运行</td>
-					<td><button class="btn" type="button">删除</button></td>
-				</tr>
+				<c:forEach var="log" items="${logs}" varStatus="status">
+					<tr>
+						<td>${page*pageSize + status.count}</td>
+						<td>${log.name}</td>
+						<td><fmt:formatDate value="${log.date}" pattern="yyyy-MM-dd HH:mm:ss" type="date"></fmt:formatDate></td>
+						<td>${statusMap[log.state]}</td>
+						<td>
+							<a class="btn" type="button" href="delete?id=${log.id}&query=${query}&page=${page}">删除</a>
+							<a class="btn" type="button" href="view?id=${log.id}">查看</a>
+						</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<div class="pagination pagination-centered">
 			<ul>
-				<li><a href="#">Previous</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">Next</a></li>
+				<c:choose>
+					<c:when test="${page <= 0}">
+						<li class="disabled"><a href="home?query=${query}&page=0">Previous</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="home?query=${query}&page=${page - 1}">Previous</a></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach begin="1" end="${pageNum}" step="1" var="tempPage">
+					<c:choose>
+						<c:when test="${tempPage - 1 == page}">
+							<li class="active"><a href="home?query=${query}&page=${tempPage - 1}" class="">${tempPage}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="home?query=${query}&page=${tempPage - 1}" class="">${tempPage}</a></li>
+						</c:otherwise>
+					</c:choose>	
+				</c:forEach>
+				<c:choose>
+					<c:when test="${page >= (pageNum - 1)}">
+						<li class="disabled"><a href="home?query=${query}&page=${pageNum - 1}">Next</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="home?query=${query}&page=${page + 1}">Next</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
@@ -145,4 +122,9 @@
 	</div>
 </body>
 <script type="text/javascript" src="resources/js/config.js"></script>
+<script type="text/javascript">
+	$('.pagination .disabled a, .pagination .active a').on('click', function(e) {
+	    e.preventDefault();
+	});
+</script>
 </html>
