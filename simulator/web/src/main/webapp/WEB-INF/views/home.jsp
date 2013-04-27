@@ -7,7 +7,6 @@
 <head>
 	<meta charset='utf-8'>
 	<title>大规模无线传感网络并行模拟器</title>
-	<meta charset="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.css" media="screen"></link>
 	<script type="text/javascript" src="resources/jquery/jquery-1.9.1.js"></script>
