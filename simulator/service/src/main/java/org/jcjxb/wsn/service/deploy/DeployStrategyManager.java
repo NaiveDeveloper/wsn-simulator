@@ -28,7 +28,7 @@ public class DeployStrategyManager {
 		// Generate sink node deploy data
 		SinkNodeDeployConfig sinkConfig = deplyConfig.getSinkNodeDeployConfig();
 		SinkNodeDeployConfig.Builder sinkBuilder = SinkNodeDeployConfig.newBuilder(sinkConfig);
-		sensorBuilder.setPostionList(SinkNodeDeploy.getInstance().deploy(sinkConfig.getNodeNum(), (int) deplyConfig.getWidth(),
+		sinkBuilder.setPostionList(SinkNodeDeploy.getInstance().deploy(sinkConfig.getNodeNum(), (int) deplyConfig.getWidth(),
 				(int) deplyConfig.getHeight(), sinkConfig.getDeployType(), sinkConfig.getPostionList()));
 		deplyBuilder.setSinkNodeDeployConfig(sinkBuilder.build());
 

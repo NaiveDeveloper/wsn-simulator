@@ -78,6 +78,8 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/view" }, method = RequestMethod.GET)
 	public String view(String id, ModelMap modelMap) {
+		Log log = dbOperation.queryById(id);
+		modelMap.put("id", id);
 		return "view";
 	}
 
