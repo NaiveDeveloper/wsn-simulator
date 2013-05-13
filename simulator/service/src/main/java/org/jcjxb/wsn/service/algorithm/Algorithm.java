@@ -16,9 +16,9 @@ import org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig;
 import org.jcjxb.wsn.service.sim.SlaveSimConfig;
 
 public abstract class Algorithm {
-	
+
 	public static long toReceiveEventInterval = 10L;
-	
+
 	public static long eventProcessCycle = 2L;
 
 	protected Map<String, EventHandler> handlerList = new HashMap<String, EventHandler>();
@@ -41,46 +41,69 @@ public abstract class Algorithm {
 
 	protected List<Event> generateEREvent(long virtualTime) {
 		List<Event> events = new ArrayList<Event>();
-		Random random = new Random();
 		SourceEventDeployConfig sourceConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
 				.getSourceEventDeployConfig();
-		DeployConfig deployConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig();
-		SensorNodeDeployConfig sensorConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
-				.getSensorNodeDeployConfig();
-		int soueceNum = 1;
-		if (sourceConfig.hasEventNum()) {
-			soueceNum = sourceConfig.getEventNum();
-		}
-		int allSensorNum = SlaveSimConfig.getInstance().getSensorCount();
-		int slaveNum = SlaveSimConfig.getInstance().getSlaveCount();
+
+		Event.Builder builder = Event.newBuilder();
+		builder.setType("ER");
+		builder.setStartTime(virtualTime);
+		builder.setDataSize(sourceConfig.getEventBit());
+
 		// Distribute source generation task to all slaves
-		for (int i = SlaveSimConfig.getInstance().getHostIndex() % slaveNum; i < soueceNum; i += slaveNum) {
-			int x = random.nextInt((int) deployConfig.getWidth());
-			int y = random.nextInt((int) deployConfig.getHeight());
-			double sourceRadius = sourceConfig.getRadius();
-			PositionList positionList = sensorConfig.getPostionList();
-			Event.Builder builder = Event.newBuilder();
-			builder.setType("ER");
-			builder.setStartTime(virtualTime);
+		if (sourceConfig.getDeployType() == SourceEventDeployConfig.DeployType.ALLNODES) {
 			builder.setEventId(nextEventTime());
-			builder.setDataSize(sourceConfig.getEventBit());
-			// Here a simple way is used to calculate sensors in source event
-			// area. A more efficient way should be used if lots of sensors are
-			// simulated.
-			for (int j = 0; j < positionList.getPostionCount(); ++j) {
-				Position pos = positionList.getPostion(j);
-				double xDis = x - pos.getX();
-				double yDis = y - pos.getY();
-				if (xDis * xDis + yDis * yDis < sourceRadius * sourceRadius) {
-					builder.addSensorId(j);
+			builder.addAllSensorId(SlaveSimConfig.getInstance().getSensorsOnThisSlave());
+			events.add(builder.build());
+		} else {
+			DeployConfig deployConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig();
+			SensorNodeDeployConfig sensorConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
+					.getSensorNodeDeployConfig();
+			int slaveNum = SlaveSimConfig.getInstance().getSlaveCount();
+
+			PositionList.Builder sourcePositionsBuilder = PositionList.newBuilder();
+			int slaveId = SlaveSimConfig.getInstance().getSlaveId();
+			if (sourceConfig.getDeployType() == SourceEventDeployConfig.DeployType.STATIC) {
+				for (int i = slaveId % slaveNum; i < sourceConfig.getPostionList().getPostionCount(); i += slaveNum) {
+					sourcePositionsBuilder.addPostion(sourceConfig.getPostionList().getPostion(i));
+				}
+			} else if (sourceConfig.getDeployType() == SourceEventDeployConfig.DeployType.RANDOM) {
+				// If sourceNum not set, default is 1
+				int soueceNum = 1;
+				if (sourceConfig.hasEventNum()) {
+					soueceNum = sourceConfig.getEventNum();
+				}
+				Random random = new Random();
+				for (int i = slaveId % slaveNum; i < soueceNum; i += slaveNum) {
+					int x = random.nextInt((int) deployConfig.getWidth());
+					int y = random.nextInt((int) deployConfig.getHeight());
+					sourcePositionsBuilder.addPostion(Position.newBuilder().setX(x).setY(y));
 				}
 			}
-			// Put X and Y position data to event data property.
-			Position.Builder positionBuilder = Position.newBuilder();
-			positionBuilder.setX(x);
-			positionBuilder.setY(y);
-			builder.setPostion(positionBuilder.build());
-			events.add(builder.build());
+
+			double sourceRadius = sourceConfig.getRadius();
+			PositionList sensorPositionList = sensorConfig.getPostionList();
+			// Generate events according to source events position list
+			// TODO Loop is not an elegant way, to improve it
+			for (Position sourcePos : sourcePositionsBuilder.getPostionList()) {
+				for (int j = 0; j < sensorPositionList.getPostionCount(); ++j) {
+					Position pos = sensorPositionList.getPostion(j);
+					double xDis = sourcePos.getX() - pos.getX();
+					double yDis = sourcePos.getY() - pos.getY();
+					if (xDis * xDis + yDis * yDis < sourceRadius * sourceRadius) {
+						builder.addSensorId(j);
+					}
+				}
+				if (builder.getSensorIdCount() <= 0) {
+					continue;
+				}
+				builder.setEventId(nextEventTime());
+				// Put X and Y position data to event data property.
+				Position.Builder positionBuilder = Position.newBuilder();
+				positionBuilder.setX(sourcePos.getX());
+				positionBuilder.setY(sourcePos.getY());
+				builder.setPostion(positionBuilder.build());
+				events.add(builder.build());
+			}
 		}
 		return events;
 	}
@@ -107,8 +130,8 @@ public abstract class Algorithm {
 		sourceEventTime = 0;
 		eventTime = 0L;
 	}
-	
-	public void collectSimResult(SimulationResult.Builder builder) {	
+
+	public void collectSimResult(SimulationResult.Builder builder) {
 	}
 
 	protected Event generateEGEvent(long startTime) {

@@ -148,9 +148,11 @@ public class MasterTimeLine {
 			status.setFlag(false);
 		}
 		
+		// Store simulation result in log
+		Log log = MasterSimConfig.getInstance().getLog();
+		log.setEndTime(System.nanoTime());
 		if (status.isFlag()) {
 			SimulationResult result = mergeSimulationResult(resultList);
-			Log log = MasterSimConfig.getInstance().getLog();
 			// Update log status to finished
 			log.setState(1);
 			log.setResult(result.toByteArray());
@@ -158,7 +160,6 @@ public class MasterTimeLine {
 			logger.info("Stop simulation on slaves successfully");
 		} else {
 			logger.error("Not all slaves end simulation successfully");
-			Log log = MasterSimConfig.getInstance().getLog();
 			// Update log status to failed
 			log.setState(2);
 			MasterSimConfig.getInstance().getDbOperation().saveLog(log);

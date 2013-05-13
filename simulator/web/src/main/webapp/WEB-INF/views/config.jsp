@@ -48,7 +48,7 @@
 			<div class="control-group">
 				<label class="control-label">电池初始容量</label>
 				<div class="controls">
-					<input type="text" name="energy" placeholder="double" value="0.5">
+					<input type="text" name="energy" placeholder="double" value="100">
 				</div>
 			</div>
 			<div class="control-group">
@@ -92,7 +92,7 @@
 			<div class="control-group">
 				<label class="control-label">事件源半径</label>
 				<div class="controls">
-					<input type="text" name="radius" placeholder="double" value="80">
+					<input type="text" name="radius" placeholder="double" value="50">
 				</div>
 			</div>
 			<div class="control-group">
@@ -116,7 +116,7 @@
 			<div class="control-group">
 				<label class="control-label">事件数据量</label>
 				<div class="controls">
-					<input type="text" name="eventBit" placeholder="int" value="100">
+					<input type="text" name="eventBit" placeholder="int" value="20">
 				</div>
 			</div>
 		</form>
@@ -136,19 +136,19 @@
 			<div class="control-group">
 				<label class="control-label">发射电路参数</label>
 				<div class="controls">
-					<input type="text" name="transmitter" placeholder="double" value="50">
+					<input type="text" name="transmitter" placeholder="double" value="0.005">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">放大器参数</label>
 				<div class="controls">
-					<input type="text" name="amplifier" placeholder="double" value="100">
+					<input type="text" name="amplifier" placeholder="double" value="0.0001">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">接受电路参数</label>
 				<div class="controls">
-					<input type="text" name="receiver" placeholder="double" value="50">
+					<input type="text" name="receiver" placeholder="double" value="0.005">
 				</div>
 			</div>
 			<div class="control-group">
@@ -160,7 +160,7 @@
 			<div class="control-group">
 				<label class="control-label">传感电路参数</label>
 				<div class="controls">
-					<input type="text" name="sensor" placeholder="double" value="10">
+					<input type="text" name="sensor" placeholder="double" value="0.001">
 				</div>
 			</div>
 		</form>

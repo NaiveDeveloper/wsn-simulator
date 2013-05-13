@@ -1848,10 +1848,12 @@ public final class WSNConfig {
         implements com.google.protobuf.ProtocolMessageEnum {
       RANDOM(0, 0),
       STATIC(1, 1),
+      ALLNODES(2, 2),
       ;
       
       public static final int RANDOM_VALUE = 0;
       public static final int STATIC_VALUE = 1;
+      public static final int ALLNODES_VALUE = 2;
       
       
       public final int getNumber() { return value; }
@@ -1860,6 +1862,7 @@ public final class WSNConfig {
         switch (value) {
           case 0: return RANDOM;
           case 1: return STATIC;
+          case 2: return ALLNODES;
           default: return null;
         }
       }
@@ -1890,7 +1893,7 @@ public final class WSNConfig {
       }
       
       private static final DeployType[] VALUES = {
-        RANDOM, STATIC, 
+        RANDOM, STATIC, ALLNODES, 
       };
       
       public static DeployType valueOf(
@@ -6673,47 +6676,48 @@ public final class WSNConfig {
       "n.service.SinkNodeDeployConfig.DeployTyp" +
       "e\022\017\n\007nodeNum\030\002 \001(\r\0228\n\013postionList\030\004 \001(\0132" +
       "#.org.jcjxb.wsn.service.PositionList\"$\n\n" +
-      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\247\002\n\027S" +
+      "DeployType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\"\265\002\n\027S" +
       "ourceEventDeployConfig\022M\n\ndeployType\030\001 \001" +
       "(\01629.org.jcjxb.wsn.service.SourceEventDe" +
       "ployConfig.DeployType\022\016\n\006radius\030\002 \001(\001\022\020\n" +
       "\010eventNum\030\003 \001(\r\022\025\n\reventInterval\030\004 \001(\r\0228",
       "\n\013postionList\030\005 \001(\0132#.org.jcjxb.wsn.serv" +
       "ice.PositionList\022\r\n\005times\030\006 \001(\r\022\025\n\010event" +
-      "Bit\030\007 \001(\r:\003100\"$\n\nDeployType\022\n\n\006RANDOM\020\000" +
-      "\022\n\n\006STATIC\020\001\"\230\002\n\014DeployConfig\022\r\n\005width\030\001" +
-      " \001(\001\022\016\n\006height\030\002 \001(\001\022M\n\026sensorNodeDeploy" +
-      "Config\030\003 \001(\0132-.org.jcjxb.wsn.service.Sen" +
-      "sorNodeDeployConfig\022I\n\024sinkNodeDeployCon" +
-      "fig\030\004 \001(\0132+.org.jcjxb.wsn.service.SinkNo" +
-      "deDeployConfig\022O\n\027sourceEventDeployConfi" +
-      "g\030\005 \001(\0132..org.jcjxb.wsn.service.SourceEv",
-      "entDeployConfig\"\037\n\017AlgorithmConfig\022\014\n\004na" +
-      "me\030\001 \001(\t\"\342\001\n\017PartitionConfig\022K\n\rpartitio" +
-      "nType\030\001 \001(\01624.org.jcjxb.wsn.service.Part" +
-      "itionConfig.PartitionType\022C\n\021sensorsOnHo" +
-      "stList\030\002 \001(\0132(.org.jcjxb.wsn.service.Sen" +
-      "sorsOnHostList\"=\n\rPartitionType\022\n\n\006RANDO" +
-      "M\020\000\022\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"\345\001" +
-      "\n\023EnergyConsumeConfig\022K\n\013consumeType\030\001 \001" +
-      "(\01626.org.jcjxb.wsn.service.EnergyConsume" +
-      "Config.ConsumeType\022\023\n\013transmitter\030\002 \001(\001\022",
-      "\021\n\tamplifier\030\003 \001(\001\022\020\n\010receiver\030\004 \001(\001\022\020\n\010" +
-      "exponent\030\005 \001(\001\022\016\n\006sensor\030\006 \001(\001\"%\n\013Consum" +
-      "eType\022\n\n\006STATIC\020\000\022\n\n\006SIMPLE\020\001\"v\n\rCommand" +
-      "Config\022C\n\006output\030\001 \001(\0162+.org.jcjxb.wsn.s" +
-      "ervice.CommandConfig.Output:\006SIMPLE\" \n\006O" +
-      "utput\022\n\n\006DETAIL\020\000\022\n\n\006SIMPLE\020\001\"\343\002\n\020Simula" +
-      "tionConfig\0229\n\014deployConfig\030\001 \001(\0132#.org.j" +
-      "cjxb.wsn.service.DeployConfig\022?\n\017algorit" +
-      "hmConfig\030\002 \001(\0132&.org.jcjxb.wsn.service.A" +
-      "lgorithmConfig\022?\n\017partitionConfig\030\003 \001(\0132",
-      "&.org.jcjxb.wsn.service.PartitionConfig\022" +
-      "G\n\023energyConsumeConfig\030\004 \001(\0132*.org.jcjxb" +
-      ".wsn.service.EnergyConsumeConfig\022;\n\rcomm" +
-      "andConfig\030\005 \001(\0132$.org.jcjxb.wsn.service." +
-      "CommandConfig\022\014\n\004name\030\006 \001(\tB(\n\033org.jcjxb" +
-      ".wsn.service.protoB\tWSNConfig"
+      "Bit\030\007 \001(\r:\003100\"2\n\nDeployType\022\n\n\006RANDOM\020\000" +
+      "\022\n\n\006STATIC\020\001\022\014\n\010ALLNODES\020\002\"\230\002\n\014DeployCon" +
+      "fig\022\r\n\005width\030\001 \001(\001\022\016\n\006height\030\002 \001(\001\022M\n\026se" +
+      "nsorNodeDeployConfig\030\003 \001(\0132-.org.jcjxb.w" +
+      "sn.service.SensorNodeDeployConfig\022I\n\024sin" +
+      "kNodeDeployConfig\030\004 \001(\0132+.org.jcjxb.wsn." +
+      "service.SinkNodeDeployConfig\022O\n\027sourceEv" +
+      "entDeployConfig\030\005 \001(\0132..org.jcjxb.wsn.se",
+      "rvice.SourceEventDeployConfig\"\037\n\017Algorit" +
+      "hmConfig\022\014\n\004name\030\001 \001(\t\"\342\001\n\017PartitionConf" +
+      "ig\022K\n\rpartitionType\030\001 \001(\01624.org.jcjxb.ws" +
+      "n.service.PartitionConfig.PartitionType\022" +
+      "C\n\021sensorsOnHostList\030\002 \001(\0132(.org.jcjxb.w" +
+      "sn.service.SensorsOnHostList\"=\n\rPartitio" +
+      "nType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020" +
+      "\002\022\010\n\004GRID\020\003\"\345\001\n\023EnergyConsumeConfig\022K\n\013c" +
+      "onsumeType\030\001 \001(\01626.org.jcjxb.wsn.service" +
+      ".EnergyConsumeConfig.ConsumeType\022\023\n\013tran",
+      "smitter\030\002 \001(\001\022\021\n\tamplifier\030\003 \001(\001\022\020\n\010rece" +
+      "iver\030\004 \001(\001\022\020\n\010exponent\030\005 \001(\001\022\016\n\006sensor\030\006" +
+      " \001(\001\"%\n\013ConsumeType\022\n\n\006STATIC\020\000\022\n\n\006SIMPL" +
+      "E\020\001\"v\n\rCommandConfig\022C\n\006output\030\001 \001(\0162+.o" +
+      "rg.jcjxb.wsn.service.CommandConfig.Outpu" +
+      "t:\006SIMPLE\" \n\006Output\022\n\n\006DETAIL\020\000\022\n\n\006SIMPL" +
+      "E\020\001\"\343\002\n\020SimulationConfig\0229\n\014deployConfig" +
+      "\030\001 \001(\0132#.org.jcjxb.wsn.service.DeployCon" +
+      "fig\022?\n\017algorithmConfig\030\002 \001(\0132&.org.jcjxb" +
+      ".wsn.service.AlgorithmConfig\022?\n\017partitio",
+      "nConfig\030\003 \001(\0132&.org.jcjxb.wsn.service.Pa" +
+      "rtitionConfig\022G\n\023energyConsumeConfig\030\004 \001" +
+      "(\0132*.org.jcjxb.wsn.service.EnergyConsume" +
+      "Config\022;\n\rcommandConfig\030\005 \001(\0132$.org.jcjx" +
+      "b.wsn.service.CommandConfig\022\014\n\004name\030\006 \001(" +
+      "\tB(\n\033org.jcjxb.wsn.service.protoB\tWSNCon" +
+      "fig"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

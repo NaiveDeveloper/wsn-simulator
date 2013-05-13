@@ -50,14 +50,15 @@ public class SlaveTimeLine {
 	}
 
 	public boolean run(long globalVirtualTime, LVTSync.Builder syncBuilder) {
-		logger.debug(String.format("Event num in queue is %d", eventQueue.size()));
+		logger.info(String.format("Event num in queue is %d", eventQueue.size()));
 		if (globalVirtualTime == 0L) {
 			List<Event> eventList = SlaveSimConfig.getInstance().getAlgorithm().start();
-			logger.debug("Global virtual time is 0L, call algorithm start method, return events num "
+			logger.info("Global virtual time is 0L, call algorithm start method, return events num "
 					+ (eventList == null ? 0 : eventList.size()));
 			return processNewEvents(eventList, syncBuilder);
 		} else {
 			List<Event> allEventList = new ArrayList<Event>();
+			int processEventNum = 0;
 			while (!eventQueue.isEmpty() && eventQueue.peek().getStartTime() == globalVirtualTime) {
 				Event event = eventQueue.poll();
 				List<Event> eventList = SlaveSimConfig.getInstance().getAlgorithm().generate(event);
@@ -68,7 +69,9 @@ public class SlaveTimeLine {
 				if(SlaveSimConfig.getInstance().outputDetail()) {
 					syncBuilder.addProcessedEvent(event);
 				}
+				++processEventNum;
 			}
+			logger.info(String.format("Processed num in cycle %d is %d", globalVirtualTime, processEventNum));
 			return processNewEvents(allEventList, syncBuilder);
 		}
 	}

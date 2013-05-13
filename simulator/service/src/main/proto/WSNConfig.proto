@@ -37,6 +37,7 @@ message SourceEventDeployConfig {
 	enum DeployType {
 		RANDOM = 0;
 		STATIC = 1;
+		ALLNODES = 2;
 	}
 
 	optional DeployType deployType = 1;

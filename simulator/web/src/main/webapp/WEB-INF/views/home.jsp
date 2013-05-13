@@ -58,6 +58,7 @@
 					<th>名称</th>
 					<th>时间</th>
 					<th>状态</th>
+					<th>运行时间</th>
 					<th>操作</th>
 				</tr>
 			</thead>
@@ -69,8 +70,15 @@
 						<td><fmt:formatDate value="${log.date}" pattern="yyyy-MM-dd HH:mm:ss" type="date"></fmt:formatDate></td>
 						<td>${statusMap[log.state]}</td>
 						<td>
+							<fmt:formatNumber maxFractionDigits="3" value="${(log.endTime - log.startTime) / 1000000}">
+							</fmt:formatNumber>
+							毫秒
+						</td>
+						<td>
 							<a class="btn" type="button" href="delete?id=${log.id}&query=${query}&page=${page}">删除</a>
-							<a class="btn" type="button" href="view?id=${log.id}">查看</a>
+							<c:if test="${log.state eq 1}">
+								<a class="btn" type="button" href="view?id=${log.id}">查看</a>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>

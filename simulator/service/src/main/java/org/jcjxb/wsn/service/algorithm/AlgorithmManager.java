@@ -10,7 +10,6 @@ public class AlgorithmManager {
 	private Map<String, Algorithm> algorithms = new HashMap<String, Algorithm>();
 
 	private AlgorithmManager() {
-		algorithms.put("TESTER", new TesterAlgorithm());
 		algorithms.put("DIRECT", new DirectAlgorithm());
 	}
 

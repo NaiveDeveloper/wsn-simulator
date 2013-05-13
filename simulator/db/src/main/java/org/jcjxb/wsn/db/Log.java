@@ -24,12 +24,17 @@ public class Log {
 	
 	private Date date;
 	
+	private long startTime; // nanoTime
+	
+	private long endTime; // nanoTime
+	
 	private static Map<Integer, String> statusMap = new HashMap<Integer, String>();
 	
 	{
 		statusMap.put(0, "正在运行");
 		statusMap.put(1, "成功运行");
 		statusMap.put(2, "运行失败");
+		System.nanoTime();
 	}
 
 	public String getId() {
@@ -102,5 +107,21 @@ public class Log {
 
 	public static Map<Integer, String> getStatusMap() {
 		return statusMap;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	public long getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(long endTime) {
+		this.endTime = endTime;
 	}
 }

@@ -1,5 +1,6 @@
 package org.jcjxb.wsn.service.sim;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ public class SimConfig {
 	protected volatile boolean isSimRunning = false;
 
 	protected SimulationConfig simulationConfig = null;
+	
+	protected List<Integer> sensorIds = null;
 
 	protected SimConfig() {
 	}
@@ -29,9 +32,11 @@ public class SimConfig {
 		this.simulationConfig = simulationConfig;
 		sensorsToSlaveMap = new HashMap<Integer, Integer>();
 		slaveToSensorsMap = new HashMap<Integer, List<Integer>>();
+		sensorIds = new ArrayList<Integer>();
 		for (SensorsOnHost sensorsOnHost : simulationConfig.getPartitionConfig().getSensorsOnHostList().getSensorsOnHostList()) {
 			addSenorToMap(sensorsToSlaveMap, sensorsOnHost);
 			slaveToSensorsMap.put(sensorsOnHost.getHostIndex(), sensorsOnHost.getSensorIdList());
+			sensorIds.addAll(sensorsOnHost.getSensorIdList());
 		}
 	}
 
@@ -43,8 +48,10 @@ public class SimConfig {
 
 	public void clear() {
 		this.sensorsToSlaveMap = null;
+		this.slaveToSensorsMap = null;
 		this.isSimRunning = false;
 		this.simulationConfig = null;
+		this.sensorIds = null;
 	}
 
 	public int getSlaveCount() {
@@ -81,5 +88,9 @@ public class SimConfig {
 
 	public boolean outputDetail() {
 		return simulationConfig.getCommandConfig().getOutput() == CommandConfig.Output.DETAIL;
+	}
+	
+	public List<Integer> getAllSensors() {
+		return sensorIds;
 	}
 }

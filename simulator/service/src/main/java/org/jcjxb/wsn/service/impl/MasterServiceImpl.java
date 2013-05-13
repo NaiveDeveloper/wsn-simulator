@@ -72,16 +72,19 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			// Insert log to db
 			Log log = MasterSimConfig.getInstance().getLog();
 			log.setState(0);
+			log.setStartTime(System.nanoTime());
 			if (!MasterSimConfig.getInstance().getDbOperation().saveLog(log)) {
 				controller.setFailed("Insert start up log into db failed");
 				logger.error("Insert initialization log to db failed");
 				return Empty.getDefaultInstance();
 			}
 			
+			// Setting detail log output directory
 			if(MasterSimConfig.getInstance().outputDetail()) {
 				log.setEventDetailDir(MasterSimConfig.getInstance().getLogPath() + log.getId() + "/");
 			}
 
+			// Notify all slaves to start simulation
 			int slaveCount = MasterSimConfig.getInstance().getHostConfig().getSlaveHostCount();
 			final CountDownLatch latch = new CountDownLatch(slaveCount);
 			final Status status = new Status(true);
