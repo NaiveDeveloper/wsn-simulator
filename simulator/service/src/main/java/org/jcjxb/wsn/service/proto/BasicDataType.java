@@ -986,9 +986,10 @@ public final class BasicDataType {
     boolean hasDataSize();
     int getDataSize();
     
-    // optional int32 senderNodeId = 7;
-    boolean hasSenderNodeId();
-    int getSenderNodeId();
+    // repeated int32 senderNodeId = 7;
+    java.util.List<java.lang.Integer> getSenderNodeIdList();
+    int getSenderNodeIdCount();
+    int getSenderNodeId(int index);
     
     // optional int64 fromEventId = 9;
     boolean hasFromEventId();
@@ -1200,21 +1201,25 @@ public final class BasicDataType {
       return dataSize_;
     }
     
-    // optional int32 senderNodeId = 7;
+    // repeated int32 senderNodeId = 7;
     public static final int SENDERNODEID_FIELD_NUMBER = 7;
-    private int senderNodeId_;
-    public boolean hasSenderNodeId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    public int getSenderNodeId() {
+    private java.util.List<java.lang.Integer> senderNodeId_;
+    public java.util.List<java.lang.Integer>
+        getSenderNodeIdList() {
       return senderNodeId_;
+    }
+    public int getSenderNodeIdCount() {
+      return senderNodeId_.size();
+    }
+    public int getSenderNodeId(int index) {
+      return senderNodeId_.get(index);
     }
     
     // optional int64 fromEventId = 9;
     public static final int FROMEVENTID_FIELD_NUMBER = 9;
     private long fromEventId_;
     public boolean hasFromEventId() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public long getFromEventId() {
       return fromEventId_;
@@ -1224,7 +1229,7 @@ public final class BasicDataType {
     public static final int SENSOREVENT_FIELD_NUMBER = 10;
     private boolean sensorEvent_;
     public boolean hasSensorEvent() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public boolean getSensorEvent() {
       return sensorEvent_;
@@ -1234,7 +1239,7 @@ public final class BasicDataType {
     public static final int POSTION_FIELD_NUMBER = 11;
     private org.jcjxb.wsn.service.proto.BasicDataType.Position postion_;
     public boolean hasPostion() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public org.jcjxb.wsn.service.proto.BasicDataType.Position getPostion() {
       return postion_;
@@ -1251,7 +1256,7 @@ public final class BasicDataType {
       type_ = "";
       data_ = com.google.protobuf.ByteString.EMPTY;
       dataSize_ = 0;
-      senderNodeId_ = 0;
+      senderNodeId_ = java.util.Collections.emptyList();;
       fromEventId_ = 0L;
       sensorEvent_ = true;
       postion_ = org.jcjxb.wsn.service.proto.BasicDataType.Position.getDefaultInstance();
@@ -1286,19 +1291,19 @@ public final class BasicDataType {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, dataSize_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, senderNodeId_);
+      for (int i = 0; i < senderNodeId_.size(); i++) {
+        output.writeInt32(7, senderNodeId_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(8, eventId_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(9, fromEventId_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBool(10, sensorEvent_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeMessage(11, postion_);
       }
       getUnknownFields().writeTo(output);
@@ -1339,23 +1344,28 @@ public final class BasicDataType {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, dataSize_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, senderNodeId_);
+      {
+        int dataSize = 0;
+        for (int i = 0; i < senderNodeId_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(senderNodeId_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSenderNodeIdList().size();
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(8, eventId_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(9, fromEventId_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(10, sensorEvent_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(11, postion_);
       }
@@ -1498,7 +1508,7 @@ public final class BasicDataType {
         bitField0_ = (bitField0_ & ~0x00000020);
         dataSize_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        senderNodeId_ = 0;
+        senderNodeId_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000080);
         fromEventId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000100);
@@ -1577,20 +1587,21 @@ public final class BasicDataType {
           to_bitField0_ |= 0x00000020;
         }
         result.dataSize_ = dataSize_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000040;
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          senderNodeId_ = java.util.Collections.unmodifiableList(senderNodeId_);
+          bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.senderNodeId_ = senderNodeId_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000080;
+          to_bitField0_ |= 0x00000040;
         }
         result.fromEventId_ = fromEventId_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000100;
+          to_bitField0_ |= 0x00000080;
         }
         result.sensorEvent_ = sensorEvent_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000200;
+          to_bitField0_ |= 0x00000100;
         }
         if (postionBuilder_ == null) {
           result.postion_ = postion_;
@@ -1641,8 +1652,15 @@ public final class BasicDataType {
         if (other.hasDataSize()) {
           setDataSize(other.getDataSize());
         }
-        if (other.hasSenderNodeId()) {
-          setSenderNodeId(other.getSenderNodeId());
+        if (!other.senderNodeId_.isEmpty()) {
+          if (senderNodeId_.isEmpty()) {
+            senderNodeId_ = other.senderNodeId_;
+            bitField0_ = (bitField0_ & ~0x00000080);
+          } else {
+            ensureSenderNodeIdIsMutable();
+            senderNodeId_.addAll(other.senderNodeId_);
+          }
+          onChanged();
         }
         if (other.hasFromEventId()) {
           setFromEventId(other.getFromEventId());
@@ -1730,8 +1748,17 @@ public final class BasicDataType {
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000080;
-              senderNodeId_ = input.readInt32();
+              ensureSenderNodeIdIsMutable();
+              senderNodeId_.add(input.readInt32());
+              break;
+            }
+            case 58: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addSenderNodeId(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
             case 64: {
@@ -1956,23 +1983,47 @@ public final class BasicDataType {
         return this;
       }
       
-      // optional int32 senderNodeId = 7;
-      private int senderNodeId_ ;
-      public boolean hasSenderNodeId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+      // repeated int32 senderNodeId = 7;
+      private java.util.List<java.lang.Integer> senderNodeId_ = java.util.Collections.emptyList();;
+      private void ensureSenderNodeIdIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          senderNodeId_ = new java.util.ArrayList<java.lang.Integer>(senderNodeId_);
+          bitField0_ |= 0x00000080;
+         }
       }
-      public int getSenderNodeId() {
-        return senderNodeId_;
+      public java.util.List<java.lang.Integer>
+          getSenderNodeIdList() {
+        return java.util.Collections.unmodifiableList(senderNodeId_);
       }
-      public Builder setSenderNodeId(int value) {
-        bitField0_ |= 0x00000080;
-        senderNodeId_ = value;
+      public int getSenderNodeIdCount() {
+        return senderNodeId_.size();
+      }
+      public int getSenderNodeId(int index) {
+        return senderNodeId_.get(index);
+      }
+      public Builder setSenderNodeId(
+          int index, int value) {
+        ensureSenderNodeIdIsMutable();
+        senderNodeId_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addSenderNodeId(int value) {
+        ensureSenderNodeIdIsMutable();
+        senderNodeId_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllSenderNodeId(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSenderNodeIdIsMutable();
+        super.addAll(values, senderNodeId_);
         onChanged();
         return this;
       }
       public Builder clearSenderNodeId() {
+        senderNodeId_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000080);
-        senderNodeId_ = 0;
         onChanged();
         return this;
       }
@@ -3877,7 +3928,7 @@ public final class BasicDataType {
       "nt.Priority:\017PRIORITY_NORMAL\022\017\n\007eventId\030" +
       "\010 \001(\003\022\021\n\tstartTime\030\002 \001(\003\022\020\n\010sensorId\030\003 \003" +
       "(\005\022\014\n\004type\030\004 \001(\t\022\014\n\004data\030\005 \001(\014\022\020\n\010dataSi" +
-      "ze\030\006 \001(\005\022\024\n\014senderNodeId\030\007 \001(\005\022\023\n\013fromEv" +
+      "ze\030\006 \001(\005\022\024\n\014senderNodeId\030\007 \003(\005\022\023\n\013fromEv" +
       "entId\030\t \001(\003\022\031\n\013sensorEvent\030\n \001(\010:\004true\0220",
       "\n\007postion\030\013 \001(\0132\037.org.jcjxb.wsn.service." +
       "Position\"D\n\010Priority\022\021\n\rPRIORITY_HIGH\020\000\022" +

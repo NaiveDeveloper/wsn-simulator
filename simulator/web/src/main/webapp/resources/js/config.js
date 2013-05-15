@@ -19,6 +19,14 @@ function addConfig() {
 }
 
 function preStep() {
+	step--;
+	if(step == 0) {
+		$("#addSimModal .modal-body").load("config");
+	} else {
+		$("#addSimModal .modal-body").load("config?step=" + algorithms[simulationConfig.algorithmConfig.name].steps[step - 1]);
+	}
+	// 如果是提交，改为下一步
+	$("#addSimModal #next").text("下一步");
 	checkPreButton();
 }
 
@@ -45,11 +53,11 @@ function nextStep() {
 		// 修改下一步为提交
 		$("#addSimModal #next").text("提交");
 	}
-	// checkPreButton();
+	checkPreButton();
 }
 
 function checkPreButton() {
-	if(step <= 1) {
+	if(step < 1) {
 		$("#addSimModal #pre").attr("disabled", "disabled");
 	} else {
 		$("#addSimModal #pre").removeAttr("disabled");
@@ -60,6 +68,10 @@ var algorithms = {
 	'DIRECT': {
 		steps : [1, 2, 3, 4, 5, 6, 7],
 		funcs : [step1, step2, step3, step4, step5, step6, step7]
+	},
+	'LEACH': {
+		steps : [1, 2, 3, 4, 5, 8, 6, 7],
+		funcs : [step1, step2, step3, step4, step5, step8, step6, step7]
 	}
 };
 
@@ -90,7 +102,7 @@ function submitConfig() {
 
 // 选择算法
 function step0() {
-	var name = $("#addSimModal .modal-body form input[name=name]").val();
+	var name = $("#addSimModal .modal-body form input[name=name]:checked").val();
 	if(name) {
 		simulationConfig.algorithmConfig = {name : name};
 	} else {
@@ -122,12 +134,13 @@ function step2() {
 		simulationConfig.deployConfig = {};
 	}
 	simulationConfig.deployConfig.sensorNodeDeployConfig = {};
+	var sensorNodeDeployConfig = simulationConfig.deployConfig.sensorNodeDeployConfig;
 	for(var i = 0; i < formData.length; ++i) {
 		var item = formData[i];
 		if(!item.value) {
 			return false;
 		}
-		simulationConfig.deployConfig.sensorNodeDeployConfig[item.name] = item.value;
+		sensorNodeDeployConfig[item.name] = item.value;
 	}
 	return true;
 }
@@ -139,12 +152,13 @@ function step3() {
 		simulationConfig.deployConfig = {};
 	}
 	simulationConfig.deployConfig.sinkNodeDeployConfig = {};
+	var sinkNodeDeployConfig = simulationConfig.deployConfig.sinkNodeDeployConfig;
 	for(var i = 0; i < formData.length; ++i) {
 		var item = formData[i];
 		if(!item.value) {
 			return false;
 		}
-		simulationConfig.deployConfig.sinkNodeDeployConfig[item.name] = item.value;
+		sinkNodeDeployConfig[item.name] = item.value;
 	}
 	return true;
 }
@@ -156,12 +170,13 @@ function step4() {
 		simulationConfig.deployConfig = {};
 	}
 	simulationConfig.deployConfig.sourceEventDeployConfig = {};
+	var sourceEventDeployConfig = simulationConfig.deployConfig.sourceEventDeployConfig;
 	for(var i = 0; i < formData.length; ++i) {
 		var item = formData[i];
 		if(!item.value) {
 			return false;
 		}
-		simulationConfig.deployConfig.sourceEventDeployConfig[item.name] = item.value;
+		sourceEventDeployConfig[item.name] = item.value;
 	}
 	return true;
 }
@@ -207,6 +222,21 @@ function step7() {
 			return false;
 		}
 		simulationConfig[item.name] = item.value;
+	}
+	return true;
+}
+
+// LEACH专有参数
+function step8() {
+	var formData = $("#addSimModal .modal-body form").serializeArray();
+	simulationConfig.algorithmConfig.leachConfig = {};
+	var leachConfig = simulationConfig.algorithmConfig.leachConfig;
+	for(var i = 0; i < formData.length; ++i) {
+		var item = formData[i];
+		if(!item.value) {
+			return false;
+		}
+		leachConfig[item.name] = item.value;
 	}
 	return true;
 }

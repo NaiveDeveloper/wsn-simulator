@@ -16,7 +16,7 @@ message SensorNodeDeployConfig {
 		CIRCLE = 3;
 	}
 
-	optional DeployType deployType = 1;
+	optional DeployType deployType = 1 [default = RANDOM];
 	optional uint32 nodeNum = 2;
 	optional SensorConfig sensorConfig = 3;
 	optional PositionList postionList = 4;
@@ -26,9 +26,10 @@ message SinkNodeDeployConfig {
 	enum DeployType {
 		RANDOM = 0;
 		STATIC = 1;
+		ONEINCENTER =2;
 	}
 
-	optional DeployType deployType = 1;
+	optional DeployType deployType = 1 [default = RANDOM];
 	optional uint32 nodeNum = 2;
 	optional PositionList postionList = 4;
 }
@@ -40,7 +41,7 @@ message SourceEventDeployConfig {
 		ALLNODES = 2;
 	}
 
-	optional DeployType deployType = 1;
+	optional DeployType deployType = 1 [default = RANDOM];
 	optional double radius = 2;
 	optional uint32 eventNum = 3;
 	optional uint32 eventInterval = 4;
@@ -57,8 +58,15 @@ message DeployConfig {
 	optional SourceEventDeployConfig sourceEventDeployConfig = 5;
 }
 
+message LeachConfig {
+	optional uint32 clusterNum = 1;
+	optional uint32 clusterBuiltCycle = 2;
+	optional uint32 dataSubmitTimes = 3; // Data submit times in each sable period
+}
+
 message AlgorithmConfig {
 	optional string name = 1;
+	optional LeachConfig leachConfig = 2;
 }
 
 message PartitionConfig {

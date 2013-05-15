@@ -20,6 +20,7 @@ import org.jcjxb.wsn.service.proto.WSNConfig.CommandConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig.ConsumeType;
+import org.jcjxb.wsn.service.proto.WSNConfig.LeachConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.PartitionConfig.PartitionType;
 import org.jcjxb.wsn.service.proto.WSNConfig.SensorConfig;
@@ -211,6 +212,17 @@ public class HomeController {
 		deployBuilder.setSourceEventDeployConfig(sourceDeployBuilder);
 
 		simulationConfigbuilder.setDeployConfig(deployBuilder);
+		
+		// 设置算相关的专有参数
+		String algorithmName = simulationConfigbuilder.getAlgorithmConfig().getName();
+		if("LEACH".endsWith(algorithmName)) {
+			Map leachConfigMap = (Map) algorithmMap.get("leachConfig");
+			LeachConfig.Builder leachConfigBuilder = LeachConfig.newBuilder();
+			leachConfigBuilder.setClusterNum(Integer.parseInt(leachConfigMap.get("clusterNum").toString()));
+			leachConfigBuilder.setClusterBuiltCycle(Integer.parseInt(leachConfigMap.get("clusterBuiltCycle").toString()));
+			leachConfigBuilder.setDataSubmitTimes(Integer.parseInt(leachConfigMap.get("dataSubmitTimes").toString()));
+			simulationConfigbuilder.getAlgorithmConfigBuilder().setLeachConfig(leachConfigBuilder);
+		}
 		return true;
 	}
 }

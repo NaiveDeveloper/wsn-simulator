@@ -49,7 +49,7 @@ public class DirectAlgorithm extends Algorithm {
 	public void collectSimResult(SimulationResult.Builder builder) {
 		super.collectSimResult(builder);
 		EnergyData.Builder energyDataBuilder = EnergyData.newBuilder();
-		for(SensorNode node : sensorNodes.values()) {
+		for (SensorNode node : sensorNodes.values()) {
 			energyDataBuilder.setDie(node.getState() == 2);
 			energyDataBuilder.setEneryLeft(node.getEnergy());
 			energyDataBuilder.setNodeId(node.getId());
@@ -72,7 +72,7 @@ public class DirectAlgorithm extends Algorithm {
 		}
 	}
 
-	// ER means event receive, which happens on sensor node
+	// ER means event receive
 	private class EREventHandler implements EventHandler {
 
 		@Override
@@ -93,7 +93,7 @@ public class DirectAlgorithm extends Algorithm {
 					node.setState(2);
 				}
 			}
-			if (!builder.hasSenderNodeId()) {
+			if (builder.getSenderNodeIdCount() <= 0) {
 				return null;
 			}
 			builder.setDataSize(event.getDataSize());
@@ -107,7 +107,7 @@ public class DirectAlgorithm extends Algorithm {
 		}
 	}
 
-	// EF means event forward, which happens on sensor node
+	// EF means event forward
 	private class EFEventHandler implements EventHandler {
 
 		@Override
@@ -127,6 +127,13 @@ public class DirectAlgorithm extends Algorithm {
 				} else {
 					node.setEnergy(node.getEnergy() - energyCost);
 				}
+			}
+			if (hasNextEGEvent()) {
+				List<Event> events = new ArrayList<Event>(1);
+				events.add(generateEGEvent(event.getStartTime()
+						+ SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSourceEventDeployConfig()
+								.getEventInterval()));
+				return events;
 			}
 			return null;
 		}

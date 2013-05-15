@@ -17,9 +17,9 @@ import org.jcjxb.wsn.service.sim.SlaveSimConfig;
 
 public abstract class Algorithm {
 
-	public static long toReceiveEventInterval = 10L;
+	public static long toReceiveEventInterval = 2L;
 
-	public static long eventProcessCycle = 2L;
+	public static long eventProcessCycle = 1L;
 
 	protected Map<String, EventHandler> handlerList = new HashMap<String, EventHandler>();
 
@@ -143,24 +143,27 @@ public abstract class Algorithm {
 		++sourceEventTime;
 		return builder.build();
 	}
+	
+	protected boolean hasNextEGEvent() {
+		SourceEventDeployConfig sourceConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
+				.getSourceEventDeployConfig();
+		if (!sourceConfig.hasTimes() || sourceConfig.getTimes() < 0 || sourceEventTime <= sourceConfig.getTimes()) {
+			return true;
+		}
+		return false;
+	}
 
 	public interface EventHandler {
 		public List<Event> handle(Event event);
 	}
 
-	// EG means event generator, which happens on source node
+	// EG means event generator
 	private class EGEventHandler implements EventHandler {
 
 		@Override
 		public List<Event> handle(Event event) {
 			long nextVirtualTime = event.getStartTime() + toReceiveEventInterval;
 			List<Event> events = generateEREvent(nextVirtualTime);
-			// Generate next EG event
-			SourceEventDeployConfig sourceConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
-					.getSourceEventDeployConfig();
-			if (!sourceConfig.hasTimes() || sourceConfig.getTimes() < 0 || sourceEventTime <= sourceConfig.getTimes()) {
-				events.add(generateEGEvent(event.getStartTime() + sourceConfig.getEventInterval()));
-			}
 			return events;
 		}
 	}

@@ -25,7 +25,7 @@ message Event {
 	optional string type = 4;
 	optional bytes data = 5;
 	optional int32 dataSize = 6;
-	optional int32 senderNodeId = 7;
+	repeated int32 senderNodeId = 7;
 	optional int64 fromEventId = 9;
 	optional bool sensorEvent = 10 [default = true];
 	optional Position postion = 11;

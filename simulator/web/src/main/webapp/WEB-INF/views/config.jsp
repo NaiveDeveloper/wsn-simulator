@@ -6,8 +6,12 @@
 		<h4 class="text-center">选择算法</h4>
 		<form>
 			<label class="radio">
-  				<input type="radio" name="name" value="DIRECT" checked>
+  				<input type="radio" name="name" value="DIRECT">
   				直接转发路由协议
+			</label>
+			<label class="radio">
+  				<input type="radio" name="name" value="LEACH" checked>
+  				LEACH路由协议
 			</label>
 		</form>
 	</c:when>
@@ -51,6 +55,7 @@
 					<input type="text" name="energy" placeholder="double" value="100">
 				</div>
 			</div>
+			<!-- In some algorithms, this attribute is never used -->
 			<div class="control-group">
 				<label class="control-label">传输范围</label>
 				<div class="controls">
@@ -67,6 +72,7 @@
 				<div class="controls">
 					<select name="deployType">
 						<option value="0">随机部署</option>
+						<option value="2" selected="selected">中心部署</option>
 					</select>
 				</div>
 			</div>
@@ -82,10 +88,11 @@
 		<h4 class="text-center">部署配置(事件源配置)</h4>
 		<form class="form-horizontal">
 			<div class="control-group">
-				<label class="control-label">部署类型</label>
+				<label class="control-label">事件源类型</label>
 				<div class="controls">
 					<select name="deployType">
-						<option value="0">随机部署</option>
+						<option value="0">随机区域</option>
+						<option value="2" selected="selected">所有节点</option>
 					</select>
 				</div>
 			</div>
@@ -128,8 +135,8 @@
 				<label class="control-label">消耗模型</label>
 				<div class="controls">
 					<select name="consumeType">
-						<option value="0">固定消耗</option>
-						<option value="1" selected>简单模型消耗</option>
+						<option value="0">固定消耗模型</option>
+						<option value="1" selected>指数次消耗模型</option>
 					</select>
 				</div>
 			</div>
@@ -184,7 +191,31 @@
 			<div class="control-group">
 				<label class="control-label">实验名称</label>
 				<div class="controls">
-					<input type="text" name="name" placeholder="string" value="直接发送算法模拟实验">
+					<input type="text" name="name" placeholder="string" value="无线网络网络模拟实验">
+				</div>
+			</div>
+		</form>
+	</c:when>
+	<%-- Specific configuration for LEACH algorithm --%>
+	<c:when test="${param['step'] eq 8}">
+		<h4 class="text-center">LEACH专有参数</h4>
+		<form>
+			<div class="control-group">
+				<label class="control-label">群集数量</label>
+				<div class="controls">
+					<input type="text" name="clusterNum" placeholder="int" value="5">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">群集构建时间</label>
+				<div class="controls">
+					<input type="text" name="clusterBuiltCycle" placeholder="int" value="100">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">稳定时段提交数据次数</label>
+				<div class="controls">
+					<input type="text" name="dataSubmitTimes" placeholder="int" value="50">
 				</div>
 			</div>
 		</form>

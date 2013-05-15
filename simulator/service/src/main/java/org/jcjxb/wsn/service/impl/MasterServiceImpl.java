@@ -139,8 +139,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 
 	@Override
 	public Empty stopSimulation(RpcController controller, Empty request) throws ServiceException {
-		// Notify all slaves to stop simulation
-		// TODO
+		// TODO Notify all slaves to stop simulation
 		MasterSimConfig.getInstance().clear();
 		return Empty.getDefaultInstance();
 	}
