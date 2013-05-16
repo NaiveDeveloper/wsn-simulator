@@ -376,6 +376,11 @@ public final class SlaveService {
         getProcessedEventOrBuilderList();
     org.jcjxb.wsn.service.proto.BasicDataType.EventOrBuilder getProcessedEventOrBuilder(
         int index);
+    
+    // optional .org.jcjxb.wsn.service.ProcessJournal processJournal = 5;
+    boolean hasProcessJournal();
+    org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal getProcessJournal();
+    org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder getProcessJournalOrBuilder();
   }
   public static final class LVTSync extends
       com.google.protobuf.GeneratedMessage
@@ -863,11 +868,25 @@ public final class SlaveService {
       return processedEvent_.get(index);
     }
     
+    // optional .org.jcjxb.wsn.service.ProcessJournal processJournal = 5;
+    public static final int PROCESSJOURNAL_FIELD_NUMBER = 5;
+    private org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal processJournal_;
+    public boolean hasProcessJournal() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal getProcessJournal() {
+      return processJournal_;
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder getProcessJournalOrBuilder() {
+      return processJournal_;
+    }
+    
     private void initFields() {
       slaveId_ = 0;
       localTime_ = 0L;
       update_ = java.util.Collections.emptyList();
       processedEvent_ = java.util.Collections.emptyList();
+      processJournal_ = org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -893,6 +912,9 @@ public final class SlaveService {
       for (int i = 0; i < processedEvent_.size(); i++) {
         output.writeMessage(4, processedEvent_.get(i));
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(5, processJournal_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -917,6 +939,10 @@ public final class SlaveService {
       for (int i = 0; i < processedEvent_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, processedEvent_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, processJournal_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1036,6 +1062,7 @@ public final class SlaveService {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getUpdateFieldBuilder();
           getProcessedEventFieldBuilder();
+          getProcessJournalFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1060,6 +1087,12 @@ public final class SlaveService {
         } else {
           processedEventBuilder_.clear();
         }
+        if (processJournalBuilder_ == null) {
+          processJournal_ = org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance();
+        } else {
+          processJournalBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -1123,6 +1156,14 @@ public final class SlaveService {
           result.processedEvent_ = processedEvent_;
         } else {
           result.processedEvent_ = processedEventBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (processJournalBuilder_ == null) {
+          result.processJournal_ = processJournal_;
+        } else {
+          result.processJournal_ = processJournalBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1198,6 +1239,9 @@ public final class SlaveService {
             }
           }
         }
+        if (other.hasProcessJournal()) {
+          mergeProcessJournal(other.getProcessJournal());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1249,6 +1293,15 @@ public final class SlaveService {
               org.jcjxb.wsn.service.proto.BasicDataType.Event.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.Event.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addProcessedEvent(subBuilder.buildPartial());
+              break;
+            }
+            case 42: {
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.newBuilder();
+              if (hasProcessJournal()) {
+                subBuilder.mergeFrom(getProcessJournal());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setProcessJournal(subBuilder.buildPartial());
               break;
             }
           }
@@ -1669,6 +1722,96 @@ public final class SlaveService {
           processedEvent_ = null;
         }
         return processedEventBuilder_;
+      }
+      
+      // optional .org.jcjxb.wsn.service.ProcessJournal processJournal = 5;
+      private org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal processJournal_ = org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder> processJournalBuilder_;
+      public boolean hasProcessJournal() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal getProcessJournal() {
+        if (processJournalBuilder_ == null) {
+          return processJournal_;
+        } else {
+          return processJournalBuilder_.getMessage();
+        }
+      }
+      public Builder setProcessJournal(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal value) {
+        if (processJournalBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          processJournal_ = value;
+          onChanged();
+        } else {
+          processJournalBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder setProcessJournal(
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder builderForValue) {
+        if (processJournalBuilder_ == null) {
+          processJournal_ = builderForValue.build();
+          onChanged();
+        } else {
+          processJournalBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder mergeProcessJournal(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal value) {
+        if (processJournalBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              processJournal_ != org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance()) {
+            processJournal_ =
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.newBuilder(processJournal_).mergeFrom(value).buildPartial();
+          } else {
+            processJournal_ = value;
+          }
+          onChanged();
+        } else {
+          processJournalBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder clearProcessJournal() {
+        if (processJournalBuilder_ == null) {
+          processJournal_ = org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance();
+          onChanged();
+        } else {
+          processJournalBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder getProcessJournalBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getProcessJournalFieldBuilder().getBuilder();
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder getProcessJournalOrBuilder() {
+        if (processJournalBuilder_ != null) {
+          return processJournalBuilder_.getMessageOrBuilder();
+        } else {
+          return processJournal_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder> 
+          getProcessJournalFieldBuilder() {
+        if (processJournalBuilder_ == null) {
+          processJournalBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder>(
+                  processJournal_,
+                  getParentForChildren(),
+                  isClean());
+          processJournal_ = null;
+        }
+        return processJournalBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.LVTSync)
@@ -4315,31 +4458,32 @@ public final class SlaveService {
       "\n\022SlaveService.proto\022\025org.jcjxb.wsn.serv" +
       "ice\032\023BasicDataType.proto\032\017WSNConfig.prot" +
       "o\"(\n\013ExecRequest\022\031\n\021globalVirtualTime\030\001 " +
-      "\001(\003\"\310\001\n\007LVTSync\022\017\n\007slaveId\030\001 \001(\005\022\021\n\tloca" +
+      "\001(\003\"\207\002\n\007LVTSync\022\017\n\007slaveId\030\001 \001(\005\022\021\n\tloca" +
       "lTime\030\002 \001(\003\0225\n\006update\030\003 \003(\0132%.org.jcjxb." +
       "wsn.service.LVTSync.Update\0224\n\016processedE" +
       "vent\030\004 \003(\0132\034.org.jcjxb.wsn.service.Event" +
-      "\032,\n\006Update\022\017\n\007slaveId\030\001 \001(\005\022\021\n\tlocalTime" +
-      "\030\002 \001(\003\"<\n\rEventsRequest\022+\n\005event\030\001 \003(\0132\034" +
-      ".org.jcjxb.wsn.service.Event\"\230\001\n\020Simulat",
-      "ionResult\022F\n\nenergyData\030\001 \003(\01322.org.jcjx" +
-      "b.wsn.service.SimulationResult.EnergyDat" +
-      "a\032<\n\nEnergyData\022\016\n\006nodeId\030\001 \001(\005\022\021\n\tenery" +
-      "Left\030\002 \001(\001\022\013\n\003die\030\003 \001(\010\"<\n\014EventsDetail\022" +
-      ",\n\004sync\030\001 \003(\0132\036.org.jcjxb.wsn.service.LV" +
-      "TSync2\252\003\n\010SService\022X\n\017startSimulation\022\'." +
-      "org.jcjxb.wsn.service.SimulationConfig\032\034" +
-      ".org.jcjxb.wsn.service.Empty\022J\n\004exec\022\".o" +
-      "rg.jcjxb.wsn.service.ExecRequest\032\036.org.j" +
-      "cjxb.wsn.service.LVTSync\022P\n\nsendEvents\022$",
-      ".org.jcjxb.wsn.service.EventsRequest\032\034.o" +
-      "rg.jcjxb.wsn.service.Empty\022V\n\rendSimulat" +
-      "ion\022\034.org.jcjxb.wsn.service.Empty\032\'.org." +
-      "jcjxb.wsn.service.SimulationResult\022N\n\020ca" +
-      "ncelSimulation\022\034.org.jcjxb.wsn.service.E" +
-      "mpty\032\034.org.jcjxb.wsn.service.EmptyB.\n\033or" +
-      "g.jcjxb.wsn.service.protoB\014SlaveService\210" +
-      "\001\001"
+      "\022=\n\016processJournal\030\005 \001(\0132%.org.jcjxb.wsn" +
+      ".service.ProcessJournal\032,\n\006Update\022\017\n\007sla" +
+      "veId\030\001 \001(\005\022\021\n\tlocalTime\030\002 \001(\003\"<\n\rEventsR",
+      "equest\022+\n\005event\030\001 \003(\0132\034.org.jcjxb.wsn.se" +
+      "rvice.Event\"\230\001\n\020SimulationResult\022F\n\nener" +
+      "gyData\030\001 \003(\01322.org.jcjxb.wsn.service.Sim" +
+      "ulationResult.EnergyData\032<\n\nEnergyData\022\016" +
+      "\n\006nodeId\030\001 \001(\005\022\021\n\teneryLeft\030\002 \001(\001\022\013\n\003die" +
+      "\030\003 \001(\010\"<\n\014EventsDetail\022,\n\004sync\030\001 \003(\0132\036.o" +
+      "rg.jcjxb.wsn.service.LVTSync2\252\003\n\010SServic" +
+      "e\022X\n\017startSimulation\022\'.org.jcjxb.wsn.ser" +
+      "vice.SimulationConfig\032\034.org.jcjxb.wsn.se" +
+      "rvice.Empty\022J\n\004exec\022\".org.jcjxb.wsn.serv",
+      "ice.ExecRequest\032\036.org.jcjxb.wsn.service." +
+      "LVTSync\022P\n\nsendEvents\022$.org.jcjxb.wsn.se" +
+      "rvice.EventsRequest\032\034.org.jcjxb.wsn.serv" +
+      "ice.Empty\022V\n\rendSimulation\022\034.org.jcjxb.w" +
+      "sn.service.Empty\032\'.org.jcjxb.wsn.service" +
+      ".SimulationResult\022N\n\020cancelSimulation\022\034." +
+      "org.jcjxb.wsn.service.Empty\032\034.org.jcjxb." +
+      "wsn.service.EmptyB.\n\033org.jcjxb.wsn.servi" +
+      "ce.protoB\014SlaveService\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4359,7 +4503,7 @@ public final class SlaveService {
           internal_static_org_jcjxb_wsn_service_LVTSync_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_LVTSync_descriptor,
-              new java.lang.String[] { "SlaveId", "LocalTime", "Update", "ProcessedEvent", },
+              new java.lang.String[] { "SlaveId", "LocalTime", "Update", "ProcessedEvent", "ProcessJournal", },
               org.jcjxb.wsn.service.proto.SlaveService.LVTSync.class,
               org.jcjxb.wsn.service.proto.SlaveService.LVTSync.Builder.class);
           internal_static_org_jcjxb_wsn_service_LVTSync_Update_descriptor =

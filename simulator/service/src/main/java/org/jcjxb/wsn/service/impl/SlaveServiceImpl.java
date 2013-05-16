@@ -30,11 +30,17 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 	@Override
 	public LVTSync exec(RpcController controller, ExecRequest request) throws ServiceException {
 		LVTSync.Builder syncBuilder = LVTSync.newBuilder();
+		// Temporarily set ProcessJournal.Builder to algorithm to record process journal
+		SlaveSimConfig.getInstance().getAlgorithm().processJournalBuilder = syncBuilder.getProcessJournalBuilder();
+		
 		logger.info(String.format("Running cycle [%d]", request.getGlobalVirtualTime()));
 		if (SlaveTimeLine.getInstance().run(request.getGlobalVirtualTime(), syncBuilder)) {
 		} else {
 			controller.setFailed("Process events failed");
 		}
+		
+		// Remove ProcessJournal.Builder from algorithm
+		SlaveSimConfig.getInstance().getAlgorithm().processJournalBuilder = null;
 		return syncBuilder.build();
 	}
 

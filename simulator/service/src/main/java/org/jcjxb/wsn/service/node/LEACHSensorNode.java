@@ -1,6 +1,7 @@
 package org.jcjxb.wsn.service.node;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class LEACHSensorNode extends SensorNode {
@@ -43,10 +44,15 @@ public class LEACHSensorNode extends SensorNode {
 		members.add(nodeId);
 	}
 	
+	public void addAllMember(List<Integer> nodeList) {
+		members.addAll(nodeList);
+	}
+	
 	public void clear() {
 		this.head = false;
 		this.members.clear();
 		this.headId = -1;
+		this.everHead = false;
 	}
 
 	public double getDistanceToHead() {

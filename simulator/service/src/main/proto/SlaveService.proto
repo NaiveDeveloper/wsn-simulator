@@ -20,6 +20,7 @@ message LVTSync {
 	}
 	repeated Update update = 3;
 	repeated Event processedEvent = 4;
+	optional ProcessJournal processJournal = 5;
 }
 
 message EventsRequest {

@@ -47,3 +47,11 @@ message SensorsOnHost {
 message SensorsOnHostList {
 	repeated SensorsOnHost sensorsOnHost = 1;
 }
+
+message ProcessJournal {
+	message DeadJournal {
+		optional int64 eventId = 1;
+		repeated int32 sensorId = 2;
+	}
+	repeated DeadJournal deadJournal = 1;
+}

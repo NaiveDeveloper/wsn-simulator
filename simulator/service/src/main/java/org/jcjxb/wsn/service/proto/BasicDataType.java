@@ -3876,6 +3876,1003 @@ public final class BasicDataType {
     // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.SensorsOnHostList)
   }
   
+  public interface ProcessJournalOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // repeated .org.jcjxb.wsn.service.ProcessJournal.DeadJournal deadJournal = 1;
+    java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal> 
+        getDeadJournalList();
+    org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal getDeadJournal(int index);
+    int getDeadJournalCount();
+    java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder> 
+        getDeadJournalOrBuilderList();
+    org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder getDeadJournalOrBuilder(
+        int index);
+  }
+  public static final class ProcessJournal extends
+      com.google.protobuf.GeneratedMessage
+      implements ProcessJournalOrBuilder {
+    // Use ProcessJournal.newBuilder() to construct.
+    private ProcessJournal(Builder builder) {
+      super(builder);
+    }
+    private ProcessJournal(boolean noInit) {}
+    
+    private static final ProcessJournal defaultInstance;
+    public static ProcessJournal getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ProcessJournal getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_fieldAccessorTable;
+    }
+    
+    public interface DeadJournalOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+      
+      // optional int64 eventId = 1;
+      boolean hasEventId();
+      long getEventId();
+      
+      // repeated int32 sensorId = 2;
+      java.util.List<java.lang.Integer> getSensorIdList();
+      int getSensorIdCount();
+      int getSensorId(int index);
+    }
+    public static final class DeadJournal extends
+        com.google.protobuf.GeneratedMessage
+        implements DeadJournalOrBuilder {
+      // Use DeadJournal.newBuilder() to construct.
+      private DeadJournal(Builder builder) {
+        super(builder);
+      }
+      private DeadJournal(boolean noInit) {}
+      
+      private static final DeadJournal defaultInstance;
+      public static DeadJournal getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public DeadJournal getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_fieldAccessorTable;
+      }
+      
+      private int bitField0_;
+      // optional int64 eventId = 1;
+      public static final int EVENTID_FIELD_NUMBER = 1;
+      private long eventId_;
+      public boolean hasEventId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public long getEventId() {
+        return eventId_;
+      }
+      
+      // repeated int32 sensorId = 2;
+      public static final int SENSORID_FIELD_NUMBER = 2;
+      private java.util.List<java.lang.Integer> sensorId_;
+      public java.util.List<java.lang.Integer>
+          getSensorIdList() {
+        return sensorId_;
+      }
+      public int getSensorIdCount() {
+        return sensorId_.size();
+      }
+      public int getSensorId(int index) {
+        return sensorId_.get(index);
+      }
+      
+      private void initFields() {
+        eventId_ = 0L;
+        sensorId_ = java.util.Collections.emptyList();;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+        
+        memoizedIsInitialized = 1;
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeInt64(1, eventId_);
+        }
+        for (int i = 0; i < sensorId_.size(); i++) {
+          output.writeInt32(2, sensorId_.get(i));
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(1, eventId_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < sensorId_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(sensorId_.get(i));
+          }
+          size += dataSize;
+          size += 1 * getSensorIdList().size();
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+      
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+      
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_fieldAccessorTable;
+        }
+        
+        // Construct using org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+        
+        private Builder(BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+        
+        public Builder clear() {
+          super.clear();
+          eventId_ = 0L;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          sensorId_ = java.util.Collections.emptyList();;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+        
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+        
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.getDescriptor();
+        }
+        
+        public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal getDefaultInstanceForType() {
+          return org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.getDefaultInstance();
+        }
+        
+        public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal build() {
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+        
+        private org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return result;
+        }
+        
+        public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal buildPartial() {
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal result = new org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.eventId_ = eventId_;
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            sensorId_ = java.util.Collections.unmodifiableList(sensorId_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.sensorId_ = sensorId_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal) {
+            return mergeFrom((org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal other) {
+          if (other == org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.getDefaultInstance()) return this;
+          if (other.hasEventId()) {
+            setEventId(other.getEventId());
+          }
+          if (!other.sensorId_.isEmpty()) {
+            if (sensorId_.isEmpty()) {
+              sensorId_ = other.sensorId_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureSensorIdIsMutable();
+              sensorId_.addAll(other.sensorId_);
+            }
+            onChanged();
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public final boolean isInitialized() {
+          return true;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                }
+                break;
+              }
+              case 8: {
+                bitField0_ |= 0x00000001;
+                eventId_ = input.readInt64();
+                break;
+              }
+              case 16: {
+                ensureSensorIdIsMutable();
+                sensorId_.add(input.readInt32());
+                break;
+              }
+              case 18: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                while (input.getBytesUntilLimit() > 0) {
+                  addSensorId(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              }
+            }
+          }
+        }
+        
+        private int bitField0_;
+        
+        // optional int64 eventId = 1;
+        private long eventId_ ;
+        public boolean hasEventId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public long getEventId() {
+          return eventId_;
+        }
+        public Builder setEventId(long value) {
+          bitField0_ |= 0x00000001;
+          eventId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearEventId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          eventId_ = 0L;
+          onChanged();
+          return this;
+        }
+        
+        // repeated int32 sensorId = 2;
+        private java.util.List<java.lang.Integer> sensorId_ = java.util.Collections.emptyList();;
+        private void ensureSensorIdIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            sensorId_ = new java.util.ArrayList<java.lang.Integer>(sensorId_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+        public java.util.List<java.lang.Integer>
+            getSensorIdList() {
+          return java.util.Collections.unmodifiableList(sensorId_);
+        }
+        public int getSensorIdCount() {
+          return sensorId_.size();
+        }
+        public int getSensorId(int index) {
+          return sensorId_.get(index);
+        }
+        public Builder setSensorId(
+            int index, int value) {
+          ensureSensorIdIsMutable();
+          sensorId_.set(index, value);
+          onChanged();
+          return this;
+        }
+        public Builder addSensorId(int value) {
+          ensureSensorIdIsMutable();
+          sensorId_.add(value);
+          onChanged();
+          return this;
+        }
+        public Builder addAllSensorId(
+            java.lang.Iterable<? extends java.lang.Integer> values) {
+          ensureSensorIdIsMutable();
+          super.addAll(values, sensorId_);
+          onChanged();
+          return this;
+        }
+        public Builder clearSensorId() {
+          sensorId_ = java.util.Collections.emptyList();;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.ProcessJournal.DeadJournal)
+      }
+      
+      static {
+        defaultInstance = new DeadJournal(true);
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.ProcessJournal.DeadJournal)
+    }
+    
+    // repeated .org.jcjxb.wsn.service.ProcessJournal.DeadJournal deadJournal = 1;
+    public static final int DEADJOURNAL_FIELD_NUMBER = 1;
+    private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal> deadJournal_;
+    public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal> getDeadJournalList() {
+      return deadJournal_;
+    }
+    public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder> 
+        getDeadJournalOrBuilderList() {
+      return deadJournal_;
+    }
+    public int getDeadJournalCount() {
+      return deadJournal_.size();
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal getDeadJournal(int index) {
+      return deadJournal_.get(index);
+    }
+    public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder getDeadJournalOrBuilder(
+        int index) {
+      return deadJournal_.get(index);
+    }
+    
+    private void initFields() {
+      deadJournal_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < deadJournal_.size(); i++) {
+        output.writeMessage(1, deadJournal_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      for (int i = 0; i < deadJournal_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, deadJournal_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournalOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.internal_static_org_jcjxb_wsn_service_ProcessJournal_fieldAccessorTable;
+      }
+      
+      // Construct using org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDeadJournalFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (deadJournalBuilder_ == null) {
+          deadJournal_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          deadJournalBuilder_.clear();
+        }
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDescriptor();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal getDefaultInstanceForType() {
+        return org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance();
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal build() {
+        org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal buildPartial() {
+        org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal result = new org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal(this);
+        int from_bitField0_ = bitField0_;
+        if (deadJournalBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            deadJournal_ = java.util.Collections.unmodifiableList(deadJournal_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.deadJournal_ = deadJournal_;
+        } else {
+          result.deadJournal_ = deadJournalBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal) {
+          return mergeFrom((org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal other) {
+        if (other == org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.getDefaultInstance()) return this;
+        if (deadJournalBuilder_ == null) {
+          if (!other.deadJournal_.isEmpty()) {
+            if (deadJournal_.isEmpty()) {
+              deadJournal_ = other.deadJournal_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureDeadJournalIsMutable();
+              deadJournal_.addAll(other.deadJournal_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.deadJournal_.isEmpty()) {
+            if (deadJournalBuilder_.isEmpty()) {
+              deadJournalBuilder_.dispose();
+              deadJournalBuilder_ = null;
+              deadJournal_ = other.deadJournal_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              deadJournalBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDeadJournalFieldBuilder() : null;
+            } else {
+              deadJournalBuilder_.addAllMessages(other.deadJournal_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder subBuilder = org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addDeadJournal(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // repeated .org.jcjxb.wsn.service.ProcessJournal.DeadJournal deadJournal = 1;
+      private java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal> deadJournal_ =
+        java.util.Collections.emptyList();
+      private void ensureDeadJournalIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          deadJournal_ = new java.util.ArrayList<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal>(deadJournal_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder> deadJournalBuilder_;
+      
+      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal> getDeadJournalList() {
+        if (deadJournalBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(deadJournal_);
+        } else {
+          return deadJournalBuilder_.getMessageList();
+        }
+      }
+      public int getDeadJournalCount() {
+        if (deadJournalBuilder_ == null) {
+          return deadJournal_.size();
+        } else {
+          return deadJournalBuilder_.getCount();
+        }
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal getDeadJournal(int index) {
+        if (deadJournalBuilder_ == null) {
+          return deadJournal_.get(index);
+        } else {
+          return deadJournalBuilder_.getMessage(index);
+        }
+      }
+      public Builder setDeadJournal(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal value) {
+        if (deadJournalBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDeadJournalIsMutable();
+          deadJournal_.set(index, value);
+          onChanged();
+        } else {
+          deadJournalBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setDeadJournal(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder builderForValue) {
+        if (deadJournalBuilder_ == null) {
+          ensureDeadJournalIsMutable();
+          deadJournal_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          deadJournalBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDeadJournal(org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal value) {
+        if (deadJournalBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDeadJournalIsMutable();
+          deadJournal_.add(value);
+          onChanged();
+        } else {
+          deadJournalBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addDeadJournal(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal value) {
+        if (deadJournalBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDeadJournalIsMutable();
+          deadJournal_.add(index, value);
+          onChanged();
+        } else {
+          deadJournalBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addDeadJournal(
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder builderForValue) {
+        if (deadJournalBuilder_ == null) {
+          ensureDeadJournalIsMutable();
+          deadJournal_.add(builderForValue.build());
+          onChanged();
+        } else {
+          deadJournalBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDeadJournal(
+          int index, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder builderForValue) {
+        if (deadJournalBuilder_ == null) {
+          ensureDeadJournalIsMutable();
+          deadJournal_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          deadJournalBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllDeadJournal(
+          java.lang.Iterable<? extends org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal> values) {
+        if (deadJournalBuilder_ == null) {
+          ensureDeadJournalIsMutable();
+          super.addAll(values, deadJournal_);
+          onChanged();
+        } else {
+          deadJournalBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearDeadJournal() {
+        if (deadJournalBuilder_ == null) {
+          deadJournal_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          deadJournalBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeDeadJournal(int index) {
+        if (deadJournalBuilder_ == null) {
+          ensureDeadJournalIsMutable();
+          deadJournal_.remove(index);
+          onChanged();
+        } else {
+          deadJournalBuilder_.remove(index);
+        }
+        return this;
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder getDeadJournalBuilder(
+          int index) {
+        return getDeadJournalFieldBuilder().getBuilder(index);
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder getDeadJournalOrBuilder(
+          int index) {
+        if (deadJournalBuilder_ == null) {
+          return deadJournal_.get(index);  } else {
+          return deadJournalBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder> 
+           getDeadJournalOrBuilderList() {
+        if (deadJournalBuilder_ != null) {
+          return deadJournalBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(deadJournal_);
+        }
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder addDeadJournalBuilder() {
+        return getDeadJournalFieldBuilder().addBuilder(
+            org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.getDefaultInstance());
+      }
+      public org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder addDeadJournalBuilder(
+          int index) {
+        return getDeadJournalFieldBuilder().addBuilder(
+            index, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.getDefaultInstance());
+      }
+      public java.util.List<org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder> 
+           getDeadJournalBuilderList() {
+        return getDeadJournalFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder> 
+          getDeadJournalFieldBuilder() {
+        if (deadJournalBuilder_ == null) {
+          deadJournalBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder, org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournalOrBuilder>(
+                  deadJournal_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          deadJournal_ = null;
+        }
+        return deadJournalBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:org.jcjxb.wsn.service.ProcessJournal)
+    }
+    
+    static {
+      defaultInstance = new ProcessJournal(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:org.jcjxb.wsn.service.ProcessJournal)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_org_jcjxb_wsn_service_Position_descriptor;
   private static
@@ -3911,6 +4908,16 @@ public final class BasicDataType {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_org_jcjxb_wsn_service_SensorsOnHostList_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_ProcessJournal_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_ProcessJournal_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3937,8 +4944,12 @@ public final class BasicDataType {
       "pty\"4\n\rSensorsOnHost\022\021\n\thostIndex\030\001 \001(\005\022" +
       "\020\n\010sensorId\030\002 \003(\005\"P\n\021SensorsOnHostList\022;" +
       "\n\rsensorsOnHost\030\001 \003(\0132$.org.jcjxb.wsn.se" +
-      "rvice.SensorsOnHostB,\n\033org.jcjxb.wsn.ser" +
-      "vice.protoB\rBasicDataType"
+      "rvice.SensorsOnHost\"\212\001\n\016ProcessJournal\022F" +
+      "\n\013deadJournal\030\001 \003(\01321.org.jcjxb.wsn.serv" +
+      "ice.ProcessJournal.DeadJournal\0320\n\013DeadJo",
+      "urnal\022\017\n\007eventId\030\001 \001(\003\022\020\n\010sensorId\030\002 \003(\005" +
+      "B,\n\033org.jcjxb.wsn.service.protoB\rBasicDa" +
+      "taType"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4001,6 +5012,22 @@ public final class BasicDataType {
               new java.lang.String[] { "SensorsOnHost", },
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.class,
               org.jcjxb.wsn.service.proto.BasicDataType.SensorsOnHostList.Builder.class);
+          internal_static_org_jcjxb_wsn_service_ProcessJournal_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_org_jcjxb_wsn_service_ProcessJournal_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_ProcessJournal_descriptor,
+              new java.lang.String[] { "DeadJournal", },
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.class,
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.Builder.class);
+          internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_descriptor =
+            internal_static_org_jcjxb_wsn_service_ProcessJournal_descriptor.getNestedTypes().get(0);
+          internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_org_jcjxb_wsn_service_ProcessJournal_DeadJournal_descriptor,
+              new java.lang.String[] { "EventId", "SensorId", },
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.class,
+              org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal.Builder.class);
           return null;
         }
       };
