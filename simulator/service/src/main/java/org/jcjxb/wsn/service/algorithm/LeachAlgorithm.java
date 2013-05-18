@@ -2,7 +2,6 @@ package org.jcjxb.wsn.service.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -12,6 +11,7 @@ import org.jcjxb.wsn.common.CommonTool;
 import org.jcjxb.wsn.service.energy.EnergyConsume;
 import org.jcjxb.wsn.service.energy.EnergyConsumeManager;
 import org.jcjxb.wsn.service.node.LEACHSensorNode;
+import org.jcjxb.wsn.service.node.SensorNode;
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
@@ -30,8 +30,15 @@ public class LeachAlgorithm extends Algorithm {
 
 	private static int clusterSchduleBit = 500;
 
-	private static int clusterBuiltCycle = 100; // Make sure CD finish before
-												// CBE
+	private static int clusterBuiltCycle = 100; // CD finish before CBE
+
+	private static int clusterBuiltAndStableInterval = 1;
+
+	private static int stableAndEGInterval = 1;
+
+	private static int stableBeginAndStableEndInterval = 50;
+
+	private static int stableEndAndStableBeginInterval = 1;
 
 	private int round = 0;
 
@@ -51,8 +58,9 @@ public class LeachAlgorithm extends Algorithm {
 		handlerList.put("CSS", new CSSEventHandler());
 		handlerList.put("CSR", new CSREventHandler());
 		handlerList.put("CBE", new CBEEventHandler());
-		handlerList.put("SPB", new SPBEventHandler());
-		handlerList.put("SPE", new SPEEventHandler());
+		handlerList.put("SPCB", new SPCBEventHandler());
+		handlerList.put("ER", new EREventHandler());
+		handlerList.put("SPCE", new SPCEEventHandler());
 	}
 
 	@Override
@@ -121,6 +129,26 @@ public class LeachAlgorithm extends Algorithm {
 	private Event generateCBEEvent(long virtualTime, long fromEventId) {
 		Event.Builder builder = Event.newBuilder();
 		builder.setType("CBE");
+		builder.setStartTime(virtualTime);
+		builder.setEventId(nextEventTime());
+		builder.setSensorEvent(false);
+		builder.setFromEventId(fromEventId);
+		return builder.build();
+	}
+
+	private Event generateSPCBEvent(long virtualTime, long fromEventId) {
+		Event.Builder builder = Event.newBuilder();
+		builder.setType("SPCB");
+		builder.setStartTime(virtualTime);
+		builder.setEventId(nextEventTime());
+		builder.setSensorEvent(false);
+		builder.setFromEventId(fromEventId);
+		return builder.build();
+	}
+
+	private Event generateSPCEEvent(long virtualTime, long fromEventId) {
+		Event.Builder builder = Event.newBuilder();
+		builder.setType("SPCE");
 		builder.setStartTime(virtualTime);
 		builder.setEventId(nextEventTime());
 		builder.setSensorEvent(false);
@@ -257,7 +285,7 @@ public class LeachAlgorithm extends Algorithm {
 			}
 
 			List<Event> events = new ArrayList<Event>();
-			// Build CJ events from map
+			// Build CJR events from map
 			for (Map.Entry<Integer, List<Integer>> entry : chMap.entrySet()) {
 				Event.Builder builder = Event.newBuilder();
 				builder.setEventId(nextEventTime());
@@ -309,26 +337,66 @@ public class LeachAlgorithm extends Algorithm {
 		}
 	}
 
-	// CSS means cluster join send
+	// CSS means cluster schedule send
 	private class CSSEventHandler implements EventHandler {
 
 		@Override
 		public List<Event> handle(Event event) {
+			List<Event> events = new ArrayList<Event>();
+			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
+			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
+			DeployConfig deployConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig();
+			double distance = CommonTool.distance(0, 0, deployConfig.getWidth(), deployConfig.getHeight());
 
-			return null;
+			for (LEACHSensorNode node : sensorNodes.values()) {
+				if (!node.isHead() || node.getState() == 2 || node.getMembers().size() == 0) {
+					continue;
+				}
+
+				double energyCost = consume.send(clusterSchduleBit, distance, energyConfig);
+				if (node.getEnergy() > energyCost) {
+					node.setEnergy(node.getEnergy() - energyCost);
+				} else {
+					node.setEnergy(0);
+					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+					continue;
+				}
+
+				Event.Builder builder = Event.newBuilder();
+				builder.setEventId(nextEventTime());
+				builder.addAllSensorId(node.getMembers());
+				builder.addSenderNodeId(node.getId());
+				builder.setType("CSR");
+				builder.setStartTime(event.getStartTime() + toReceiveEventInterval + eventProcessCycle);
+				builder.setFromEventId(event.getEventId());
+				events.add(builder.build());
+			}
+			return events;
 		}
-
 	}
 
-	// CSR means cluster join receive
+	// CSR means cluster schedule receive
 	private class CSREventHandler implements EventHandler {
 
 		@Override
 		public List<Event> handle(Event event) {
+			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
+			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
 
+			for (Integer nodeId : event.getSensorIdList()) {
+				LEACHSensorNode node = sensorNodes.get(nodeId);
+				double energyCost = consume.receive(clusterSchduleBit, node.getDistanceToHead(), energyConfig);
+				if (node.getEnergy() > energyCost) {
+					node.setEnergy(node.getEnergy() - energyCost);
+				} else {
+					node.setEnergy(0);
+					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+				}
+			}
 			return null;
 		}
-
 	}
 
 	// CBE means cluster build end
@@ -336,31 +404,83 @@ public class LeachAlgorithm extends Algorithm {
 
 		@Override
 		public List<Event> handle(Event event) {
-			Random random = new Random();
-
-			return null;
+			List<Event> events = new ArrayList<Event>();
+			events.add(generateSPCBEvent(event.getStartTime() + clusterBuiltAndStableInterval, event.getEventId()));
+			return events;
 		}
 	}
 
-	// SPB means stable period begin
-	private class SPBEventHandler implements EventHandler {
+	// SPCB means stable period cycle begin
+	private class SPCBEventHandler implements EventHandler {
 
 		@Override
 		public List<Event> handle(Event event) {
-			Random random = new Random();
-
-			return null;
+			if (!hasNextEGEvent()) {
+				return null;
+			}
+			List<Event> events = new ArrayList<Event>();
+			events.add(generateEGEvent(event.getStartTime() + stableAndEGInterval));
+			events.add(generateSPCEEvent(event.getStartTime() + stableBeginAndStableEndInterval, event.getEventId()));
+			return events;
 		}
 	}
 
-	// SPE means stable period end
-	private class SPEEventHandler implements EventHandler {
+	// ER means event receive
+	private class EREventHandler implements EventHandler {
 
 		@Override
 		public List<Event> handle(Event event) {
-			Random random = new Random();
+			Event.Builder builder = Event.newBuilder();
+			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
+			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
+			Position eventPosition = event.getPostion();
+			for (int sensorId : event.getSensorIdList()) {
+				SensorNode node = sensorNodes.get(sensorId);
+				double energyCost = consume.sense(event.getDataSize(),
+						CommonTool.distance(eventPosition.getX(), eventPosition.getY(), node.getX(), node.getY()), energyConfig);
+				if (node.getState() == 0 && node.getEnergy() > energyCost) {
+					node.setEnergy(node.getEnergy() - energyCost);
+					builder.addSensorId(sensorId);
+				} else if (node.getEnergy() <= energyCost) {
+					node.setEnergy(0);
+					node.setState(2);
+				}
+			}
+			if (builder.getSenderNodeIdCount() <= 0) {
+				return null;
+			}
+			builder.setDataSize(event.getDataSize());
+			builder.setEventId(nextEventTime());
+			builder.setFromEventId(event.getEventId());
+			builder.setStartTime(event.getStartTime() + eventProcessCycle);
+			builder.setType("EF");
+			List<Event> events = new ArrayList<Event>();
+			events.add(builder.build());
+			return events;
+		}
+	}
 
-			return null;
+	// SPCE means stable period end
+	private class SPCEEventHandler implements EventHandler {
+
+		@Override
+		public List<Event> handle(Event event) {
+			LeachConfig leachConfig = SlaveSimConfig.getInstance().getSimulationConfig().getAlgorithmConfig().getLeachConfig();
+			if (hasNextEGEvent()) {
+				return null;
+			}
+
+			++dataTimeEver;
+			if (dataTimeEver % leachConfig.getDataSubmitTimes() == 0) {
+				for (LEACHSensorNode node : sensorNodes.values()) {
+					node.clear();
+				}
+				return generateCBBEvent(event.getStartTime() + 1L);
+			} else {
+				List<Event> events = new ArrayList<Event>();
+				events.add(generateSPCBEvent(event.getStartTime() + stableEndAndStableBeginInterval, event.getEventId()));
+				return events;
+			}
 		}
 	}
 }

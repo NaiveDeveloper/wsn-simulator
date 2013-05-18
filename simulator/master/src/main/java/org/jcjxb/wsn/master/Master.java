@@ -46,7 +46,7 @@ public class Master {
 		if (!"".equals(hostConfigOption.getValue())) {
 			hostConfig = HostConfig.parseFrom(new FileInputStream(hostConfigOption.getValue()));
 			if (hostConfig == null) {
-				logger.error("Parsing host config file failed, hostConfig = " + hostConfigOption.getValue());
+				logger.error("Parsing host config file fails, hostConfig = " + hostConfigOption.getValue());
 				return;
 			}
 		} else {

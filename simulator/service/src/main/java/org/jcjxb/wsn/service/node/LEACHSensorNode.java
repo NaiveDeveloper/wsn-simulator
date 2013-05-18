@@ -15,6 +15,8 @@ public class LEACHSensorNode extends SensorNode {
 	private double distanceToHead;
 	
 	private boolean everHead = false;
+	
+	private int receiveDataSize = 0;
 
 	public boolean isHead() {
 		return head;
@@ -69,5 +71,13 @@ public class LEACHSensorNode extends SensorNode {
 
 	public void setEverHead(boolean everHead) {
 		this.everHead = everHead;
+	}
+
+	public int getReceiveDataSize() {
+		return receiveDataSize;
+	}
+
+	public void setReceiveDataSize(int receiveDataSize) {
+		this.receiveDataSize = receiveDataSize;
 	}
 }

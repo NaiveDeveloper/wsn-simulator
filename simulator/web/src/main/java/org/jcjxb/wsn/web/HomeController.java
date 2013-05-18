@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -65,7 +66,7 @@ public class HomeController {
 		modelMap.put("statusMap", Log.getStatusMap());
 		return "home";
 	}
-	
+
 	@RequestMapping(value = { "/delete" }, method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam(required = false, defaultValue = "") String query,
 			@RequestParam(required = false, defaultValue = "0") int page, String id) {
@@ -76,7 +77,7 @@ public class HomeController {
 		mmap.put("page", page);
 		return new ModelAndView("redirect:/home", mmap);
 	}
-	
+
 	@RequestMapping(value = { "/view" }, method = RequestMethod.GET)
 	public String view(String id, ModelMap modelMap) {
 		Log log = dbOperation.queryById(id);
@@ -135,7 +136,9 @@ public class HomeController {
 		}
 
 		SimulationConfig simulationConfig = simulationConfigbuilder.build();
-		logger.debug(simulationConfig.toString());
+		if (Level.DEBUG.isGreaterOrEqual(logger.getEffectiveLevel())) {
+			logger.debug(simulationConfig.toString());
+		}
 
 		RpcController controller = new LionRpcController();
 		MasterServicAgentManager.getInstance().getServiceAgent("127.0.0.1", 10000).startSimulation(simulationConfig, controller);
@@ -212,10 +215,10 @@ public class HomeController {
 		deployBuilder.setSourceEventDeployConfig(sourceDeployBuilder);
 
 		simulationConfigbuilder.setDeployConfig(deployBuilder);
-		
+
 		// 设置算相关的专有参数
 		String algorithmName = simulationConfigbuilder.getAlgorithmConfig().getName();
-		if("LEACH".endsWith(algorithmName)) {
+		if ("LEACH".endsWith(algorithmName)) {
 			Map leachConfigMap = (Map) algorithmMap.get("leachConfig");
 			LeachConfig.Builder leachConfigBuilder = LeachConfig.newBuilder();
 			leachConfigBuilder.setClusterNum(Integer.parseInt(leachConfigMap.get("clusterNum").toString()));

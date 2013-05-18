@@ -2,6 +2,7 @@ package org.jcjxb.wsn.service.impl;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jcjxb.wsn.common.Status;
 import org.jcjxb.wsn.db.Log;
@@ -37,7 +38,9 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 	@Override
 	public Empty startSimulation(RpcController controller, SimulationConfig request) throws ServiceException {
 		logger.info("A new simulation request is recieved");
-		logger.debug("Message:\n" + request.toString());
+		if (Level.DEBUG.isGreaterOrEqual(logger.getEffectiveLevel())) {
+			logger.debug("Message:\n" + request.toString());
+		}
 		if (!MasterSimConfig.getInstance().isAllSlaveReady()) {
 			controller.setFailed("All slaves are not ready");
 			logger.error("A start simulation rquest is recieved when all slaves are not ready");
@@ -78,9 +81,9 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 				logger.error("Insert initialization log to db failed");
 				return Empty.getDefaultInstance();
 			}
-			
+
 			// Setting detail log output directory
-			if(MasterSimConfig.getInstance().outputDetail()) {
+			if (MasterSimConfig.getInstance().outputDetail()) {
 				log.setEventDetailDir(MasterSimConfig.getInstance().getLogPath() + log.getId() + "/");
 			}
 
@@ -114,7 +117,9 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			}
 			if (status.isFlag()) {
 				logger.info("Start simulation on slaves successfully");
-				logger.debug("Simulation message:\n" + simulationConfig.toString());
+				if (Level.DEBUG.isGreaterOrEqual(logger.getEffectiveLevel())) {
+					logger.debug("Simulation message:\n" + simulationConfig.toString());
+				}
 				MasterSimConfig.getInstance().setSimRunning(true);
 				MasterTimeLine.getInstance().start();
 			} else {

@@ -1,5 +1,6 @@
 package org.jcjxb.wsn.service.impl;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.SlaveService;
@@ -21,7 +22,9 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 	@Override
 	public Empty startSimulation(RpcController controller, SimulationConfig request) throws ServiceException {
 		logger.info("A new simulation request is recieved");
-		logger.debug("Message:\n" + request.toString());
+		if (Level.DEBUG.isGreaterOrEqual(logger.getEffectiveLevel())) {
+			logger.debug("Message:\n" + request.toString());
+		}
 		SlaveSimConfig.getInstance().initSimulation(request);
 		SlaveTimeLine.getInstance().init();
 		return Empty.getDefaultInstance();
@@ -30,15 +33,16 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 	@Override
 	public LVTSync exec(RpcController controller, ExecRequest request) throws ServiceException {
 		LVTSync.Builder syncBuilder = LVTSync.newBuilder();
-		// Temporarily set ProcessJournal.Builder to algorithm to record process journal
+		// Temporarily set ProcessJournal.Builder to algorithm to record process
+		// journal
 		SlaveSimConfig.getInstance().getAlgorithm().processJournalBuilder = syncBuilder.getProcessJournalBuilder();
-		
+
 		logger.info(String.format("Running cycle [%d]", request.getGlobalVirtualTime()));
 		if (SlaveTimeLine.getInstance().run(request.getGlobalVirtualTime(), syncBuilder)) {
 		} else {
 			controller.setFailed("Process events failed");
 		}
-		
+
 		// Remove ProcessJournal.Builder from algorithm
 		SlaveSimConfig.getInstance().getAlgorithm().processJournalBuilder = null;
 		return syncBuilder.build();
@@ -57,11 +61,11 @@ public class SlaveServiceImpl implements SlaveService.SService.BlockingInterface
 		// Collect simulation result data
 		SimulationResult.Builder builder = SimulationResult.newBuilder();
 		SlaveSimConfig.getInstance().collectSimResult(builder);
-		
+
 		// Clear running data
 		SlaveSimConfig.getInstance().clear();
 		SlaveTimeLine.getInstance().clear();
-		
+
 		return builder.build();
 	}
 
