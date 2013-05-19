@@ -27,7 +27,9 @@ public abstract class Algorithm {
 	protected int sourceEventTime = 0;
 
 	protected long eventTime = 0;
-	
+
+	protected boolean generateEventAutomatic = true;
+
 	// This is not a good design pattern
 	public ProcessJournal.Builder processJournalBuilder;
 
@@ -147,7 +149,7 @@ public abstract class Algorithm {
 		++sourceEventTime;
 		return builder.build();
 	}
-	
+
 	protected boolean hasNextEGEvent() {
 		SourceEventDeployConfig sourceConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
 				.getSourceEventDeployConfig();
@@ -168,6 +170,14 @@ public abstract class Algorithm {
 		public List<Event> handle(Event event) {
 			long nextVirtualTime = event.getStartTime() + toReceiveEventInterval;
 			List<Event> events = generateEREvent(nextVirtualTime);
+
+			if (generateEventAutomatic) {
+				if (hasNextEGEvent()) {
+					events.add(generateEGEvent(event.getStartTime()
+							+ SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSourceEventDeployConfig()
+									.getEventInterval()));
+				}
+			}
 			return events;
 		}
 	}

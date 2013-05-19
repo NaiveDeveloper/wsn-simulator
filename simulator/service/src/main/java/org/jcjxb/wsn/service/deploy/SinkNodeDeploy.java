@@ -17,6 +17,7 @@ public class SinkNodeDeploy {
 	private SinkNodeDeploy() {
 		deployStrategys.put(DeployType.RANDOM, new RandomDeploy());
 		deployStrategys.put(DeployType.STATIC, new StaticDeploy());
+		deployStrategys.put(DeployType.ONEINCENTER, new CenterDeploy());
 	}
 
 	public static SinkNodeDeploy getInstance() {
@@ -49,6 +50,15 @@ public class SinkNodeDeploy {
 		@Override
 		public PositionList generate(int num, int width, int height, PositionList positionList) {
 			return positionList;
+		}
+	}
+
+	private class CenterDeploy implements Deploy {
+		@Override
+		public PositionList generate(int num, int width, int height, PositionList positionList) {
+			PositionList.Builder builder = PositionList.newBuilder();
+			builder.addPostion(Position.newBuilder().setX(width / 2).setY(height / 2).build());
+			return builder.build();
 		}
 	}
 }

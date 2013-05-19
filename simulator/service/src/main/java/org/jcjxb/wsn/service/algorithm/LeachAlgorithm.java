@@ -11,7 +11,6 @@ import org.jcjxb.wsn.common.CommonTool;
 import org.jcjxb.wsn.service.energy.EnergyConsume;
 import org.jcjxb.wsn.service.energy.EnergyConsumeManager;
 import org.jcjxb.wsn.service.node.LEACHSensorNode;
-import org.jcjxb.wsn.service.node.SensorNode;
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
@@ -74,6 +73,7 @@ public class LeachAlgorithm extends Algorithm {
 	@Override
 	public List<Event> start() {
 		super.start();
+		generateEventAutomatic = false;
 		round = 0;
 		LeachConfig leachConfig = SlaveSimConfig.getInstance().getSimulationConfig().getAlgorithmConfig().getLeachConfig();
 		allRound = SlaveSimConfig.getInstance().getSensorCount() / leachConfig.getClusterNum();

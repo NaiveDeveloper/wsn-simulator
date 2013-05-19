@@ -2,12 +2,9 @@ package org.jcjxb.wsn.service.deploy;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
-import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
 import org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig.DeployType;
-
 
 public class SourceEventDeploy {
 	private static SourceEventDeploy sourceNodeDeploy = new SourceEventDeploy();
@@ -17,6 +14,7 @@ public class SourceEventDeploy {
 	private SourceEventDeploy() {
 		deployStrategys.put(DeployType.RANDOM, new RandomDeploy());
 		deployStrategys.put(DeployType.STATIC, new StaticDeploy());
+		deployStrategys.put(DeployType.ALLNODES, new AllNodesDeploy());
 	}
 
 	public static SourceEventDeploy getInstance() {
@@ -36,16 +34,18 @@ public class SourceEventDeploy {
 
 		@Override
 		public PositionList generate(int num, int width, int height, PositionList positionList) {
-			PositionList.Builder builder = PositionList.newBuilder();
-			Random random = new Random();
-			for (int i = 0; i < num; ++i) {
-				builder.addPostion(Position.newBuilder().setX(random.nextInt(width)).setY(random.nextInt(height)).build());
-			}
-			return builder.build();
+			return positionList;
 		}
 	}
 
 	private class StaticDeploy implements Deploy {
+		@Override
+		public PositionList generate(int num, int width, int height, PositionList positionList) {
+			return positionList;
+		}
+	}
+
+	private class AllNodesDeploy implements Deploy {
 		@Override
 		public PositionList generate(int num, int width, int height, PositionList positionList) {
 			return positionList;

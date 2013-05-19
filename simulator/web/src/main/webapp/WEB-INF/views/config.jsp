@@ -6,11 +6,11 @@
 		<h4 class="text-center">选择算法</h4>
 		<form>
 			<label class="radio">
-  				<input type="radio" name="name" value="DIRECT">
+  				<input type="radio" name="name" value="DIRECT" checked>
   				直接转发路由协议
 			</label>
 			<label class="radio">
-  				<input type="radio" name="name" value="LEACH" checked>
+  				<input type="radio" name="name" value="LEACH">
   				LEACH路由协议
 			</label>
 		</form>
@@ -117,13 +117,13 @@
 			<div class="control-group">
 				<label class="control-label">重复次数</label>
 				<div class="controls">
-					<input type="text" name="times" placeholder="int" value="10">
+					<input type="text" name="times" placeholder="int" value="100">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">事件数据量</label>
 				<div class="controls">
-					<input type="text" name="eventBit" placeholder="int" value="20">
+					<input type="text" name="eventBit" placeholder="int" value="50">
 				</div>
 			</div>
 		</form>
@@ -143,19 +143,19 @@
 			<div class="control-group">
 				<label class="control-label">发射电路参数</label>
 				<div class="controls">
-					<input type="text" name="transmitter" placeholder="double" value="0.005">
+					<input type="text" name="transmitter" placeholder="double" value="0.00005">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">放大器参数</label>
 				<div class="controls">
-					<input type="text" name="amplifier" placeholder="double" value="0.0001">
+					<input type="text" name="amplifier" placeholder="double" value="0.00000001">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">接受电路参数</label>
 				<div class="controls">
-					<input type="text" name="receiver" placeholder="double" value="0.005">
+					<input type="text" name="receiver" placeholder="double" value="0.000005">
 				</div>
 			</div>
 			<div class="control-group">
@@ -167,7 +167,7 @@
 			<div class="control-group">
 				<label class="control-label">传感电路参数</label>
 				<div class="controls">
-					<input type="text" name="sensor" placeholder="double" value="0.001">
+					<input type="text" name="sensor" placeholder="double" value="0.000001">
 				</div>
 			</div>
 		</form>

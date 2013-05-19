@@ -97,7 +97,7 @@ public class DirectAlgorithm extends Algorithm {
 					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
 				}
 			}
-			if (builder.getSenderNodeIdCount() <= 0) {
+			if (builder.getSensorIdCount() <= 0) {
 				return null;
 			}
 			builder.setDataSize(event.getDataSize());
@@ -135,13 +135,6 @@ public class DirectAlgorithm extends Algorithm {
 				} else {
 					node.setEnergy(node.getEnergy() - energyCost);
 				}
-			}
-			if (hasNextEGEvent()) {
-				List<Event> events = new ArrayList<Event>(1);
-				events.add(generateEGEvent(event.getStartTime()
-						+ SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSourceEventDeployConfig()
-								.getEventInterval()));
-				return events;
 			}
 			return null;
 		}
