@@ -16,10 +16,13 @@ import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
 import org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
+import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult.EnergyData;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.LeachConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SinkNodeDeployConfig;
 import org.jcjxb.wsn.service.sim.SlaveSimConfig;
 
 public class LeachAlgorithm extends Algorithm {
@@ -35,6 +38,8 @@ public class LeachAlgorithm extends Algorithm {
 	private static int clusterBuiltAndStableInterval = 1;
 
 	private static int stableAndEGInterval = 1;
+
+	private static int dataToSinkAndStableEndInterval = 1;
 
 	private static int stableBeginAndStableEndInterval = 50;
 
@@ -60,6 +65,9 @@ public class LeachAlgorithm extends Algorithm {
 		handlerList.put("CBE", new CBEEventHandler());
 		handlerList.put("SPCB", new SPCBEventHandler());
 		handlerList.put("ER", new EREventHandler());
+		handlerList.put("EFTCS", new EFTCSEventHandler());
+		handlerList.put("EFTCR", new EFTCREventHandler());
+		handlerList.put("EFTSS", new EFTSSEventHandler());
 		handlerList.put("SPCE", new SPCEEventHandler());
 	}
 
@@ -78,6 +86,18 @@ public class LeachAlgorithm extends Algorithm {
 	public void end() {
 		super.end();
 		sensorNodes.clear();
+	}
+
+	@Override
+	public void collectSimResult(SimulationResult.Builder builder) {
+		super.collectSimResult(builder);
+		EnergyData.Builder energyDataBuilder = EnergyData.newBuilder();
+		for (LEACHSensorNode node : sensorNodes.values()) {
+			energyDataBuilder.setDie(node.getState() == 2);
+			energyDataBuilder.setEneryLeft(node.getEnergy());
+			energyDataBuilder.setNodeId(node.getId());
+			builder.addEnergyData(energyDataBuilder.build());
+		}
 	}
 
 	private void initSensors() {
@@ -149,6 +169,16 @@ public class LeachAlgorithm extends Algorithm {
 	private Event generateSPCEEvent(long virtualTime, long fromEventId) {
 		Event.Builder builder = Event.newBuilder();
 		builder.setType("SPCE");
+		builder.setStartTime(virtualTime);
+		builder.setEventId(nextEventTime());
+		builder.setSensorEvent(false);
+		builder.setFromEventId(fromEventId);
+		return builder.build();
+	}
+
+	private Event generateEFTSSEvent(long virtualTime, long fromEventId) {
+		Event.Builder builder = Event.newBuilder();
+		builder.setType("EFTSS");
 		builder.setStartTime(virtualTime);
 		builder.setEventId(nextEventTime());
 		builder.setSensorEvent(false);
@@ -420,6 +450,8 @@ public class LeachAlgorithm extends Algorithm {
 			}
 			List<Event> events = new ArrayList<Event>();
 			events.add(generateEGEvent(event.getStartTime() + stableAndEGInterval));
+			events.add(generateEFTSSEvent(event.getStartTime() + stableBeginAndStableEndInterval - dataToSinkAndStableEndInterval,
+					event.getEventId()));
 			events.add(generateSPCEEvent(event.getStartTime() + stableBeginAndStableEndInterval, event.getEventId()));
 			return events;
 		}
@@ -435,28 +467,159 @@ public class LeachAlgorithm extends Algorithm {
 			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
 			Position eventPosition = event.getPostion();
 			for (int sensorId : event.getSensorIdList()) {
-				SensorNode node = sensorNodes.get(sensorId);
+				LEACHSensorNode node = sensorNodes.get(sensorId);
+				if (node.getState() == 2) {
+					continue;
+				}
+				if (eventPosition == null) {
+					eventPosition = Position.newBuilder().setX(node.getX()).setY(node.getY()).build();
+				}
 				double energyCost = consume.sense(event.getDataSize(),
 						CommonTool.distance(eventPosition.getX(), eventPosition.getY(), node.getX(), node.getY()), energyConfig);
-				if (node.getState() == 0 && node.getEnergy() > energyCost) {
+				if (node.getEnergy() > energyCost) {
 					node.setEnergy(node.getEnergy() - energyCost);
-					builder.addSensorId(sensorId);
-				} else if (node.getEnergy() <= energyCost) {
+					node.setReceiveDataSize(event.getDataSize());
+					if (!node.isHead()) {
+						builder.addSensorId(sensorId);
+					}
+				} else {
 					node.setEnergy(0);
 					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
 				}
 			}
 			if (builder.getSenderNodeIdCount() <= 0) {
 				return null;
 			}
+
+			// TODO Here same size sense data for all sensors is assumed
 			builder.setDataSize(event.getDataSize());
 			builder.setEventId(nextEventTime());
 			builder.setFromEventId(event.getEventId());
 			builder.setStartTime(event.getStartTime() + eventProcessCycle);
-			builder.setType("EF");
+			builder.setType("EFTCS");
 			List<Event> events = new ArrayList<Event>();
 			events.add(builder.build());
 			return events;
+		}
+	}
+
+	// EFTCS means event forward to cluster head send
+	private class EFTCSEventHandler implements EventHandler {
+
+		@Override
+		public List<Event> handle(Event event) {
+			Map<Integer, List<Integer>> chMap = new HashMap<Integer, List<Integer>>();
+
+			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
+			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
+			for (Integer nodeId : event.getSensorIdList()) {
+				LEACHSensorNode node = sensorNodes.get(nodeId);
+				if (node.getState() == 2 || node.getHeadId() == -1 || node.isHead()) {
+					continue;
+				}
+				// Compute receive energy cost
+				double energyCost = consume.send(node.getReceiveDataSize(), node.getDistanceToHead(), energyConfig);
+				if (node.getEnergy() > energyCost) {
+					node.setEnergy(node.getEnergy() - energyCost);
+					node.setReceiveDataSize(0);
+				} else {
+					node.setEnergy(0);
+					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+					continue;
+				}
+				int chId = node.getHeadId();
+				List<Integer> nodeList = chMap.get(chId);
+				if (nodeList == null) {
+					nodeList = new ArrayList<Integer>();
+					chMap.put(chId, nodeList);
+				}
+				nodeList.add(node.getId());
+			}
+
+			List<Event> events = new ArrayList<Event>();
+			// Build EFTCR events from map
+			for (Map.Entry<Integer, List<Integer>> entry : chMap.entrySet()) {
+				Event.Builder builder = Event.newBuilder();
+				builder.setEventId(nextEventTime());
+				builder.addSensorId(entry.getKey());
+				builder.addAllSenderNodeId(entry.getValue());
+				builder.setType("EFTCR");
+				builder.setStartTime(event.getStartTime() + toReceiveEventInterval + eventProcessCycle);
+				builder.setFromEventId(event.getEventId());
+				builder.setDataSize(event.getDataSize());
+				events.add(builder.build());
+			}
+			return events;
+		}
+	}
+
+	// EFTCS means event forward to cluster head receive
+	private class EFTCREventHandler implements EventHandler {
+
+		@Override
+		public List<Event> handle(Event event) {
+			if (event.getSensorIdCount() == 0) {
+				return null;
+			}
+			LEACHSensorNode node = sensorNodes.get(event.getSensorId(0));
+			if (node.getState() == 2 || !node.isHead()) {
+				return null;
+			}
+			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
+			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
+			PositionList allNodesPosList = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSensorNodeDeployConfig()
+					.getPostionList();
+			// Compute receive energy cost
+			double energyCost = 0.0;
+			for (Integer nodeId : event.getSenderNodeIdList()) {
+				Position nodePos = allNodesPosList.getPostion(nodeId);
+				double tempDis = CommonTool.distance(nodePos.getX(), nodePos.getY(), node.getX(), node.getY());
+				energyCost += consume.receive(event.getDataSize(), tempDis, energyConfig);
+			}
+			if (node.getEnergy() > energyCost) {
+				node.setEnergy(node.getEnergy() - energyCost);
+				node.setReceiveDataSize(node.getReceiveDataSize() + event.getDataSize() * event.getSenderNodeIdCount());
+			} else {
+				node.setEnergy(0);
+				node.setState(2);
+				processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+				return null;
+			}
+			return null;
+		}
+	}
+
+	// EFTCS means event forward to sink node send
+	private class EFTSSEventHandler implements EventHandler {
+
+		@Override
+		public List<Event> handle(Event event) {
+			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
+			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
+			DeployConfig deployConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig();
+			SinkNodeDeployConfig sinkConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
+					.getSinkNodeDeployConfig();
+			Position sinkPos = sinkConfig.getPostionList().getPostion(0);
+			LeachConfig leachConfig = SlaveSimConfig.getInstance().getSimulationConfig().getAlgorithmConfig().getLeachConfig();
+
+			for (LEACHSensorNode node : sensorNodes.values()) {
+				if (!node.isHead() || node.getState() == 2 || node.getMembers().size() == 0) {
+					continue;
+				}
+
+				double energyCost = consume.send((int) (event.getDataSize() * leachConfig.getAggregationRate()),
+						CommonTool.distance(sinkPos.getX(), sinkPos.getY(), node.getX(), node.getY()), energyConfig);
+				if (node.getEnergy() > energyCost) {
+					node.setEnergy(node.getEnergy() - energyCost);
+				} else {
+					node.setEnergy(0);
+					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+				}
+			}
+			return null;
 		}
 	}
 

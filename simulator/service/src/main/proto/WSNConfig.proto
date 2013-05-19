@@ -62,6 +62,7 @@ message LeachConfig {
 	optional uint32 clusterNum = 1;
 	optional uint32 clusterBuiltCycle = 2;
 	optional uint32 dataSubmitTimes = 3; // Data submit times in each sable period
+	optional double aggregationRate = 4;
 }
 
 message AlgorithmConfig {

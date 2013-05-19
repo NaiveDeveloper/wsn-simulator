@@ -3472,6 +3472,10 @@ public final class WSNConfig {
     // optional uint32 dataSubmitTimes = 3;
     boolean hasDataSubmitTimes();
     int getDataSubmitTimes();
+    
+    // optional double aggregationRate = 4;
+    boolean hasAggregationRate();
+    double getAggregationRate();
   }
   public static final class LeachConfig extends
       com.google.protobuf.GeneratedMessage
@@ -3532,10 +3536,21 @@ public final class WSNConfig {
       return dataSubmitTimes_;
     }
     
+    // optional double aggregationRate = 4;
+    public static final int AGGREGATIONRATE_FIELD_NUMBER = 4;
+    private double aggregationRate_;
+    public boolean hasAggregationRate() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public double getAggregationRate() {
+      return aggregationRate_;
+    }
+    
     private void initFields() {
       clusterNum_ = 0;
       clusterBuiltCycle_ = 0;
       dataSubmitTimes_ = 0;
+      aggregationRate_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3558,6 +3573,9 @@ public final class WSNConfig {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeUInt32(3, dataSubmitTimes_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, aggregationRate_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3578,6 +3596,10 @@ public final class WSNConfig {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, dataSubmitTimes_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, aggregationRate_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3709,6 +3731,8 @@ public final class WSNConfig {
         bitField0_ = (bitField0_ & ~0x00000002);
         dataSubmitTimes_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        aggregationRate_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -3759,6 +3783,10 @@ public final class WSNConfig {
           to_bitField0_ |= 0x00000004;
         }
         result.dataSubmitTimes_ = dataSubmitTimes_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.aggregationRate_ = aggregationRate_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3783,6 +3811,9 @@ public final class WSNConfig {
         }
         if (other.hasDataSubmitTimes()) {
           setDataSubmitTimes(other.getDataSubmitTimes());
+        }
+        if (other.hasAggregationRate()) {
+          setAggregationRate(other.getAggregationRate());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3828,6 +3859,11 @@ public final class WSNConfig {
             case 24: {
               bitField0_ |= 0x00000004;
               dataSubmitTimes_ = input.readUInt32();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              aggregationRate_ = input.readDouble();
               break;
             }
           }
@@ -3895,6 +3931,27 @@ public final class WSNConfig {
       public Builder clearDataSubmitTimes() {
         bitField0_ = (bitField0_ & ~0x00000004);
         dataSubmitTimes_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional double aggregationRate = 4;
+      private double aggregationRate_ ;
+      public boolean hasAggregationRate() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public double getAggregationRate() {
+        return aggregationRate_;
+      }
+      public Builder setAggregationRate(double value) {
+        bitField0_ |= 0x00000008;
+        aggregationRate_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAggregationRate() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        aggregationRate_ = 0D;
         onChanged();
         return this;
       }
@@ -7295,36 +7352,37 @@ public final class WSNConfig {
       "nkNodeDeployConfig\030\004 \001(\0132+.org.jcjxb.wsn" +
       ".service.SinkNodeDeployConfig\022O\n\027sourceE",
       "ventDeployConfig\030\005 \001(\0132..org.jcjxb.wsn.s" +
-      "ervice.SourceEventDeployConfig\"U\n\013LeachC" +
+      "ervice.SourceEventDeployConfig\"n\n\013LeachC" +
       "onfig\022\022\n\nclusterNum\030\001 \001(\r\022\031\n\021clusterBuil" +
-      "tCycle\030\002 \001(\r\022\027\n\017dataSubmitTimes\030\003 \001(\r\"X\n" +
-      "\017AlgorithmConfig\022\014\n\004name\030\001 \001(\t\0227\n\013leachC" +
-      "onfig\030\002 \001(\0132\".org.jcjxb.wsn.service.Leac" +
-      "hConfig\"\342\001\n\017PartitionConfig\022K\n\rpartition" +
-      "Type\030\001 \001(\01624.org.jcjxb.wsn.service.Parti" +
-      "tionConfig.PartitionType\022C\n\021sensorsOnHos" +
-      "tList\030\002 \001(\0132(.org.jcjxb.wsn.service.Sens",
-      "orsOnHostList\"=\n\rPartitionType\022\n\n\006RANDOM" +
-      "\020\000\022\n\n\006STATIC\020\001\022\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"\345\001\n" +
-      "\023EnergyConsumeConfig\022K\n\013consumeType\030\001 \001(" +
-      "\01626.org.jcjxb.wsn.service.EnergyConsumeC" +
-      "onfig.ConsumeType\022\023\n\013transmitter\030\002 \001(\001\022\021" +
-      "\n\tamplifier\030\003 \001(\001\022\020\n\010receiver\030\004 \001(\001\022\020\n\010e" +
-      "xponent\030\005 \001(\001\022\016\n\006sensor\030\006 \001(\001\"%\n\013Consume" +
-      "Type\022\n\n\006STATIC\020\000\022\n\n\006SIMPLE\020\001\"v\n\rCommandC" +
-      "onfig\022C\n\006output\030\001 \001(\0162+.org.jcjxb.wsn.se" +
-      "rvice.CommandConfig.Output:\006SIMPLE\" \n\006Ou",
-      "tput\022\n\n\006DETAIL\020\000\022\n\n\006SIMPLE\020\001\"\343\002\n\020Simulat" +
-      "ionConfig\0229\n\014deployConfig\030\001 \001(\0132#.org.jc" +
-      "jxb.wsn.service.DeployConfig\022?\n\017algorith" +
-      "mConfig\030\002 \001(\0132&.org.jcjxb.wsn.service.Al" +
-      "gorithmConfig\022?\n\017partitionConfig\030\003 \001(\0132&" +
-      ".org.jcjxb.wsn.service.PartitionConfig\022G" +
-      "\n\023energyConsumeConfig\030\004 \001(\0132*.org.jcjxb." +
-      "wsn.service.EnergyConsumeConfig\022;\n\rcomma" +
-      "ndConfig\030\005 \001(\0132$.org.jcjxb.wsn.service.C" +
-      "ommandConfig\022\014\n\004name\030\006 \001(\tB(\n\033org.jcjxb.",
-      "wsn.service.protoB\tWSNConfig"
+      "tCycle\030\002 \001(\r\022\027\n\017dataSubmitTimes\030\003 \001(\r\022\027\n" +
+      "\017aggregationRate\030\004 \001(\001\"X\n\017AlgorithmConfi" +
+      "g\022\014\n\004name\030\001 \001(\t\0227\n\013leachConfig\030\002 \001(\0132\".o" +
+      "rg.jcjxb.wsn.service.LeachConfig\"\342\001\n\017Par" +
+      "titionConfig\022K\n\rpartitionType\030\001 \001(\01624.or" +
+      "g.jcjxb.wsn.service.PartitionConfig.Part" +
+      "itionType\022C\n\021sensorsOnHostList\030\002 \001(\0132(.o",
+      "rg.jcjxb.wsn.service.SensorsOnHostList\"=" +
+      "\n\rPartitionType\022\n\n\006RANDOM\020\000\022\n\n\006STATIC\020\001\022" +
+      "\n\n\006CIRCLE\020\002\022\010\n\004GRID\020\003\"\345\001\n\023EnergyConsumeC" +
+      "onfig\022K\n\013consumeType\030\001 \001(\01626.org.jcjxb.w" +
+      "sn.service.EnergyConsumeConfig.ConsumeTy" +
+      "pe\022\023\n\013transmitter\030\002 \001(\001\022\021\n\tamplifier\030\003 \001" +
+      "(\001\022\020\n\010receiver\030\004 \001(\001\022\020\n\010exponent\030\005 \001(\001\022\016" +
+      "\n\006sensor\030\006 \001(\001\"%\n\013ConsumeType\022\n\n\006STATIC\020" +
+      "\000\022\n\n\006SIMPLE\020\001\"v\n\rCommandConfig\022C\n\006output" +
+      "\030\001 \001(\0162+.org.jcjxb.wsn.service.CommandCo",
+      "nfig.Output:\006SIMPLE\" \n\006Output\022\n\n\006DETAIL\020" +
+      "\000\022\n\n\006SIMPLE\020\001\"\343\002\n\020SimulationConfig\0229\n\014de" +
+      "ployConfig\030\001 \001(\0132#.org.jcjxb.wsn.service" +
+      ".DeployConfig\022?\n\017algorithmConfig\030\002 \001(\0132&" +
+      ".org.jcjxb.wsn.service.AlgorithmConfig\022?" +
+      "\n\017partitionConfig\030\003 \001(\0132&.org.jcjxb.wsn." +
+      "service.PartitionConfig\022G\n\023energyConsume" +
+      "Config\030\004 \001(\0132*.org.jcjxb.wsn.service.Ene" +
+      "rgyConsumeConfig\022;\n\rcommandConfig\030\005 \001(\0132" +
+      "$.org.jcjxb.wsn.service.CommandConfig\022\014\n",
+      "\004name\030\006 \001(\tB(\n\033org.jcjxb.wsn.service.pro" +
+      "toB\tWSNConfig"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7376,7 +7434,7 @@ public final class WSNConfig {
           internal_static_org_jcjxb_wsn_service_LeachConfig_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_org_jcjxb_wsn_service_LeachConfig_descriptor,
-              new java.lang.String[] { "ClusterNum", "ClusterBuiltCycle", "DataSubmitTimes", },
+              new java.lang.String[] { "ClusterNum", "ClusterBuiltCycle", "DataSubmitTimes", "AggregationRate", },
               org.jcjxb.wsn.service.proto.WSNConfig.LeachConfig.class,
               org.jcjxb.wsn.service.proto.WSNConfig.LeachConfig.Builder.class);
           internal_static_org_jcjxb_wsn_service_AlgorithmConfig_descriptor =

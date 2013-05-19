@@ -12,6 +12,7 @@ import org.jcjxb.wsn.service.energy.EnergyConsumeManager;
 import org.jcjxb.wsn.service.node.SensorNode;
 import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
+import org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal;
 import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult.EnergyData;
 import org.jcjxb.wsn.service.proto.WSNConfig.EnergyConsumeConfig;
@@ -80,17 +81,20 @@ public class DirectAlgorithm extends Algorithm {
 			Event.Builder builder = Event.newBuilder();
 			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
 			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
-			Position eventPosition = event.getPostion();
+
 			for (int sensorId : event.getSensorIdList()) {
 				SensorNode node = sensorNodes.get(sensorId);
-				double energyCost = consume.sense(event.getDataSize(),
-						CommonTool.distance(eventPosition.getX(), eventPosition.getY(), node.getX(), node.getY()), energyConfig);
-				if (node.getState() == 0 && node.getEnergy() > energyCost) {
+				if (node.getState() == 2) {
+					continue;
+				}
+				double energyCost = consume.sense(event.getDataSize(), 0, energyConfig);
+				if (node.getEnergy() > energyCost) {
 					node.setEnergy(node.getEnergy() - energyCost);
 					builder.addSensorId(sensorId);
-				} else if (node.getEnergy() <= energyCost) {
+				} else {
 					node.setEnergy(0);
 					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
 				}
 			}
 			if (builder.getSenderNodeIdCount() <= 0) {
@@ -119,11 +123,15 @@ public class DirectAlgorithm extends Algorithm {
 			Position sinkPos = sinkConfig.getPostionList().getPostion(0);
 			for (int sensorId : event.getSensorIdList()) {
 				SensorNode node = sensorNodes.get(sensorId);
+				if (node.getState() == 2) {
+					continue;
+				}
 				double energyCost = consume.send(event.getDataSize(),
 						CommonTool.distance(sinkPos.getX(), sinkPos.getY(), node.getX(), node.getY()), energyConfig);
 				if (node.getEnergy() <= energyCost) {
 					node.setEnergy(0);
 					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
 				} else {
 					node.setEnergy(node.getEnergy() - energyCost);
 				}
