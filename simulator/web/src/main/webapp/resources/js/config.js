@@ -26,7 +26,12 @@ function preStep() {
 		$("#addSimModal .modal-body").load("config?step=" + algorithms[simulationConfig.algorithmConfig.name].steps[step - 1]);
 	}
 	// 如果是提交，改为下一步
-	$("#addSimModal #next").text("下一步");
+	if(step >= algorithms[simulationConfig.algorithmConfig.name].steps.length) {
+		// 修改下一步为提交
+		$("#addSimModal #next").text("提交");
+	} else {
+		$("#addSimModal #next").text("下一步");
+	}
 	checkPreButton();
 }
 
@@ -91,6 +96,7 @@ function submitConfig() {
 				} else {
 					$("#addSimModal .modal-body").html("<div class='alert alert-error'>" + data.errorText + "</div>");
 					$("#addSimModal #next").removeAttr("disabled");
+					step++;
 				}
 			},
 			error: function(xhr, errorInfo) {

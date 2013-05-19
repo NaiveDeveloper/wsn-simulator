@@ -12,7 +12,7 @@ public class LEACHSensorNode extends SensorNode {
 	
 	private int headId = -1;
 	
-	private double distanceToHead;
+	private double distanceToHead = Double.MAX_VALUE;
 	
 	private boolean everHead = false;
 	
@@ -55,6 +55,8 @@ public class LEACHSensorNode extends SensorNode {
 		this.members.clear();
 		this.headId = -1;
 		this.everHead = false;
+		this.distanceToHead = Double.MAX_VALUE;
+		this.receiveDataSize = 0;
 	}
 
 	public double getDistanceToHead() {

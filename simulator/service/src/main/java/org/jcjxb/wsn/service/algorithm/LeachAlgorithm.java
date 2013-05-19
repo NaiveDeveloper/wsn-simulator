@@ -26,11 +26,11 @@ import org.jcjxb.wsn.service.sim.SlaveSimConfig;
 
 public class LeachAlgorithm extends Algorithm {
 
-	private static int clusterDeclareBit = 100;
+	private static int clusterDeclareBit = 50;
 
-	private static int clusterJoinBit = 100;
+	private static int clusterJoinBit = 50;
 
-	private static int clusterSchduleBit = 500;
+	private static int clusterSchduleBit = 200;
 
 	private static int clusterBuiltCycle = 100; // CD finish before CBE
 
@@ -193,23 +193,23 @@ public class LeachAlgorithm extends Algorithm {
 		public List<Event> handle(Event event) {
 			Event.Builder builder = Event.newBuilder();
 			Random random = new Random();
-			double tn = (double) allRound / (allRound - (round % allRound));
+			double tn = (double) 1 / (allRound - (round % allRound));
 			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
 			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
 			DeployConfig deployConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig();
-			for (Integer nodeId : SlaveSimConfig.getInstance().getSensorsOnThisSlave()) {
-				LEACHSensorNode node = sensorNodes.get(nodeId);
+			for (LEACHSensorNode node : sensorNodes.values()) {
 				if (node.getState() == 0 && !node.isEverHead()) {
 					double rp = random.nextDouble();
 					if (rp < tn) {
+						// Assume the distance is diagonal of deploy area
 						double energyCost = consume.send(clusterDeclareBit,
 								CommonTool.distance(0, 0, deployConfig.getWidth(), deployConfig.getHeight()), energyConfig);
 						if (node.getEnergy() > energyCost) {
 							node.setEnergy(node.getEnergy() - energyCost);
 							node.setEverHead(true);
 							node.setHead(true);
-							builder.addSenderNodeId(nodeId);
-						} else if (node.getEnergy() <= energyCost) {
+							builder.addSenderNodeId(node.getId());
+						} else {
 							node.setEnergy(0);
 							node.setState(2);
 							processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId())
@@ -252,6 +252,18 @@ public class LeachAlgorithm extends Algorithm {
 					continue;
 				}
 
+				// Compute receive energy cost
+				// Should multiply CH count
+				double energyCost = consume.receive(clusterDeclareBit, 0, energyConfig) * event.getSenderNodeIdCount();
+				if (node.getEnergy() > energyCost) {
+					node.setEnergy(node.getEnergy() - energyCost);
+				} else {
+					node.setEnergy(0);
+					node.setState(2);
+					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+					continue;
+				}
+
 				int resultCHId = -1;
 				double dis = Double.MAX_VALUE;
 				for (Integer chId : event.getSenderNodeIdList()) {
@@ -263,20 +275,10 @@ public class LeachAlgorithm extends Algorithm {
 					}
 				}
 
-				// Compute receive energy cost
-				// Should multiply CH count
-				double energyCost = consume.receive(clusterDeclareBit, dis, energyConfig) * event.getSenderNodeIdCount();
-				if (node.getEnergy() > energyCost) {
-					node.setEnergy(node.getEnergy() - energyCost);
-				} else {
-					node.setEnergy(0);
-					node.setState(2);
-					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
-					continue;
+				if (!(node.getHeadId() != -1 && node.getDistanceToHead() <= dis)) {
+					node.setHeadId(resultCHId);
+					node.setDistanceToHead(dis);
 				}
-
-				node.setHeadId(resultCHId);
-				node.setDistanceToHead(dis);
 			}
 			return null;
 		}
@@ -322,13 +324,12 @@ public class LeachAlgorithm extends Algorithm {
 				builder.addSensorId(entry.getKey());
 				builder.addAllSenderNodeId(entry.getValue());
 				builder.setType("CJR");
-				builder.setStartTime(event.getStartTime() + toReceiveEventInterval);
+				builder.setStartTime(event.getStartTime() + toReceiveEventInterval + eventProcessCycle);
 				builder.setFromEventId(event.getEventId());
 				events.add(builder.build());
 			}
 			return events;
 		}
-
 	}
 
 	// CJR means cluster join receive
@@ -345,15 +346,9 @@ public class LeachAlgorithm extends Algorithm {
 			}
 			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
 			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
-			PositionList allNodesPosList = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSensorNodeDeployConfig()
-					.getPostionList();
+
 			// Compute receive energy cost
-			double energyCost = 0.0;
-			for (Integer nodeId : event.getSenderNodeIdList()) {
-				Position nodePos = allNodesPosList.getPostion(nodeId);
-				double tempDis = CommonTool.distance(nodePos.getX(), nodePos.getY(), node.getX(), node.getY());
-				energyCost += consume.receive(clusterJoinBit, tempDis, energyConfig);
-			}
+			double energyCost = consume.receive(clusterJoinBit, 0, energyConfig) * event.getSenderNodeIdCount();
 			if (node.getEnergy() > energyCost) {
 				node.setEnergy(node.getEnergy() - energyCost);
 				node.addAllMember(event.getSenderNodeIdList());
@@ -518,7 +513,7 @@ public class LeachAlgorithm extends Algorithm {
 				if (node.getState() == 2 || node.getHeadId() == -1 || node.isHead()) {
 					continue;
 				}
-				// Compute receive energy cost
+
 				double energyCost = consume.send(node.getReceiveDataSize(), node.getDistanceToHead(), energyConfig);
 				if (node.getEnergy() > energyCost) {
 					node.setEnergy(node.getEnergy() - energyCost);
@@ -572,12 +567,7 @@ public class LeachAlgorithm extends Algorithm {
 			PositionList allNodesPosList = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSensorNodeDeployConfig()
 					.getPostionList();
 			// Compute receive energy cost
-			double energyCost = 0.0;
-			for (Integer nodeId : event.getSenderNodeIdList()) {
-				Position nodePos = allNodesPosList.getPostion(nodeId);
-				double tempDis = CommonTool.distance(nodePos.getX(), nodePos.getY(), node.getX(), node.getY());
-				energyCost += consume.receive(event.getDataSize(), tempDis, energyConfig);
-			}
+			double energyCost = consume.receive(event.getDataSize(), 0, energyConfig) * event.getSenderNodeIdCount();
 			if (node.getEnergy() > energyCost) {
 				node.setEnergy(node.getEnergy() - energyCost);
 				node.setReceiveDataSize(node.getReceiveDataSize() + event.getDataSize() * event.getSenderNodeIdCount());
@@ -585,7 +575,6 @@ public class LeachAlgorithm extends Algorithm {
 				node.setEnergy(0);
 				node.setState(2);
 				processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
-				return null;
 			}
 			return null;
 		}

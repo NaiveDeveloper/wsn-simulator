@@ -218,6 +218,12 @@
 					<input type="text" name="dataSubmitTimes" placeholder="int" value="50">
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">数据融合率</label>
+				<div class="controls">
+					<input type="text" name="aggregationRate" placeholder="double" value="0.10">
+				</div>
+			</div>
 		</form>
 	</c:when>
 	<c:otherwise>

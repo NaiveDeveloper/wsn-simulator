@@ -224,6 +224,7 @@ public class HomeController {
 			leachConfigBuilder.setClusterNum(Integer.parseInt(leachConfigMap.get("clusterNum").toString()));
 			leachConfigBuilder.setClusterBuiltCycle(Integer.parseInt(leachConfigMap.get("clusterBuiltCycle").toString()));
 			leachConfigBuilder.setDataSubmitTimes(Integer.parseInt(leachConfigMap.get("dataSubmitTimes").toString()));
+			leachConfigBuilder.setAggregationRate(Double.parseDouble(leachConfigMap.get("aggregationRate").toString()));
 			simulationConfigbuilder.getAlgorithmConfigBuilder().setLeachConfig(leachConfigBuilder);
 		}
 		return true;
