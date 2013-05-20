@@ -3,6 +3,7 @@ package org.jcjxb.wsn.db;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -11,6 +12,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.mongodb.Mongo;
 
 public class DBOperation {
+	
+	private static Logger logger = Logger.getLogger(DBOperation.class);
 
 	private MongoOperations operations = null;
 
@@ -22,7 +25,7 @@ public class DBOperation {
 		try {
 			operations.save(log, "log");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			return false;
 		}
 		return true;

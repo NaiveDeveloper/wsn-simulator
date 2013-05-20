@@ -2,11 +2,14 @@ package org.jcjxb.wsn.rpc;
 
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.jcjxb.wsn.rpc.LionRpcConnectionFactory.Connection;
 
 import com.google.protobuf.RpcCallback;
 
 public class LionRpcConnectionHandler implements Runnable {
+	
+	private static Logger logger = Logger.getLogger(LionRpcConnectionHandler.class);
 
 	private Connection connection;
 
@@ -47,7 +50,7 @@ public class LionRpcConnectionHandler implements Runnable {
 									try {
 										sendResponse(rpcResponse);
 									} catch (IOException e) {
-										e.printStackTrace();
+										logger.error("Exception happens", e);
 										closeConnection(connection);
 									}
 								}
@@ -57,7 +60,7 @@ public class LionRpcConnectionHandler implements Runnable {
 				connection.close();
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			closeConnection(connection);
 		}
 	}

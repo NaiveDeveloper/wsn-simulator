@@ -112,7 +112,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 			try {
 				latch.await();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				logger.error("Exception happens", e);
 				status.setFlag(false);
 			}
 			if (status.isFlag()) {
@@ -174,7 +174,7 @@ public class MasterServiceImpl implements MasterService.MService.BlockingInterfa
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			status.setFlag(false);
 		}
 		return status.isFlag();

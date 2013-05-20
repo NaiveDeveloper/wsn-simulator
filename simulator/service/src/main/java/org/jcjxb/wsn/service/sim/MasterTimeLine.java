@@ -144,7 +144,7 @@ public class MasterTimeLine {
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			status.setFlag(false);
 		}
 		
@@ -194,7 +194,7 @@ public class MasterTimeLine {
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			status.setFlag(false);
 		}
 		return status.isFlag();
@@ -290,7 +290,7 @@ public class MasterTimeLine {
 					try {
 						latch.await();
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						logger.error("Exception happens", e);
 						status.setFlag(false);
 					}
 					if (status.isFlag()) {

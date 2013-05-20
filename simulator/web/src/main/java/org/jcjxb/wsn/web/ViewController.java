@@ -43,7 +43,7 @@ public class ViewController {
 			try {
 				simulationConfig = SimulationConfig.parseFrom(log.getConfig());
 			} catch (InvalidProtocolBufferException e) {
-				e.printStackTrace();
+				logger.error("Exception happens", e);
 				result.put("errorMsg", "解析实验配置数据出错");
 				return result;
 			}
@@ -59,7 +59,7 @@ public class ViewController {
 				simulationResult = SimulationResult.parseFrom(log.getResult());
 				simulationConfig = SimulationConfig.parseFrom(log.getConfig());
 			} catch (InvalidProtocolBufferException e) {
-				e.printStackTrace();
+				logger.error("Exception happens", e);
 				result.put("errorMsg", "解析实验结果或配置数据出错");
 				return result;
 			}

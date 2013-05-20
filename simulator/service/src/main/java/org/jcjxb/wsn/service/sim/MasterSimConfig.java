@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.jcjxb.wsn.db.DBOperation;
 import org.jcjxb.wsn.db.Log;
 import org.jcjxb.wsn.service.proto.SlaveService.EventsDetail;
@@ -13,6 +14,8 @@ import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 
 public class MasterSimConfig extends SimConfig {
 
+	private static Logger logger = Logger.getLogger(MasterSimConfig.class);
+
 	private static MasterSimConfig simConfig = new MasterSimConfig();
 
 	private Map<Integer, Boolean> slaveReadyStatus = new HashMap<Integer, Boolean>();
@@ -20,13 +23,13 @@ public class MasterSimConfig extends SimConfig {
 	private int logFlushCycle = 100;
 
 	private String dbHost = "127.0.0.1";
-	
-	private String logPath = "/var/tssim";
+
+	private String logPath = "/var/tssim/data";
 
 	private DBOperation dbOperation = null;
 
 	private EventsDetail.Builder eventsDetailBuilder = EventsDetail.newBuilder();
-	
+
 	private Log log = null;
 
 	private MasterSimConfig() {
@@ -73,7 +76,7 @@ public class MasterSimConfig extends SimConfig {
 			try {
 				setDbHost("127.0.0.1");
 			} catch (UnknownHostException e) {
-				e.printStackTrace();
+				logger.error("Exception happens", e);
 			}
 		}
 		return dbOperation;

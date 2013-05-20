@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import org.apache.log4j.Logger;
+
 public class FileTool {
+	
+	private static Logger logger = Logger.getLogger(FileTool.class);
 
 	public static void storeFile(String dir, String fileName, byte[] data) {
 		File dirFile = new File(dir);
@@ -17,7 +21,7 @@ public class FileTool {
 			out.write(data);
 			out.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 		}
 	}
 }

@@ -3,6 +3,8 @@ package org.jcjxb.wsn.rpc;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.google.protobuf.BlockingService;
 import com.google.protobuf.Descriptors.MethodDescriptor;
 import com.google.protobuf.Descriptors.ServiceDescriptor;
@@ -14,6 +16,8 @@ import com.google.protobuf.Service;
 import com.google.protobuf.ServiceException;
 
 public class LionRpcForwarder {
+	
+	private static Logger logger = Logger.getLogger(LionRpcForwarder.class);
 
 	private final Map<String, Service> serviceMap = new HashMap<String, Service>();
 
@@ -88,7 +92,7 @@ public class LionRpcForwarder {
 					controller, request);
 			return createRpcResponse(response, controller);
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			return handleError("Calling blocking method error");
 		}
 	}
@@ -115,7 +119,7 @@ public class LionRpcForwarder {
 				return null;
 			}
 		} catch (InvalidProtocolBufferException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			return null;
 		}
 		return builder.build();

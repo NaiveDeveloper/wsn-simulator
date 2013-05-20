@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import org.apache.log4j.Logger;
 import org.jcjxb.wsn.rpc.LionRpcConnectionFactory.Connection;
 
 import com.google.protobuf.BlockingService;
 import com.google.protobuf.Service;
 
 public class LionRpcServer {
+	
+	private static Logger logger = Logger.getLogger(LionRpcServer.class);
 
 	private Executor executor;
 
@@ -68,7 +71,7 @@ public class LionRpcServer {
 					executor.execute(new LionRpcConnectionHandler(connection,
 							identical, rpcForwarder));
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error("Exception happens", e);
 					return;
 				}
 			}

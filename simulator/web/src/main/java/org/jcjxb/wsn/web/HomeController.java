@@ -114,7 +114,7 @@ public class HomeController {
 			};
 			reuqetsMap = mapper.readValue(byteOut.toByteArray(), typeRef);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			result.put("status", "1");
 			result.put("errorText", "读取或解析实验配置JSON请求发生错误");
 			return result;
@@ -129,7 +129,7 @@ public class HomeController {
 				return result;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			result.put("status", "1");
 			result.put("errorText", "生成命令请求发生错误");
 			return result;

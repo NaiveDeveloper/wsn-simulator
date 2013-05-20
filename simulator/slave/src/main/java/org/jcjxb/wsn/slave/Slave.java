@@ -84,7 +84,7 @@ public class Slave {
 		try {
 			rpcServer.waitEnd();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 		}
 
 		logger.info("Slave server is exiting now");

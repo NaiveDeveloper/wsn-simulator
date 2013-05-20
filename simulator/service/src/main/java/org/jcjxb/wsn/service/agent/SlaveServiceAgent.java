@@ -2,6 +2,7 @@ package org.jcjxb.wsn.service.agent;
 
 import java.net.UnknownHostException;
 
+import org.apache.log4j.Logger;
 import org.jcjxb.wsn.rpc.LionRpcChannelFactory;
 import org.jcjxb.wsn.service.proto.BasicDataType.Empty;
 import org.jcjxb.wsn.service.proto.BasicDataType.Host;
@@ -21,6 +22,8 @@ import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 
 public class SlaveServiceAgent {
+	
+	private static Logger logger = Logger.getLogger(SlaveServiceAgent.class);
 
 	private Host host;
 
@@ -122,6 +125,6 @@ public class SlaveServiceAgent {
 		} else if (exception instanceof ServiceException) {
 			controller.setFailed("Service do not support");
 		}
-		exception.printStackTrace();
+		logger.error("Exception happens", exception);
 	}
 }

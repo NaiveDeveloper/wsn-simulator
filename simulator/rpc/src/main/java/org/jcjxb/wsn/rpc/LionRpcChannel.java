@@ -3,6 +3,7 @@ package org.jcjxb.wsn.rpc;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
+import org.apache.log4j.Logger;
 import org.jcjxb.wsn.rpc.LionRpcConnectionFactory.Connection;
 
 import com.google.protobuf.BlockingRpcChannel;
@@ -15,6 +16,8 @@ import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 
 public class LionRpcChannel implements RpcChannel, BlockingRpcChannel {
+	
+	private static Logger logger = Logger.getLogger(LionRpcChannel.class);
 
 	private LionRpcConnectionFactory connectionFactory;
 
@@ -44,7 +47,7 @@ public class LionRpcChannel implements RpcChannel, BlockingRpcChannel {
 			return response;
 		} catch (IOException e) {
 			handleError(controller, "Create connection error");
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			return null;
 		} finally {
 			closeConnection(connection);
@@ -74,7 +77,7 @@ public class LionRpcChannel implements RpcChannel, BlockingRpcChannel {
 					runDone(done, response);
 				} catch (IOException e) {
 					handleError(controller, "Create connection error");
-					e.printStackTrace();
+					logger.error("Exception happens", e);
 					runDone(done, null);
 					return;
 				} catch (ServiceException e) {
@@ -103,7 +106,7 @@ public class LionRpcChannel implements RpcChannel, BlockingRpcChannel {
 			connection.sendMessage(rpcRequest);
 		} catch (IOException e) {
 			handleError(controller, "Send message error");
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			try {
 				connection.close();
 			} catch (IOException e1) {
@@ -127,7 +130,7 @@ public class LionRpcChannel implements RpcChannel, BlockingRpcChannel {
 			return builder.build();
 		} catch (IOException e) {
 			handleError(controller, "Recieve message error");
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			return null;
 		}
 	}
@@ -154,7 +157,7 @@ public class LionRpcChannel implements RpcChannel, BlockingRpcChannel {
 			return builder.build();
 		} catch (InvalidProtocolBufferException e) {
 			handleError(controller, "Invalid protocol buffer error");
-			e.printStackTrace();
+			logger.error("Exception happens", e);
 			return null;
 		}
 	}
