@@ -42,12 +42,14 @@ function nextStep() {
 			return;
 		}
 	} else {
-		if(!algorithms[simulationConfig.algorithmConfig.name].funcs[step - 1]()) {
+		if (step <= algorithms[simulationConfig.algorithmConfig.name].funcs.length
+				&& !algorithms[simulationConfig.algorithmConfig.name].funcs[step - 1]()) {
 			alert("该步骤配置信息填写错误");
 			return;
 		}
 		if(step >= algorithms[simulationConfig.algorithmConfig.name].steps.length) {
 			// 提交数据
+			step = algorithms[simulationConfig.algorithmConfig.name].steps.length + 1;
 			submitConfig();
 			return;
 		}
@@ -96,7 +98,6 @@ function submitConfig() {
 				} else {
 					$("#addSimModal .modal-body").html("<div class='alert alert-error'>" + data.errorText + "</div>");
 					$("#addSimModal #next").removeAttr("disabled");
-					step++;
 				}
 			},
 			error: function(xhr, errorInfo) {

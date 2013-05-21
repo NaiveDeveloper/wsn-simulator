@@ -123,8 +123,8 @@
 		<div class="modal-body">
 		</div>
 		<div class="modal-footer">
-			<button class="btn" onclick="preStep();" disabled id="pre">上一步</button>
-			<button class="btn" onclick="nextStep();" id="next">下一步</button>
+			<button class="btn" onclick="preStep();" disabled id="pre" type="button">上一步</button>
+			<button class="btn" onclick="nextStep();" id="next" type="button">下一步</button>
 		</div>
 	</div>
 </body>

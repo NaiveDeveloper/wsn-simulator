@@ -19,7 +19,6 @@ import org.jcjxb.wsn.web.bean.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +55,7 @@ public class ViewController {
 			result.put("sensorLocation", convertPositionList(deplyConfig.getSensorNodeDeployConfig().getPostionList()));
 			result.put("width", (int) deplyConfig.getWidth());
 			result.put("height", (int) deplyConfig.getHeight());
+			result.put("outputType", simulationConfig.getCommandConfig().getOutput().name());
 		} else if ("energy".equalsIgnoreCase(type)) {
 			SimulationResult simulationResult = null;
 			SimulationConfig simulationConfig = null;
@@ -75,8 +75,8 @@ public class ViewController {
 
 	@RequestMapping(value = "/simConfig", method = RequestMethod.GET)
 	public ResponseEntity<String> simConfig(String id) {
-		HttpHeaders headers = new HttpHeaders();  
-        headers.set("content-type", "text/html;charset=UTF-8");
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("content-type", "text/html;charset=UTF-8");
 		Log log = dbOperation.queryById(id);
 		SimulationConfig simulationConfig = null;
 		try {
@@ -95,8 +95,25 @@ public class ViewController {
 		String result = simulationConfig.toString();
 		result = result.replaceAll("\n", "<br/>");
 		result += "name: " + name;
-		
+
 		return new ResponseEntity<String>(result, headers, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getAnimationData", method = RequestMethod.GET)
+	public Map<String, Object> getEvents(String id) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		Log log = dbOperation.queryById(id);
+		SimulationConfig simulationConfig = null;
+		try {
+			simulationConfig = SimulationConfig.parseFrom(log.getConfig());
+		} catch (InvalidProtocolBufferException e) {
+			logger.error("Exception happens", e);
+			result.put("errorMsg", "配置数据出错");
+			return result;
+		}
+		
+		// 获取事件详细信息, 产生动画过程数据
+		return result;
 	}
 
 	private List<Position> convertPositionList(PositionList positionList) {

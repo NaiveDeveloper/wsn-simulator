@@ -12,6 +12,9 @@ function initLocation() {
 				$("#errorMsg").html("<div class='alert alert-success'>" + data.errorMsg + "</div>");
 			} else {
 				drawNodes(data);
+				if(data.outputType == 'DETAIL') {
+					$("#viewAnimation").removeAttr("disabled");
+				}
 			}
 		},
 		error : function(xhr, errorInfo) {
@@ -138,4 +141,16 @@ function drawEnergyGraph(data) {
 function checkConfig() {
 	$("#simConfig").modal("show");
 	$("#simConfig .modal-body").load("simConfig?id=" + id);
+}
+
+function doAnimation() {
+	$('#status').html("<div class='alert alert-info fade in'>" + 
+			"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
+			"正在获取动画数据中，请稍后...</div>");
+	$("#viewAnimation").attr("disabled", "disabled");
+	getAnimationData();
+}
+
+function getAnimationData() {
+	
 }

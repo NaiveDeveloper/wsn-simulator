@@ -39,11 +39,12 @@
 				<a class="brand" href="resources/page/about.html">大规模无线传感网络并行模拟器</a>
 				<form class="navbar-form pull-right margin10">
 					<a class="btn" onclick="checkConfig();">查看实验配置</a>
-					<a class="btn" onclick="animation();">查看动画过程</a>
+					<button class="btn" id="viewAnimation" onclick="doAnimation();" type="button" disabled>查看动画过程</button>
 				</form>
 			</div>
 		</div>
 	</div>
+	<div id="status"></div>
 	<div style="text-align: center; width: 100%;">
 		<div id="errorMsg"></div>
 		<h1 class="text-center">实验场景图</h1>
@@ -53,7 +54,7 @@
 		<h1 class="text-center">实验数据图表</h1>
 		<div id="energyChart"></div>
 	</div>
-	<div id="simConfig" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="simConfig" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h3 id="myModalLabel">模拟器实验配置信息</h3>
