@@ -1,3 +1,16 @@
+var tpanel = null;
+var nodeLayer = null;
+var sourceLayer = null;
+
+$(document).ready(function() {
+	var canvas = document.getElementById("sceneCanvas");
+	canvas.width = 1000;
+	canvas.height = 750;
+	tpanel = new Panel(canvas);
+	initLocation();
+	initEneryCost();
+});
+
 function initLocation() {
 	$.ajax({
 		url : 'simData',
@@ -11,7 +24,18 @@ function initLocation() {
 			if (data.errorMsg) {
 				$("#errorMsg").html("<div class='alert alert-success'>" + data.errorMsg + "</div>");
 			} else {
-				drawNodes(data);
+				nodeLayer = new NodeLayer(1000, 750, data);
+				nodeLayer.redraw();
+				
+				// Test
+				if(sourceLayer == null) {
+					sourceLayer = new SourceLayer(1000, 750, nodeLayer.xPro, nodeLayer.yPro);
+				}
+				sourceLayer.redraw();
+				
+				tpanel.addLayer(nodeLayer);
+				tpanel.addLayer(sourceLayer);
+				tpanel.redraw();
 				if(data.outputType == 'DETAIL') {
 					$("#viewAnimation").removeAttr("disabled");
 				}
@@ -21,44 +45,6 @@ function initLocation() {
 			$("#errorMsg").html("<div class='alert alert-error'>" + errorInfo + ": " + xhr.statusText + "</div>");
 		}
 	});
-}
-
-function drawNodes(data) {
-	var sensorRadius = drawSensorNodes(data.sensorLocation, data.width, data.height);
-	drawSinkNodes(data.sinkLocation, data.width, data.height, sensorRadius);
-}
-
-function drawSensorNodes(postions, width, height) {
-	var nodeNum = postions.length;
-	var minDis = Math.min(width, height);
-	var nodeSqrt = Math.sqrt(nodeNum);
-	var radius = minDis / (nodeSqrt * 10);
-	var xPro = canvas.width / width;
-	var yPro = canvas.height / height;
-	var color = "#0000FF";
-	for(var i = 0; i < nodeNum; ++i) {
-		drawCircle(cxt, postions[i].x * xPro, postions[i].y * yPro, radius, color);
-	}
-	return radius;
-}
-
-function drawSinkNodes(postions, width, height, sensorRadius) {
-	var nodeNum = postions.length;
-	var radius = sensorRadius * 2;
-	var xPro = canvas.width / width;
-	var yPro = canvas.height / height;
-	var color = "#FF0000";
-	for(var i = 0; i < nodeNum; ++i) {
-		drawCircle(cxt, postions[i].x * xPro, postions[i].y * yPro, radius, color);
-	}
-}
-
-function drawCircle(cxt, cx, cy, r, color) {
-	cxt.fillStyle = color;
-	cxt.beginPath();
-	cxt.arc(cx, cy, r, 0, Math.PI * 2, true);
-	cxt.closePath();
-	cxt.fill();
 }
 
 function initEneryCost() {

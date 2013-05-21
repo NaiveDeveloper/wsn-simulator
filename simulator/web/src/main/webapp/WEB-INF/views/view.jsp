@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="resources/jquery/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="resources/js/json2.js"></script>
 	<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="resources/js/tpanel.js"></script>
 	<script type="text/javascript" src="resources/js/view.js"></script>
 	<script type="text/javascript" src="resources/highcharts/js/highcharts.js"></script>
 	<script type="text/javascript" src="resources/highcharts/js/modules/exporting.js"></script>
@@ -64,16 +65,6 @@
 	</div>
 </body>
 <script type="text/javascript">
-	var canvas = null;
-	var cxt = null;
 	var id = '${id}';
-	$(document).ready(function() {
-		canvas = document.getElementById("sceneCanvas");
-		canvas.width = 1000;
-		canvas.height = 750;
-		cxt = canvas.getContext("2d");
-		initLocation();
-		initEneryCost();
-	});
 </script>
 </html>
