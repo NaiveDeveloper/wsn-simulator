@@ -134,3 +134,8 @@ function drawEnergyGraph(data) {
         }]
 	});
 }
+
+function checkConfig() {
+	$("#simConfig").modal("show");
+	$("#simConfig .modal-body").load("simConfig?id=" + id);
+}

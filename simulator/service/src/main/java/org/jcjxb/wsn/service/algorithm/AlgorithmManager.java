@@ -11,6 +11,7 @@ public class AlgorithmManager {
 
 	private AlgorithmManager() {
 		algorithms.put("DIRECT", new DirectAlgorithm());
+		algorithms.put("LEACH", new LeachAlgorithm());
 	}
 
 	public static AlgorithmManager getInstance() {

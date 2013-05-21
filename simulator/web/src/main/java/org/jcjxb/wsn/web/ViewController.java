@@ -17,6 +17,10 @@ import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
 import org.jcjxb.wsn.web.bean.Energy;
 import org.jcjxb.wsn.web.bean.Position;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,19 +30,19 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 @Controller
 public class ViewController {
-	
+
 	private static Logger logger = Logger.getLogger(ViewController.class);
 
 	@Autowired
 	private DBOperation dbOperation;
-	
+
 	@RequestMapping(value = "/simData", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, Object> simData(String id, String type) {
 		logger.debug(String.format("View simulation %s data of %s", type, id));
 		Map<String, Object> result = new HashMap<String, Object>();
 		Log log = dbOperation.queryById(id);
-		if("location".equalsIgnoreCase(type)) {
+		if ("location".equalsIgnoreCase(type)) {
 			SimulationConfig simulationConfig = null;
 			try {
 				simulationConfig = SimulationConfig.parseFrom(log.getConfig());
@@ -50,9 +54,9 @@ public class ViewController {
 			DeployConfig deplyConfig = simulationConfig.getDeployConfig();
 			result.put("sinkLocation", convertPositionList(deplyConfig.getSinkNodeDeployConfig().getPostionList()));
 			result.put("sensorLocation", convertPositionList(deplyConfig.getSensorNodeDeployConfig().getPostionList()));
-			result.put("width", (int)deplyConfig.getWidth());
-			result.put("height", (int)deplyConfig.getHeight());
-		} else if("energy".equalsIgnoreCase(type)) {
+			result.put("width", (int) deplyConfig.getWidth());
+			result.put("height", (int) deplyConfig.getHeight());
+		} else if ("energy".equalsIgnoreCase(type)) {
 			SimulationResult simulationResult = null;
 			SimulationConfig simulationConfig = null;
 			try {
@@ -68,18 +72,44 @@ public class ViewController {
 		}
 		return result;
 	}
-	
+
+	@RequestMapping(value = "/simConfig", method = RequestMethod.GET)
+	public ResponseEntity<String> simConfig(String id) {
+		HttpHeaders headers = new HttpHeaders();  
+        headers.set("content-type", "text/html;charset=UTF-8");
+		Log log = dbOperation.queryById(id);
+		SimulationConfig simulationConfig = null;
+		try {
+			simulationConfig = SimulationConfig.parseFrom(log.getConfig());
+		} catch (InvalidProtocolBufferException e) {
+			logger.error("Exception happens", e);
+			return new ResponseEntity<String>("解析配置信息出错", headers, HttpStatus.OK);
+		}
+
+		// Show name clearly
+		String name = simulationConfig.getName();
+		System.out.println(name);
+		SimulationConfig.Builder builder = SimulationConfig.newBuilder(simulationConfig);
+		builder.clearName();
+		simulationConfig = builder.build();
+		String result = simulationConfig.toString();
+		result = result.replaceAll("\n", "<br/>");
+		result += "name: " + name;
+		
+		return new ResponseEntity<String>(result, headers, HttpStatus.OK);
+	}
+
 	private List<Position> convertPositionList(PositionList positionList) {
 		List<Position> result = new ArrayList<Position>();
-		for(BasicDataType.Position pos : positionList.getPostionList()) {
-			result.add(new Position((int)pos.getX(), (int)pos.getY()));
+		for (BasicDataType.Position pos : positionList.getPostionList()) {
+			result.add(new Position((int) pos.getX(), (int) pos.getY()));
 		}
 		return result;
 	}
-	
+
 	private List<Energy> convertEnergyData(List<EnergyData> energyDataList) {
 		List<Energy> result = new ArrayList<Energy>();
-		for(EnergyData energyData : energyDataList) {
+		for (EnergyData energyData : energyDataList) {
 			result.add(new Energy(energyData.getNodeId(), energyData.getEneryLeft(), energyData.getDie()));
 		}
 		return result;

@@ -15,8 +15,8 @@
 	<script type="text/javascript" src="resources/highcharts/js/modules/exporting.js"></script>
 	<style type="text/css">
 		html,body {
-		    margin:0;
-		    width:100%;
+		    padding-left: 20px;
+			padding-right: 20px;
 		}
 		
 		#sceneCanvas {
@@ -33,6 +33,17 @@
 	</style>
 </head>
 <body>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="resources/page/about.html">大规模无线传感网络并行模拟器</a>
+				<form class="navbar-form pull-right margin10">
+					<a class="btn" onclick="checkConfig();">查看实验配置</a>
+					<a class="btn" onclick="animation();">查看动画过程</a>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div style="text-align: center; width: 100%;">
 		<div id="errorMsg"></div>
 		<h1 class="text-center">实验场景图</h1>
@@ -41,6 +52,14 @@
 		</div>
 		<h1 class="text-center">实验数据图表</h1>
 		<div id="energyChart"></div>
+	</div>
+	<div id="simConfig" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">模拟器实验配置信息</h3>
+		</div>
+		<div class="modal-body">
+		</div>
 	</div>
 </body>
 <script type="text/javascript">
