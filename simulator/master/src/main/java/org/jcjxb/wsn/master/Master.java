@@ -34,7 +34,7 @@ public class Master {
 	private static Options.StringOption dbHostOption = mainOptions.newOption("dbHost", "127.0.0.1",
 			"The database to store log information");
 
-	private static Options.StringOption logPathOption = mainOptions.newOption("logPath", "/var/tssim/data",
+	private static Options.StringOption logPathOption = mainOptions.newOption("logPath", "/var/tssim/data/",
 			"Directory to store event detail log");
 
 	public static void main(String[] args) throws Exception {

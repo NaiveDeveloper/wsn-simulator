@@ -76,11 +76,26 @@ function NodeLayer(width, height, nodesData) {
 		}
 		this.context.restore();
 	};
+
+	this.setNodeDie = function(nodesDead) {
+		this.context.save();
+		for ( var i = 0; i < nodesDead.length; ++i) {
+			var j = nodesDead[i];
+			nodeDies[j] = true;
+			drawNode(this.context, nodesData.sensorLocation[j].x * this.xPro, nodesData.sensorLocation[j].y * this.yPro, nodeRadius,
+					this.sendorDieColor);
+		}
+		this.context.restore();
+	};
+
+	this.getNodesData = function() {
+		return nodesData;
+	};
 }
 
 function SourceLayer(width, height, xPro, yPro) {
 	Layer.apply(this, [ width, height ]);
-	var sources = [new Source(100, 100, 100), new Source(500, 500, 100)];
+	var sources = [];
 	
 	this.sourceColor = "#00FF00";
 	

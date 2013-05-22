@@ -34,7 +34,6 @@ function initLocation() {
 				sourceLayer.redraw();
 				
 				tpanel.addLayer(nodeLayer);
-				tpanel.addLayer(sourceLayer);
 				tpanel.redraw();
 				if(data.outputType == 'DETAIL') {
 					$("#viewAnimation").removeAttr("disabled");
@@ -138,5 +137,69 @@ function doAnimation() {
 }
 
 function getAnimationData() {
+	$.ajax({
+		url : 'getAnimationData',
+		type : 'GET',
+		data : {
+			id : id
+		},
+		dataType : 'json',
+		success : function(data) {
+			if (data.errorMsg) {
+				$('#status').html("<div class='alert alert-error fade in'>" + 
+						"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
+						data.errorMsg + "</div>");
+			} else {
+				$('#status').html("<div class='alert alert-info fade in'>" + 
+						"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
+						"正在进行动画...</div>");
+				animationBegin(data);
+			}
+		},
+		error : function(xhr, errorInfo) {
+			$('#status').html("<div class='alert alert-error fade in'>" + 
+					"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
+					errorInfo + ": " + xhr.statusText + "</div>");
+		}
+	});
+}
+
+var animationHandlers = {
+	'NodeDie': nodeDieHandler
+};
+
+function nodeDieHandler(animation) {
+	nodeLayer.setNodeDie(animation.nodes);
+}
+
+var animationIndex = 0;
+var animations = [];
+function animationTimeout() {
+	if(animationIndex >= animations.length) {
+		animationEnd();
+		return;
+	}
 	
+	var cycle = animations[animationIndex].cycle;
+	while(animationIndex < animations.length && cycle == animations[animationIndex].cycle) {
+		animationHandlers[animations[animationIndex].name](animations[animationIndex]);
+		++animationIndex;
+	}
+	tpanel.redraw();
+	setTimeout("animationTimeout()", 100);
+}
+
+function animationBegin(data) {
+	animationIndex = 0;
+	animations = data.animations;
+	setTimeout("animationTimeout()", 100);
+}
+
+function animationEnd() {
+	$('#status').html("<div class='alert alert-info fade in'>" + 
+			"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
+			"动画结束...</div>");
+	animationIndex = 0;
+	animations = [];
+	$("#viewAnimation").removeAttr("disabled");
 }

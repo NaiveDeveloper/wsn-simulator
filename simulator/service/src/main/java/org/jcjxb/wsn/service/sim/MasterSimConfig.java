@@ -24,7 +24,7 @@ public class MasterSimConfig extends SimConfig {
 
 	private String dbHost = "127.0.0.1";
 
-	private String logPath = "/var/tssim/data";
+	private String logPath = "/var/tssim/data/";
 
 	private DBOperation dbOperation = null;
 

@@ -1,5 +1,6 @@
 package org.jcjxb.wsn.web;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +11,16 @@ import org.jcjxb.wsn.db.DBOperation;
 import org.jcjxb.wsn.db.Log;
 import org.jcjxb.wsn.service.proto.BasicDataType;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
+import org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal;
+import org.jcjxb.wsn.service.proto.SlaveService.EventsDetail;
+import org.jcjxb.wsn.service.proto.SlaveService.LVTSync;
 import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult.EnergyData;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
+import org.jcjxb.wsn.web.bean.Animation;
 import org.jcjxb.wsn.web.bean.Energy;
+import org.jcjxb.wsn.web.bean.NodeDieAnimation;
 import org.jcjxb.wsn.web.bean.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -100,7 +106,8 @@ public class ViewController {
 	}
 
 	@RequestMapping(value = "/getAnimationData", method = RequestMethod.GET)
-	public Map<String, Object> getEvents(String id) {
+	@ResponseBody
+	public Map<String, Object> getAnimationData(String id) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Log log = dbOperation.queryById(id);
 		SimulationConfig simulationConfig = null;
@@ -108,11 +115,27 @@ public class ViewController {
 			simulationConfig = SimulationConfig.parseFrom(log.getConfig());
 		} catch (InvalidProtocolBufferException e) {
 			logger.error("Exception happens", e);
-			result.put("errorMsg", "配置数据出错");
+			result.put("errorMsg", "解析配置数据出错");
 			return result;
 		}
 		
 		// 获取事件详细信息, 产生动画过程数据
+		List<Animation> animations = new ArrayList<Animation>();
+		for(String file : log.getEventDetailFiles()) {
+			try {
+				EventsDetail eventsDetail = EventsDetail.parseFrom(new FileInputStream(log.getEventDetailDir() + file));
+				List<Animation> tempAnimations = parseAnimations(simulationConfig, eventsDetail);
+				if(tempAnimations != null) {
+					animations.addAll(tempAnimations);
+				}
+			} catch (Exception e) {
+				logger.error("Exception happens", e);
+				result.put("errorMsg", "解析日志数据出错");
+				return result;
+			}
+		}
+		
+		result.put("animations", animations);
 		return result;
 	}
 
@@ -130,5 +153,21 @@ public class ViewController {
 			result.add(new Energy(energyData.getNodeId(), energyData.getEneryLeft(), energyData.getDie()));
 		}
 		return result;
+	}
+	
+	private List<Animation> parseAnimations(SimulationConfig simulationConfig, EventsDetail eventsDetail) {
+		List<Animation> animations = new ArrayList<Animation>();
+		for(LVTSync sync : eventsDetail.getSyncList()) {
+			if(sync.getProcessedEventCount() <= 0) {
+				continue;
+			}
+			long cycle = sync.getProcessedEvent(0).getStartTime();
+			if(sync.hasProcessJournal() && sync.getProcessJournal().getDeadJournalCount() > 0) {
+				for(DeadJournal deadJournal : sync.getProcessJournal().getDeadJournalList()) {
+					animations.add(new NodeDieAnimation(cycle, deadJournal.getEventId(), deadJournal.getSensorIdList()));
+				}
+			}
+		}
+		return animations;
 	}
 }
