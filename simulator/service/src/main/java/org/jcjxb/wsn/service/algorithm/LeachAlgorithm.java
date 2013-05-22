@@ -324,7 +324,7 @@ public class LeachAlgorithm extends Algorithm {
 				builder.addSensorId(entry.getKey());
 				builder.addAllSenderNodeId(entry.getValue());
 				builder.setType("CJR");
-				builder.setStartTime(event.getStartTime() + toReceiveEventInterval + eventProcessCycle);
+				builder.setStartTime(event.getStartTime() + toReceiveEventInterval);
 				builder.setFromEventId(event.getEventId());
 				events.add(builder.build());
 			}
@@ -483,7 +483,7 @@ public class LeachAlgorithm extends Algorithm {
 					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
 				}
 			}
-			if (builder.getSenderNodeIdCount() <= 0) {
+			if (builder.getSensorIdCount() <= 0) {
 				return null;
 			}
 
@@ -564,8 +564,7 @@ public class LeachAlgorithm extends Algorithm {
 			}
 			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
 			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
-			PositionList allNodesPosList = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig().getSensorNodeDeployConfig()
-					.getPostionList();
+			
 			// Compute receive energy cost
 			double energyCost = consume.receive(event.getDataSize(), 0, energyConfig) * event.getSenderNodeIdCount();
 			if (node.getEnergy() > energyCost) {
@@ -598,8 +597,9 @@ public class LeachAlgorithm extends Algorithm {
 					continue;
 				}
 
-				double energyCost = consume.send((int) (event.getDataSize() * leachConfig.getAggregationRate()),
+				double energyCost = consume.send((int) (node.getReceiveDataSize() * leachConfig.getAggregationRate()),
 						CommonTool.distance(sinkPos.getX(), sinkPos.getY(), node.getX(), node.getY()), energyConfig);
+				node.setReceiveDataSize(0);
 				if (node.getEnergy() > energyCost) {
 					node.setEnergy(node.getEnergy() - energyCost);
 				} else {
@@ -618,7 +618,7 @@ public class LeachAlgorithm extends Algorithm {
 		@Override
 		public List<Event> handle(Event event) {
 			LeachConfig leachConfig = SlaveSimConfig.getInstance().getSimulationConfig().getAlgorithmConfig().getLeachConfig();
-			if (hasNextEGEvent()) {
+			if (!hasNextEGEvent()) {
 				return null;
 			}
 
