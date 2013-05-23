@@ -2,14 +2,18 @@ package org.jcjxb.wsn.web;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.jcjxb.wsn.db.DBOperation;
 import org.jcjxb.wsn.db.Log;
 import org.jcjxb.wsn.service.proto.BasicDataType;
+import org.jcjxb.wsn.service.proto.BasicDataType.Event;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
 import org.jcjxb.wsn.service.proto.BasicDataType.ProcessJournal.DeadJournal;
 import org.jcjxb.wsn.service.proto.SlaveService.EventsDetail;
@@ -18,10 +22,14 @@ import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult;
 import org.jcjxb.wsn.service.proto.SlaveService.SimulationResult.EnergyData;
 import org.jcjxb.wsn.service.proto.WSNConfig.DeployConfig;
 import org.jcjxb.wsn.service.proto.WSNConfig.SimulationConfig;
+import org.jcjxb.wsn.service.proto.WSNConfig.SourceEventDeployConfig;
 import org.jcjxb.wsn.web.bean.Animation;
+import org.jcjxb.wsn.web.bean.Cluster;
+import org.jcjxb.wsn.web.bean.ClusterAnimation;
 import org.jcjxb.wsn.web.bean.Energy;
 import org.jcjxb.wsn.web.bean.NodeDieAnimation;
 import org.jcjxb.wsn.web.bean.Position;
+import org.jcjxb.wsn.web.bean.SourceAnimation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -118,14 +126,14 @@ public class ViewController {
 			result.put("errorMsg", "解析配置数据出错");
 			return result;
 		}
-		
+
 		// 获取事件详细信息, 产生动画过程数据
 		List<Animation> animations = new ArrayList<Animation>();
-		for(String file : log.getEventDetailFiles()) {
+		for (String file : log.getEventDetailFiles()) {
 			try {
 				EventsDetail eventsDetail = EventsDetail.parseFrom(new FileInputStream(log.getEventDetailDir() + file));
 				List<Animation> tempAnimations = parseAnimations(simulationConfig, eventsDetail);
-				if(tempAnimations != null) {
+				if (tempAnimations != null) {
 					animations.addAll(tempAnimations);
 				}
 			} catch (Exception e) {
@@ -134,7 +142,7 @@ public class ViewController {
 				return result;
 			}
 		}
-		
+
 		result.put("animations", animations);
 		return result;
 	}
@@ -154,17 +162,72 @@ public class ViewController {
 		}
 		return result;
 	}
-	
+
 	private List<Animation> parseAnimations(SimulationConfig simulationConfig, EventsDetail eventsDetail) {
 		List<Animation> animations = new ArrayList<Animation>();
-		for(LVTSync sync : eventsDetail.getSyncList()) {
-			if(sync.getProcessedEventCount() <= 0) {
+		NodeDieAnimation nodeAnimation = null;
+		Set<Long> sourceAnimationSet = new HashSet<Long>();
+		Map<Long, SourceAnimation> sourceAnimationsMap = new HashMap<Long, SourceAnimation>();
+		Map<Long, ClusterAnimation> clusterAnimationsMap = new HashMap<Long, ClusterAnimation>();
+		for (LVTSync sync : eventsDetail.getSyncList()) {
+			if (sync.getProcessedEventCount() <= 0) {
 				continue;
 			}
 			long cycle = sync.getProcessedEvent(0).getStartTime();
-			if(sync.hasProcessJournal() && sync.getProcessJournal().getDeadJournalCount() > 0) {
-				for(DeadJournal deadJournal : sync.getProcessJournal().getDeadJournalList()) {
-					animations.add(new NodeDieAnimation(cycle, deadJournal.getEventId(), deadJournal.getSensorIdList()));
+			if (sync.hasProcessJournal() && sync.getProcessJournal().getDeadJournalCount() > 0) {
+				for (DeadJournal deadJournal : sync.getProcessJournal().getDeadJournalList()) {
+
+					if (nodeAnimation == null || nodeAnimation.getCycle() != cycle) {
+						nodeAnimation = new NodeDieAnimation(cycle, deadJournal.getSensorIdList());
+						animations.add(nodeAnimation);
+					} else {
+						nodeAnimation.addNodes(deadJournal.getSensorIdList());
+					}
+				}
+			}
+
+			SourceEventDeployConfig sourceConfig = simulationConfig.getDeployConfig().getSourceEventDeployConfig();
+			if (sourceConfig.getDeployType() == SourceEventDeployConfig.DeployType.RANDOM
+					|| sourceConfig.getDeployType() == SourceEventDeployConfig.DeployType.STATIC) {
+				for (Event event : sync.getProcessedEventList()) {
+					if ("ER".equals(event.getType()) && event.hasPostion() && !sourceAnimationSet.contains(event.getEventId())) {
+						SourceAnimation sourceAnimation = sourceAnimationsMap.get(cycle);
+						Position pos = new Position((int) event.getPostion().getX(), (int) event.getPostion().getY());
+						List<Position> positions = new ArrayList<Position>();
+						positions.add(pos);
+						if (sourceAnimation != null) {
+							if (!(sourceAnimation.getPositions() != null && sourceAnimation.getPositions().contains(pos))) {
+								sourceAnimation.addPositions(positions);
+							}
+						} else {
+							sourceAnimation = new SourceAnimation(cycle, positions, sourceConfig.getRadius());
+							animations.add(sourceAnimation);
+							sourceAnimationsMap.put(cycle, sourceAnimation);
+						}
+					}
+				}
+			}
+
+			if ("LEACH".equals(simulationConfig.getAlgorithmConfig().getName())) {
+				for (Event event : sync.getProcessedEventList()) {
+					if ("CJR".equals(event.getType()) && event.getSenderNodeIdCount() > 0 && event.getSensorIdCount() > 0) {
+						ClusterAnimation clusterAnimation = clusterAnimationsMap.get(cycle);
+						Cluster cluster = new Cluster(event.getSensorId(0), event.getSenderNodeIdList());
+						if (clusterAnimation != null) {
+							int index = clusterAnimation.getClusters().indexOf(cluster);
+							if (index != -1) {
+								clusterAnimation.getClusters().get(index).addMembers(event.getSenderNodeIdList());
+							} else {
+								clusterAnimation.getClusters().add(cluster);
+							}
+						} else {
+							List<Cluster> clusters = new ArrayList<Cluster>();
+							clusters.add(cluster);
+							clusterAnimation = new ClusterAnimation(cycle, clusters);
+							animations.add(clusterAnimation);
+							clusterAnimationsMap.put(cycle, clusterAnimation);
+						}
+					}
 				}
 			}
 		}

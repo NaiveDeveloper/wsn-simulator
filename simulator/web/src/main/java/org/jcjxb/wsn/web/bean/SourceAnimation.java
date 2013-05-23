@@ -1,16 +1,17 @@
 package org.jcjxb.wsn.web.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SourceAnimation extends Animation {
 
-	private List<Position> positions;
+	private List<Position> positions = new ArrayList<Position>();
 	
 	private double radius;
 
-	public SourceAnimation(long cycle, long eventId, List<Position> positions, double radius) {
-		super(cycle, eventId);
-		this.positions = positions;
+	public SourceAnimation(long cycle, List<Position> positions, double radius) {
+		super(cycle);
+		this.positions.addAll(positions);
 		this.radius = radius;
 		this.name = "Source";
 	}
@@ -24,10 +25,6 @@ public class SourceAnimation extends Animation {
 	}
 
 	public void addPositions(List<Position> positions) {
-		if(this.positions == null) {
-			this.positions = positions;
-			return;
-		}
 		this.positions.addAll(positions);
-	}	
+	}
 }

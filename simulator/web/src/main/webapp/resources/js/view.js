@@ -1,6 +1,7 @@
 var tpanel = null;
 var nodeLayer = null;
 var sourceLayer = null;
+var clusterLayer = null;
 
 $(document).ready(function() {
 	var canvas = document.getElementById("sceneCanvas");
@@ -26,12 +27,6 @@ function initLocation() {
 			} else {
 				nodeLayer = new NodeLayer(1000, 750, data);
 				nodeLayer.redraw();
-				
-				// Test
-				if(sourceLayer == null) {
-					sourceLayer = new SourceLayer(1000, 750, nodeLayer.xPro, nodeLayer.yPro);
-				}
-				sourceLayer.redraw();
 				
 				tpanel.addLayer(nodeLayer);
 				tpanel.redraw();
@@ -153,7 +148,18 @@ function getAnimationData() {
 				$('#status').html("<div class='alert alert-info fade in'>" + 
 						"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
 						"正在进行动画...</div>");
+				if(sourceLayer == null) {
+					sourceLayer = new SourceLayer(1000, 750, nodeLayer.xPro, nodeLayer.yPro);
+					tpanel.addLayer(sourceLayer);
+				}
+				if(clusterLayer == null) {
+					clusterLayer = new ClusterLayer(1000, 750, nodeLayer.getNodesData());
+					tpanel.addLayer(clusterLayer);
+				}
 				animationBegin(data);
+				// Test first
+				//$("#simConfig .modal-body").html(JSON.stringify(data));
+				//$("#simConfig").modal("show");
 			}
 		},
 		error : function(xhr, errorInfo) {
@@ -165,11 +171,32 @@ function getAnimationData() {
 }
 
 var animationHandlers = {
-	'NodeDie': nodeDieHandler
+	'NodeDie': nodeDieHandler,
+	'Source' : sourceHandler,
+	'Cluster': clusterHandler
 };
 
 function nodeDieHandler(animation) {
 	nodeLayer.setNodeDie(animation.nodes);
+}
+
+function sourceHandler(animation) {
+	var sources = [];
+	for(var i = 0; i < animation.positions.length; ++i) {
+		var pos = animation.positions[i];
+		sources.push(new Source(pos.x, pos.y, animation.radius));
+	}
+	sourceLayer.setSources(sources);
+	sourceLayer.redraw();
+}
+function clusterHandler(animation) {
+	var clusters = [];
+	for(var i = 0; i < animation.clusters.length; ++i) {
+		var cluster = animation.clusters[i];
+		clusters.push(new Cluster(cluster.ch, cluster.members));
+	}
+	clusterLayer.setClusters(clusters);
+	clusterLayer.redraw();
 }
 
 var animationIndex = 0;
@@ -199,6 +226,13 @@ function animationEnd() {
 	$('#status').html("<div class='alert alert-info fade in'>" + 
 			"<a class='close' data-dismiss='alert' href='#'>&times;</a>" +
 			"动画结束...</div>");
+	nodeLayer.clearNodeDie();
+	sourceLayer.setSources([]);
+	clusterLayer.setClusters([]);
+	nodeLayer.redraw();
+	sourceLayer.redraw();
+	clusterLayer.redraw();
+	tpanel.redraw();
 	animationIndex = 0;
 	animations = [];
 	$("#viewAnimation").removeAttr("disabled");

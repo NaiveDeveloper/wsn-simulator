@@ -27,4 +27,16 @@ public class Position {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(super.equals(obj)) {
+			return true;
+		}
+		if(obj instanceof Position) {
+			Position pos = (Position)obj;
+			return this.x == pos.x && this.y == pos.y;
+		}
+		return false;
+	}
 }

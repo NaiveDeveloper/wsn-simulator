@@ -1,33 +1,23 @@
 package org.jcjxb.wsn.web.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClusterAnimation extends Animation {
-	
-	private int ch;
-	
-	private List<Integer> members;
 
-	public ClusterAnimation(long cycle, long eventId, int ch, List<Integer> members) {
-		super(cycle, eventId);
-		this.ch = ch;
-		this.members = members;
+	private List<Cluster> clusters = new ArrayList<Cluster>();
+
+	public ClusterAnimation(long cycle, List<Cluster> clusters) {
+		super(cycle);
+		this.clusters.addAll(clusters);
 		this.name = "Cluster";
 	}
 
-	public int getCh() {
-		return ch;
+	public List<Cluster> getClusters() {
+		return clusters;
 	}
 
-	public List<Integer> getMembers() {
-		return members;
-	}
-	
-	public void addMembers(List<Integer> members) {
-		if(this.members == null) {
-			this.members = members;
-			return;
-		}
-		this.members.addAll(members);
+	public void addClusters(List<Cluster> clusters) {
+		this.clusters.addAll(clusters);
 	}
 }

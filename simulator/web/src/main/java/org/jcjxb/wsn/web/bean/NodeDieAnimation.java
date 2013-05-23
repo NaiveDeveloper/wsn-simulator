@@ -1,14 +1,15 @@
 package org.jcjxb.wsn.web.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NodeDieAnimation extends Animation {
 	
-	private List<Integer> nodes;
+	private List<Integer> nodes = new ArrayList<Integer>();
 
-	public NodeDieAnimation(long cycle, long eventId, List<Integer> nodes) {
-		super(cycle, eventId);
-		this.nodes = nodes;
+	public NodeDieAnimation(long cycle, List<Integer> nodes) {
+		super(cycle);
+		this.nodes.addAll(nodes);
 		this.name = "NodeDie";
 	}
 
@@ -17,10 +18,6 @@ public class NodeDieAnimation extends Animation {
 	}
 	
 	public void addNodes(List<Integer> nodes) {
-		if(this.nodes == null) {
-			this.nodes = nodes;
-			return;
-		}
 		this.nodes.addAll(nodes);
 	}
 }

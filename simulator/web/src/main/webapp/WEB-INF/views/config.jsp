@@ -13,6 +13,14 @@
   				<input type="radio" name="name" value="LEACH">
   				LEACH路由协议
 			</label>
+			<label class="radio">
+  				<input type="radio" name="name" value="DIRECT">
+  				层次与集群路由协议
+			</label>
+			<label class="radio">
+  				<input type="radio" name="name" value="DIRECT">
+  				自适应节能路由协议
+			</label>
 		</form>
 	</c:when>
 	<c:when test="${param['step'] eq 1}">
@@ -117,7 +125,7 @@
 			<div class="control-group">
 				<label class="control-label">重复次数</label>
 				<div class="controls">
-					<input type="text" name="times" placeholder="int" value="100">
+					<input type="text" name="times" placeholder="int" value="1500">
 				</div>
 			</div>
 			<div class="control-group">

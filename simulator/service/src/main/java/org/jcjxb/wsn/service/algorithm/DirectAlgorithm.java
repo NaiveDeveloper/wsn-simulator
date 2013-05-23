@@ -82,6 +82,8 @@ public class DirectAlgorithm extends Algorithm {
 			EnergyConsumeConfig energyConfig = SlaveSimConfig.getInstance().getSimulationConfig().getEnergyConsumeConfig();
 			EnergyConsume consume = EnergyConsumeManager.getInstance().getEnergyConsume(energyConfig.getConsumeType());
 
+			DeadJournal.Builder deadJournalBuilder = DeadJournal.newBuilder();
+
 			for (int sensorId : event.getSensorIdList()) {
 				SensorNode node = sensorNodes.get(sensorId);
 				if (node.getState() == 2) {
@@ -94,9 +96,15 @@ public class DirectAlgorithm extends Algorithm {
 				} else {
 					node.setEnergy(0);
 					node.setState(2);
-					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+					deadJournalBuilder.addSensorId(node.getId());
 				}
 			}
+
+			if (deadJournalBuilder.getSensorIdCount() > 0) {
+				deadJournalBuilder.setEventId(event.getEventId());
+				processJournalBuilder.addDeadJournal(deadJournalBuilder);
+			}
+
 			if (builder.getSensorIdCount() <= 0) {
 				return null;
 			}
@@ -121,6 +129,9 @@ public class DirectAlgorithm extends Algorithm {
 			SinkNodeDeployConfig sinkConfig = SlaveSimConfig.getInstance().getSimulationConfig().getDeployConfig()
 					.getSinkNodeDeployConfig();
 			Position sinkPos = sinkConfig.getPostionList().getPostion(0);
+
+			DeadJournal.Builder deadJournalBuilder = DeadJournal.newBuilder();
+
 			for (int sensorId : event.getSensorIdList()) {
 				SensorNode node = sensorNodes.get(sensorId);
 				if (node.getState() == 2) {
@@ -131,11 +142,17 @@ public class DirectAlgorithm extends Algorithm {
 				if (node.getEnergy() <= energyCost) {
 					node.setEnergy(0);
 					node.setState(2);
-					processJournalBuilder.addDeadJournal(DeadJournal.newBuilder().setEventId(event.getEventId()).addSensorId(node.getId()));
+					deadJournalBuilder.addSensorId(node.getId());
 				} else {
 					node.setEnergy(node.getEnergy() - energyCost);
 				}
 			}
+
+			if (deadJournalBuilder.getSensorIdCount() > 0) {
+				deadJournalBuilder.setEventId(event.getEventId());
+				processJournalBuilder.addDeadJournal(deadJournalBuilder);
+			}
+
 			return null;
 		}
 	}
