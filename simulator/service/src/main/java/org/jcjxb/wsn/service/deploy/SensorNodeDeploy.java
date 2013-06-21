@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.jcjxb.wsn.common.DeployTool;
 import org.jcjxb.wsn.service.proto.BasicDataType.Position;
 import org.jcjxb.wsn.service.proto.BasicDataType.PositionList;
 import org.jcjxb.wsn.service.proto.WSNConfig.SensorNodeDeployConfig.DeployType;
@@ -17,6 +18,7 @@ public class SensorNodeDeploy {
 	private SensorNodeDeploy() {
 		deployStrategys.put(DeployType.RANDOM, new RandomDeploy());
 		deployStrategys.put(DeployType.STATIC, new StaticDeploy());
+		deployStrategys.put(DeployType.GRID, new GridDeploy());
 	}
 
 	public static SensorNodeDeploy getInstance() {
@@ -49,6 +51,27 @@ public class SensorNodeDeploy {
 		@Override
 		public PositionList generate(int num, int width, int height, PositionList positionList) {
 			return positionList;
+		}
+	}
+
+	private class GridDeploy implements Deploy {
+		@Override
+		public PositionList generate(int num, int width, int height, PositionList positionList) {
+			PositionList.Builder builder = PositionList.newBuilder();
+			double dis = DeployTool.gridDistance(num, height, width);
+			int horCount = (int) ((width - dis) / dis);
+			double horOffset = (width - horCount * dis) / 2;
+			int verNum = 1;
+			int horNum = 0;
+			for (int i = 0; i < num; ++i) {
+				if (horNum > horCount) {
+					horNum = 0;
+					++verNum;
+				}
+				builder.addPostion(Position.newBuilder().setX(horOffset + dis * horNum).setY(verNum * dis).build());
+				++horNum;
+			}
+			return builder.build();
 		}
 	}
 }

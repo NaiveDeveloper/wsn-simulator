@@ -48,6 +48,7 @@
 				<div class="controls">
 					<select name="deployType">
 						<option value="0">随机部署</option>
+						<option value="2">网格部署</option>
 					</select>
 				</div>
 			</div>
